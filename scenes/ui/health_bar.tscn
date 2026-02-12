@@ -1,0 +1,57 @@
+[gd_scene load_steps=5 format=3 uid="uid://sbwjthhfx2yi"]
+
+[ext_resource type="Script" uid="uid://dybwlgtpxpuv4" path="res://scenes/ui/health_bar.gd" id="1_qi2ti"]
+[ext_resource type="FontFile" uid="uid://dmgqmwfwyqfc0" path="res://assets/FOT-Aokane Std.ttf" id="2_4rf34"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8ymem"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.5058824, 0.6313726, 0.47058824, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 2
+anti_aliasing = false
+anti_aliasing_size = 0.01
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x4hh8"]
+bg_color = Color(0.972549, 0.92941177, 0.08235294, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.5058824, 0.6313726, 0.47058824, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 2
+anti_aliasing = false
+anti_aliasing_size = 0.01
+
+[node name="HealthBar" type="HBoxContainer"]
+mouse_filter = 2
+theme_override_constants/separation = 4
+script = ExtResource("1_qi2ti")
+
+[node name="Bar" type="ProgressBar" parent="."]
+custom_minimum_size = Vector2(48, 12)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_8ymem")
+theme_override_styles/fill = SubResource("StyleBoxFlat_x4hh8")
+rounded = true
+show_percentage = false
+
+[node name="Value" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_4rf34")
+theme_override_font_sizes/font_size = 12
+text = "000"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Ability" load_steps=3 format=3 uid="uid://4n2hcgqah637"]
+
+[ext_resource type="Script" uid="uid://np6c631gwyc1" path="res://effect.gd" id="1_p5vfj"]
+[ext_resource type="Script" uid="uid://c8d4ukuf2tkk0" path="res://ability.gd" id="2_nj1m2"]
+
+[resource]
+script = ExtResource("2_nj1m2")
+ability_name = "Basic AOE"
+target = 3
+mode = 2
+metadata/_custom_type_script = "uid://c8d4ukuf2tkk0"

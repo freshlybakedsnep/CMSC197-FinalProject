@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="HeroData" load_steps=8 format=3 uid="uid://cgl8udh6bfxna"]
+
+[ext_resource type="Script" uid="uid://c8d4ukuf2tkk0" path="res://ability.gd" id="1_e3q5m"]
+[ext_resource type="Script" uid="uid://nqhxig82acgw" path="res://resources/data_hero.gd" id="2_tq3po"]
+[ext_resource type="Resource" uid="uid://dobxvjv81eaxa" path="res://resources/abilities/01_ba_ST.tres" id="2_vl6hx"]
+[ext_resource type="Texture2D" uid="uid://834p5paarcud" path="res://assets/sprites/locke.webp" id="3_tq3po"]
+[ext_resource type="Resource" uid="uid://c1x244ego6kjx" path="res://resources/abilities/04_skill_en_AOE.tres" id="4_dqvff"]
+[ext_resource type="Resource" uid="uid://dncie7g82gll2" path="res://resources/abilities/00_guard.tres" id="5_ebhn3"]
+[ext_resource type="Resource" uid="uid://bjjg6xh648o8e" path="res://resources/abilities/03_skill_en_ST.tres" id="6_iq7v7"]
+
+[resource]
+script = ExtResource("2_tq3po")
+entity_name = "Capt. Locke"
+elemental_type = 1
+base_health = 17
+sprite = ExtResource("3_tq3po")
+basic_atk = Array[ExtResource("1_e3q5m")]([ExtResource("2_vl6hx")])
+skill_use = Array[ExtResource("1_e3q5m")]([ExtResource("5_ebhn3"), ExtResource("6_iq7v7"), ExtResource("6_iq7v7")])
+skill_ult = Array[ExtResource("1_e3q5m")]([ExtResource("4_dqvff")])
+metadata/_custom_type_script = "uid://nqhxig82acgw"

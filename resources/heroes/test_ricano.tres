@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="HeroData" load_steps=7 format=3 uid="uid://0d2imum1yj47"]
+
+[ext_resource type="Script" uid="uid://c8d4ukuf2tkk0" path="res://ability.gd" id="1_m1hio"]
+[ext_resource type="Script" uid="uid://nqhxig82acgw" path="res://resources/data_hero.gd" id="2_bydk7"]
+[ext_resource type="Resource" uid="uid://dobxvjv81eaxa" path="res://resources/abilities/01_ba_ST.tres" id="2_cjau5"]
+[ext_resource type="Texture2D" uid="uid://c51rmprgm5hh4" path="res://assets/sprites/ricano.webp" id="3_u3siy"]
+[ext_resource type="Resource" uid="uid://c1x244ego6kjx" path="res://resources/abilities/04_skill_en_AOE.tres" id="4_1svb1"]
+[ext_resource type="Resource" uid="uid://dncie7g82gll2" path="res://resources/abilities/00_guard.tres" id="5_1ywuj"]
+
+[resource]
+script = ExtResource("2_bydk7")
+character_class = 4
+entity_name = "Ricano"
+base_health = 15
+base_attack = 6
+base_defense = 3
+base_speed = 9
+sprite = ExtResource("3_u3siy")
+basic_atk = Array[ExtResource("1_m1hio")]([ExtResource("2_cjau5")])
+skill_use = Array[ExtResource("1_m1hio")]([ExtResource("5_1ywuj"), ExtResource("4_1svb1"), ExtResource("4_1svb1")])
+skill_ult = Array[ExtResource("1_m1hio")]([ExtResource("4_1svb1")])
+metadata/_custom_type_script = "uid://nqhxig82acgw"

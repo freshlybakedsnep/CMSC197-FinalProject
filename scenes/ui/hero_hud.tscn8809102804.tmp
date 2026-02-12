@@ -1,0 +1,154 @@
+[gd_scene load_steps=11 format=3 uid="uid://ntkoceor2v43"]
+
+[ext_resource type="Script" uid="uid://dlh588ibhynuh" path="res://scenes/ui/hero_hud.gd" id="1_eqevu"]
+[ext_resource type="Texture2D" uid="uid://i7jt4s0h8fiq" path="res://assets/sprites/anuberus.webp" id="2_ttu7u"]
+[ext_resource type="Texture2D" uid="uid://djsmku1wj884k" path="res://icon.svg" id="3_jcuw5"]
+[ext_resource type="FontFile" uid="uid://dmgqmwfwyqfc0" path="res://assets/FOT-Aokane Std.ttf" id="4_jk0qd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o8nwn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f02a4"]
+atlas = ExtResource("2_ttu7u")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f02a4"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.5058824, 0.6313726, 0.47058824, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 2
+anti_aliasing = false
+anti_aliasing_size = 0.01
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v5f8s"]
+bg_color = Color(0.972549, 0.92941177, 0.08235294, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.5058824, 0.6313726, 0.47058824, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 2
+anti_aliasing = false
+anti_aliasing_size = 0.01
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eqevu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ttu7u"]
+
+[node name="HeroHUD" type="HBoxContainer"]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -93.0
+offset_top = -48.5
+offset_bottom = 48.5
+grow_horizontal = 0
+grow_vertical = 2
+focus_mode = 2
+alignment = 2
+script = ExtResource("1_eqevu")
+
+[node name="Panel" type="PanelContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_o8nwn")
+
+[node name="Margin" type="MarginContainer" parent="Panel"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+focus_behavior_recursive = 1
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/Margin"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 2
+
+[node name="Close" type="Button" parent="Panel/Margin/HBoxContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_behavior_recursive = 1
+
+[node name="Detail" type="VBoxContainer" parent="Panel/Margin/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Portrait" type="TextureRect" parent="Panel/Margin/HBoxContainer/Detail"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = SubResource("AtlasTexture_f02a4")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/Margin/HBoxContainer/Detail/Portrait"]
+layout_mode = 1
+offset_right = 32.0
+offset_bottom = 32.0
+mouse_filter = 2
+theme_override_constants/margin_left = -16
+theme_override_constants/margin_top = -8
+
+[node name="Class" type="TextureRect" parent="Panel/Margin/HBoxContainer/Detail/Portrait/MarginContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("3_jcuw5")
+expand_mode = 1
+
+[node name="Health" type="HBoxContainer" parent="Panel/Margin/HBoxContainer/Detail"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 4
+
+[node name="HealthBar" type="ProgressBar" parent="Panel/Margin/HBoxContainer/Detail/Health"]
+custom_minimum_size = Vector2(48, 12)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_f02a4")
+theme_override_styles/fill = SubResource("StyleBoxFlat_v5f8s")
+rounded = true
+show_percentage = false
+
+[node name="Value" type="Label" parent="Panel/Margin/HBoxContainer/Detail/Health"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("4_jk0qd")
+theme_override_font_sizes/font_size = 12
+text = "000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ClickArea" type="Button" parent="Panel"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_styles/normal = SubResource("StyleBoxEmpty_eqevu")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ttu7u")
+
+[connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
+[connection signal="mouse_entered" from="." to="." method="_on_focus_entered"]
+[connection signal="pressed" from="Panel/ClickArea" to="." method="_on_button_pressed"]

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="HeroData" load_steps=8 format=3 uid="uid://babych8u6k5s2"]
+
+[ext_resource type="Script" uid="uid://c8d4ukuf2tkk0" path="res://ability.gd" id="1_3hfex"]
+[ext_resource type="Script" uid="uid://nqhxig82acgw" path="res://resources/data_hero.gd" id="2_7tg5n"]
+[ext_resource type="Resource" uid="uid://dobxvjv81eaxa" path="res://resources/abilities/01_ba_ST.tres" id="2_y8eyt"]
+[ext_resource type="Texture2D" uid="uid://c06guetubyynw" path="res://assets/sprites/famido.webp" id="3_7tg5n"]
+[ext_resource type="Resource" uid="uid://c1x244ego6kjx" path="res://resources/abilities/04_skill_en_AOE.tres" id="4_7vvrw"]
+[ext_resource type="Resource" uid="uid://dncie7g82gll2" path="res://resources/abilities/00_guard.tres" id="5_n2p8v"]
+[ext_resource type="Resource" uid="uid://bjjg6xh648o8e" path="res://resources/abilities/03_skill_en_ST.tres" id="6_vroah"]
+
+[resource]
+script = ExtResource("2_7tg5n")
+entity_name = "Famido"
+elemental_type = 2
+base_health = 24
+base_speed = 12
+sprite = ExtResource("3_7tg5n")
+basic_atk = Array[ExtResource("1_3hfex")]([ExtResource("2_y8eyt")])
+skill_use = Array[ExtResource("1_3hfex")]([ExtResource("5_n2p8v"), ExtResource("6_vroah"), ExtResource("4_7vvrw")])
+skill_ult = Array[ExtResource("1_3hfex")]([ExtResource("4_7vvrw")])
+metadata/_custom_type_script = "uid://nqhxig82acgw"

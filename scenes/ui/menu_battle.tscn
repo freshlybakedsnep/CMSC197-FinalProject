@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwtxguku00kwa"]
+
+[ext_resource type="Script" uid="uid://b3l666p10m5jc" path="res://scenes/ui/menu_battle.gd" id="1_qyamm"]
+[ext_resource type="PackedScene" uid="uid://c47ba8kmvdupx" path="res://scenes/ui/menu_party.tscn" id="2_2kidt"]
+
+[node name="BattleMenuManager" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qyamm")
+
+[node name="PartyMenu" parent="." instance=ExtResource("2_2kidt")]
+layout_mode = 1
+offset_top = -99.0
+offset_bottom = 99.0
+size_flags_horizontal = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -101.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_bottom = 24
+
+[node name="StartBattle" type="Button" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Start Battle!"
+
+[connection signal="actor_selected" from="PartyMenu" to="." method="_open_action_menu"]
+[connection signal="party_ready" from="PartyMenu" to="." method="_on_party_ready"]
+[connection signal="pressed" from="MarginContainer/StartBattle" to="." method="_on_start_battle_pressed"]

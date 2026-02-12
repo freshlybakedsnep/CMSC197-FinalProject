@@ -1,0 +1,95 @@
+[gd_scene load_steps=9 format=3 uid="uid://ntkoceor2v43"]
+
+[ext_resource type="Script" uid="uid://dlh588ibhynuh" path="res://scenes/ui/hero_hud.gd" id="1_eqevu"]
+[ext_resource type="Texture2D" uid="uid://i7jt4s0h8fiq" path="res://assets/sprites/anuberus.webp" id="2_ttu7u"]
+[ext_resource type="Texture2D" uid="uid://djsmku1wj884k" path="res://icon.svg" id="3_jcuw5"]
+[ext_resource type="PackedScene" uid="uid://sbwjthhfx2yi" path="res://scenes/ui/health_bar.tscn" id="4_eqevu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o8nwn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eqevu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ttu7u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f02a4"]
+atlas = ExtResource("2_ttu7u")
+region = Rect2(0, 0, 256, 256)
+
+[node name="HeroHUD" type="PanelContainer"]
+custom_minimum_size = Vector2(129, 81)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -81.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_mode = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxEmpty_o8nwn")
+script = ExtResource("1_eqevu")
+
+[node name="ClickArea" type="Button" parent="."]
+layout_mode = 2
+mouse_filter = 1
+theme_override_styles/normal = SubResource("StyleBoxEmpty_eqevu")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ttu7u")
+
+[node name="Draw" type="CanvasGroup" parent="."]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Draw"]
+offset_right = 129.0
+offset_bottom = 81.0
+mouse_filter = 2
+alignment = 2
+
+[node name="Action" type="TextureRect" parent="Draw/HBoxContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_behavior_recursive = 1
+expand_mode = 1
+
+[node name="Detail" type="VBoxContainer" parent="Draw/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+mouse_filter = 2
+theme_override_constants/separation = -2
+
+[node name="Portrait" type="TextureRect" parent="Draw/HBoxContainer/Detail"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = SubResource("AtlasTexture_f02a4")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Draw/HBoxContainer/Detail/Portrait"]
+layout_mode = 1
+offset_right = 32.0
+offset_bottom = 32.0
+mouse_filter = 2
+theme_override_constants/margin_left = -16
+theme_override_constants/margin_top = -8
+
+[node name="Class" type="TextureRect" parent="Draw/HBoxContainer/Detail/Portrait/MarginContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("3_jcuw5")
+expand_mode = 1
+
+[node name="HealthBar" parent="Draw/HBoxContainer/Detail" instance=ExtResource("4_eqevu")]
+layout_mode = 2
+
+[connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
+[connection signal="mouse_entered" from="." to="." method="_on_focus_entered"]
+[connection signal="pressed" from="ClickArea" to="." method="_on_button_pressed"]

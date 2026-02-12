@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://bifyp6opkfsfo"]
+
+[ext_resource type="Script" uid="uid://dfwilkkfsbqyu" path="res://scenes/stage.gd" id="1_2so7o"]
+[ext_resource type="Script" uid="uid://cx656sdytf30u" path="res://wave.gd" id="2_st0q7"]
+[ext_resource type="Script" uid="uid://ddsxg1ao3vu1d" path="res://resources/data_enemy.gd" id="3_1hwpr"]
+[ext_resource type="Resource" uid="uid://cgqtujynpdh3p" path="res://resources/enemies/test_slime.tres" id="5_yd2gm"]
+[ext_resource type="PackedScene" uid="uid://bwtxguku00kwa" path="res://scenes/ui/menu_battle.tscn" id="6_0hg5s"]
+
+[sub_resource type="Resource" id="Resource_h4tux"]
+script = ExtResource("2_st0q7")
+enemies = Array[ExtResource("3_1hwpr")]([ExtResource("5_yd2gm"), ExtResource("5_yd2gm"), ExtResource("5_yd2gm")])
+metadata/_custom_type_script = "uid://cx656sdytf30u"
+
+[node name="Stage" type="Node" unique_id=871806380]
+script = ExtResource("1_2so7o")
+waves = Array[ExtResource("2_st0q7")]([SubResource("Resource_h4tux")])
+
+[node name="PartyPositions" type="Node" parent="." unique_id=2118514473]
+
+[node name="EnemyContainer" type="Node" parent="." unique_id=830120594]
+
+[node name="BattleUI" parent="." unique_id=1732962988 instance=ExtResource("6_0hg5s")]
+
+[connection signal="plan_done" from="BattleUI" to="." method="start_phase_fight"]

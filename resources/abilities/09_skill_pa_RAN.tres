@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Ability" load_steps=3 format=3 uid="uid://22jk2kxiv52g"]
+
+[ext_resource type="Script" uid="uid://np6c631gwyc1" path="res://effect.gd" id="1_lcqvf"]
+[ext_resource type="Script" uid="uid://c8d4ukuf2tkk0" path="res://ability.gd" id="2_kp268"]
+
+[resource]
+script = ExtResource("2_kp268")
+ability_name = "Party Skill Random"
+target = 2
+mode = 3
+metadata/_custom_type_script = "uid://c8d4ukuf2tkk0"

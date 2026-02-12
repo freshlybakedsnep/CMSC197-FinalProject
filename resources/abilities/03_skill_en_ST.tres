@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Ability" load_steps=3 format=3 uid="uid://bjjg6xh648o8e"]
+
+[ext_resource type="Script" uid="uid://np6c631gwyc1" path="res://effect.gd" id="1_jqp26"]
+[ext_resource type="Script" uid="uid://c8d4ukuf2tkk0" path="res://ability.gd" id="2_iqdp5"]
+
+[resource]
+script = ExtResource("2_iqdp5")
+ability_name = "Enemy Skill ST"
+target = 3
+mode = 1
+metadata/_custom_type_script = "uid://c8d4ukuf2tkk0"
