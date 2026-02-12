@@ -35,4 +35,7 @@ func _validate_property(property: Dictionary) -> void:
 			property.usage = PROPERTY_USAGE_NO_EDITOR
 		else:
 			property.usage = PROPERTY_USAGE_DEFAULT
-		
+
+func take_effect(source : UnitData) -> void:
+	for fx in effects:
+		fx.trigger(source)
