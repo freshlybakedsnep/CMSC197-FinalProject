@@ -1,12 +1,13 @@
-[gd_resource type="Resource" script_class="HeroData" load_steps=8 format=3 uid="uid://bx6lvkwy1qb12"]
+[gd_resource type="Resource" script_class="HeroData" format=3 uid="uid://bx6lvkwy1qb12"]
 
 [ext_resource type="Script" uid="uid://c8d4ukuf2tkk0" path="res://ability.gd" id="1_wa4vt"]
 [ext_resource type="Script" uid="uid://nqhxig82acgw" path="res://resources/data_hero.gd" id="2_a3fyn"]
 [ext_resource type="Resource" uid="uid://4n2hcgqah637" path="res://resources/abilities/02_ba_AOE.tres" id="2_ne3t8"]
 [ext_resource type="Texture2D" uid="uid://ckvv4ch5rnnh1" path="res://assets/sprites/shin.webp" id="3_a3fyn"]
-[ext_resource type="Resource" uid="uid://c1x244ego6kjx" path="res://resources/abilities/04_skill_en_AOE.tres" id="4_r2tmj"]
 [ext_resource type="Resource" uid="uid://dncie7g82gll2" path="res://resources/abilities/00_guard.tres" id="5_imqcf"]
 [ext_resource type="Resource" uid="uid://bjjg6xh648o8e" path="res://resources/abilities/03_skill_en_ST.tres" id="6_beknr"]
+[ext_resource type="Resource" uid="uid://blpuc4qpwsakn" path="res://resources/abilities/06_skill_notself.tres" id="6_r2tmj"]
+[ext_resource type="Resource" uid="uid://22jk2kxiv52g" path="res://resources/abilities/09_skill_pa_RAN.tres" id="8_imqcf"]
 
 [resource]
 script = ExtResource("2_a3fyn")
@@ -17,6 +18,6 @@ base_health = 18
 base_speed = 10
 sprite = ExtResource("3_a3fyn")
 basic_atk = Array[ExtResource("1_wa4vt")]([ExtResource("2_ne3t8")])
-skill_use = Array[ExtResource("1_wa4vt")]([ExtResource("5_imqcf"), ExtResource("4_r2tmj"), ExtResource("6_beknr")])
-skill_ult = Array[ExtResource("1_wa4vt")]([ExtResource("4_r2tmj")])
+skills = Array[ExtResource("1_wa4vt")]([ExtResource("5_imqcf"), ExtResource("6_beknr"), ExtResource("6_r2tmj")])
+ultimate = Array[ExtResource("1_wa4vt")]([ExtResource("8_imqcf")])
 metadata/_custom_type_script = "uid://nqhxig82acgw"

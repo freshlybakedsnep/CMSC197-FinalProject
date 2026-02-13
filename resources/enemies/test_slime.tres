@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://c8d4ukuf2tkk0" path="res://ability.gd" id="1_rwtre"]
 [ext_resource type="Script" uid="uid://ddsxg1ao3vu1d" path="res://resources/data_enemy.gd" id="2_ljfmg"]
 [ext_resource type="Resource" uid="uid://dobxvjv81eaxa" path="res://resources/abilities/01_ba_ST.tres" id="2_sgfjc"]
-[ext_resource type="Resource" uid="uid://c1x244ego6kjx" path="res://resources/abilities/04_skill_en_AOE.tres" id="4_sgfjc"]
 
 [resource]
 script = ExtResource("2_ljfmg")
@@ -14,5 +13,5 @@ base_attack = 2
 base_defense = 1
 base_speed = 6
 basic_atk = Array[ExtResource("1_rwtre")]([ExtResource("2_sgfjc")])
-skill_ult = Array[ExtResource("1_rwtre")]([ExtResource("4_sgfjc")])
+ultimate = Array[ExtResource("1_rwtre")]([ExtResource("2_sgfjc")])
 metadata/_custom_type_script = "uid://ddsxg1ao3vu1d"
