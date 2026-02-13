@@ -4,89 +4,99 @@ class_name StageInfo
 @export var waves : Array[Wave]
 @onready var battle_ui: Control = $BattleUI
 
+@export var entity : PackedScene
+
 const MAX_ON_FIELD := 5
 
 var on_field : Dictionary = {
-	0 : null,
 	1 : null,
 	2 : null,
 	3 : null,
 	4 : null,
+	5 : null
 }
 
+var current_wave_data : Wave
+var max_waves := 1
 var wave_index := 0
 var turn_count := 0
 
+var hero_nodes : Array[Entity]
+
+
 var turn_queue : Array
 var acted : Array
-
-
 var names : Dictionary
 
 func _ready() -> void:
-	PartyManager.load_party()
+	max_waves = waves.size()
+	spawn_party()
+	start_battle()
+
+func spawn_entity(res : UnitData) -> Node:
+	var node = entity.instantiate()
+	add_child(node)
+	
+	node.add_to_group("heroes" if res is HeroData else "enemies")
+	node.setup(res)
+	return node
+
+func spawn_party() -> void:
+	for i in PartyManager.party.size():
+		var hero_res = PartyManager.party[i]
+		if hero_res == null: continue
+		hero_nodes.append(spawn_entity(hero_res))
+
+func start_battle() -> void:
+	current_wave_data = waves[wave_index].duplicate(true)
+	battle_ui.battle_start(hero_nodes)
 	start_turn()
 
 func start_turn() -> void:
 	initialize_enemy_formation()
-	initialize_enemy_actions()
+	for e in get_tree().get_nodes_in_group("entities"):
+		e.new_turn()
+	
 	update_turn_order()
 	turn_count += 1
 	start_phase_plan()
 
 func initialize_enemy_formation() -> void:
-	var f = 0
+	var f = 1
 	var e = MAX_ON_FIELD
 	
 	while e > 0:
-		var enemy = waves[wave_index].enemies.pop_front()
-		if enemy == null : return
-		enemy = enemy.duplicate()
+		var enemy_res = current_wave_data.enemies.pop_front()
+		if enemy_res == null : return
 		
-		if names.keys().has(enemy.entity_name):
-			names[enemy.entity_name] += 1
-			enemy.entity_name += " " + char(64 + names[enemy.entity_name])
+		enemy_res = enemy_res.duplicate()
+		
+		if names.keys().has(enemy_res.entity_name):
+			names[enemy_res.entity_name] += 1
+			enemy_res.entity_name += " " + char(64 + names[enemy_res.entity_name])
 		else:
-			names[enemy.entity_name] = 1
+			names[enemy_res.entity_name] = 1
+		
+		var enemy_node = spawn_entity(enemy_res)
 		
 		var scouting = true
-		if enemy.starting_position != EnemyData.Positions.ANY:
-			var s = enemy.starting_position
+		if enemy_res.starting_position != EnemyData.Positions.ANY:
+			var s = enemy_res.starting_position
 			if on_field.get(s) == null:
-				on_field[s] = enemy
+				on_field[s] = enemy_node
 				scouting = false
-		
 		if scouting:
 			while on_field.get(f):
 				f += 1
-			on_field[f] = enemy
+			on_field[f] = enemy_node
 			f += 1
 		
-		enemy.initialize()
 		e -= 1
-
-func initialize_enemy_actions() -> void:
-	for enemy in on_field.values():
-		if enemy == null: continue
-		enemy.charge += 1
-		if enemy.charge > enemy.max_charges:
-			enemy.charge = 0
-		
-		enemy.set_action()
-		var e = enemy.get_current_ability()
-		enemy.target_range = finalize_targets(e, enemy)
-		enemy.set_target()
 
 func update_turn_order() -> void:
 	turn_queue.clear()
 	
-	var all_units = []
-	all_units.append_array(PartyManager.party)
-	for unit in on_field.values():
-		if unit != null:
-			all_units.append(unit)
-	
-	for unit in all_units:
+	for unit in get_tree().get_nodes_in_group("entities"):
 		if not acted.has(unit):
 			turn_queue.append(unit)
 	
@@ -96,68 +106,43 @@ func update_turn_order() -> void:
 
 func start_phase_plan():
 	print("Turn %d" % turn_count)
-	#for f in on_field:
-		#print("%s: %s" % [f, on_field[f].entity_name])
 	battle_ui.turn_start(on_field)
 
 func end_turn():
 	acted.clear()
+	
+	if (current_wave_data.enemies.size() <= 0 and 
+	on_field.values().all(func(x): return x == null)):
+		wave_index += 1
+		if wave_index > max_waves:
+			print("Stage Clear!")
+			return
+		current_wave_data = waves[wave_index].duplicate(true)
 	start_turn()
 
 func start_phase_fight() -> void:
-	change_actor()
+	while turn_queue:
+		enact(turn_queue.pop_front())
+	end_turn()
 
-func change_actor() -> void:
-	if turn_queue.is_empty():
-		end_turn()
-		return
+func enact(actor : Entity) -> void:
+	var f = []
+	for e in actor.current_target:
+		f.append(e.name)
+	f = ", ".join(f)
 	
-	var current_actor = turn_queue.pop_front()
-	enact(current_actor)
-
-func enact(actor) -> void:
-	var t = actor.target
-	
-	if t == null or (t is Object and is_instance_valid(t)):
-		# retarget logic
-		pass
-	if t is Array:
-		var temp = []
-		for x in t:
-			temp.append(x.entity_name)
-		t = ", ".join(temp)
-	else:
-		t = t.entity_name
+	#var t = actor.current_target
+	#if t == null or (t is Object and is_instance_valid(t)):
+		## retarget logic
+		#pass
 	print("%s uses %s on %s" % 
-	[actor.entity_name, UnitData.ActionMode.find_key(actor.action), t])
+	[actor.name, actor.action.ability_name, f])
+	
 	acted.append(actor)
 	
-	actor.action = UnitData.ActionMode.NONE
-	actor.target = null
-	actor.target_range = []
+	actor.current_action = UnitData.ActionMode.NONE
+	actor.action = null
+	actor.current_target.clear()
+	actor.target_range.clear()
 	
 	update_turn_order()
-	change_actor()
-
-func finalize_targets(ability : Ability, unit : UnitData):
-	var side = []
-	if unit is HeroData:
-		side.append_array(PartyManager.party)
-	elif unit is EnemyData:
-		side.append_array(on_field.values())
-
-	match ability.target:
-		Ability.TargetGroup.SELF:
-			return [unit]
-		Ability.TargetGroup.PARTY:
-			return side
-		Ability.TargetGroup.ALLY_ONLY:
-			side.erase(unit)
-			return side
-		Ability.TargetGroup.ENEMY:
-			if unit is HeroData:
-				return on_field.values()
-			else:
-				return PartyManager.party
-		_:
-			return null

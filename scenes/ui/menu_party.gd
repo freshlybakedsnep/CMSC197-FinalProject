@@ -2,20 +2,24 @@ extends VBoxContainer
 signal actor_selected(index : int)
 signal party_ready
 
+var hero_nodes : Array[Entity]
+
 @onready var party: Array = $".".get_children()
 var actor : int
 
-func _ready() -> void:
+func setup(nodes : Array[Entity]) -> void:
 	for i in party:
 		i.hide()
 		
-	for i in range(len(PartyManager.party)):
+	hero_nodes = nodes
+
+	for i in range(hero_nodes.size()):
 		party[i].show()
 		party[i].portrait.texture = party[i].portrait.texture.duplicate()
-		party[i].portrait.texture.atlas = PartyManager.party[i].sprite
-		party[i].health_bar.update_health(PartyManager.party[i].base_health, PartyManager.party[i].base_health)
-		var j = PartyManager.party[i].character_class
-		var t = PartyManager.party[i].elemental_type
+		party[i].portrait.texture.atlas = hero_nodes[i].character_data.sprite
+		party[i].health_bar.update_health(hero_nodes[i].health, hero_nodes[i].character_data.base_health)
+		var j = hero_nodes[i].character_data.character_class
+		var t = hero_nodes[i].character_data.elemental_type
 		party[i].character_class.texture = load("res://assets/jobs/El%skind%s.png" % [str(t+1), str(j+1)])
 		party[i].pressed.connect(pick_actor)
 
@@ -33,20 +37,19 @@ func enable() -> void:
 		p.focusable(true)
 		p.mouse_behavior_recursive = MOUSE_BEHAVIOR_ENABLED
 
-func pick_actor(posit : int) -> void:
-	actor = posit
-	actor_selected.emit(posit)
+func pick_actor(pos : int) -> void:
+	actor = pos
+	actor_selected.emit(pos)
 
 func focus_initial() -> void:
-	if PartyManager.party[actor].action == UnitData.ActionMode.NONE:
+	if hero_nodes[actor].current_action == UnitData.ActionMode.NONE:
 		party[actor].grab_focus()
 		return
 	
-	for member in range(len(PartyManager.party)):
-		if (PartyManager.party[member].condition == UnitData.State.NORMAL and 
-		PartyManager.party[member].action == UnitData.ActionMode.NONE):
+	for member in range(hero_nodes.size()):
+		if (hero_nodes[member].condition == UnitData.State.NORMAL and 
+		hero_nodes[member].current_action == UnitData.ActionMode.NONE):
 			party[member].grab_focus()
 			return
 	
-	# change this to make start button grab the focus
 	party_ready.emit()

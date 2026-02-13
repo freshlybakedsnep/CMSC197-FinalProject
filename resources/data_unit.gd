@@ -1,3 +1,4 @@
+@abstract
 extends Resource
 class_name UnitData
 
@@ -20,18 +21,10 @@ enum ElementalType {
 
 @export var sprite : Texture
 
-# dynamic values
-var health
-var health_max
-var attack
-var defense
-var speed
-
 @export var basic_atk : Array[Ability]
-@export var skill_use : Array[Ability]
-@export var skill_ult : Array[Ability]
+@export var skills : Array[Ability]
+@export var ultimate : Array[Ability]
 
-var condition : State = State.NORMAL
 enum State {
 	NORMAL,
 	DOWN,
@@ -39,9 +32,6 @@ enum State {
 	INACTIVE
 }
 
-var targetable := true
-
-var action : ActionMode
 enum ActionMode{
 	NONE,
 	BASIC_ATTACK,
@@ -51,15 +41,4 @@ enum ActionMode{
 	SKILL_EXTRA
 }
 
-var target
-var target_range : Array
-
-func get_current_ability():
-	pass
-
-func initialize() -> void:
-	health_max = base_health
-	health = health_max
-	attack = base_attack
-	defense = base_defense
-	speed = base_speed
+@abstract func get_ability(_actor : Entity = null) -> Ability

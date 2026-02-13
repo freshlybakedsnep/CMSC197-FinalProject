@@ -3,7 +3,7 @@ signal open_skill_menu
 signal cancel_op
 signal finish_op
 
-var hero : HeroData
+var hero : Entity
 var select := 1
 
 func enable() -> void:
@@ -20,12 +20,12 @@ func disable() -> void:
 		b.mouse_behavior_recursive = MOUSE_BEHAVIOR_DISABLED
 
 func focus_initial() -> void:
-	if hero.action == UnitData.ActionMode.NONE:
+	if hero.current_action == UnitData.ActionMode.NONE:
 		get_child(select).grab_focus()
 	else:
-		get_child(min(hero.action, 3)).grab_focus()
+		get_child(min(hero.current_action, 3)).grab_focus()
 
-func link_member(member : HeroData) -> void:
+func link_member(member : Entity) -> void:
 	hero = member
 
 func select_action(i : int) -> void:
@@ -38,7 +38,7 @@ func select_action(i : int) -> void:
 		open_skill_menu.emit()
 	else:
 		if i > 0:
-			hero.action = i as UnitData.ActionMode
+			hero.current_action = i as UnitData.ActionMode
 			finish_op.emit()
 		else:
 			cancel_op.emit()

@@ -15,17 +15,17 @@ enum CharacterClass {
 	VANDAL
 }
 
-func get_current_ability():
-	match action:
+func get_ability(_actor : Entity = null):
+	match _actor.current_action:
 		UnitData.ActionMode.BASIC_ATTACK:
 			return basic_atk[0]
 		UnitData.ActionMode.GUARD_ATTACK:
-			return skill_use[0]
+			return skills[0]
 		UnitData.ActionMode.SKILL_SLOT1:
-			return skill_use[1]
+			return skills[1]
 		UnitData.ActionMode.SKILL_SLOT2:
-			return skill_use[2]
+			return skills[2]
 		UnitData.ActionMode.SKILL_EXTRA:
-			return skill_ult[0]
+			return ultimate[0]
 		_:
 			return null

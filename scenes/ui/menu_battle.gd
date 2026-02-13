@@ -4,11 +4,12 @@ signal plan_done
 @onready var party_menu: VBoxContainer = $PartyMenu
 @onready var start_battle: Button = $MarginContainer/StartBattle
 
+var hero_nodes : Array[Entity]
+var current_hero_node : Entity
+
 var active_enemies : Dictionary
 var stack : Array
 var actor : int
-
-var current_member : HeroData
 
 const ACTION_MENU = preload("res://scenes/ui/menu_action.tscn")
 const SKILLS_MENU = preload("res://scenes/ui/menu_skill.tscn")
@@ -17,8 +18,13 @@ const TARGET_MENU = preload("res://scenes/ui/menu_target.tscn")
 func _ready() -> void:
 	stack.append(party_menu)
 
+func battle_start(heroes : Array[Entity]) -> void:
+	hero_nodes = heroes
+	party_menu.setup(hero_nodes)
+
 func turn_start(enemies : Dictionary) -> void:
 	active_enemies = enemies
+	
 	start_battle.disabled = true
 	start_battle.focus_mode = Control.FOCUS_NONE
 	
@@ -62,15 +68,13 @@ func draw_menu(menu : Control, reference : Control, menu_offset : Vector2) -> vo
 
 func _spawn_menu(
 	menu_scene: PackedScene, 
-	member_pos: HeroData, 
+	member_pos: Entity, 
 	next_op : Callable, 
 	spawn_anc = null, 
 	offset = Vector2.ZERO
 	) -> Control:
 	var menu = menu_scene.instantiate()
 	if menu.has_method("link_member"):
-		current_member.target = null
-		current_member.target_range = []
 		menu.link_member(member_pos)
 	
 	add_child(menu)
@@ -84,43 +88,28 @@ func _spawn_menu(
 	return menu
 
 func _open_action_menu(index: int) -> void:
-	current_member = PartyManager.party[index]
+	current_hero_node = hero_nodes[index]
 	
-	var menu = _spawn_menu(ACTION_MENU, current_member, _open_target_menu, 
+	var menu = _spawn_menu(ACTION_MENU, current_hero_node, _open_target_menu, 
 			party_menu.get_child(index), Vector2(-10, 0))
 	menu.connect("open_skill_menu", _open_skill_menu)
 	draw_menu(menu, party_menu.get_child(index), Vector2(-10, 0))
 
 func _open_skill_menu() -> void:
-	_spawn_menu(SKILLS_MENU, current_member, _open_target_menu,
+	_spawn_menu(SKILLS_MENU, current_hero_node, _open_target_menu,
 	stack.back(), Vector2(-10, 40))
 
 func _open_target_menu() -> void:
-	var ability = current_member.get_current_ability()
-	
+	var ability = current_hero_node.get_ability()
+	current_hero_node.set_target_range()
 	if not ability: return
 	
 	if ability.mode == Ability.TargetMode.SINGLE:
-		var menu = _spawn_menu(TARGET_MENU, current_member, close_to_root)
-		menu.setup(_resolve_targets(ability))
+		var menu = _spawn_menu(TARGET_MENU, current_hero_node, close_to_root)
+		menu.setup(current_hero_node.target_range)
 	else:
-		current_member.target = _resolve_targets(ability)
+		current_hero_node.current_target.assign(current_hero_node.target_range)
 		close_to_root()
-
-func _resolve_targets(ability : Ability) -> Array:
-	var hero = PartyManager.party[actor]
-	match ability.target:
-		Ability.TargetGroup.ENEMY:
-			return active_enemies.values().filter(
-				func(e): return e != null)
-		Ability.TargetGroup.PARTY:
-			return PartyManager.party.duplicate()
-		Ability.TargetGroup.ALLY_ONLY:
-			var t = PartyManager.party.duplicate()
-			t.erase(hero)
-			return t
-		_:
-			return [hero]
 
 func _on_party_ready() -> void:
 	print("Ready for Battle!")

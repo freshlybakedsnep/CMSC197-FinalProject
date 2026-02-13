@@ -4,10 +4,6 @@ class_name Party
 var party : Array[HeroData] = []
 const MAX_PARTY_SIZE = 5
 
-func load_party() -> void:
-	for hero in party:
-		hero.initialize()
-
 func add_member(hero : HeroData) -> bool:
 	if hero in party or party.size() >= MAX_PARTY_SIZE:
 		return false

@@ -1,27 +1,24 @@
 extends Control
 signal cancel_op
 signal finish_op
-var hero : HeroData
+var hero : Entity
 
-func link_member(member : HeroData) -> void:
+func link_member(member : Entity) -> void:
 	hero = member
 
-func setup(targets : Array) -> void:
-	hero.target_range = targets
+func setup(targets : Array[Entity]) -> void:
 	for unit in targets:
 		var b = Button.new()
-		b.text = str(unit.entity_name)
+		b.text = str(unit.character_data.entity_name)
 		b.set_meta("unit", unit)
 		add_child(b)
 		b.connect("pressed", selected_target.bind(unit))
 
 func focus_initial() -> void:
-	var t = hero.target
-	
-	if t != null and not (t is Array):
+	if hero.current_target.size() == 1:
 		for b in get_children():
 			if b.has_meta("unit"):
-				if b.get_meta("unit") == hero.target:
+				if b.get_meta("unit") == hero.current_target[0]:
 					b.grab_focus()
 					return
 	
@@ -30,8 +27,8 @@ func focus_initial() -> void:
 	else:
 		get_child(0).grab_focus()
 
-func selected_target(unit) -> void:
-	hero.target = unit
+func selected_target(unit : Entity) -> void:
+	hero.set_target(unit)
 	finish_op.emit()
 
 func _on_back_pressed() -> void:

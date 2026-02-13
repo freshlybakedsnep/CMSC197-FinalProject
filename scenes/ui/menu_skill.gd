@@ -2,7 +2,7 @@ extends VBoxContainer
 signal cancel_op
 signal finish_op
 
-var hero : HeroData
+var hero : Entity
 
 func enable() -> void:
 	modulate.a = 1.0
@@ -18,12 +18,12 @@ func disable() -> void:
 	modulate.a = 0.5
 
 func focus_initial() -> void:
-	if hero.action == UnitData.ActionMode.NONE:
+	if hero.current_action == UnitData.ActionMode.NONE:
 		get_child(1).grab_focus()
 	else:
-		get_child(max(hero.action-2, 1)).grab_focus()
+		get_child(max(hero.current_action-2, 1)).grab_focus()
 
-func link_member(member : HeroData) -> void:
+func link_member(member : Entity) -> void:
 	hero = member
 
 func select_action(i : int) -> void:
@@ -31,7 +31,7 @@ func select_action(i : int) -> void:
 		cancel_op.emit()
 		return
 	
-	hero.action = i + 2 as UnitData.ActionMode
+	hero.current_action = i + 2 as UnitData.ActionMode
 	
 	var c = get_children()
 	c.remove_at(i)
