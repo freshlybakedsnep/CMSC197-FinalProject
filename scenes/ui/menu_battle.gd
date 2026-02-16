@@ -120,8 +120,8 @@ func _on_party_ready() -> void:
 	start_battle.grab_focus()
 
 func _on_start_battle_pressed() -> void:
+	print("Battle Starting!")
 	plan_done.emit()
 	
 	start_battle.focus_mode = Control.FOCUS_NONE
 	start_battle.mouse_behavior_recursive = Control.MOUSE_BEHAVIOR_DISABLED
-	print("Battle Starting!")

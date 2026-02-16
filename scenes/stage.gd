@@ -39,7 +39,17 @@ func spawn_entity(res : UnitData) -> Node:
 	
 	node.add_to_group("heroes" if res is HeroData else "enemies")
 	node.setup(res)
+	node.connect("entity_action_over", next_actor)
+	node.connect("entity_eliminated", remove_from_battle)
 	return node
+
+func remove_from_battle(unit : Entity) -> void:
+	if !unit.is_hero:
+		for key in on_field.keys():
+			if on_field[key] == unit:
+				on_field[key] = null
+	
+	update_turn_order()
 
 func spawn_party() -> void:
 	for i in PartyManager.party.size():
@@ -97,7 +107,9 @@ func update_turn_order() -> void:
 	turn_queue.clear()
 	
 	for unit in get_tree().get_nodes_in_group("entities"):
-		if not acted.has(unit):
+		if (not acted.has(unit) 
+		and not unit.is_queued_for_deletion()
+		and unit.health > 0):
 			turn_queue.append(unit)
 	
 	turn_queue.sort_custom(
@@ -108,41 +120,51 @@ func start_phase_plan():
 	print("Turn %d" % turn_count)
 	battle_ui.turn_start(on_field)
 
+func start_phase_fight() -> void:
+	for ent in turn_queue:
+		if ent.current_action == UnitData.ActionMode.GUARD_ATTACK:
+			turn_queue.erase(ent)
+			acted.append(ent)
+	next_actor()
+
 func end_turn():
 	acted.clear()
+	for e in get_tree().get_nodes_in_group("entities"):
+		e.end_turn()
 	
-	if (current_wave_data.enemies.size() <= 0 and 
-	on_field.values().all(func(x): return x == null)):
+	if (current_wave_data.enemies.size() <= 0 
+	and on_field.values().all(func(x): return x == null)):
 		wave_index += 1
-		if wave_index > max_waves:
+		if wave_index >= max_waves:
 			print("Stage Clear!")
 			return
 		current_wave_data = waves[wave_index].duplicate(true)
 	start_turn()
 
-func start_phase_fight() -> void:
-	while turn_queue:
-		enact(turn_queue.pop_front())
-	end_turn()
+func next_actor() -> void:
+	if party_wiped():
+		print("Game Over!")
+		return
+	
+	update_turn_order()
+	var actor = turn_queue.pop_front()
+	if actor: 
+		enact(actor)
+	else:
+		end_turn()
 
 func enact(actor : Entity) -> void:
 	var f = []
 	for e in actor.current_target:
 		f.append(e.name)
 	f = ", ".join(f)
-	
-	#var t = actor.current_target
-	#if t == null or (t is Object and is_instance_valid(t)):
-		## retarget logic
-		#pass
 	print("%s uses %s on %s" % 
 	[actor.name, actor.action.ability_name, f])
 	
 	acted.append(actor)
-	
-	actor.current_action = UnitData.ActionMode.NONE
-	actor.action = null
-	actor.current_target.clear()
-	actor.target_range.clear()
-	
-	update_turn_order()
+	actor.do_action()
+
+func party_wiped() -> bool:
+	return get_tree().get_nodes_in_group("heroes").all(
+		func(h): return h.health <= 0
+	)

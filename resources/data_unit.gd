@@ -14,6 +14,14 @@ enum ElementalType {
 	DARK
 }
 
+const TypeChart = {
+	ElementalType.FIRE : 	{ElementalType.WATER: 	2.0, 	ElementalType.WOOD: 	0.5},
+	ElementalType.WATER : 	{ElementalType.WOOD: 	2.0, 	ElementalType.FIRE: 	0.5},
+	ElementalType.WOOD : 	{ElementalType.FIRE: 	2.0, 	ElementalType.WATER: 	0.5},
+	ElementalType.LIGHT : 	{ElementalType.DARK: 	2.0},
+	ElementalType.DARK : 	{ElementalType.LIGHT: 	2.0}
+}
+
 @export var base_health := 10
 @export var base_attack := 4
 @export var base_defense := 2
@@ -25,11 +33,11 @@ enum ElementalType {
 @export var skills : Array[Ability]
 @export var ultimate : Array[Ability]
 
+var state : State
 enum State {
-	NORMAL,
-	DOWN,
-	DEAD,
-	INACTIVE
+	NORMAL,	# alive, can act, can be damaged
+	DOWN,	# not alive, cannot act, cannot be damaged 
+	DULL 	# alive, but cannot act, can be damaged
 }
 
 enum ActionMode{
@@ -42,3 +50,6 @@ enum ActionMode{
 }
 
 @abstract func get_ability(_actor : Entity = null) -> Ability
+
+func get_effectiveness(element : ElementalType) -> float:
+	return TypeChart[elemental_type].get(element, 1.0)

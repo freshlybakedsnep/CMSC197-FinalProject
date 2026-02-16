@@ -15,3 +15,7 @@ func remove_member(hero : HeroData) -> int:
 	var index = party.find(hero)
 	party.erase(hero)
 	return index
+
+func finalize_party() -> void:
+	for slot in party.size():
+		party[slot] = party[slot].duplicate()

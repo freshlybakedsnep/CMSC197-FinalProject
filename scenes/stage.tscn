@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bifyp6opkfsfo"]
 
 [ext_resource type="Script" uid="uid://dfwilkkfsbqyu" path="res://scenes/stage.gd" id="1_2so7o"]
-[ext_resource type="Script" uid="uid://cx656sdytf30u" path="res://wave.gd" id="2_st0q7"]
+[ext_resource type="Script" uid="uid://cx656sdytf30u" path="res://resources/wave.gd" id="2_st0q7"]
 [ext_resource type="Script" uid="uid://ddsxg1ao3vu1d" path="res://resources/data_enemy.gd" id="3_1hwpr"]
 [ext_resource type="PackedScene" uid="uid://c6b4l3yqvllgy" path="res://entity.tscn" id="5_2so7o"]
 [ext_resource type="Resource" uid="uid://cgqtujynpdh3p" path="res://resources/enemies/test_slime.tres" id="5_yd2gm"]

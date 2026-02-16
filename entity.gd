@@ -1,16 +1,19 @@
 extends Node
 class_name Entity
 
+signal entity_action_over
+signal entity_eliminated
+
 @export var character_data : UnitData
 var data : UnitData
 
+var element : UnitData.ElementalType
 var health : int
 var health_max : int
 var attack : int
 var defense : int
 var speed : int
 
-var condition : UnitData.State
 var targetable := true
 var target_range : Array[Entity]
 var current_target : Array[Entity]
@@ -21,6 +24,7 @@ var is_hero : bool
 
 # hero units only
 var current_action : UnitData.ActionMode
+var hud = null
 
 # enemy units only
 var charge := 0
@@ -29,10 +33,12 @@ func setup(res : UnitData):
 	character_data = res
 	data = character_data.duplicate()
 	
+	element = data.elemental_type
 	name = data.entity_name
 	
 	health_max = data.base_health
 	health = health_max
+	
 	attack = data.base_attack
 	defense = data.base_defense
 	speed = data.base_speed
@@ -41,7 +47,6 @@ func setup(res : UnitData):
 func new_turn() -> void:
 	action = null
 	if !is_hero:
-		charge += 1 % (data.max_charges + 1)
 		get_ability()
 		#print("%s is using %s" % [name, action.ability_name])
 		set_target_range()
@@ -89,3 +94,61 @@ func set_target(unit : Entity = null) -> void:
 func get_ability() -> Ability:
 	action = data.get_ability(self)
 	return action
+
+func do_action() -> void:
+	for recipient in current_target:
+		if action.target == Ability.TargetMode.SINGLE:
+			var target : Entity
+			if recipient is Object and is_instance_valid(recipient):
+				target = recipient
+				print("Attacking selected target!")
+			else:
+				target_range.erase(recipient)
+				print("Attacking next viable target")
+				for candidate in target_range:
+					if recipient is Object and is_instance_valid(recipient):
+						target = candidate
+						break
+					target_range.erase(candidate)
+
+				if target != null:
+					action.take_effect(self, target)
+				else:
+					break
+		else:
+			action.take_effect(self, recipient)
+	entity_action_over.emit()
+	
+func modify_health(
+	incoming : int, 
+	el : UnitData.ElementalType, 
+	damaging : bool
+	) -> void:
+	if damaging:
+		incoming *= data.get_effectiveness(el)
+		if current_action == UnitData.ActionMode.GUARD_ATTACK:
+			incoming *= 0.5
+	health = max(0, health - ceil(incoming))
+	
+	if health <= 0:
+		eliminated()
+	
+	if hud != null:
+		hud.health_bar.update_health(health)
+	
+	print("%s : %d" % [name, health])
+
+func eliminated() -> void:
+	print(name + " has died!")
+	entity_eliminated.emit(self)
+	if !is_hero:
+		self.queue_free()
+	else:
+		data.state = UnitData.State.DOWN
+
+func end_turn() -> void:
+	if !is_hero:
+		charge = (charge + 1) % (data.max_charges + 1)
+	action = null
+	current_target.clear()
+	target_range.clear()
