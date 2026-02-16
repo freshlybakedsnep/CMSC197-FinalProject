@@ -1,17 +1,71 @@
 [gd_resource type="Resource" script_class="EnemyData" format=3 uid="uid://cgqtujynpdh3p"]
 
-[ext_resource type="Script" uid="uid://c8d4ukuf2tkk0" path="res://ability.gd" id="1_rwtre"]
+[ext_resource type="Script" uid="uid://c8d4ukuf2tkk0" path="res://resources/ability.gd" id="1_sgfjc"]
+[ext_resource type="Script" uid="uid://np6c631gwyc1" path="res://resources/effect.gd" id="2_1tihf"]
 [ext_resource type="Script" uid="uid://ddsxg1ao3vu1d" path="res://resources/data_enemy.gd" id="2_ljfmg"]
-[ext_resource type="Resource" uid="uid://dobxvjv81eaxa" path="res://resources/abilities/01_ba_ST.tres" id="2_sgfjc"]
+[ext_resource type="Script" uid="uid://ccv6s717ftoj2" path="res://resources/value_scaling.gd" id="3_1tihf"]
+[ext_resource type="Script" uid="uid://cam2fjh06h71s" path="res://resources/value_flat.gd" id="3_d8cdp"]
+[ext_resource type="Script" uid="uid://cwp6uh5wxbdq0" path="res://resources/effect_health.gd" id="4_awg88"]
+
+[sub_resource type="Resource" id="Resource_drq2u"]
+script = ExtResource("3_1tihf")
+stat = 6
+metadata/_custom_type_script = "uid://ccv6s717ftoj2"
+
+[sub_resource type="Resource" id="Resource_rmjao"]
+script = ExtResource("4_awg88")
+inherit_target = true
+formula = SubResource("Resource_drq2u")
+metadata/_custom_type_script = "uid://cwp6uh5wxbdq0"
+
+[sub_resource type="Resource" id="Resource_x18yb"]
+script = ExtResource("1_sgfjc")
+ability_name = "Slime Basic Attack"
+target = 3
+mode = 1
+effects = Array[ExtResource("2_1tihf")]([SubResource("Resource_rmjao")])
+metadata/_custom_type_script = "uid://c8d4ukuf2tkk0"
+
+[sub_resource type="Resource" id="Resource_ku4y8"]
+script = ExtResource("3_d8cdp")
+amount = 3
+metadata/_custom_type_script = "uid://cam2fjh06h71s"
+
+[sub_resource type="Resource" id="Resource_1tihf"]
+script = ExtResource("4_awg88")
+target_mode = 3
+target_group = 3
+formula = SubResource("Resource_ku4y8")
+metadata/_custom_type_script = "uid://cwp6uh5wxbdq0"
+
+[sub_resource type="Resource" id="Resource_d8cdp"]
+script = ExtResource("3_d8cdp")
+amount = 3
+metadata/_custom_type_script = "uid://cam2fjh06h71s"
+
+[sub_resource type="Resource" id="Resource_awg88"]
+script = ExtResource("4_awg88")
+target_mode = 3
+target_group = 3
+formula = SubResource("Resource_d8cdp")
+metadata/_custom_type_script = "uid://cwp6uh5wxbdq0"
+
+[sub_resource type="Resource" id="Resource_pw5yq"]
+script = ExtResource("1_sgfjc")
+ability_name = "Slime Rush"
+target = 3
+mode = 3
+effects = Array[ExtResource("2_1tihf")]([SubResource("Resource_1tihf"), SubResource("Resource_awg88")])
+metadata/_custom_type_script = "uid://c8d4ukuf2tkk0"
 
 [resource]
 script = ExtResource("2_ljfmg")
 entity_name = "Slime"
 elemental_type = 2
-base_health = 20
+base_health = 12
 base_attack = 2
 base_defense = 1
 base_speed = 6
-basic_atk = Array[ExtResource("1_rwtre")]([ExtResource("2_sgfjc")])
-ultimate = Array[ExtResource("1_rwtre")]([ExtResource("2_sgfjc")])
+basic_atk = Array[ExtResource("1_sgfjc")]([SubResource("Resource_x18yb")])
+ultimate = Array[ExtResource("1_sgfjc")]([SubResource("Resource_pw5yq")])
 metadata/_custom_type_script = "uid://ddsxg1ao3vu1d"

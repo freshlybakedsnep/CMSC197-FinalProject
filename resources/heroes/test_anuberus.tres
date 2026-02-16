@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="HeroData" format=3 uid="uid://b3gin5ue18kl6"]
 
-[ext_resource type="Script" uid="uid://c8d4ukuf2tkk0" path="res://ability.gd" id="1_ytc7u"]
+[ext_resource type="Script" uid="uid://c8d4ukuf2tkk0" path="res://resources/ability.gd" id="1_ytc7u"]
 [ext_resource type="Script" uid="uid://nqhxig82acgw" path="res://resources/data_hero.gd" id="2_ntdg7"]
 [ext_resource type="Resource" uid="uid://dobxvjv81eaxa" path="res://resources/abilities/01_ba_ST.tres" id="2_s00es"]
 [ext_resource type="Texture2D" uid="uid://i7jt4s0h8fiq" path="res://assets/sprites/anuberus.webp" id="3_ntdg7"]

@@ -18,7 +18,6 @@ func _ready():
 	
 	character_buttons.get_child(0).call_deferred("grab_focus")
 
-
 func select_hero(index : int, recruited : bool) -> void:
 	var c = butts[index][1]
 	if recruited:
@@ -35,4 +34,5 @@ func select_hero(index : int, recruited : bool) -> void:
 	$VBoxContainer/Button.disabled = (PartyManager.party.size() < 1)
 
 func _on_button_pressed() -> void:
+	PartyManager.finalize_party()
 	get_tree().change_scene_to_file("res://scenes/stage.tscn") 

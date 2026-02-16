@@ -1,11 +1,25 @@
 [gd_resource type="Resource" script_class="Ability" format=3 uid="uid://dobxvjv81eaxa"]
 
-[ext_resource type="Script" uid="uid://np6c631gwyc1" path="res://effect.gd" id="1_srv6p"]
-[ext_resource type="Script" uid="uid://c8d4ukuf2tkk0" path="res://ability.gd" id="2_nh1yu"]
+[ext_resource type="Script" uid="uid://np6c631gwyc1" path="res://resources/effect.gd" id="1_srv6p"]
+[ext_resource type="Script" uid="uid://c8d4ukuf2tkk0" path="res://resources/ability.gd" id="2_nh1yu"]
+[ext_resource type="Script" uid="uid://ccv6s717ftoj2" path="res://resources/value_scaling.gd" id="2_p4t71"]
+[ext_resource type="Script" uid="uid://cwp6uh5wxbdq0" path="res://resources/effect_health.gd" id="2_rhooi"]
+
+[sub_resource type="Resource" id="Resource_bpqhx"]
+script = ExtResource("2_p4t71")
+stat = 6
+metadata/_custom_type_script = "uid://ccv6s717ftoj2"
+
+[sub_resource type="Resource" id="Resource_p4t71"]
+script = ExtResource("2_rhooi")
+inherit_target = true
+formula = SubResource("Resource_bpqhx")
+metadata/_custom_type_script = "uid://cwp6uh5wxbdq0"
 
 [resource]
 script = ExtResource("2_nh1yu")
 ability_name = "Basic Attack"
 target = 3
 mode = 1
+effects = Array[ExtResource("1_srv6p")]([SubResource("Resource_p4t71")])
 metadata/_custom_type_script = "uid://c8d4ukuf2tkk0"
