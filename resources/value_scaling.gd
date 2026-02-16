@@ -2,8 +2,9 @@ extends ValueFormula
 class_name ScalingAmount
 
 @export var multiplier := 1.0
-@export var stat : StatSource
+@export var from_target := false
 
+@export var stat : StatSource
 enum StatSource {
 	BASE_HEALTH,
 	BASE_ATTACK,
@@ -16,8 +17,8 @@ enum StatSource {
 	SPEED
 }
 
-func calculate(src : UnitData) -> int:
+func calculate(src : Entity, tar : Entity) -> int:
 	var key = StatSource.find_key(stat)
 	var property_name = key.to_lower()
-	var val = src.get(property_name)
+	var val = tar.get(property_name) if from_target else src.get(property_name)
 	return val * multiplier
