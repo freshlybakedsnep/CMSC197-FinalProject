@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="HeroData" format=3 uid="uid://0d2imum1yj47"]
 
-[ext_resource type="Script" uid="uid://c8d4ukuf2tkk0" path="res://resources/ability.gd" id="1_m1hio"]
-[ext_resource type="Script" uid="uid://nqhxig82acgw" path="res://resources/data_hero.gd" id="2_bydk7"]
+[ext_resource type="Script" uid="uid://c8d4ukuf2tkk0" path="res://scripts/resource/ability.gd" id="1_m1hio"]
+[ext_resource type="Script" uid="uid://nqhxig82acgw" path="res://scripts/resource/data_hero.gd" id="2_bydk7"]
 [ext_resource type="Resource" uid="uid://dobxvjv81eaxa" path="res://resources/abilities/01_ba_ST.tres" id="2_cjau5"]
 [ext_resource type="Texture2D" uid="uid://c51rmprgm5hh4" path="res://assets/sprites/ricano.webp" id="3_u3siy"]
 [ext_resource type="Resource" uid="uid://bjjg6xh648o8e" path="res://resources/abilities/03_skill_en_ST.tres" id="5_1svb1"]

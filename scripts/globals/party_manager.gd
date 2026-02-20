@@ -19,3 +19,4 @@ func remove_member(hero : HeroData) -> int:
 func finalize_party() -> void:
 	for slot in party.size():
 		party[slot] = party[slot].duplicate()
+		party[slot].reset_to_default()

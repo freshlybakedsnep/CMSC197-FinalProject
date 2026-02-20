@@ -7,7 +7,6 @@ extends Control
 var butts : Array
 
 func _ready():
-	
 	for ch in HeroDatabase.library:
 		var c = character_slot.instantiate()
 		c.texture = c.texture.duplicate()

@@ -3,8 +3,8 @@ class_name Entity
 
 signal entity_action_over
 signal entity_eliminated
+signal entity_selected
 
-@export var character_data : UnitData
 var data : UnitData
 
 var element : UnitData.ElementalType
@@ -17,7 +17,6 @@ var speed : int
 var targetable := true
 var target_range : Array[Entity]
 var current_target : Array[Entity]
-
 var action : Ability
 
 var is_hero : bool
@@ -29,26 +28,59 @@ var hud = null
 # enemy units only
 var charge := 0
 
+@onready var sprite: AnimatedSprite2D = $Sprite
+
+var element_icon : TextureRect
+var hp_bar_hud : Control
+var hp_bar : ProgressBar
+
+@onready var target_component: Node2D = $TargetComponent
+
+func update_health_bar() -> void:
+	if hp_bar != null:
+		hp_bar.max_value = health_max
+		hp_bar.value = health
+
+func prepare_health_bar() -> void:
+	if !is_hero:
+		hp_bar_hud = $EnemyHPBar
+		element_icon = hp_bar_hud.get_child(0)
+		hp_bar = $EnemyHPBar.get_child(1)
+		
+		element_icon.texture = load("res://assets/jobs/El%s.png" % str(element+1))
+		position_health_bar()
+		
+	update_health_bar()
+
+func position_health_bar():
+	var frame_tex = sprite.sprite_frames.get_frame_texture(sprite.animation, sprite.frame)
+	var sprite_height = frame_tex.get_size().y * sprite.scale.y
+	
+	hp_bar_hud.position.y = -(sprite_height / 2)
+	hp_bar_hud.position.x = -(hp_bar_hud.size.x / 2)
+
+func _ready() -> void:
+	target_component.connect("has_focus", highlight_me)
+	prepare_health_bar()
+
 func setup(res : UnitData):
-	character_data = res
-	data = character_data.duplicate()
+	data = res
+	is_hero = res is HeroData
 	
 	element = data.elemental_type
 	name = data.entity_name
 	
-	health_max = data.base_health
-	health = health_max
+	health_max = data.health_max
+	health = data.health
 	
-	attack = data.base_attack
-	defense = data.base_defense
-	speed = data.base_speed
-	is_hero = character_data is HeroData
+	attack = data.attack
+	defense = data.defense
+	speed = data.speed
 
 func new_turn() -> void:
 	action = null
 	if !is_hero:
 		get_ability()
-		#print("%s is using %s" % [name, action.ability_name])
 		set_target_range()
 		set_target()
 	else:
@@ -95,30 +127,32 @@ func get_ability() -> Ability:
 	action = data.get_ability(self)
 	return action
 
-func do_action() -> void:
-	for recipient in current_target:
-		if action.target == Ability.TargetMode.SINGLE:
-			var target : Entity
-			if recipient is Object and is_instance_valid(recipient):
-				target = recipient
-				print("Attacking selected target!")
-			else:
-				target_range.erase(recipient)
-				print("Attacking next viable target")
-				for candidate in target_range:
-					if recipient is Object and is_instance_valid(recipient):
-						target = candidate
-						break
-					target_range.erase(candidate)
+func target_viable(target : Entity) -> bool:
+	if target is Object and !is_instance_valid(target):
+		return false
+	if target.is_queued_for_deletion():
+		return false
+	return true
 
-				if target != null:
-					action.take_effect(self, target)
-				else:
-					break
+func do_action() -> void:
+	if action.mode == Ability.TargetMode.SINGLE:
+		var target : Entity
+		if target_viable(current_target[0]):
+			target = current_target[0]
 		else:
-			action.take_effect(self, recipient)
+			target_range.erase(current_target[0])
+			for candidate in target_range:
+				if target_viable(candidate):
+					target = candidate
+					break
+		if target != null:
+			action.take_effect(self, target)
+	else:
+		for target in current_target:
+			if target_viable(target):
+				action.take_effect(self, target)
 	entity_action_over.emit()
-	
+
 func modify_health(
 	incoming : int, 
 	el : UnitData.ElementalType, 
@@ -129,14 +163,13 @@ func modify_health(
 		if current_action == UnitData.ActionMode.GUARD_ATTACK:
 			incoming *= 0.5
 	health = max(0, health - ceil(incoming))
+	update_health_bar()
 	
 	if health <= 0:
 		eliminated()
 	
 	if hud != null:
 		hud.health_bar.update_health(health)
-	
-	print("%s : %d" % [name, health])
 
 func eliminated() -> void:
 	print(name + " has died!")
@@ -152,3 +185,6 @@ func end_turn() -> void:
 	action = null
 	current_target.clear()
 	target_range.clear()
+
+func highlight_me(enabled : bool) -> void:
+	sprite.material.set_shader_parameter("active", enabled)

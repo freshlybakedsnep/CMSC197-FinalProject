@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://sbwjthhfx2yi"]
+[gd_scene format=3 uid="uid://sbwjthhfx2yi"]
 
-[ext_resource type="Script" uid="uid://dybwlgtpxpuv4" path="res://scenes/ui/health_bar.gd" id="1_qi2ti"]
+[ext_resource type="Script" uid="uid://dybwlgtpxpuv4" path="res://scripts/ui/health_bar.gd" id="1_qi2ti"]
 [ext_resource type="FontFile" uid="uid://dmgqmwfwyqfc0" path="res://assets/FOT-Aokane Std.ttf" id="2_4rf34"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8ymem"]

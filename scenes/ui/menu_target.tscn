@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://qmtu4u4ldqdo"]
 
-[ext_resource type="Script" uid="uid://5qfltf3003g0" path="res://scenes/ui/menu_target.gd" id="1_asgli"]
+[ext_resource type="Script" uid="uid://5qfltf3003g0" path="res://scripts/ui/menu_target.gd" id="1_asgli"]
 
 [node name="TargetMenu" type="VBoxContainer" unique_id=457463230]
 anchors_preset = 15

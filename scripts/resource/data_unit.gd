@@ -33,6 +33,13 @@ const TypeChart = {
 @export var skills : Array[Ability]
 @export var ultimate : Array[Ability]
 
+# will be loaded at the start of a stage
+var health : int
+var health_max : int
+var attack : int
+var defense : int
+var speed : int
+
 var state : State
 enum State {
 	NORMAL,	# alive, can act, can be damaged
@@ -53,3 +60,17 @@ enum ActionMode{
 
 func get_effectiveness(element : ElementalType) -> float:
 	return TypeChart[elemental_type].get(element, 1.0)
+
+func reset_to_default() -> void:
+	health_max = base_health
+	health = health_max
+	attack = base_attack
+	defense = base_defense
+	speed = base_speed
+
+func update_data(new : Entity) -> void:
+	health_max = new.health_max
+	health = new.health
+	attack = new.attack
+	defense = new.defense
+	speed = new.speed

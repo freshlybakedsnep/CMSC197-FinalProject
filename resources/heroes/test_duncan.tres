@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="HeroData" format=3 uid="uid://gxtopevciwt1"]
 
-[ext_resource type="Script" uid="uid://c8d4ukuf2tkk0" path="res://resources/ability.gd" id="1_002wj"]
+[ext_resource type="Script" uid="uid://c8d4ukuf2tkk0" path="res://scripts/resource/ability.gd" id="1_002wj"]
 [ext_resource type="Resource" uid="uid://4n2hcgqah637" path="res://resources/abilities/02_ba_AOE.tres" id="2_ai2l6"]
-[ext_resource type="Script" uid="uid://nqhxig82acgw" path="res://resources/data_hero.gd" id="2_r84ma"]
+[ext_resource type="Script" uid="uid://nqhxig82acgw" path="res://scripts/resource/data_hero.gd" id="2_r84ma"]
 [ext_resource type="Texture2D" uid="uid://dv1b1iddmh3js" path="res://assets/sprites/duncan.webp" id="3_r84ma"]
 [ext_resource type="Resource" uid="uid://dncie7g82gll2" path="res://resources/abilities/00_guard.tres" id="5_f4ee2"]
 [ext_resource type="Resource" uid="uid://cotybom0ubdbw" path="res://resources/abilities/07_skill_pa_ST.tres" id="6_f4ee2"]

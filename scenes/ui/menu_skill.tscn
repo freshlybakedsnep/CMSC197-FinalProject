@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://b7fo8smpwdbcb"]
+[gd_scene format=3 uid="uid://b7fo8smpwdbcb"]
 
-[ext_resource type="Script" uid="uid://dyyjdkyyu1186" path="res://scenes/ui/menu_skill.gd" id="1_8n5qu"]
+[ext_resource type="Script" uid="uid://dyyjdkyyu1186" path="res://scripts/ui/menu_skill.gd" id="1_8n5qu"]
 [ext_resource type="Texture2D" uid="uid://c4lmtlpvrwsm5" path="res://assets/icons/class_psionic.webp" id="2_twods"]
 [ext_resource type="Texture2D" uid="uid://c2l0sgxhal5k6" path="res://assets/icon_test.png" id="3_twods"]
 
