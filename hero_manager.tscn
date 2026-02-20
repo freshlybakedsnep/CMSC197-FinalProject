@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://cv1pps7l0sce7"]
+
+[ext_resource type="Script" uid="uid://cpvwcgai5b0d1" path="res://hero_manager.gd" id="1_fb83y"]
+
+[node name="Heroes" type="Node2D" unique_id=689653097]
+script = ExtResource("1_fb83y")
+
+[node name="pos1" type="Marker2D" parent="." unique_id=507830191]
+y_sort_enabled = true
+position = Vector2(-130, 10)
+
+[node name="pos2" type="Marker2D" parent="." unique_id=313020340]
+y_sort_enabled = true
+position = Vector2(-65, 60)
+
+[node name="pos3" type="Marker2D" parent="." unique_id=264810793]
+y_sort_enabled = true
+position = Vector2(0, -20)
+
+[node name="pos4" type="Marker2D" parent="." unique_id=1971730018]
+y_sort_enabled = true
+position = Vector2(65, 60)
+
+[node name="pos5" type="Marker2D" parent="." unique_id=1736645290]
+y_sort_enabled = true
+position = Vector2(130, 10)

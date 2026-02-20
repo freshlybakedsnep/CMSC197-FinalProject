@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://3vg0err7ohtm"]
+
+[ext_resource type="Script" uid="uid://c4yrjkh7asd8c" path="res://enemy_manager.gd" id="1_g5mgr"]
+
+[node name="Enemies" type="Node2D" unique_id=689653097]
+script = ExtResource("1_g5mgr")
+
+[node name="pos1" type="Marker2D" parent="." unique_id=507830191]
+y_sort_enabled = true
+position = Vector2(-160, 10)
+
+[node name="pos2" type="Marker2D" parent="." unique_id=313020340]
+y_sort_enabled = true
+position = Vector2(-85, -10)
+
+[node name="pos3" type="Marker2D" parent="." unique_id=1971730018]
+y_sort_enabled = true
+
+[node name="pos4" type="Marker2D" parent="." unique_id=264810793]
+y_sort_enabled = true
+position = Vector2(70, -20)
+
+[node name="pos5" type="Marker2D" parent="." unique_id=1736645290]
+y_sort_enabled = true
+position = Vector2(160, -10)
