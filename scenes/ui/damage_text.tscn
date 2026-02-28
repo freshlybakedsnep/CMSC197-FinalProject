@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://dr0fvwkdc10g4"]
+
+[ext_resource type="Script" uid="uid://bajdgqeopny70" path="res://scripts/ui/damage_text.gd" id="1_c6dak"]
+[ext_resource type="FontFile" uid="uid://dmgqmwfwyqfc0" path="res://assets/FOT-Aokane Std.ttf" id="1_skkc4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_qnvfe"]
+font = ExtResource("1_skkc4")
+font_size = 32
+
+[node name="DamageText" type="Node2D" unique_id=772494065]
+position = Vector2(32, 0)
+script = ExtResource("1_c6dak")
+duration = 0.4
+
+[node name="Label" type="Label" parent="." unique_id=493253027]
+z_index = 10
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "000"
+label_settings = SubResource("LabelSettings_qnvfe")
+horizontal_alignment = 1
