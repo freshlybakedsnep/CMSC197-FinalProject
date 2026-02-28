@@ -28,15 +28,14 @@ func setup(nodes : Array[Entity]) -> void:
 func disable() -> void:
 	for i in hero_nodes.size():
 		if hero_nodes[i].data.state == UnitData.State.NORMAL:
-			var p = get_child(i)
+			var p := get_child(i)
 			p.enabled(false)
 			if p.get_index() == actor:
-				p.a.self_modulate.a = 1.0
+				p.a.self_modulate = Color(1,1,1)
 
 func enable() -> void:
-	actor = 0
 	for i in hero_nodes.size():
-		var p = get_child(i)
+		var p := get_child(i)
 		if hero_nodes[i].data.state == UnitData.State.NORMAL:
 			p.enabled(true)
 

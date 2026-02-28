@@ -13,7 +13,6 @@ enum ElementalType {
 	LIGHT,
 	DARK
 }
-
 const TypeChart = {
 	ElementalType.FIRE : 	{ElementalType.WATER: 	2.0, 	ElementalType.WOOD: 	0.5},
 	ElementalType.WATER : 	{ElementalType.WOOD: 	2.0, 	ElementalType.FIRE: 	0.5},
@@ -46,7 +45,6 @@ enum State {
 	DOWN,	# not alive, cannot act, cannot be damaged 
 	DULL 	# alive, but cannot act, can be damaged
 }
-
 enum ActionMode{
 	NONE,
 	BASIC_ATTACK,

@@ -14,6 +14,16 @@ mouse_filter = 1
 mouse_behavior_recursive = 2
 script = ExtResource("1_qyamm")
 
+[node name="InputConsumer" type="MarginContainer" parent="." unique_id=880204734]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+mouse_behavior_recursive = 1
+
 [node name="PartyMenu" parent="." unique_id=296522800 instance=ExtResource("2_2kidt")]
 layout_mode = 1
 anchors_preset = 3

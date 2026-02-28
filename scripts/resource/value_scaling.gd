@@ -17,8 +17,12 @@ enum StatSource {
 	SPEED
 }
 
-func calculate(src : Entity, tar : Entity) -> int:
+func calculate(src : Entity, tar : Entity) -> float:
 	var key = StatSource.find_key(stat)
 	var property_name = key.to_lower()
-	var val = tar.get(property_name) if from_target else src.get(property_name)
+	var val
+	if property_name.contains("base"):
+		val = tar.data.get(property_name) if from_target else src.data.get(property_name)
+	else: 
+		val = tar.get(property_name) if from_target else src.get(property_name)
 	return val * multiplier

@@ -30,11 +30,11 @@ func _on_button_pressed() -> void:
 
 func enabled(toggled : bool) -> void:
 	if toggled:
-		a.self_modulate.a = 1.0
+		a.self_modulate = Color(1,1,1)
 		focusable(true)
 		mouse_behavior_recursive = MOUSE_BEHAVIOR_ENABLED
 	else:
-		a.self_modulate.a = 0.2
+		a.self_modulate = Color(0.3,0.3,0.3)
 		focusable(false) 
 		mouse_behavior_recursive = MOUSE_BEHAVIOR_DISABLED
 
