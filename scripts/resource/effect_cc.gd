@@ -6,4 +6,4 @@ class_name CrowdControl
 # probably stuns, sleep, charms, etc.
 
 func trigger(source : Entity, recipient : Entity) -> void:
-	pass
+	effect_finished.emit()

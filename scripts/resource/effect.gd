@@ -3,6 +3,8 @@
 extends Resource
 class_name Effect
 
+signal effect_finished
+
 @export var inherit_target : bool :
 	set(value):
 		inherit_target = value

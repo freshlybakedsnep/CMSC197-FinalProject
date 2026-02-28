@@ -6,4 +6,4 @@ class_name StatModify
 @export var is_buff := true
 
 func trigger(source : Entity, recipient : Entity) -> void:
-	pass
+	effect_finished.emit()

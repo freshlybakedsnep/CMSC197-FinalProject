@@ -1,25 +1,40 @@
-extends Node
+extends Area2D
 class_name Entity
 
 signal entity_action_over
 signal entity_eliminated
-signal entity_selected
+signal dead
 
+var state : State
+enum State {
+	DEAD,
+	DOWN,
+	NORMAL,
+}
+
+var damage_text : PackedScene = preload("res://scenes/ui/damage_text.tscn")
+@onready var hp_bar: HPBar = $HPBar
+@onready var element_icon : TextureRect = $HPBar.get_child(0).get_child(0)
+@onready var sprite: AnimatedSprite2D = $Sprite
+@onready var target_component: Node2D = $TargetComponent
+# will handle character animations 
+var model 
+
+# everything related to attributes
 var data : UnitData
-
 var element : UnitData.ElementalType
 var health : int
 var health_max : int
 var attack : int
 var defense : int
 var speed : int
+var is_hero : bool
 
-var targetable := true
+# depicts entity
+@export var targetable := true
 var target_range : Array[Entity]
 var current_target : Array[Entity]
 var action : Ability
-
-var is_hero : bool
 
 # hero units only
 var current_action : UnitData.ActionMode
@@ -28,54 +43,36 @@ var hud = null
 # enemy units only
 var charge := 0
 
-@onready var sprite: AnimatedSprite2D = $Sprite
-
-var element_icon : TextureRect
-var hp_bar_hud : Control
-var hp_bar : ProgressBar
-
-@onready var target_component: Node2D = $TargetComponent
-
-func update_health_bar() -> void:
-	if hp_bar != null:
-		hp_bar.max_value = health_max
-		hp_bar.value = health
+func _ready() -> void:
+	target_component.connect("has_focus", outline_me)
+	prepare_health_bar()
 
 func prepare_health_bar() -> void:
-	if !is_hero:
-		hp_bar_hud = $EnemyHPBar
-		element_icon = hp_bar_hud.get_child(0)
-		hp_bar = $EnemyHPBar.get_child(1)
-		
-		element_icon.texture = load("res://assets/jobs/El%s.png" % str(element+1))
-		position_health_bar()
-		
-	update_health_bar()
+	hp_bar.update(health, health_max)
+	element_icon.texture = load("res://assets/jobs/El%s.png" % str(element+1))
+	if is_hero:
+		element_icon.hide()
+	position_health_bar()
 
 func position_health_bar():
 	var frame_tex = sprite.sprite_frames.get_frame_texture(sprite.animation, sprite.frame)
 	var sprite_height = frame_tex.get_size().y * sprite.scale.y
-	
-	hp_bar_hud.position.y = -(sprite_height / 2)
-	hp_bar_hud.position.x = -(hp_bar_hud.size.x / 2)
-
-func _ready() -> void:
-	target_component.connect("has_focus", highlight_me)
-	prepare_health_bar()
+	hp_bar.position.y = -(sprite_height / 2)
 
 func setup(res : UnitData):
+	state = State.NORMAL
 	data = res
 	is_hero = res is HeroData
-	
 	element = data.elemental_type
 	name = data.entity_name
-	
 	health_max = data.health_max
 	health = data.health
-	
 	attack = data.attack
 	defense = data.defense
 	speed = data.speed
+	
+	if health <= 0:
+		state = State.DEAD
 
 func new_turn() -> void:
 	action = null
@@ -88,8 +85,10 @@ func new_turn() -> void:
 
 func set_target_range() -> void:
 	target_range.clear()
-	var side = get_tree().get_nodes_in_group("heroes" if is_hero else "enemies")
 	if action == null: return
+	var side = get_tree().get_nodes_in_group(
+		"heroes" if is_hero else "enemies").filter(
+			func(x): return (is_instance_valid(x) and x.health > 0))
 	
 	match action.target:
 		Ability.TargetGroup.SELF:
@@ -100,14 +99,16 @@ func set_target_range() -> void:
 			side.erase(self)
 			target_range.assign(side)
 		Ability.TargetGroup.ENEMY:
-			target_range.assign(get_tree().get_nodes_in_group("enemies" if is_hero else "heroes"))
+			target_range.assign(
+				get_tree().get_nodes_in_group(
+					"enemies" if is_hero else "heroes").filter(
+			func(x): return (is_instance_valid(x) and x.health > 0)))
 
 func set_target(unit : Entity = null) -> void:
 	current_target.clear()
 	if is_hero: 
 		current_target.append(unit)
 		return
-	
 	# enemy only
 	match action.mode:
 		Ability.TargetMode.SINGLE:
@@ -127,57 +128,72 @@ func get_ability() -> Ability:
 	action = data.get_ability(self)
 	return action
 
-func target_viable(target : Entity) -> bool:
-	if target is Object and !is_instance_valid(target):
-		return false
-	if target.is_queued_for_deletion():
-		return false
-	return true
-
 func do_action() -> void:
+	print("%s uses %s" % [name, action.ability_name])
+	set_target_range()
+	# action only has single target (aka, is targeted)
 	if action.mode == Ability.TargetMode.SINGLE:
-		var target : Entity
-		if target_viable(current_target[0]):
-			target = current_target[0]
-		else:
-			target_range.erase(current_target[0])
-			for candidate in target_range:
-				if target_viable(candidate):
-					target = candidate
-					break
+		var target : Entity = null
+		# checks if the target is still valid (still in-battle)
+		if current_target.size() > 0 and is_instance_valid(current_target[0]):
+			if current_target[0].targetable:
+				target = current_target[0]
+		
+		if target == null:
+			if !is_hero:
+				set_target()
+			else:
+				var fail_safe : Entity = null
+				for candidate in target_range:
+					if candidate.targetable:
+						target = candidate
+						break
+					if fail_safe == null:
+						fail_safe = candidate
+				
+				if target == null:
+					target = fail_safe
+		
 		if target != null:
-			action.take_effect(self, target)
+			await action.take_effect(self, target)
+		# otherwise, do nothing
+		
 	else:
-		for target in current_target:
-			if target_viable(target):
-				action.take_effect(self, target)
+		var targets_hit := 0
+		for target in current_target.filter(func(x): return is_instance_valid(x)):
+			targets_hit += 1
+			action.take_effect(self, target)
+		for i in range(targets_hit):
+			await i
 	entity_action_over.emit()
 
-func modify_health(
-	incoming : int, 
-	el : UnitData.ElementalType, 
-	damaging : bool
-	) -> void:
+func modify_health(incoming : int, el : UnitData.ElementalType, 
+	damaging : bool) -> void:
+	health = clamp(health - incoming, 0, health_max)
+	hp_bar.update(health, health_max)
+	hp_bar.show()
 	if damaging:
-		incoming *= data.get_effectiveness(el)
-		if current_action == UnitData.ActionMode.GUARD_ATTACK:
-			incoming *= 0.5
-	health = max(0, health - ceil(incoming))
-	update_health_bar()
-	
-	if health <= 0:
-		eliminated()
+		var t = damage_text.instantiate() as DamageText
+		var m = data.get_effectiveness(el)
+		t.amount(incoming, m)
+		hp_bar.add_child(t)
+		await t.finished
+
+	if health <= 0 and state > 0:
+		state = State.DEAD
+		entity_eliminated.emit(self)
+		print(name, " has died")
 	
 	if hud != null:
 		hud.health_bar.update_health(health)
 
-func eliminated() -> void:
-	print(name + " has died!")
-	entity_eliminated.emit(self)
-	if !is_hero:
-		self.queue_free()
-	else:
-		data.state = UnitData.State.DOWN
+func die() -> void:
+	# place death animation here
+	# temporary
+	var t : Tween = create_tween()
+	t.tween_property(sprite, "self_modulate:a", 0.0, 0.6)
+	await t.finished
+	dead.emit()
 
 func end_turn() -> void:
 	if !is_hero:
@@ -187,4 +203,7 @@ func end_turn() -> void:
 	target_range.clear()
 
 func highlight_me(enabled : bool) -> void:
+	sprite.material.set_shader_parameter("is_bright", enabled)
+
+func outline_me(enabled : bool) -> void:
 	sprite.material.set_shader_parameter("active", enabled)

@@ -38,26 +38,33 @@ func _validate_property(property: Dictionary) -> void:
 
 func take_effect(source : Entity, recipient : Entity) -> void:
 	for fx in effects:
-		if !fx.inherit_target:
-			var side : Array[Entity]
-			var target_range : Array[Entity]
-			
-			side.assign(source.get_tree().get_nodes_in_group("heroes" if source.is_hero else "enemies"))
-			
+		var side : Array[Entity]
+		var target_range : Array[Entity]
+		
+		if !fx.inherit_target:	
+			side.assign(source.get_tree().get_nodes_in_group(
+				"heroes" if source.is_hero else "enemies").filter(
+			func(x): return (is_instance_valid(x) and x.state > 0)))
 			match fx.target_group:
 				TargetGroup.SELF:
 					target_range.append(source)
-				TargetGroup.ALLY_ONLY:
-					side.erase(source)
-					target_range.assign(side)
 				TargetGroup.ENEMY:
-					target_range.assign(source.get_tree().get_nodes_in_group("enemies" if source.is_hero else "heroes"))
-			
-			match fx.target_mode:
+					target_range.assign(source.get_tree().get_nodes_in_group("enemies" if source.is_hero else "heroes").filter(
+					func(x): return (is_instance_valid(x) and x.state > 0)))
+				_:
+					if fx.target_group == TargetGroup.ALLY_ONLY:
+						side.erase(source)
+					target_range.assign(side)
+			match fx.target_mode: 
 				TargetMode.AOE:
+					var targets_hit := 0
 					for ent in target_range:
+						targets_hit += 1
 						fx.trigger(source, ent)
+					for i in range(targets_hit):
+						await fx.effect_finished
 				TargetMode.RANDOM:
-					fx.trigger(source, target_range.pick_random())
+					await fx.trigger(source, target_range.pick_random())
+					
 		else:
-			fx.trigger(source, recipient)
+			await fx.trigger(source, recipient)

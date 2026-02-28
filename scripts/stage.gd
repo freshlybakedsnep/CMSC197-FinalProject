@@ -5,6 +5,7 @@ class_name Stage
 @onready var command_ui: Control = $CommandUI
 @onready var enemies : EnemyManager = $Enemies
 @onready var heroes : HeroManager = $Heroes
+@onready var interval: Timer = $Interval
 
 @export var stage_info : StageInfo
 var current_wave : Array[EnemyData]
@@ -13,7 +14,7 @@ var current_wave_index := -1
 var turn_count := 0
 var turn_queue : Array
 var acted : Array
-var names : Dictionary
+var eliminated : Array[Entity]
 
 func _ready() -> void:
 	heroes.setup(spawn_entity)
@@ -24,8 +25,8 @@ func spawn_entity(res : UnitData) -> Node:
 	
 	node.add_to_group("heroes" if res is HeroData else "enemies")
 	node.setup(res)
-	node.connect("entity_action_over", next_actor)
-	node.connect("entity_eliminated", remove_from_battle)
+	node.connect("entity_action_over", actor_finished)
+	node.connect("entity_eliminated", func(x): eliminated.append(x))
 	return node
 
 func load_next_wave() -> bool:
@@ -38,11 +39,6 @@ func load_next_wave() -> bool:
 	enemies.load_wave(curr_wave)
 	return true
 
-func remove_from_battle(unit : Entity) -> void:
-	if !unit.is_hero:
-		enemies.remove_from_formation(unit)
-	update_turn_order()
-
 func party_wiped() -> bool:
 	return get_tree().get_nodes_in_group("heroes").all(
 		func(h): return h.health <= 0
@@ -50,16 +46,19 @@ func party_wiped() -> bool:
 
 func update_turn_order() -> void:
 	turn_queue.clear()
-	
 	for unit in get_tree().get_nodes_in_group("entities"):
-		if (not acted.has(unit) 
-		and not unit.is_queued_for_deletion()
-		and unit.health > 0):
-			turn_queue.append(unit)
-	
-	turn_queue.sort_custom(
-		func(a, b) : return a.speed > b.speed
-	)
+		unit = unit as Entity
+		unit.highlight_me(false)
+		unit.outline_me(false)
+		
+		if (not is_instance_valid(unit) or 
+			eliminated.has(unit) or 
+			acted.has(unit) or 
+			unit.state == Entity.State.DEAD):
+			continue
+		turn_queue.append(unit)
+		
+	turn_queue.sort_custom(func(a, b) : return a.speed > b.speed)
 
 func start_battle() -> void:
 	load_next_wave()
@@ -86,6 +85,7 @@ func start_phase_plan():
 	command_ui.turn_start(enemies.formation)
 
 func start_phase_fight() -> void:
+	RenderingServer.global_shader_parameter_set("screen_dim_amount", 0.3)
 	for ent in turn_queue:
 		if ent.current_action == UnitData.ActionMode.GUARD_ATTACK:
 			turn_queue.erase(ent)
@@ -93,6 +93,7 @@ func start_phase_fight() -> void:
 	next_actor()
 
 func end_turn():
+	RenderingServer.global_shader_parameter_set("screen_dim_amount", 1.0)
 	acted.clear()
 	for e in get_tree().get_nodes_in_group("entities"):
 		e.end_turn()
@@ -107,14 +108,47 @@ func end_turn():
 	start_turn()
 
 func next_actor() -> void:
-	if party_wiped():
-		print("Game Over!")
-		return
-	
 	update_turn_order()
-	var actor = turn_queue.pop_front()
+	var actor : Entity = turn_queue.pop_front()
 	if actor: 
+		
+		if actor.state < 2:
+			next_actor()
+			return
+		actor.highlight_me(true)
+		actor.outline_me(true)
 		acted.append(actor)
 		actor.do_action()
 	else:
 		end_turn()
+
+func actor_finished() -> void:
+	print("")
+	interval.start()
+	await interval.timeout
+	await clear_the_dead()
+	
+	if party_wiped():
+		print("Game Over!")
+		return
+	next_actor()
+
+func clear_the_dead() -> void:
+	if !eliminated: return
+	var targets = eliminated.duplicate()
+	eliminated.clear()
+	for ent in targets:
+		if not is_instance_valid(ent): continue
+		
+		if ent.is_in_group("died"): continue
+		ent.add_to_group("died")
+		await ent.die()
+		
+		if !ent.is_hero:
+			enemies.remove_from_formation(ent)
+			print(ent.name, " is deleted")
+			ent.queue_free()
+		else:
+			ent.data.state = UnitData.State.DOWN
+		ent.remove_from_group("entities")
+	eliminated.clear()
