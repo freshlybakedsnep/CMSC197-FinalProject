@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Ability" format=3 uid="uid://lyylgu7mnrel"]
+
+[ext_resource type="Script" uid="uid://np6c631gwyc1" path="res://scripts/resource/effect.gd" id="1_ygm4f"]
+[ext_resource type="Script" uid="uid://c8d4ukuf2tkk0" path="res://scripts/resource/ability.gd" id="2_y0gn2"]
+
+[resource]
+script = ExtResource("2_y0gn2")
+ability_name = "Basic Guard"
+basic_ability = true
+metadata/_custom_type_script = "uid://c8d4ukuf2tkk0"

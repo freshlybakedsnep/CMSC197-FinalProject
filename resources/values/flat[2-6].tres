@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="FlatAmount" format=3 uid="uid://cl8x5v4bd2h3"]
+
+[ext_resource type="Script" uid="uid://cam2fjh06h71s" path="res://scripts/resource/value_flat.gd" id="1_k6cyy"]
+
+[resource]
+script = ExtResource("1_k6cyy")
+amount = 2
+amount_gain_per_level = 1
+metadata/_custom_type_script = "uid://cam2fjh06h71s"

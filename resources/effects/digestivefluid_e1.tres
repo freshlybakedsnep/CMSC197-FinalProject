@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="HealthAdjust" format=3 uid="uid://485j4y0uf67"]
+
+[ext_resource type="Resource" uid="uid://c6fxu5lneh2kt" path="res://resources/values/own ATK[100].tres" id="1_or8v7"]
+[ext_resource type="Script" uid="uid://cwp6uh5wxbdq0" path="res://scripts/resource/effect_health.gd" id="2_7shtt"]
+
+[resource]
+Resource = null
+resource_path = "::pufof"
+resource_scene_unique_id = ""
+script = ExtResource("2_7shtt")
+"Health Alteration" = null
+formula = ExtResource("1_or8v7")
+"Targeting Settings" = null
+metadata/_custom_type_script = "uid://cwp6uh5wxbdq0"

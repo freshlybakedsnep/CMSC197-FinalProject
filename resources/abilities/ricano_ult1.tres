@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Ability" format=3 uid="uid://b5yumacsjrsog"]
+
+[ext_resource type="Script" uid="uid://np6c631gwyc1" path="res://scripts/resource/effect.gd" id="1_w4op7"]
+[ext_resource type="Resource" uid="uid://cxneumjtdotco" path="res://resources/effects/ricano_ult1_e1.tres" id="2_fw4oo"]
+[ext_resource type="Script" uid="uid://c8d4ukuf2tkk0" path="res://scripts/resource/ability.gd" id="2_leb88"]
+[ext_resource type="Resource" uid="uid://cfuskwt8gv5gt" path="res://resources/effects/ricano_ult1_e2.tres" id="3_0aond"]
+
+[resource]
+script = ExtResource("2_leb88")
+ability_name = "Starpup Callout!"
+target = 3
+cooldown = 3
+effects = Array[ExtResource("1_w4op7")]([ExtResource("2_fw4oo"), ExtResource("3_0aond"), ExtResource("3_0aond")])
+metadata/_custom_type_script = "uid://c8d4ukuf2tkk0"

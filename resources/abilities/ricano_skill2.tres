@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Ability" format=3 uid="uid://b3ic5tyy10hlf"]
+
+[ext_resource type="Script" uid="uid://np6c631gwyc1" path="res://scripts/resource/effect.gd" id="1_3bi43"]
+[ext_resource type="Resource" uid="uid://blgxnty15v4xb" path="res://resources/effects/ricano_skill2_e1.tres" id="2_esatj"]
+[ext_resource type="Script" uid="uid://c8d4ukuf2tkk0" path="res://scripts/resource/ability.gd" id="3_gid74"]
+
+[resource]
+script = ExtResource("3_gid74")
+ability_name = "Captivating Charisma"
+cooldown = 2
+effects = Array[ExtResource("1_3bi43")]([ExtResource("2_esatj")])
+metadata/_custom_type_script = "uid://c8d4ukuf2tkk0"

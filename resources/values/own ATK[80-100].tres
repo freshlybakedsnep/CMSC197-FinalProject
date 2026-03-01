@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ScalingAmount" format=3 uid="uid://b3vt33iqq6w0m"]
+
+[ext_resource type="Script" uid="uid://ccv6s717ftoj2" path="res://scripts/resource/value_scaling.gd" id="1_km33o"]
+
+[resource]
+script = ExtResource("1_km33o")
+multiplier = 0.8
+mult_gain_per_level = 0.05
+stat = 6
+metadata/_custom_type_script = "uid://ccv6s717ftoj2"

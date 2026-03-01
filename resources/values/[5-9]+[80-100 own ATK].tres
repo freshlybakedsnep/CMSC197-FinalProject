@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CompositeValues" format=3 uid="uid://mu6ufe7ksel1"]
+
+[ext_resource type="Script" uid="uid://bx4i3brscrnhr" path="res://scripts/resource/value_composite.gd" id="1_doyud"]
+[ext_resource type="Script" uid="uid://2kbi26516ku6" path="res://scripts/resource/value.gd" id="2_ldiua"]
+[ext_resource type="Resource" uid="uid://df1ellw4luphc" path="res://resources/values/flat[5-9].tres" id="3_mwhbo"]
+[ext_resource type="Resource" uid="uid://b3vt33iqq6w0m" path="res://resources/values/own ATK[80-100].tres" id="4_g3cn1"]
+
+[resource]
+script = ExtResource("1_doyud")
+values = Array[ExtResource("2_ldiua")]([ExtResource("3_mwhbo"), ExtResource("4_g3cn1")])
+metadata/_custom_type_script = "uid://bx4i3brscrnhr"
