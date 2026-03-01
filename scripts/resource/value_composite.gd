@@ -3,8 +3,10 @@ class_name CompositeValues
 
 @export var values : Array[ValueFormula]
 
-func calculate(src : Entity, tar : Entity) -> float:
+func calculate(src : UnitData, tar : UnitData) -> float:
 	var total = 0
-	for v in values:
+	for v: ValueFormula in values:
+		if v == null: continue
+		v.set_level(level)
 		total += v.calculate(src, tar)
 	return total

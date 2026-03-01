@@ -2,4 +2,9 @@
 extends Resource
 class_name ValueFormula
 
-@abstract func calculate(src : Entity, tar : Entity) -> float
+var level := 1
+
+func set_level(val : int) -> void:
+	level = val - 1
+
+@abstract func calculate(src : UnitData, tar : UnitData) -> float
