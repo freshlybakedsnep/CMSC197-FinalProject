@@ -57,6 +57,8 @@ offset_bottom = 8.0
 mouse_filter = 2
 mouse_behavior_recursive = 1
 
+[node name="Statuses" type="Node" parent="." unique_id=453684751]
+
 [connection signal="input_event" from="." to="TargetComponent" method="_on_entity_input_event"]
 [connection signal="mouse_entered" from="." to="TargetComponent" method="grab_focus"]
 [connection signal="focus_entered" from="TargetComponent/FocusProxy" to="TargetComponent" method="grab_focus"]
