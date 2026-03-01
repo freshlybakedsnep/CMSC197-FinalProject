@@ -5,12 +5,7 @@ signal entity_action_over
 signal entity_eliminated
 signal dead
 
-var state : State
-enum State {
-	DEAD,
-	DOWN,
-	NORMAL,
-}
+@onready var statuses: Node = $Statuses
 
 var damage_text : PackedScene = preload("res://scenes/ui/damage_text.tscn")
 @onready var hp_bar: HPBar = $HPBar
@@ -22,12 +17,6 @@ var model
 
 # everything related to attributes
 var data : UnitData
-var element : UnitData.ElementalType
-var health : int
-var health_max : int
-var attack : int
-var defense : int
-var speed : int
 var is_hero : bool
 
 # depicts entity
@@ -45,11 +34,12 @@ var charge := 0
 
 func _ready() -> void:
 	target_component.connect("has_focus", outline_me)
+	data.health_changed.connect(hp_bar.update)
 	prepare_health_bar()
 
 func prepare_health_bar() -> void:
-	hp_bar.update(health, health_max)
-	element_icon.texture = load("res://assets/jobs/El%s.png" % str(element+1))
+	hp_bar.update(data.health, data.health_max)
+	element_icon.texture = load("res://assets/jobs/El%s.png" % str(data.element+1))
 	if is_hero:
 		element_icon.hide()
 	position_health_bar()
@@ -60,19 +50,12 @@ func position_health_bar():
 	hp_bar.position.y = -(sprite_height / 2)
 
 func setup(res : UnitData):
-	state = State.NORMAL
 	data = res
+	data.state = UnitData.State.NORMAL
 	is_hero = res is HeroData
-	element = data.elemental_type
-	name = data.entity_name
-	health_max = data.health_max
-	health = data.health
-	attack = data.attack
-	defense = data.defense
-	speed = data.speed
 	
-	if health <= 0:
-		state = State.DEAD
+	if data.health <= 0:
+		data.state = UnitData.State.DEAD
 
 func new_turn() -> void:
 	action = null
@@ -88,7 +71,7 @@ func set_target_range() -> void:
 	if action == null: return
 	var side = get_tree().get_nodes_in_group(
 		"heroes" if is_hero else "enemies").filter(
-			func(x): return (is_instance_valid(x) and x.health > 0))
+			func(x): return (is_instance_valid(x) and x.data.health > 0))
 	
 	match action.target:
 		Ability.TargetGroup.SELF:
@@ -102,7 +85,7 @@ func set_target_range() -> void:
 			target_range.assign(
 				get_tree().get_nodes_in_group(
 					"enemies" if is_hero else "heroes").filter(
-			func(x): return (is_instance_valid(x) and x.health > 0)))
+			func(x): return (is_instance_valid(x) and x.data.health > 0)))
 
 func set_target(unit : Entity = null) -> void:
 	current_target.clear()
@@ -129,7 +112,7 @@ func get_ability() -> Ability:
 	return action
 
 func do_action() -> void:
-	print("%s uses %s" % [name, action.ability_name])
+	print("%s uses %s" % [data.entity_name, action.ability_name])
 	set_target_range()
 	# action only has single target (aka, is targeted)
 	if action.mode == Ability.TargetMode.SINGLE:
@@ -169,23 +152,21 @@ func do_action() -> void:
 
 func modify_health(incoming : int, el : UnitData.ElementalType, 
 	damaging : bool) -> void:
-	health = clamp(health - incoming, 0, health_max)
-	hp_bar.update(health, health_max)
+	data.health -= incoming
 	hp_bar.show()
-	if damaging:
-		var t = damage_text.instantiate() as DamageText
-		var m = data.get_effectiveness(el)
-		t.amount(incoming, m)
-		hp_bar.add_child(t)
-		await t.finished
+	var t = damage_text.instantiate() as DamageText
+	var m = data.get_effectiveness(el)
+	t.amount(incoming, m, damaging)
+	hp_bar.add_child(t)
+	await t.finished
 
-	if health <= 0 and state > 0:
-		state = State.DEAD
+	if data.health <= 0 and data.state > 0:
+		data.state = UnitData.State.DEAD
 		entity_eliminated.emit(self)
-		print(name, " has died")
+		print(data.entity_name, " has died")
 	
 	if hud != null:
-		hud.health_bar.update_health(health)
+		hud.health_bar.update_health(data.health)
 
 func die() -> void:
 	# place death animation here

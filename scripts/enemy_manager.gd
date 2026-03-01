@@ -15,7 +15,7 @@ func fill_vacancies(spawner : Callable) -> void:
 		var enemy_res = enemy_pool.pop_front()
 		if enemy_res == null : return
 		
-		enemy_res = enemy_res.duplicate()
+		enemy_res = enemy_res.duplicate(true)
 		enemy_res.reset_to_default()
 		
 		if names.keys().has(enemy_res.entity_name):

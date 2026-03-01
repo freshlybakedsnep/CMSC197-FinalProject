@@ -2,17 +2,9 @@
 extends Resource
 class_name UnitData
 
+signal health_changed(current : int, maximum : int)
+
 # fixed values
-@export var entity_name := "Entity"
-@export var character_model := PackedScene
-@export var elemental_type : ElementalType
-enum ElementalType {
-	FIRE,
-	WATER,
-	WOOD,
-	LIGHT,
-	DARK
-}
 const TypeChart = {
 	ElementalType.FIRE : 	{ElementalType.WATER: 	2.0, 	ElementalType.WOOD: 	0.5},
 	ElementalType.WATER : 	{ElementalType.WOOD: 	2.0, 	ElementalType.FIRE: 	0.5},
@@ -21,30 +13,45 @@ const TypeChart = {
 	ElementalType.DARK : 	{ElementalType.LIGHT: 	2.0}
 }
 
+@export_category("Character Information")
+@export var entity_name := "Entity"
+@export var character_model := PackedScene
+@export var sprite : Texture
+
+@export_group("Character Kit")
+@export var elemental_type : ElementalType
+enum ElementalType { FIRE, WATER, WOOD, LIGHT, DARK}
+@export var basic_atk : Array[Ability]
+@export var skills : Array[Ability]
+@export var ultimate : Array[Ability]
+
+@export_group("Base Stats")
 @export var base_health := 10
 @export var base_attack := 4
 @export var base_defense := 2
 @export var base_speed := 5
 
-@export var sprite : Texture
-
-@export var basic_atk : Array[Ability]
-@export var skills : Array[Ability]
-@export var ultimate : Array[Ability]
-
-# will be loaded at the start of a stage
-var health : int
+# run time : will be used at the start of a stage
+@export_group("")
+var health : int :
+	set(value):
+		health = clamp(value, 0, health_max)
+		health_changed.emit(health, health_max)
 var health_max : int
 var attack : int
 var defense : int
 var speed : int
+var element : ElementalType
 
-var state : State
-enum State {
-	NORMAL,	# alive, can act, can be damaged
-	DOWN,	# not alive, cannot act, cannot be damaged 
-	DULL 	# alive, but cannot act, can be damaged
-}
+var state : State :
+	set(value):
+		if health <= 0:
+			state = State.DEAD
+		else:
+			state = value
+enum State {DEAD, DOWN, NORMAL}
+
+# other modifiers
 enum ActionMode{
 	NONE,
 	BASIC_ATTACK,
@@ -65,10 +72,4 @@ func reset_to_default() -> void:
 	attack = base_attack
 	defense = base_defense
 	speed = base_speed
-
-func update_data(new : Entity) -> void:
-	health_max = new.health_max
-	health = new.health
-	attack = new.attack
-	defense = new.defense
-	speed = new.speed
+	element = elemental_type

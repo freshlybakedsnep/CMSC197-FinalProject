@@ -3,9 +3,8 @@ class_name HeroData
 
 const MAX_SKILLS_SLOT = 2
 
+# hero related attributes
 @export var base_gain := 5
-var gain
-
 @export var character_class : CharacterClass
 enum CharacterClass {
 	DUELIST,
@@ -14,6 +13,11 @@ enum CharacterClass {
 	TACTICIAN,
 	VANDAL
 }
+
+# on runtime
+var gain
+
+
 
 func get_ability(_actor : Entity = null):
 	match _actor.current_action:
