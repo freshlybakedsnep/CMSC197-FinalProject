@@ -6,6 +6,8 @@
 [sub_resource type="LabelSettings" id="LabelSettings_qnvfe"]
 font = ExtResource("1_skkc4")
 font_size = 32
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
 
 [node name="DamageText" type="Node2D" unique_id=772494065]
 position = Vector2(32, 0)
