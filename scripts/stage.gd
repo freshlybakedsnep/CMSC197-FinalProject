@@ -41,7 +41,7 @@ func load_next_wave() -> bool:
 
 func party_wiped() -> bool:
 	return get_tree().get_nodes_in_group("heroes").all(
-		func(h): return h.health <= 0
+		func(h): return h.data.health <= 0
 	)
 
 func update_turn_order() -> void:
@@ -54,11 +54,11 @@ func update_turn_order() -> void:
 		if (not is_instance_valid(unit) or 
 			eliminated.has(unit) or 
 			acted.has(unit) or 
-			unit.state == Entity.State.DEAD):
+			unit.data.state == UnitData.State.DEAD):
 			continue
 		turn_queue.append(unit)
 		
-	turn_queue.sort_custom(func(a, b) : return a.speed > b.speed)
+	turn_queue.sort_custom(func(a, b) : return a.data.speed > b.data.speed)
 
 func start_battle() -> void:
 	load_next_wave()
@@ -112,7 +112,7 @@ func next_actor() -> void:
 	var actor : Entity = turn_queue.pop_front()
 	if actor: 
 		
-		if actor.state < 2:
+		if actor.data.state < 2:
 			next_actor()
 			return
 		actor.highlight_me(true)
