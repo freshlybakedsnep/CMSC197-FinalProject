@@ -73,3 +73,5 @@ func reset_to_default() -> void:
 	defense = base_defense
 	speed = base_speed
 	element = elemental_type
+	
+	state = State.NORMAL
