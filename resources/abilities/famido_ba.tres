@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Ability" format=3 uid="uid://dm1hvpm2djw24"]
+
+[ext_resource type="Script" uid="uid://np6c631gwyc1" path="res://scripts/resource/effect.gd" id="1_3p6a8"]
+[ext_resource type="Resource" uid="uid://dvjs65wj543ou" path="res://resources/effects/famido_ba_e1.tres" id="2_6qpts"]
+[ext_resource type="Script" uid="uid://c8d4ukuf2tkk0" path="res://scripts/resource/ability.gd" id="3_ehequ"]
+
+[resource]
+script = ExtResource("3_ehequ")
+ability_name = "Quickfire Pass"
+target = 3
+basic_ability = true
+effects = Array[ExtResource("1_3p6a8")]([ExtResource("2_6qpts")])
+metadata/_custom_type_script = "uid://c8d4ukuf2tkk0"

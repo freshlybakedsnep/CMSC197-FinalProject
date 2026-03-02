@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="HeroData" format=3 uid="uid://cjb5csx54hs8o"]
+
+[ext_resource type="Script" uid="uid://c8d4ukuf2tkk0" path="res://scripts/resource/ability.gd" id="1_8c5wc"]
+[ext_resource type="Resource" uid="uid://dm1hvpm2djw24" path="res://resources/abilities/famido_ba.tres" id="2_0w5gx"]
+[ext_resource type="Script" uid="uid://nqhxig82acgw" path="res://scripts/resource/data_hero.gd" id="2_jsdkb"]
+[ext_resource type="Resource" uid="uid://lyylgu7mnrel" path="res://resources/abilities/guard_basic.tres" id="4_6sr1a"]
+[ext_resource type="Resource" uid="uid://dcauqncs2tqep" path="res://resources/abilities/famido_skill1.tres" id="5_lphwy"]
+[ext_resource type="Resource" uid="uid://c10c1qh7shsjk" path="res://resources/abilities/famido_skill2.tres" id="6_1edte"]
+[ext_resource type="Texture2D" uid="uid://c06guetubyynw" path="res://assets/sprites/famido.webp" id="7_pb4a3"]
+[ext_resource type="Resource" uid="uid://skh7xpixtwbc" path="res://resources/abilities/famido_ult1.tres" id="8_hdufg"]
+
+[resource]
+script = ExtResource("2_jsdkb")
+entity_name = "Famido"
+sprite = ExtResource("7_pb4a3")
+elemental_type = 2
+basic_atk = Array[ExtResource("1_8c5wc")]([ExtResource("2_0w5gx")])
+skills = Array[ExtResource("1_8c5wc")]([ExtResource("4_6sr1a"), ExtResource("5_lphwy"), ExtResource("6_1edte")])
+ultimate = Array[ExtResource("1_8c5wc")]([ExtResource("8_hdufg")])
+base_health = 25
+base_attack = 7
+base_defense = 4
+base_speed = 3
+metadata/_custom_type_script = "uid://nqhxig82acgw"
