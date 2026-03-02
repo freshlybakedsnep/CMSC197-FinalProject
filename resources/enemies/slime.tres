@@ -7,6 +7,7 @@
 
 [resource]
 script = ExtResource("3_f4jmt")
+max_charges = 3
 entity_name = "Slime"
 elemental_type = 2
 basic_atk = Array[ExtResource("1_k071p")]([ExtResource("2_lb0tw")])

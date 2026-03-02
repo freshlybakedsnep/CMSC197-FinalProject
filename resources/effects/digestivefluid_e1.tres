@@ -5,10 +5,11 @@
 
 [resource]
 Resource = null
-resource_path = "::pufof"
+resource_path = "res://resources/effects/digestivefluid_e1.tres"
 resource_scene_unique_id = ""
 script = ExtResource("2_7shtt")
 "Health Alteration" = null
 formula = ExtResource("1_or8v7")
 "Targeting Settings" = null
+inherit_target = true
 metadata/_custom_type_script = "uid://cwp6uh5wxbdq0"
