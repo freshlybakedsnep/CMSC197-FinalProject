@@ -28,7 +28,7 @@ func turn_start() -> void:
 	start_battle.disabled = true
 	start_battle.focus_mode = Control.FOCUS_NONE
 	party_menu.enable()
-	actor = 0
+	party_menu.actor = 0
 	party_menu.focus_initial()
 
 func open(menu : Node) -> void:
@@ -95,15 +95,17 @@ func _open_skill_menu() -> void:
 	stack.back(), Vector2(-10, 40))
 
 func _open_target_menu() -> void:
-	var ability = current_hero_node.get_ability()
-	current_hero_node.set_target_range()
+	var ability : Ability = current_hero_node.get_ability()
 	if not ability: return
+	
+	ability.lock_sides(current_hero_node)
+	var target_range := ability.match_suitable_targets(current_hero_node)
 	
 	if ability.mode == Ability.TargetMode.SINGLE:
 		var menu = _spawn_menu(TARGET_MENU, current_hero_node, close_to_root)
-		menu.setup(current_hero_node.target_range)
+		menu.setup(target_range)
 	else:
-		current_hero_node.current_target.assign(current_hero_node.target_range)
+		current_hero_node.current_target.assign(target_range)
 		close_to_root()
 
 func _on_party_ready() -> void:
@@ -116,8 +118,7 @@ func _on_party_ready() -> void:
 
 func _on_start_battle_pressed() -> void:
 	print("Battle Starting!")
-	actor = 0
-	party_menu.actor = 0
+	party_menu.actor = -1
 	party_menu.disable()
 	plan_done.emit()
 	

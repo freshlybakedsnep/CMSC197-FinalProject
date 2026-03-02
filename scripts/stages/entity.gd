@@ -21,7 +21,6 @@ var is_hero : bool
 
 # depicts entity
 @export var targetable := true
-var target_range : Array[Entity]
 var current_target : Array[Entity]
 var action : Ability
 
@@ -60,51 +59,31 @@ func new_turn() -> void:
 	action = null
 	if !is_hero:
 		get_ability()
-		set_target_range()
 		set_target()
 	else:
 		current_action = UnitData.ActionMode.NONE
-
-func set_target_range() -> void:
-	target_range.clear()
-	if action == null: return
-	var side = get_tree().get_nodes_in_group(
-		"heroes" if is_hero else "enemies").filter(
-			func(x): return (is_instance_valid(x) and x.data.health > 0))
-	
-	match action.target:
-		Ability.TargetGroup.SELF:
-			target_range.append(self)
-		Ability.TargetGroup.PARTY:
-			target_range.assign(side)
-		Ability.TargetGroup.ALLY_ONLY:
-			side.erase(self)
-			target_range.assign(side)
-		Ability.TargetGroup.ENEMY:
-			target_range.assign(
-				get_tree().get_nodes_in_group(
-					"enemies" if is_hero else "heroes").filter(
-			func(x): return (is_instance_valid(x) and x.data.health > 0)))
 
 func set_target(unit : Entity = null) -> void:
 	current_target.clear()
 	if is_hero: 
 		current_target.append(unit)
 		return
+		
 	# enemy only
+	action.lock_sides(self)
+	var valid_targets = action.match_suitable_targets(self)
 	match action.mode:
-		Ability.TargetMode.SINGLE:
-			# attempt to get a target, if can't then they dont have target
+		Ability.TargetMode.AOE, Ability.TargetMode.RANDOM:
+			current_target.assign(valid_targets)
+		_: 
 			while true:
-				var p = target_range.pick_random()
+				var p = valid_targets.pick_random()
 				if p == null: break
 				if p.targetable:
 					current_target.append(p)
 					break
 				else:
-					target_range.erase(p)
-		_: 
-			current_target.assign(target_range)
+					valid_targets.erase(p)
 
 func get_ability() -> Ability:
 	action = data.get_ability(self)
@@ -112,7 +91,6 @@ func get_ability() -> Ability:
 
 func do_action() -> void:
 	print("%s uses %s" % [data.entity_name, action.ability_name])
-	set_target_range()
 	await action.take_effect(self, current_target)
 	entity_action_over.emit()
 
@@ -128,7 +106,7 @@ func modify_health(incoming : int, el : UnitData.ElementalType,
 
 	if data.health <= 0 and data.state > 0:
 		data.state = UnitData.State.DEAD
-		entity_eliminated.emit(self)
+		entity_eliminated.emit()
 		print(data.entity_name, " has died")
 	
 	if hud != null:
@@ -147,7 +125,6 @@ func end_turn() -> void:
 		charge = (charge + 1) % (data.max_charges + 1)
 	action = null
 	current_target.clear()
-	target_range.clear()
 
 func highlight_me(enabled : bool) -> void:
 	sprite.material.set_shader_parameter("is_bright", enabled)

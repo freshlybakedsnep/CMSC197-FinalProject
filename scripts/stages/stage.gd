@@ -29,7 +29,7 @@ func spawn_entity(res : UnitData) -> Node:
 	node.add_to_group("heroes" if res is HeroData else "enemies")
 	node.setup(res)
 	node.connect("entity_action_over", actor_finished)
-	node.connect("entity_eliminated", func(x): eliminated.append(x))
+	node.connect("entity_eliminated", func(): eliminated.append(node))
 	return node
 
 func load_next_wave() -> bool:
@@ -74,9 +74,6 @@ func start_turn() -> void:
 	
 	for e in get_tree().get_nodes_in_group("entities"):
 		e.new_turn()
-	
-	#print(get_tree().get_nodes_in_group("heroes"))
-	#print(get_tree().get_nodes_in_group("enemies"))
 	
 	update_turn_order()
 	print("\nTurn %d" % turn_count)
