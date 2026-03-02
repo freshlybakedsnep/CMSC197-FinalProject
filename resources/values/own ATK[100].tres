@@ -5,4 +5,5 @@
 [resource]
 script = ExtResource("1_5q7bb")
 mult_gain_per_level = 0.0
+stat = 6
 metadata/_custom_type_script = "uid://ccv6s717ftoj2"
