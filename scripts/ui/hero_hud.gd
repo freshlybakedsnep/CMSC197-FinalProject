@@ -37,6 +37,3 @@ func enabled(toggled : bool) -> void:
 		a.self_modulate = Color(0.3,0.3,0.3)
 		focusable(false) 
 		mouse_behavior_recursive = MOUSE_BEHAVIOR_DISABLED
-
-func disable(_x : Object) -> void:
-	enabled(false)

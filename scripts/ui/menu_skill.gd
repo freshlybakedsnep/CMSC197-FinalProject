@@ -1,4 +1,4 @@
-extends VBoxContainer
+extends Control
 signal cancel_op
 signal finish_op
 

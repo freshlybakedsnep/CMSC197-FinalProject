@@ -23,7 +23,7 @@ func setup(nodes : Array[Entity]) -> void:
 		var t = hero_nodes[i].data.elemental_type
 		party[i].character_class.texture = load("res://assets/jobs/El%skind%s.png" % [str(t+1), str(j+1)])
 		party[i].pressed.connect(pick_actor)
-		hero_nodes[i].connect("entity_eliminated", party[i].disable)
+		hero_nodes[i].connect("entity_eliminated", func(): party[i].enabled(false))
 
 func disable() -> void:
 	for i in hero_nodes.size():
@@ -38,6 +38,7 @@ func enable() -> void:
 		var p := get_child(i)
 		if hero_nodes[i].data.state == UnitData.State.NORMAL:
 			p.enabled(true)
+	call_deferred("focus_initial")
 
 func pick_actor(pos : int) -> void:
 	actor = pos

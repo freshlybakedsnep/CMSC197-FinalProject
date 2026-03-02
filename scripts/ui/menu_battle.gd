@@ -1,4 +1,5 @@
 extends Control
+class_name BattleMenu
 signal plan_done
 
 @onready var party_menu: HBoxContainer = $PartyMenu
@@ -7,7 +8,7 @@ signal plan_done
 var hero_nodes : Array[Entity]
 var current_hero_node : Entity
 
-var active_enemies : Dictionary
+var enemy_formation : Dictionary
 var stack : Array
 var actor : int
 
@@ -18,17 +19,16 @@ const TARGET_MENU = preload("res://scenes/ui/menu_target.tscn")
 func _ready() -> void:
 	stack.append(party_menu)
 
-func battle_start(heroes : Array[Entity]) -> void:
+func connect_formations(enemies : Dictionary, heroes : Array[Entity]) -> void:
+	enemy_formation = enemies
 	hero_nodes = heroes
 	party_menu.setup(hero_nodes)
 
-func turn_start(enemies : Dictionary) -> void:
-	active_enemies = enemies
-	
+func turn_start() -> void:
 	start_battle.disabled = true
 	start_battle.focus_mode = Control.FOCUS_NONE
-	
 	party_menu.enable()
+	actor = 0
 	party_menu.focus_initial()
 
 func open(menu : Node) -> void:
@@ -116,6 +116,9 @@ func _on_party_ready() -> void:
 
 func _on_start_battle_pressed() -> void:
 	print("Battle Starting!")
+	actor = 0
+	party_menu.actor = 0
+	party_menu.disable()
 	plan_done.emit()
 	
 	start_battle.focus_mode = Control.FOCUS_NONE
