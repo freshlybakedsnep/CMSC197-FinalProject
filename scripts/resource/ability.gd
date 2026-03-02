@@ -40,38 +40,49 @@ func _validate_property(property: Dictionary) -> void:
 	else:
 		property.usage |= PROPERTY_USAGE_EDITOR
 
-func take_effect(source : Entity, recipient : Entity) -> void:
+func take_effect(source : Entity, recipient : Array[Entity]) -> void:
 	for fx in effects:
 		fx.formula.set_level(ability_level)
-		var side : Array[Entity]
-		var target_range : Array[Entity]
 		
-		if !fx.inherit_target:	
-			side.assign(source.get_tree().get_nodes_in_group(
-				"heroes" if source.is_hero else "enemies").filter(
-			func(x): return (is_instance_valid(x) and x.data.state > 0)))
-			match fx.target_group:
-				Ability.TargetGroup.SELF:
-					target_range.append(source)
-				Ability.TargetGroup.ENEMY:
-					target_range.assign(source.get_tree().get_nodes_in_group("enemies" if source.is_hero else "heroes").filter(
-					func(x): return (is_instance_valid(x) and x.data.state > 0)))
-				_:
-					if fx.target_group == TargetGroup.ALLY_ONLY:
-						side.erase(source)
-					target_range.assign(side)
-			print(target_range)
-			print(fx.target_mode)
-			
-			match fx.target_mode: 
-				Ability.TargetMode.AOE:
-					var targets_hit := 0
-					for ent in target_range:
-						targets_hit += 1
-						fx.trigger(source, ent)
-					for i in range(targets_hit):
-						await fx.effect_finished
-				Ability.TargetMode.RANDOM:
-					await fx.trigger(source, target_range.pick_random())
+		var final_targets : Array[Entity] 
+		if fx.inherit_target:
+			final_targets = recipient
 		else:
-			await fx.trigger(source, recipient)
+			final_targets = _get_targets(source, fx)
+		
+		var triggers := 0
+		for ent in final_targets:
+			if is_instance_valid(ent):
+				triggers += 1
+				fx.trigger(source, ent)
+		
+		for i in range(triggers):
+			await i
+
+func _get_targets(source : Entity, fx: Effect) -> Array[Entity]:
+	var tree = source.get_tree()
+	var heroes = tree.get_nodes_in_group("heroes")
+	var enemies = tree.get_nodes_in_group("enemies")
+	
+	var out : Array[Entity] = []
+	match fx.target_group:
+		TargetGroup.SELF:
+			out = [source]
+		TargetGroup.ENEMY:
+			var l = enemies if source.is_hero else heroes
+			out.assign(l.filter(func(x): return is_instance_valid(x) and x.data.state > 0))
+		TargetGroup.PARTY, TargetGroup.ALLY_ONLY:
+			var l = heroes if source.is_hero else enemies
+			out.assign(l.filter(func(x): return is_instance_valid(x) and x.data.state > 0))
+			if fx.target_group == TargetGroup.ALLY_ONLY:
+				out.erase(source)
+	
+	match fx.target_mode:
+		TargetMode.SINGLE:
+			out = [out[0]]
+		TargetMode.AOE:
+			pass
+		TargetMode.RANDOM:
+			out = [out.pick_random()]
+	
+	return out

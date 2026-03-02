@@ -36,13 +36,12 @@ func _ready() -> void:
 	target_component.connect("has_focus", outline_me)
 	data.health_changed.connect(hp_bar.update)
 	prepare_health_bar()
+	position_health_bar()
 
 func prepare_health_bar() -> void:
-	hp_bar.update(data.health, data.health_max)
 	element_icon.texture = load("res://assets/jobs/El%s.png" % str(data.element+1))
 	if is_hero:
 		element_icon.hide()
-	position_health_bar()
 
 func position_health_bar():
 	var frame_tex = sprite.sprite_frames.get_frame_texture(sprite.animation, sprite.frame)
@@ -51,7 +50,7 @@ func position_health_bar():
 
 func setup(res : UnitData):
 	data = res
-	data.state = UnitData.State.NORMAL
+	name = data.entity_name
 	is_hero = res is HeroData
 	
 	if data.health <= 0:
@@ -114,40 +113,7 @@ func get_ability() -> Ability:
 func do_action() -> void:
 	print("%s uses %s" % [data.entity_name, action.ability_name])
 	set_target_range()
-	# action only has single target (aka, is targeted)
-	if action.mode == Ability.TargetMode.SINGLE:
-		var target : Entity = null
-		# checks if the target is still valid (still in-battle)
-		if current_target.size() > 0 and is_instance_valid(current_target[0]):
-			if current_target[0].targetable:
-				target = current_target[0]
-		
-		if target == null:
-			if !is_hero:
-				set_target()
-			else:
-				var fail_safe : Entity = null
-				for candidate in target_range:
-					if candidate.targetable:
-						target = candidate
-						break
-					if fail_safe == null:
-						fail_safe = candidate
-				
-				if target == null:
-					target = fail_safe
-		
-		if target != null:
-			await action.take_effect(self, target)
-		# otherwise, do nothing
-		
-	else:
-		var targets_hit := 0
-		for target in current_target.filter(func(x): return is_instance_valid(x)):
-			targets_hit += 1
-			action.take_effect(self, target)
-		for i in range(targets_hit):
-			await i
+	await action.take_effect(self, current_target)
 	entity_action_over.emit()
 
 func modify_health(incoming : int, el : UnitData.ElementalType, 
