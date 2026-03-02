@@ -1,8 +1,10 @@
 extends Node
 class_name Stage
 
+signal turn_changed()
+
 @export var entity : PackedScene
-@onready var command_ui: Control = $CommandUI
+@onready var command_ui: BattleMenu = $CommandUI
 @onready var enemies : EnemyManager = $Enemies
 @onready var heroes : HeroManager = $Heroes
 @onready var interval: Timer = $Interval
@@ -18,6 +20,7 @@ var eliminated : Array[Entity]
 
 func _ready() -> void:
 	heroes.setup(spawn_entity)
+	command_ui.connect_formations(enemies.formation, heroes.formation.values().filter(func(f): return f))
 	start_battle()
 
 func spawn_entity(res : UnitData) -> Node:
@@ -62,7 +65,6 @@ func update_turn_order() -> void:
 
 func start_battle() -> void:
 	load_next_wave()
-	command_ui.battle_start(heroes.formation.values().filter(func(f): return f))
 	start_turn()
 
 func start_turn() -> void:
@@ -73,18 +75,14 @@ func start_turn() -> void:
 	for e in get_tree().get_nodes_in_group("entities"):
 		e.new_turn()
 	
-	print(get_tree().get_nodes_in_group("heroes"))
-	print(get_tree().get_nodes_in_group("enemies"))
-	
+	#print(get_tree().get_nodes_in_group("heroes"))
+	#print(get_tree().get_nodes_in_group("enemies"))
 	
 	update_turn_order()
-	start_phase_plan()
-
-func start_phase_plan():
 	print("\nTurn %d" % turn_count)
-	command_ui.turn_start(enemies.formation)
+	turn_changed.emit()
 
-func start_phase_fight() -> void:
+func start_fight() -> void:
 	RenderingServer.global_shader_parameter_set("screen_dim_amount", 0.3)
 	for ent in turn_queue:
 		if ent.current_action == UnitData.ActionMode.GUARD_ATTACK:
@@ -109,18 +107,25 @@ func end_turn():
 
 func next_actor() -> void:
 	update_turn_order()
-	var actor : Entity = turn_queue.pop_front()
-	if actor: 
-		
-		if actor.data.state < 2:
-			next_actor()
-			return
-		actor.highlight_me(true)
-		actor.outline_me(true)
-		acted.append(actor)
-		actor.do_action()
-	else:
+	
+	if enemies.has_vacancies() >= 5:
 		end_turn()
+		return
+	
+	var actor : Entity = turn_queue.pop_front()
+	
+	if !actor: 
+		end_turn()
+		return
+	
+	if actor.data.state < 2:
+		next_actor()
+		return
+	
+	actor.highlight_me(true)
+	actor.outline_me(true)
+	acted.append(actor)
+	actor.do_action()
 
 func actor_finished() -> void:
 	print("")
