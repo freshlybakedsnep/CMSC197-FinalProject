@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cp0dcct1p2u3d"]
 
-[ext_resource type="Script" uid="uid://bbqureqt1r8x1" path="res://scenes/ui/hp_bar.gd" id="1_wupjp"]
+[ext_resource type="Script" uid="uid://bbqureqt1r8x1" path="res://scripts/stages/hp_bar.gd" id="1_wupjp"]
 [ext_resource type="Texture2D" uid="uid://cb5wxytvtgwv" path="res://assets/El4kind5.png" id="1_x8mdd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o28gw"]

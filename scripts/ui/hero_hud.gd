@@ -1,39 +1,14 @@
-extends Control
+extends Button
 class_name HeroHUD
-signal pressed(index : int)
 
-@onready var click_area: Button = $ClickArea
-@onready var health_bar := $Draw/Padding/Detail/HealthBar
-@onready var portrait: TextureRect = $Draw/Padding/Detail/Portrait
-@onready var character_class: TextureRect = $Draw/Padding/Detail/Portrait/MarginContainer/Class
+@onready var health: ProgressBar = $Draw/Margin/Detail/Health
+@onready var value: Label = $Draw/Margin/Detail/Health/Value
+@onready var portrait: TextureRect = $Draw/Margin/Detail/Portrait
 @onready var a: CanvasGroup = $Draw
+@onready var character_class: TextureRect = $Draw/Margin/Detail/Portrait/MarginContainer/Class
 
-func focusable(value : bool) -> void:
-	if !value:
-		focus_mode = Control.FOCUS_NONE
-		click_area.focus_mode = Control.FOCUS_NONE
-	else:
-		focus_mode = Control.FOCUS_ALL
-		click_area.focus_mode = Control.FOCUS_ALL
-
-func _ready() -> void:
-	size = $Draw/Padding/Detail.size
-	click_area.size = size
-
-func _on_focus_entered() -> void:
-	if click_area.focus_mode == Control.FOCUS_NONE:
-		click_area.focus_mode = Control.FOCUS_ALL
-	click_area.call_deferred("grab_focus")
-
-func _on_button_pressed() -> void:
-	pressed.emit(get_index())
-
-func enabled(toggled : bool) -> void:
-	if toggled:
-		a.self_modulate = Color(1,1,1)
-		focusable(true)
-		mouse_behavior_recursive = MOUSE_BEHAVIOR_ENABLED
-	else:
-		a.self_modulate = Color(0.3,0.3,0.3)
-		focusable(false) 
-		mouse_behavior_recursive = MOUSE_BEHAVIOR_DISABLED
+func enabled(toggle : bool) -> void:
+	a.self_modulate = Color(1,1,1) if toggle else Color(0.3,0.3,0.3)
+	disabled = false if toggle else true
+	focus_mode = Control.FOCUS_ALL if toggle else Control.FOCUS_NONE
+	mouse_behavior_recursive = MOUSE_BEHAVIOR_ENABLED if toggle else MOUSE_BEHAVIOR_DISABLED

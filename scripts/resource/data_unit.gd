@@ -52,6 +52,7 @@ var state : State :
 enum State {DEAD, DOWN, NORMAL}
 
 # other modifiers
+var action : ActionMode
 enum ActionMode{
 	NONE,
 	BASIC_ATTACK,
@@ -61,17 +62,9 @@ enum ActionMode{
 	SKILL_EXTRA
 }
 
-@abstract func get_ability(_actor : Entity = null) -> Ability
+@abstract func get_ability(act : ActionMode = ActionMode.NONE) -> Ability
 
 func get_effectiveness(element : ElementalType) -> float:
 	return TypeChart[elemental_type].get(element, 1.0)
 
-func reset_to_default() -> void:
-	health_max = base_health
-	health = health_max
-	attack = base_attack
-	defense = base_defense
-	speed = base_speed
-	element = elemental_type
-	
-	state = State.NORMAL
+@abstract func reset_to_default() -> void

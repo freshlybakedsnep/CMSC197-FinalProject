@@ -11,7 +11,7 @@ var damage_text : PackedScene = preload("res://scenes/ui/damage_text.tscn")
 @onready var hp_bar: HPBar = $HPBar
 @onready var element_icon : TextureRect = $HPBar.get_child(0).get_child(0)
 @onready var sprite: AnimatedSprite2D = $Sprite
-@onready var target_component: Node2D = $TargetComponent
+@onready var target_component: TargetProxy = $TargetComponent
 # will handle character animations 
 var model 
 
@@ -22,14 +22,7 @@ var is_hero : bool
 # depicts entity
 @export var targetable := true
 var current_target : Array[Entity]
-var action : Ability
-
-# hero units only
-var current_action : UnitData.ActionMode
-var hud = null
-
-# enemy units only
-var charge := 0
+var intent : Ability
 
 func _ready() -> void:
 	target_component.connect("has_focus", outline_me)
@@ -56,12 +49,12 @@ func setup(res : UnitData):
 		data.state = UnitData.State.DEAD
 
 func new_turn() -> void:
-	action = null
+	intent = null
 	if !is_hero:
-		get_ability()
+		intent = data.get_ability()
 		set_target()
 	else:
-		current_action = UnitData.ActionMode.NONE
+		data.action = UnitData.ActionMode.NONE
 
 func set_target(unit : Entity = null) -> void:
 	current_target.clear()
@@ -70,9 +63,9 @@ func set_target(unit : Entity = null) -> void:
 		return
 		
 	# enemy only
-	action.lock_sides(self)
-	var valid_targets = action.match_suitable_targets(self)
-	match action.mode:
+	intent.lock_sides(self)
+	var valid_targets = intent.match_suitable_targets(self, intent.target)
+	match intent.mode:
 		Ability.TargetMode.AOE, Ability.TargetMode.RANDOM:
 			current_target.assign(valid_targets)
 		_: 
@@ -85,14 +78,18 @@ func set_target(unit : Entity = null) -> void:
 				else:
 					valid_targets.erase(p)
 
-func get_ability() -> Ability:
-	action = data.get_ability(self)
-	return action
+func set_intent(ability : UnitData.ActionMode) -> void:
+	if is_hero:
+		intent = (data as HeroData).ability_preset[ability]
+		data.action = ability
 
 func do_action() -> void:
-	print("%s uses %s" % [data.entity_name, action.ability_name])
-	await action.take_effect(self, current_target)
+	print("%s uses %s" % [data.entity_name, intent.ability_name])
+	await intent.take_effect(self, current_target)
 	entity_action_over.emit()
+
+func apply_status(status : StatusCondition) -> void:
+	status.add(status)
 
 func modify_health(incoming : int, el : UnitData.ElementalType, 
 	damaging : bool) -> void:
@@ -108,9 +105,6 @@ func modify_health(incoming : int, el : UnitData.ElementalType,
 		data.state = UnitData.State.DEAD
 		entity_eliminated.emit()
 		print(data.entity_name, " has died")
-	
-	if hud != null:
-		hud.health_bar.update_health(data.health)
 
 func die() -> void:
 	# place death animation here
@@ -122,8 +116,10 @@ func die() -> void:
 
 func end_turn() -> void:
 	if !is_hero:
-		charge = (charge + 1) % (data.max_charges + 1)
-	action = null
+		data.charge = (data.charge + 1) % (data.max_charges + 1)
+	else:
+		(data as HeroData).tick_abilities()
+	intent = null
 	current_target.clear()
 
 func highlight_me(enabled : bool) -> void:

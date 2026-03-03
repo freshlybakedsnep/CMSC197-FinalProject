@@ -5,10 +5,13 @@ signal finished
 @export var duration := 0.5
 
 func _ready() -> void:
-	var f = create_tween().set_parallel()
-	f.tween_property(self, "modulate:a", 0.0, duration)
-	f.tween_property(self, "position", Vector2(position.x, -25), duration)
+	var f = create_tween()
+	f.tween_property(self, "position", Vector2(position.x, -25), duration).set_ease(Tween.EASE_IN)
 	await f.finished
+	
+	var f2 = create_tween()
+	f2.tween_property(self, "scale", Vector2(0, 0), 0.1)
+	await f2.finished
 	finished.emit()
 	queue_free()
 

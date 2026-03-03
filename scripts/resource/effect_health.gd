@@ -15,7 +15,7 @@ func trigger(source : Entity, recipient : Entity) -> void:
 	if is_damaging:
 		var m = recipient.data.get_effectiveness(source.data.element)
 		output *= m
-		if recipient.current_action == UnitData.ActionMode.GUARD_ATTACK:
+		if recipient.data.action == UnitData.ActionMode.GUARD_ATTACK:
 			output *= 0.5
 		print("%s deals %d DMG to %s" % [source.data.entity_name, int(output), recipient.data.entity_name])
 	else:

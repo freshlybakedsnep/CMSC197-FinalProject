@@ -12,7 +12,7 @@ func load_wave(new_wave : Array[EnemyData]) -> void:
 
 func fill_vacancies(spawner : Callable) -> void:
 	while _vacancies > 0 and not enemy_pool.is_empty():
-		var enemy_res = enemy_pool.pop_front()
+		var enemy_res = enemy_pool.pop_front() as EnemyData
 		if enemy_res == null : return
 		
 		enemy_res = enemy_res.duplicate(true)

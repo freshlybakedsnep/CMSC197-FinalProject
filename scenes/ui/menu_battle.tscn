@@ -1,7 +1,11 @@
 [gd_scene format=3 uid="uid://bwtxguku00kwa"]
 
 [ext_resource type="Script" uid="uid://b3l666p10m5jc" path="res://scripts/ui/menu_battle.gd" id="1_qyamm"]
-[ext_resource type="PackedScene" uid="uid://c47ba8kmvdupx" path="res://scenes/ui/menu_party.tscn" id="2_2kidt"]
+[ext_resource type="Script" uid="uid://f486luiaamwq" path="res://scripts/ui/menu_party.gd" id="2_0bl1x"]
+[ext_resource type="Script" uid="uid://cce2y4tb4nn2v" path="res://scripts/ui/action_menu.gd" id="3_h1ljj"]
+[ext_resource type="PackedScene" uid="uid://ntkoceor2v43" path="res://scenes/ui/hero_hud.tscn" id="3_j33cn"]
+[ext_resource type="PackedScene" uid="uid://dd44kt0ng0qeu" path="res://scenes/ui/skill_button.tscn" id="4_hpdg0"]
+[ext_resource type="Script" uid="uid://5qfltf3003g0" path="res://scripts/ui/menu_target.gd" id="5_rucv6"]
 
 [node name="BattleMenuManager" type="Control" unique_id=971412710]
 layout_mode = 3
@@ -14,7 +18,35 @@ mouse_filter = 1
 mouse_behavior_recursive = 2
 script = ExtResource("1_qyamm")
 
-[node name="PartyMenu" parent="." unique_id=296522800 instance=ExtResource("2_2kidt")]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1958384438]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.5
+offset_top = -55.0
+offset_right = 50.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_bottom = 24
+
+[node name="StartBattle" type="Button" parent="MarginContainer" unique_id=664642513]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_behavior_recursive = 2
+text = "Start Battle!"
+
+[node name="AbilityTooltip" type="Panel" parent="." unique_id=1538801652]
+layout_mode = 0
+offset_left = 720.0
+offset_top = 250.0
+offset_right = 1070.0
+offset_bottom = 350.0
+
+[node name="PartyMenu" type="HBoxContainer" parent="." unique_id=296522800]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -28,29 +60,110 @@ offset_bottom = -109.0
 grow_horizontal = 0
 grow_vertical = 0
 size_flags_horizontal = 8
+size_flags_vertical = 4
 mouse_behavior_recursive = 2
+script = ExtResource("2_0bl1x")
 
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1958384438]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -101.0
-offset_top = -40.0
-grow_horizontal = 0
-grow_vertical = 0
-theme_override_constants/margin_bottom = 24
-
-[node name="StartBattle" type="Button" parent="MarginContainer" unique_id=664642513]
+[node name="p1" parent="PartyMenu" unique_id=861129675 instance=ExtResource("3_j33cn")]
+visible = false
 layout_mode = 2
+
+[node name="p2" parent="PartyMenu" unique_id=367878744 instance=ExtResource("3_j33cn")]
+visible = false
+layout_mode = 2
+
+[node name="p3" parent="PartyMenu" unique_id=795550964 instance=ExtResource("3_j33cn")]
+visible = false
+layout_mode = 2
+
+[node name="p4" parent="PartyMenu" unique_id=37162805 instance=ExtResource("3_j33cn")]
+visible = false
+layout_mode = 2
+
+[node name="p5" parent="PartyMenu" unique_id=418989165 instance=ExtResource("3_j33cn")]
+visible = false
+layout_mode = 2
+
+[node name="Back" type="Button" parent="." unique_id=1729140984]
+visible = false
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -32.0
+offset_top = 173.0
+offset_right = 32.0
+offset_bottom = 205.0
+grow_horizontal = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
-mouse_behavior_recursive = 2
-text = "Start Battle!"
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath("../ActionMenu/BasicAttack")
+focus_neighbor_bottom = NodePath("../ActionMenu/BasicAttack")
+focus_next = NodePath("../ActionMenu/BasicAttack")
+focus_previous = NodePath(".")
+text = "Back"
+icon_alignment = 1
+expand_icon = true
 
-[connection signal="actor_selected" from="PartyMenu" to="." method="_open_action_menu"]
-[connection signal="party_ready" from="PartyMenu" to="." method="_on_party_ready"]
+[node name="ActionMenu" type="HBoxContainer" parent="." unique_id=6932576]
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -580.0
+offset_top = 160.0
+offset_right = -244.0
+offset_bottom = 224.0
+grow_horizontal = 0
+alignment = 2
+script = ExtResource("3_h1ljj")
+
+[node name="BasicAttack" parent="ActionMenu" unique_id=925848095 instance=ExtResource("4_hpdg0")]
+layout_mode = 2
+
+[node name="GuardAttack" parent="ActionMenu" unique_id=336486365 instance=ExtResource("4_hpdg0")]
+layout_mode = 2
+
+[node name="Skill1" parent="ActionMenu" unique_id=1142561119 instance=ExtResource("4_hpdg0")]
+layout_mode = 2
+
+[node name="Skill2" parent="ActionMenu" unique_id=1902482874 instance=ExtResource("4_hpdg0")]
+layout_mode = 2
+
+[node name="SkillEx" parent="ActionMenu" unique_id=2125153524 instance=ExtResource("4_hpdg0")]
+layout_mode = 2
+
+[node name="TargetMenu" type="HBoxContainer" parent="." unique_id=189218388]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.0
+offset_top = -59.0
+offset_right = 37.0
+offset_bottom = -27.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_rucv6")
+
+[node name="Back" type="Button" parent="TargetMenu" unique_id=24818383]
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Back"
+icon_alignment = 1
+expand_icon = true
+
 [connection signal="pressed" from="MarginContainer/StartBattle" to="." method="_on_start_battle_pressed"]
 [connection signal="pressed" from="MarginContainer/StartBattle" to="PartyMenu" method="disable"]
+[connection signal="party_ready" from="PartyMenu" to="." method="_on_party_ready"]
+[connection signal="pressed" from="Back" to="." method="_close_menu"]
+[connection signal="pressed" from="TargetMenu/Back" to="." method="_close_menu"]

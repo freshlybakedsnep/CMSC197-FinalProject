@@ -14,8 +14,8 @@ var current_wave : Array[EnemyData]
 var current_wave_index := -1
 
 var turn_count := 0
-var turn_queue : Array
-var acted : Array
+var turn_queue : Array[Entity]
+var acted : Array[Entity]
 var eliminated : Array[Entity]
 
 func _ready() -> void:
@@ -82,7 +82,7 @@ func start_turn() -> void:
 func start_fight() -> void:
 	RenderingServer.global_shader_parameter_set("screen_dim_amount", 0.3)
 	for ent in turn_queue:
-		if ent.current_action == UnitData.ActionMode.GUARD_ATTACK:
+		if ent.data.action == UnitData.ActionMode.GUARD_ATTACK:
 			turn_queue.erase(ent)
 			acted.append(ent)
 	next_actor()
@@ -153,4 +153,3 @@ func clear_the_dead() -> void:
 		else:
 			ent.data.state = UnitData.State.DOWN
 		ent.remove_from_group("entities")
-	eliminated.clear()

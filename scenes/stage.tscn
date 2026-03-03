@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://lhx7sp8rhhjr" path="res://scripts/resource/stage_info.gd" id="2_1hwpr"]
 [ext_resource type="Script" uid="uid://cx656sdytf30u" path="res://scripts/resource/wave.gd" id="2_st0q7"]
 [ext_resource type="Script" uid="uid://ddsxg1ao3vu1d" path="res://scripts/resource/data_enemy.gd" id="3_1hwpr"]
-[ext_resource type="PackedScene" uid="uid://c6b4l3yqvllgy" path="res://entity.tscn" id="5_2so7o"]
+[ext_resource type="PackedScene" uid="uid://c6b4l3yqvllgy" path="res://scenes/entity.tscn" id="5_2so7o"]
 [ext_resource type="PackedScene" uid="uid://bwtxguku00kwa" path="res://scenes/ui/menu_battle.tscn" id="6_0hg5s"]
 [ext_resource type="Resource" uid="uid://bu70ke42l84bf" path="res://resources/enemies/slime.tres" id="6_dexii"]
 [ext_resource type="Script" uid="uid://c8d4ukuf2tkk0" path="res://scripts/resource/ability.gd" id="6_e38vs"]

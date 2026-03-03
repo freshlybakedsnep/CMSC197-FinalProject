@@ -1,60 +1,56 @@
-extends HBoxContainer 
-signal actor_selected(index : int)
+extends Control
+class_name PartyMenu
+
+signal hero_selected
 signal party_ready
 
-var hero_nodes : Array[Entity]
-
-@onready var party: Array = $".".get_children()
-var actor : int
+var hero_to_hud : Dictionary[Entity, HeroHUD] = {}
+var selected_hero : Entity
 
 func setup(nodes : Array[Entity]) -> void:
-	for i in party:
-		i.hide()
+	for i in range(nodes.size()):
+		var hud = get_child(i) as HeroHUD
+		var hero : Entity = nodes[i]
+		hero_to_hud.set(hero, hud)
 		
-	hero_nodes = nodes
+		hud.portrait.texture = hud.portrait.texture.duplicate()
+		hud.portrait.texture.atlas = hero.data.sprite
+		hud.health.value = hero.data.health
+		hud.health.max_value = hero.data.health_max
+		
+		var j = (hero.data as HeroData).character_class
+		var t = hero.data.elemental_type
+		
+		hud.character_class.texture = load("res://assets/jobs/El%skind%s.png" % [str(t+1), str(j+1)])
+		hud.pressed.connect(func(): select_hero(hero))
+		hero.entity_eliminated.connect(func(): hud.enabled(false))
+		hud.show()
 
-	for i in range(hero_nodes.size()):
-		hero_nodes[i].hud = party[i]
-		party[i].show()
-		party[i].portrait.texture = party[i].portrait.texture.duplicate()
-		party[i].portrait.texture.atlas = hero_nodes[i].data.sprite
-		party[i].health_bar.update_health(hero_nodes[i].data.health, hero_nodes[i].data.health_max)
-		var j = hero_nodes[i].data.character_class
-		var t = hero_nodes[i].data.elemental_type
-		party[i].character_class.texture = load("res://assets/jobs/El%skind%s.png" % [str(t+1), str(j+1)])
-		party[i].pressed.connect(pick_actor)
-		hero_nodes[i].connect("entity_eliminated", func(): party[i].enabled(false))
+func select_hero(hero : Entity) -> void:
+	if hero:
+		selected_hero = hero
+		hero_selected.emit(hero)
 
-func disable() -> void:
-	for i in hero_nodes.size():
-		if hero_nodes[i].data.state == UnitData.State.NORMAL:
-			var p := get_child(i)
-			p.enabled(false)
-			if p.get_index() == actor:
-				p.a.self_modulate = Color(1,1,1)
-
-func enable() -> void:
-	for i in hero_nodes.size():
-		var p := get_child(i)
-		if hero_nodes[i].data.state == UnitData.State.NORMAL:
-			p.enabled(true)
-	call_deferred("focus_initial")
-
-func pick_actor(pos : int) -> void:
-	actor = pos
-	actor_selected.emit(pos)
+func enabled(toggle : bool) -> void:
+	for hero in hero_to_hud:
+		if hero.data.state == UnitData.State.NORMAL:
+			hero_to_hud[hero].enabled(toggle)
+			if toggle == false:
+				hero_to_hud[hero].a.self_modulate = Color(1,1,1)
+	if toggle:
+		call_deferred("focus_initial")
 
 func focus_initial() -> void:
-	if (hero_nodes[actor].current_action == UnitData.ActionMode.NONE
-	and hero_nodes[actor].data.state == UnitData.State.NORMAL):
-		party[actor].grab_focus()
-		return
+	if selected_hero:
+		if (selected_hero.data.action == UnitData.ActionMode.NONE 
+			and selected_hero.data.state == UnitData.State.NORMAL):
+				hero_to_hud[selected_hero].grab_focus()
+				return
 	
-	for member in range(hero_nodes.size()):
-		match hero_nodes[member].data.state:
-			UnitData.State.NORMAL:
-				if hero_nodes[member].current_action == UnitData.ActionMode.NONE:
-					party[member].grab_focus()
-					return
+	for hero in hero_to_hud:
+		if (hero.data.action == UnitData.ActionMode.NONE 
+		and hero.data.state == UnitData.State.NORMAL):
+			hero_to_hud[hero].grab_focus()
+			return
 	
 	party_ready.emit()

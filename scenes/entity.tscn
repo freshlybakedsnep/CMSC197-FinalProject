@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://cvj6rupnxjdty" path="res://scripts/stages/entity.gd" id="1_uqc13"]
 [ext_resource type="Texture2D" uid="uid://coix0iaueaui5" path="res://assets/place_holder.png" id="2_uqc13"]
 [ext_resource type="PackedScene" uid="uid://cp0dcct1p2u3d" path="res://scenes/ui/hp_bar.tscn" id="3_nwmpt"]
-[ext_resource type="Script" uid="uid://cucmic6nwe2vl" path="res://target_component.gd" id="5_pimh3"]
+[ext_resource type="Script" uid="uid://cucmic6nwe2vl" path="res://scripts/stages/target_component.gd" id="5_pimh3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_03rkj"]
 resource_local_to_scene = true

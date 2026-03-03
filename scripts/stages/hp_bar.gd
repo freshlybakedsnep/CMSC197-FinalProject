@@ -15,7 +15,7 @@ func update(curr : float, maxh : float) -> void:
 	
 	if $HealthBar.max_value != maxh:
 		_tween.tween_property($HealthBar, "max_value", maxh, 0.2)
-	_tween.tween_property($HealthBar, "value", curr, 0.5)
+	_tween.tween_property($HealthBar, "value", curr, 1)
 	
 	_tween.tween_interval(0.5)
 	
