@@ -34,7 +34,7 @@ func select_hero(recruited : bool, ch : HeroData) -> void:
 		party_preview.add_child(p)
 		PartyManager.add_member(ch)
 	else:
-		if char in PartyManager.party:
+		if ch in PartyManager.party:
 			party_preview.get_child(PartyManager.remove_member(ch)).queue_free()
 	
 	$VBoxContainer/Button.disabled = (PartyManager.party.size() < 1)
