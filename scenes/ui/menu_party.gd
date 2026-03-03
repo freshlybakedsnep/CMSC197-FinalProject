@@ -15,8 +15,15 @@ func setup(nodes : Array[Entity]) -> void:
 		
 		hud.portrait.texture = hud.portrait.texture.duplicate()
 		hud.portrait.texture.atlas = hero.data.sprite
+		hud.value.text = str(hero.data.stats["HEALTH"])
 		hud.health.value = hero.data.stats["HEALTH"]
 		hud.health.max_value = hero.data.stats["HEALTH_MAX"]
+		
+		hero.data.health_changed.connect(
+			func(h, m): 
+				hud.health.value = h
+				hud.health.max_value = m
+				hud.value.text = str(h))
 		
 		var j = (hero.data as HeroData).character_class
 		var t = hero.data.stats["ELEMENT"]
@@ -35,7 +42,7 @@ func enabled(toggle : bool) -> void:
 	for hero in hero_to_hud:
 		if hero.data.state == UnitData.State.NORMAL:
 			hero_to_hud[hero].enabled(toggle)
-			if toggle == false:
+			if toggle == false and selected_hero == hero:
 				hero_to_hud[hero].a.self_modulate = Color(1,1,1)
 	if toggle:
 		call_deferred("focus_initial")
