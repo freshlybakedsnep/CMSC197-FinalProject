@@ -2,10 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dycvrrxp8qprn" path="res://scenes/ui/character_slot.gd" id="1_h3508"]
 [ext_resource type="Texture2D" uid="uid://c06guetubyynw" path="res://assets/sprites/famido.webp" id="1_ndgm5"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_h3508"]
-atlas = ExtResource("1_ndgm5")
-region = Rect2(0, 0, 256, 256)
+[ext_resource type="Texture2D" uid="uid://p7mkohtu0rg1" path="res://assets/jobs/El1.png" id="3_xnx3y"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h3508"]
 
@@ -14,29 +11,45 @@ bg_color = Color(0, 0, 0, 0.7254902)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ll4xo"]
 
-[node name="CharacterSlot" type="TextureRect" unique_id=687663332]
+[sub_resource type="AtlasTexture" id="AtlasTexture_h3508"]
+atlas = ExtResource("1_ndgm5")
+region = Rect2(0, 0, 256, 256)
+
+[node name="CharacterIcon" type="Button" unique_id=2095410461]
 custom_minimum_size = Vector2(80, 80)
-offset_right = 128.0
-offset_bottom = 128.0
-size_flags_horizontal = 4
-focus_mode = 2
-texture = SubResource("AtlasTexture_h3508")
-expand_mode = 1
+offset_right = 80.0
+offset_bottom = 80.0
+mouse_filter = 1
+theme_override_styles/normal = SubResource("StyleBoxEmpty_h3508")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ndgm5")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ll4xo")
+toggle_mode = true
 script = ExtResource("1_h3508")
 
-[node name="Button" type="Button" parent="." unique_id=2095410461]
+[node name="Icon" type="TextureRect" parent="." unique_id=982516869]
+z_index = 1
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 30.0
+offset_bottom = 30.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("3_xnx3y")
+expand_mode = 1
+
+[node name="Portrait" type="TextureRect" parent="." unique_id=687663332]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 1
-theme_override_styles/normal = SubResource("StyleBoxEmpty_h3508")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_ndgm5")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_ll4xo")
-toggle_mode = true
+size_flags_horizontal = 4
+focus_mode = 2
+texture = SubResource("AtlasTexture_h3508")
+expand_mode = 1
 
-[connection signal="focus_entered" from="." to="." method="_on_focus_entered"]
-[connection signal="mouse_entered" from="." to="." method="_on_focus_entered"]
-[connection signal="toggled" from="Button" to="." method="_on_toggle"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

@@ -38,7 +38,7 @@ var stats : Dictionary = {
 	"ATTACK" : 0,
 	"DEFENSE" : 0,
 	"SPEED" : 0,
-	"ELEMENT" : ElementalType
+	"ELEMENT" : 0
 }
 
 func get_effectiveness(element : ElementalType) -> float:

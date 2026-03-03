@@ -1,5 +1,5 @@
 extends Node
-@export var library : Dictionary = {}
+@export var library : Dictionary[String, HeroData] = {}
 
 # path to heroe .tres files
 const DATA_PATH = "res://resources/heroes/"
@@ -22,7 +22,7 @@ func load_all() -> void:
 			var res = ResourceLoader.load(clean_path)
 			
 			if res is HeroData:
-				library[res.entity_name] = res
+				library[res.entity_name] = res as HeroData
 		
 		file_name = dir.get_next()
 	print("Library: Loaded ", library.size(), " characters.")
