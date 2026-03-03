@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://ntkoceor2v43" path="res://scenes/ui/hero_hud.tscn" id="3_j33cn"]
 [ext_resource type="PackedScene" uid="uid://dd44kt0ng0qeu" path="res://scenes/ui/skill_button.tscn" id="4_hpdg0"]
 [ext_resource type="Script" uid="uid://5qfltf3003g0" path="res://scenes/ui/menu_target.gd" id="5_rucv6"]
+[ext_resource type="PackedScene" uid="uid://cqig8vtkfogja" path="res://scripts/cursor.tscn" id="7_j33cn"]
 
 [node name="BattleMenuManager" type="Control" unique_id=971412710]
 layout_mode = 3
@@ -42,9 +43,9 @@ text = "Start Battle!"
 [node name="AbilityTooltip" type="Panel" parent="." unique_id=1538801652]
 layout_mode = 0
 offset_left = 720.0
-offset_top = 250.0
+offset_top = 176.0
 offset_right = 1070.0
-offset_bottom = 350.0
+offset_bottom = 276.0
 
 [node name="PartyMenu" type="HBoxContainer" parent="." unique_id=296522800]
 layout_mode = 1
@@ -91,17 +92,17 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -32.0
-offset_top = 173.0
-offset_right = 32.0
-offset_bottom = 205.0
+offset_left = -40.0
+offset_top = 100.0
+offset_right = 24.0
+offset_bottom = 132.0
 grow_horizontal = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 focus_neighbor_left = NodePath(".")
 focus_neighbor_top = NodePath(".")
 focus_neighbor_right = NodePath("../ActionMenu/BasicAttack")
-focus_neighbor_bottom = NodePath("../ActionMenu/BasicAttack")
+focus_neighbor_bottom = NodePath(".")
 focus_next = NodePath("../ActionMenu/BasicAttack")
 focus_previous = NodePath(".")
 text = "Back"
@@ -109,15 +110,14 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="ActionMenu" type="HBoxContainer" parent="." unique_id=6932576]
-visible = false
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -580.0
-offset_top = 160.0
+offset_top = 86.0
 offset_right = -244.0
-offset_bottom = 224.0
+offset_bottom = 150.0
 grow_horizontal = 0
 alignment = 2
 script = ExtResource("3_h1ljj")
@@ -138,17 +138,16 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="TargetMenu" type="HBoxContainer" parent="." unique_id=189218388]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -27.0
-offset_top = -59.0
-offset_right = 37.0
-offset_bottom = -27.0
+offset_left = -40.0
+offset_top = -210.0
+offset_right = 24.0
+offset_bottom = -178.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("5_rucv6")
@@ -161,6 +160,9 @@ size_flags_vertical = 4
 text = "Back"
 icon_alignment = 1
 expand_icon = true
+
+[node name="Cursor" parent="." unique_id=224305860 instance=ExtResource("7_j33cn")]
+layout_mode = 1
 
 [connection signal="pressed" from="MarginContainer/StartBattle" to="." method="_on_start_battle_pressed"]
 [connection signal="pressed" from="MarginContainer/StartBattle" to="PartyMenu" method="disable"]

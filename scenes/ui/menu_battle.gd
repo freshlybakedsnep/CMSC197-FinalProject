@@ -8,6 +8,7 @@ signal plan_done
 @onready var target_menu: TargetMenu = $TargetMenu
 @onready var back: Button = $Back
 @onready var start_battle: Button = $MarginContainer/StartBattle
+@onready var cursor: Cursor = $Cursor
 
 var selected_hero : Hero
 var menu_stack : Array
@@ -33,6 +34,7 @@ func turn_start() -> void:
 	start_battle.disabled = true
 	start_battle.focus_mode = Control.FOCUS_NONE
 	party_menu.enabled(true)
+	cursor.show()
 
 func _close_menu() -> void:
 	var x = menu_stack.pop_back()
@@ -51,8 +53,10 @@ func _open_menu(menu : Control) -> void:
 		menu_stack.back().enabled(false)
 	
 	menu_stack.append(menu)
-	menu.enabled(true)
 	menu.show()
+	menu.enabled(true)
+	start_battle.disabled = true
+	start_battle.focus_mode = Control.FOCUS_NONE
 	
 func _open_action_menu(hero : Entity) -> void:
 	selected_hero = hero
@@ -85,7 +89,28 @@ func _on_party_ready() -> void:
 func _on_start_battle_pressed() -> void:
 	print("Battle Starting!")
 	party_menu.enabled(false)
+	cursor.hide()
 	plan_done.emit()
 	
 	start_battle.focus_mode = Control.FOCUS_NONE
 	start_battle.mouse_behavior_recursive = Control.MOUSE_BEHAVIOR_DISABLED
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		if cursor.visible:
+			_set_cursor_mode(false)
+	elif event.is_action_pressed("navigation"):
+		if not cursor.visible:
+			_set_cursor_mode(true)
+
+func _set_cursor_mode(is_keyboard : bool) -> void:
+	var f = get_viewport().gui_get_focus_owner()
+	if is_keyboard:
+		cursor.show()
+		if f == null:
+			var menu = menu_stack.back()
+			menu.focus_initial()
+	else:
+		cursor.hide()
+		if f:
+			f.release_focus()
