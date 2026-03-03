@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://3vg0err7ohtm"]
 
-[ext_resource type="Script" uid="uid://c4yrjkh7asd8c" path="res://scripts/stages/enemy_manager.gd" id="1_g5mgr"]
+[ext_resource type="Script" uid="uid://c4yrjkh7asd8c" path="res://scenes/stages/formation_enemy.gd" id="1_g5mgr"]
 
 [node name="Enemies" type="Node2D" unique_id=689653097]
 script = ExtResource("1_g5mgr")

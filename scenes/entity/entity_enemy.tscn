@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://b6ibb4e5hmygc"]
+
+[ext_resource type="PackedScene" uid="uid://c6b4l3yqvllgy" path="res://scenes/entity/entity.tscn" id="1_ycqhb"]
+[ext_resource type="Script" uid="uid://cjm3dvyn5y1h7" path="res://scenes/entity/entity_enemy.gd" id="2_2246m"]
+[ext_resource type="Shader" uid="uid://byk63wjvv8dun" path="res://entity_outline.gdshader" id="3_snn0t"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v2hyp"]
+resource_local_to_scene = true
+shader = ExtResource("3_snn0t")
+shader_parameter/active = false
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/outline_thickness = 0.5
+shader_parameter/alpha_threshold = 0.50000002049012
+shader_parameter/is_bright = false
+
+[node name="Enemy" unique_id=1924993659 instance=ExtResource("1_ycqhb")]
+script = ExtResource("2_2246m")
+
+[node name="Sprite" parent="." index="0" unique_id=229155458]
+material = SubResource("ShaderMaterial_v2hyp")

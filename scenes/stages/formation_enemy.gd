@@ -1,5 +1,5 @@
 extends EntityFormation
-class_name EnemyManager
+class_name EnemyFormation
 
 var enemy_pool : Array[EnemyData]
 var names : Dictionary[String, int]
@@ -10,7 +10,7 @@ func load_wave(new_wave : Array[EnemyData]) -> void:
 	enemy_pool = new_wave.duplicate()
 	names.clear()
 
-func fill_vacancies(spawner : Callable) -> void:
+func fill_vacancies() -> void:
 	while _vacancies > 0 and not enemy_pool.is_empty():
 		var enemy_res = enemy_pool.pop_front() as EnemyData
 		if enemy_res == null : return
@@ -24,7 +24,10 @@ func fill_vacancies(spawner : Callable) -> void:
 		else:
 			names[enemy_res.entity_name] = 1
 		
-		var enemy_node = spawner.call(enemy_res)
+		var enemy_node = spawn_entity(enemy_res)
+		enemy_node.add_to_group("enemies")
+		enemy_node.entity_action_over.connect(next_move)
+		enemy_node.entity_eliminated.connect(func(): deathrow.append(enemy_node))
 		probe_and_position(enemy_node, enemy_res.starting_position)
 
 func is_wave_clear() -> bool:

@@ -5,7 +5,7 @@ signal hero_selected
 signal party_ready
 
 var hero_to_hud : Dictionary[Entity, HeroHUD] = {}
-var selected_hero : Entity
+var selected_hero : Hero
 
 func setup(nodes : Array[Entity]) -> void:
 	for i in range(nodes.size()):
@@ -15,18 +15,18 @@ func setup(nodes : Array[Entity]) -> void:
 		
 		hud.portrait.texture = hud.portrait.texture.duplicate()
 		hud.portrait.texture.atlas = hero.data.sprite
-		hud.health.value = hero.data.health
-		hud.health.max_value = hero.data.health_max
+		hud.health.value = hero.data.stats["HEALTH"]
+		hud.health.max_value = hero.data.stats["HEALTH_MAX"]
 		
 		var j = (hero.data as HeroData).character_class
-		var t = hero.data.elemental_type
+		var t = hero.data.stats["ELEMENT"]
 		
 		hud.character_class.texture = load("res://assets/jobs/El%skind%s.png" % [str(t+1), str(j+1)])
-		hud.pressed.connect(func(): select_hero(hero))
+		hud.pressed.connect(func(): select_hero(hero as Hero))
 		hero.entity_eliminated.connect(func(): hud.enabled(false))
 		hud.show()
 
-func select_hero(hero : Entity) -> void:
+func select_hero(hero : Hero) -> void:
 	if hero:
 		selected_hero = hero
 		hero_selected.emit(hero)
@@ -42,13 +42,13 @@ func enabled(toggle : bool) -> void:
 
 func focus_initial() -> void:
 	if selected_hero:
-		if (selected_hero.data.action == UnitData.ActionMode.NONE 
+		if (selected_hero.action == HeroData.ActionMode.NONE 
 			and selected_hero.data.state == UnitData.State.NORMAL):
 				hero_to_hud[selected_hero].grab_focus()
 				return
 	
 	for hero in hero_to_hud:
-		if (hero.data.action == UnitData.ActionMode.NONE 
+		if (hero.action == HeroData.ActionMode.NONE 
 		and hero.data.state == UnitData.State.NORMAL):
 			hero_to_hud[hero].grab_focus()
 			return

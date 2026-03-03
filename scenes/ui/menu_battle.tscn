@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://bwtxguku00kwa"]
 
-[ext_resource type="Script" uid="uid://b3l666p10m5jc" path="res://scripts/ui/menu_battle.gd" id="1_qyamm"]
-[ext_resource type="Script" uid="uid://f486luiaamwq" path="res://scripts/ui/menu_party.gd" id="2_0bl1x"]
-[ext_resource type="Script" uid="uid://cce2y4tb4nn2v" path="res://scripts/ui/action_menu.gd" id="3_h1ljj"]
+[ext_resource type="Script" uid="uid://b3l666p10m5jc" path="res://scenes/ui/menu_battle.gd" id="1_qyamm"]
+[ext_resource type="Script" uid="uid://f486luiaamwq" path="res://scenes/ui/menu_party.gd" id="2_0bl1x"]
+[ext_resource type="Script" uid="uid://cce2y4tb4nn2v" path="res://scenes/ui/action_menu.gd" id="3_h1ljj"]
 [ext_resource type="PackedScene" uid="uid://ntkoceor2v43" path="res://scenes/ui/hero_hud.tscn" id="3_j33cn"]
 [ext_resource type="PackedScene" uid="uid://dd44kt0ng0qeu" path="res://scenes/ui/skill_button.tscn" id="4_hpdg0"]
-[ext_resource type="Script" uid="uid://5qfltf3003g0" path="res://scripts/ui/menu_target.gd" id="5_rucv6"]
+[ext_resource type="Script" uid="uid://5qfltf3003g0" path="res://scenes/ui/menu_target.gd" id="5_rucv6"]
 
 [node name="BattleMenuManager" type="Control" unique_id=971412710]
 layout_mode = 3

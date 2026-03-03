@@ -4,13 +4,13 @@ class_name ActionMenu
 signal action_selected
 
 var back : Button
-var selected_hero : Entity
-var buttons : Dictionary[UnitData.ActionMode, SkillButton] = {
-	UnitData.ActionMode.BASIC_ATTACK : null,
-	UnitData.ActionMode.GUARD_ATTACK : null,
-	UnitData.ActionMode.SKILL_SLOT1 : null,
-	UnitData.ActionMode.SKILL_SLOT2 : null,
-	UnitData.ActionMode.SKILL_EXTRA : null
+var selected_hero : Hero
+var buttons : Dictionary[HeroData.ActionMode, SkillButton] = {
+	HeroData.ActionMode.BASIC_ATTACK : null,
+	HeroData.ActionMode.GUARD_ATTACK : null,
+	HeroData.ActionMode.SKILL_SLOT1 : null,
+	HeroData.ActionMode.SKILL_SLOT2 : null,
+	HeroData.ActionMode.SKILL_EXTRA : null
 }
 
 func add_back(b : Button) -> void:
@@ -19,7 +19,7 @@ func add_back(b : Button) -> void:
 func _ready() -> void:
 	for i in range(buttons.size()):
 		var butt : SkillButton = get_child(i) as SkillButton
-		var action : UnitData.ActionMode = buttons.keys()[i]
+		var action : HeroData.ActionMode = buttons.keys()[i]
 		buttons.set(action, butt)
 		butt.pressed.connect(func(): select_action(action))
 
@@ -32,7 +32,7 @@ func load_menu(hero : Entity) -> void:
 		var duration : int = abil.downtime
 		buttons[i].set_assets(skill_icon, duration)
 
-func select_action(action : UnitData.ActionMode) -> void:
+func select_action(action : HeroData.ActionMode) -> void:
 	if selected_hero:
 		action_selected.emit(action)
 
@@ -47,7 +47,7 @@ func enabled(toggled : bool) -> void:
 		call_deferred("focus_initial")
 
 func focus_initial() -> void:
-	if selected_hero.data.action == UnitData.ActionMode.NONE:
-		buttons[UnitData.ActionMode.BASIC_ATTACK].grab_focus()
+	if selected_hero.action == HeroData.ActionMode.NONE:
+		buttons[HeroData.ActionMode.BASIC_ATTACK].grab_focus()
 	else:
-		buttons[selected_hero.data.action].grab_focus()
+		buttons[selected_hero.action].grab_focus()

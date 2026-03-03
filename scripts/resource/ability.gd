@@ -76,9 +76,9 @@ func lock_sides(source : Entity):
 	_enemies.clear()
 	_heroes.clear()
 	for x in enemies:
-		_enemies.append(x as Entity)
+		_enemies.append(x as Enemy)
 	for y in heroes:
-		_heroes.append(y as Entity)
+		_heroes.append(y as Hero)
 	
 func match_suitable_targets(source : Entity, tar : TargetGroup) -> Array[Entity]:
 	var out : Array[Entity] = []
@@ -86,9 +86,9 @@ func match_suitable_targets(source : Entity, tar : TargetGroup) -> Array[Entity]
 		TargetGroup.SELF:
 			return [source]
 		TargetGroup.ENEMY:
-			out = _enemies if source.is_hero else _heroes
+			out = _enemies if source is Hero else _heroes
 		TargetGroup.PARTY, TargetGroup.ALLY_ONLY:
-			out = _heroes if source.is_hero else _enemies
+			out = _heroes if source is Hero else _enemies
 			if tar == TargetGroup.ALLY_ONLY:
 				out.erase(source)
 	return out.filter(func(x): return is_instance_valid(x) and x.data.state > 0)

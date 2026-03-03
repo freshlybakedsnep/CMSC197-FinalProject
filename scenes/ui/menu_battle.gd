@@ -9,7 +9,7 @@ signal plan_done
 @onready var back: Button = $Back
 @onready var start_battle: Button = $MarginContainer/StartBattle
 
-var selected_hero : Entity
+var selected_hero : Hero
 var menu_stack : Array
 var current_hero_node : Entity
 
@@ -59,8 +59,8 @@ func _open_action_menu(hero : Entity) -> void:
 	action_menu.load_menu(hero)
 	_open_menu(action_menu)
 
-func _open_target_menu(action : UnitData.ActionMode) -> void:
-	var ability : Ability = selected_hero.data.get_ability(action)
+func _open_target_menu(action : HeroData.ActionMode) -> void:
+	var ability : Ability = (selected_hero.data as HeroData).get_ability(action)
 	if not ability: return
 	
 	ability.lock_sides(selected_hero)

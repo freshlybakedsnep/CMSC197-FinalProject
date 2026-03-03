@@ -3,11 +3,11 @@ class_name TargetMenu
 
 signal target_selected
 
-var selected_hero : Entity
+var selected_hero : Hero
 var display_targets : Array[Entity]
 @onready var back: Button = $Back
 
-func setup(hero : Entity, targets : Array[Entity], action : UnitData.ActionMode) -> void:
+func setup(hero : Hero, targets : Array[Entity], action : HeroData.ActionMode) -> void:
 	selected_hero = hero
 	display_targets = targets.filter(func(x): return (x as Entity).targetable)
 	
@@ -55,7 +55,7 @@ func focus_initial() -> void:
 	if display_targets.size() > 0:
 		display_targets[0].target_component.proxy.grab_focus()
 
-func selected_target(unit : Entity, action : UnitData.ActionMode) -> void:
+func selected_target(unit : Entity, action : HeroData.ActionMode) -> void:
 	selected_hero.set_target(unit)
 	selected_hero.set_intent(action)
 	target_selected.emit()
