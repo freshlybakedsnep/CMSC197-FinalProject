@@ -7,6 +7,14 @@ class_name StatModify
 var status_node = preload("res://status_cond.tscn")
 @export var effect_name : String = ""
 
+@export var stat : ModifiableStat
+enum ModifiableStat {
+	HEALTH_MAX,
+	ATTACK,
+	DEFENSE,
+	SPEED
+}
+
 @export var is_buff := true
 @export var is_removable := true 
 @export var is_permanent := false:
@@ -23,7 +31,13 @@ var status_node = preload("res://status_cond.tscn")
 @export var hits := 1 :
 	set(value): hits = max(1, value)
 
+
+
 func trigger(source : Entity, recipient : Entity) -> void:
+	if !is_instance_valid(recipient):
+		effect_finished.emit()
+		return
+	
 	var f = status_node.instantiate() as StatusCondition
 	f.name = effect_name
 	
@@ -37,14 +51,9 @@ func trigger(source : Entity, recipient : Entity) -> void:
 	if hit_based:
 		f.set_hits(hits)
 	
+	recipient.apply_status(f, ModifiableStat.find_key(stat))
 	effect_finished.emit()
 
-
-
-
-
-const remove_toggle : Array[StringName] = [&"duration"]
-const hit_toggle : Array[StringName] = [&"hits"]
 func _validate_property(property: Dictionary) -> void:
 	var hide = false
 	match property.name:

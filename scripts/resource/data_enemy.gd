@@ -16,18 +16,18 @@ enum Positions {
 }
 
 func reset_to_default() -> void:
-	health_max = base_health
-	health = health_max
-	attack = base_attack
-	defense = base_defense
-	speed = base_speed
-	element = elemental_type
-	charge = starting_charge
+	stats["HEALTH"] = base_health
+	stats["HEALTH_MAX"] = base_health
+	stats["ATTACK"] = base_attack
+	stats["DEFENSE"] = base_defense
+	stats["SPEED"] = base_speed
+	stats["ELEMENT"] = elemental_type
+	stats["CHARGE"] = starting_charge
 	
 	state = State.NORMAL
 
-func get_ability(_act : ActionMode = ActionMode.NONE) -> Ability:
-	if charge >= max_charges:
+func get_ability() -> Ability:
+	if stats["CHARGE"] >= max_charges:
 		return ultimate[0]
 	else:
 		var actions = []

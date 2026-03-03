@@ -40,4 +40,3 @@ func apply() -> void:
 
 func remove() -> void:
 	if !is_removable: return
-	pass

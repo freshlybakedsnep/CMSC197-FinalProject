@@ -3,8 +3,6 @@ extends Resource
 class_name UnitData
 
 signal health_changed(current : int, maximum : int)
-
-# fixed values
 const TypeChart = {
 	ElementalType.FIRE : 	{ElementalType.WATER: 	2.0, 	ElementalType.WOOD: 	0.5},
 	ElementalType.WATER : 	{ElementalType.WOOD: 	2.0, 	ElementalType.FIRE: 	0.5},
@@ -13,12 +11,15 @@ const TypeChart = {
 	ElementalType.DARK : 	{ElementalType.LIGHT: 	2.0}
 }
 
-@export_category("Character Information")
+var state : State 
+enum State {DEAD, DOWN, NORMAL}
+
+@export_category("Entity Information")
 @export var entity_name := "Entity"
 @export var character_model := PackedScene
 @export var sprite : Texture
 
-@export_group("Character Kit")
+@export_group("Entity Kit")
 @export var elemental_type : ElementalType
 enum ElementalType { FIRE, WATER, WOOD, LIGHT, DARK}
 @export var basic_atk : Array[Ability]
@@ -31,40 +32,26 @@ enum ElementalType { FIRE, WATER, WOOD, LIGHT, DARK}
 @export var base_defense := 2
 @export var base_speed := 5
 
-# run time : will be used at the start of a stage
-@export_group("")
-var health : int :
-	set(value):
-		health = clamp(value, 0, health_max)
-		health_changed.emit(health, health_max)
-var health_max : int
-var attack : int
-var defense : int
-var speed : int
-var element : ElementalType
-
-var state : State :
-	set(value):
-		if health <= 0:
-			state = State.DEAD
-		else:
-			state = value
-enum State {DEAD, DOWN, NORMAL}
-
-# other modifiers
-var action : ActionMode
-enum ActionMode{
-	NONE,
-	BASIC_ATTACK,
-	GUARD_ATTACK,
-	SKILL_SLOT1,
-	SKILL_SLOT2,
-	SKILL_EXTRA
+var stats : Dictionary = {
+	"HEALTH" : 0,
+	"HEALTH_MAX" : 0,
+	"ATTACK" : 0,
+	"DEFENSE" : 0,
+	"SPEED" : 0,
+	"ELEMENT" : ElementalType
 }
 
-@abstract func get_ability(act : ActionMode = ActionMode.NONE) -> Ability
-
 func get_effectiveness(element : ElementalType) -> float:
-	return TypeChart[elemental_type].get(element, 1.0)
+	if TypeChart.has(element):
+		return TypeChart[elemental_type].get(element, 1.0)
+	return 0
+
+func modify_stat(stat_name : StringName, value : int) -> void:
+	stats[stat_name] = stats[stat_name] + value
+	if stat_name == "HEALTH":
+		stats["HEALTH"] = clamp(stats["HEALTH"], 0, stats["HEALTH_MAX"])
+		health_changed.emit(stats["HEALTH"], stats["HEALTH_MAX"])
 
 @abstract func reset_to_default() -> void
+
+@abstract func get_ability() -> Ability

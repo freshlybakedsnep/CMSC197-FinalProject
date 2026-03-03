@@ -20,12 +20,14 @@ enum StatSource {
 }
 
 func calculate(src : UnitData, tar : UnitData) -> float:
-	var key = StatSource.find_key(stat).to_lower()
-	var val
-	val = tar.get(key) if from_target else src.get(key)
+	var key = StatSource.find_key(stat)
+	
+	var x := tar if from_target else src 	
+	var val = x.stats.get(key)
 	if val == null:
-		match key:
+		match key.to_lower():
 			"missing_health":
-				val = (tar.health_max - tar.health if from_target 
-				else src.health_max - src.health)
+				val = x.stats["HEALTH_MAX"] - x.stats["HEALTH"]
+			_:
+				val = x.key
 	return val * (multiplier + (mult_gain_per_level * level))
