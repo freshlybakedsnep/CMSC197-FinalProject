@@ -34,4 +34,4 @@ func select_hero(index : int, recruited : bool) -> void:
 
 func _on_button_pressed() -> void:
 	PartyManager.finalize_party()
-	get_tree().change_scene_to_file("res://scenes/stage.tscn") 
+	get_tree().change_scene_to_file("res://scenes/stages/stage.tscn") 

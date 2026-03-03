@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://jncj3kxol1ne"]
 
-[ext_resource type="Script" uid="uid://dycvrrxp8qprn" path="res://scripts/ui/character_slot.gd" id="1_h3508"]
+[ext_resource type="Script" uid="uid://dycvrrxp8qprn" path="res://scenes/ui/character_slot.gd" id="1_h3508"]
 [ext_resource type="Texture2D" uid="uid://c06guetubyynw" path="res://assets/sprites/famido.webp" id="1_ndgm5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h3508"]

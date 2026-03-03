@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b443gh0tp45xd"]
 
-[ext_resource type="Script" uid="uid://dkejoipkaf70w" path="res://scripts/party_selection.gd" id="1_akf8x"]
+[ext_resource type="Script" uid="uid://dkejoipkaf70w" path="res://scenes/party_selection.gd" id="1_akf8x"]
 [ext_resource type="PackedScene" uid="uid://jncj3kxol1ne" path="res://scenes/ui/character_slot.tscn" id="2_c7a27"]
 
 [node name="PartySelection" type="Control" unique_id=497987333]

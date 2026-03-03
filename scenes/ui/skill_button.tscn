@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dd44kt0ng0qeu"]
 
-[ext_resource type="Script" uid="uid://tb7psuldt4ay" path="res://scripts/ui/skill_button.gd" id="1_ka5vw"]
+[ext_resource type="Script" uid="uid://tb7psuldt4ay" path="res://scenes/ui/skill_button.gd" id="1_ka5vw"]
 [ext_resource type="Texture2D" uid="uid://c2l0sgxhal5k6" path="res://assets/icon_test.png" id="2_p80kq"]
 [ext_resource type="FontFile" uid="uid://dmgqmwfwyqfc0" path="res://assets/FOT-Aokane Std.ttf" id="3_wqklx"]
 

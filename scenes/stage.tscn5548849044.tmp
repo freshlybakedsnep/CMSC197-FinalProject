@@ -1,0 +1,92 @@
+[gd_scene format=3 uid="uid://bifyp6opkfsfo"]
+
+[ext_resource type="Script" uid="uid://dfwilkkfsbqyu" path="res://scripts/stages/stage.gd" id="1_2so7o"]
+[ext_resource type="Script" uid="uid://lhx7sp8rhhjr" path="res://scripts/resource/stage_info.gd" id="2_1hwpr"]
+[ext_resource type="Script" uid="uid://cx656sdytf30u" path="res://scripts/resource/wave.gd" id="2_st0q7"]
+[ext_resource type="Script" uid="uid://ddsxg1ao3vu1d" path="res://scripts/resource/data_enemy.gd" id="3_1hwpr"]
+[ext_resource type="PackedScene" uid="uid://c6b4l3yqvllgy" path="res://entity/entity.tscn" id="5_2so7o"]
+[ext_resource type="PackedScene" uid="uid://bwtxguku00kwa" path="res://scenes/ui/menu_battle.tscn" id="6_0hg5s"]
+[ext_resource type="Resource" uid="uid://bu70ke42l84bf" path="res://resources/enemies/slime.tres" id="6_dexii"]
+[ext_resource type="Script" uid="uid://c8d4ukuf2tkk0" path="res://scripts/resource/ability.gd" id="6_e38vs"]
+[ext_resource type="PackedScene" uid="uid://3vg0err7ohtm" path="res://scenes/enemy_manager.tscn" id="8_1hwpr"]
+[ext_resource type="Resource" uid="uid://ddn6x0h8smtqk" path="res://resources/abilities/tackle.tres" id="8_jl6nj"]
+[ext_resource type="Resource" uid="uid://c53384fojvadq" path="res://resources/abilities/slime_ult.tres" id="9_e38vs"]
+[ext_resource type="PackedScene" uid="uid://cv1pps7l0sce7" path="res://scenes/hero_manager.tscn" id="13_xfx4c"]
+
+[sub_resource type="Resource" id="Resource_jl6nj"]
+script = ExtResource("3_1hwpr")
+entity_name = "Slime"
+elemental_type = 1
+basic_atk = Array[ExtResource("6_e38vs")]([ExtResource("8_jl6nj")])
+ultimate = Array[ExtResource("6_e38vs")]([ExtResource("9_e38vs")])
+base_attack = 6
+metadata/_custom_type_script = "uid://ddsxg1ao3vu1d"
+
+[sub_resource type="Resource" id="Resource_e38vs"]
+script = ExtResource("3_1hwpr")
+entity_name = "Slime"
+basic_atk = Array[ExtResource("6_e38vs")]([ExtResource("8_jl6nj")])
+ultimate = Array[ExtResource("6_e38vs")]([ExtResource("9_e38vs")])
+base_attack = 6
+metadata/_custom_type_script = "uid://ddsxg1ao3vu1d"
+
+[sub_resource type="Resource" id="Resource_xfx4c"]
+script = ExtResource("3_1hwpr")
+entity_name = "Slime"
+elemental_type = 3
+basic_atk = Array[ExtResource("6_e38vs")]([ExtResource("8_jl6nj")])
+ultimate = Array[ExtResource("6_e38vs")]([ExtResource("9_e38vs")])
+base_attack = 6
+metadata/_custom_type_script = "uid://ddsxg1ao3vu1d"
+
+[sub_resource type="Resource" id="Resource_5sts7"]
+script = ExtResource("3_1hwpr")
+entity_name = "Slime"
+elemental_type = 4
+basic_atk = Array[ExtResource("6_e38vs")]([ExtResource("8_jl6nj")])
+ultimate = Array[ExtResource("6_e38vs")]([ExtResource("9_e38vs")])
+base_attack = 6
+metadata/_custom_type_script = "uid://ddsxg1ao3vu1d"
+
+[sub_resource type="Resource" id="Resource_ddp0b"]
+script = ExtResource("3_1hwpr")
+entity_name = "Slime"
+elemental_type = 3
+basic_atk = Array[ExtResource("6_e38vs")]([ExtResource("8_jl6nj")])
+ultimate = Array[ExtResource("6_e38vs")]([ExtResource("9_e38vs")])
+base_attack = 6
+metadata/_custom_type_script = "uid://ddsxg1ao3vu1d"
+
+[sub_resource type="Resource" id="Resource_yd2gm"]
+script = ExtResource("2_st0q7")
+enemies = Array[ExtResource("3_1hwpr")]([ExtResource("6_dexii"), SubResource("Resource_jl6nj"), SubResource("Resource_e38vs"), SubResource("Resource_xfx4c"), SubResource("Resource_5sts7"), SubResource("Resource_ddp0b")])
+metadata/_custom_type_script = "uid://cx656sdytf30u"
+
+[sub_resource type="Resource" id="Resource_dexii"]
+script = ExtResource("2_1hwpr")
+waves = Array[ExtResource("2_st0q7")]([SubResource("Resource_yd2gm")])
+metadata/_custom_type_script = "uid://lhx7sp8rhhjr"
+
+[node name="Stage" type="Node" unique_id=871806380]
+script = ExtResource("1_2so7o")
+entity = ExtResource("5_2so7o")
+stage_info = SubResource("Resource_dexii")
+
+[node name="Background" type="Node2D" parent="." unique_id=1792994303]
+z_index = -1
+
+[node name="Enemies" parent="." unique_id=1419791244 instance=ExtResource("8_1hwpr")]
+position = Vector2(350, 320)
+
+[node name="Heroes" parent="." unique_id=689653097 instance=ExtResource("13_xfx4c")]
+position = Vector2(900, 400)
+
+[node name="CommandUI" parent="." unique_id=1732962988 instance=ExtResource("6_0hg5s")]
+z_index = 1
+
+[node name="Interval" type="Timer" parent="." unique_id=762121790]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="turn_changed" from="." to="CommandUI" method="turn_start"]
+[connection signal="plan_done" from="CommandUI" to="." method="start_fight"]
