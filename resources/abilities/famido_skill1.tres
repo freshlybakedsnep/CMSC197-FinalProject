@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="Ability" format=3 uid="uid://dcauqncs2tqep"]
 
+[ext_resource type="Texture2D" uid="uid://c2l0sgxhal5k6" path="res://assets/icon_test.png" id="1_4lyk5"]
 [ext_resource type="Script" uid="uid://np6c631gwyc1" path="res://scripts/resource/effect.gd" id="1_gt06j"]
 [ext_resource type="Resource" uid="uid://ccss0pnwvrqoc" path="res://resources/effects/famido_skill1_e1.tres" id="2_4lyk5"]
 [ext_resource type="Script" uid="uid://c8d4ukuf2tkk0" path="res://scripts/resource/ability.gd" id="3_7f82d"]
@@ -8,5 +9,6 @@
 script = ExtResource("3_7f82d")
 ability_name = "Quarterback Command"
 target = 2
+cooldown = 2
 effects = Array[ExtResource("1_gt06j")]([ExtResource("2_4lyk5")])
 metadata/_custom_type_script = "uid://c8d4ukuf2tkk0"

@@ -1,13 +1,15 @@
 [gd_resource type="Resource" script_class="Ability" format=3 uid="uid://kcasmhcwr0rs"]
 
+[ext_resource type="Texture2D" uid="uid://c2l0sgxhal5k6" path="res://assets/icon_test.png" id="1_5bkyq"]
 [ext_resource type="Script" uid="uid://np6c631gwyc1" path="res://scripts/resource/effect.gd" id="1_ms0e6"]
 [ext_resource type="Resource" uid="uid://cnfy0qcmoms5j" path="res://resources/effects/ricano_skill1_e1.tres" id="2_ms0e6"]
 [ext_resource type="Script" uid="uid://c8d4ukuf2tkk0" path="res://scripts/resource/ability.gd" id="3_lsanj"]
+[ext_resource type="Resource" uid="uid://b10oe0vddo0cn" path="res://resources/effects/10-30% DEF Down.tres" id="4_lsanj"]
 
 [resource]
 script = ExtResource("3_lsanj")
 ability_name = "Hype Up!"
 target = 3
 cooldown = 2
-effects = Array[ExtResource("1_ms0e6")]([ExtResource("2_ms0e6")])
+effects = Array[ExtResource("1_ms0e6")]([ExtResource("4_lsanj"), ExtResource("2_ms0e6")])
 metadata/_custom_type_script = "uid://c8d4ukuf2tkk0"

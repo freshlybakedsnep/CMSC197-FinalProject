@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="StatModify" format=3 uid="uid://b10oe0vddo0cn"]
+
+[ext_resource type="Resource" uid="uid://dakx6divo1nda" path="res://resources/values/target DEF[10-30].tres" id="1_3vydi"]
+[ext_resource type="Script" uid="uid://fepr2h8vccrk" path="res://scripts/resource/effect_stats.gd" id="2_idagk"]
+[ext_resource type="PackedScene" uid="uid://ckv0p3jisj157" path="res://status_cond.tscn" id="3_xr4qr"]
+
+[resource]
+Resource = null
+resource_path = "res://resources/effects/10-30% DEF Down.tres"
+resource_scene_unique_id = ""
+script = ExtResource("2_idagk")
+status_node = ExtResource("3_xr4qr")
+effect_name = "Defense Down"
+stat = 2
+is_buff = false
+duration = 2
+formula = ExtResource("1_3vydi")
+"Targeting Settings" = null
+inherit_target = true
+metadata/_custom_type_script = "uid://fepr2h8vccrk"

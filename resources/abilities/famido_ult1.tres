@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="Ability" format=3 uid="uid://skh7xpixtwbc"]
 
+[ext_resource type="Texture2D" uid="uid://c2l0sgxhal5k6" path="res://assets/icon_test.png" id="1_hgop3"]
 [ext_resource type="Script" uid="uid://np6c631gwyc1" path="res://scripts/resource/effect.gd" id="1_s8j8a"]
 [ext_resource type="Resource" uid="uid://dxi6dlf0qxa4j" path="res://resources/effects/famido_ult1_e1.tres" id="2_s8j8a"]
 [ext_resource type="Resource" uid="uid://d1bwgfjajqeer" path="res://resources/effects/famido_ult1_e2.tres" id="3_hgop3"]
@@ -10,5 +11,6 @@ script = ExtResource("4_5rn0n")
 ability_name = "Champion's Battle Cry"
 target = 3
 mode = 1
+cooldown = 4
 effects = Array[ExtResource("1_s8j8a")]([ExtResource("2_s8j8a"), ExtResource("3_hgop3")])
 metadata/_custom_type_script = "uid://c8d4ukuf2tkk0"

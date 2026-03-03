@@ -5,7 +5,7 @@
 
 [resource]
 Resource = null
-resource_path = "res://resources/abilities/ricano_skill1_e1.tres"
+resource_path = "res://resources/effects/ricano_skill1_e1.tres"
 resource_scene_unique_id = "Resource_xo1td"
 script = ExtResource("1_f0xkk")
 "Health Alteration" = null
