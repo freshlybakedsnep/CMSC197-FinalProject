@@ -47,7 +47,12 @@ func enabled(toggled : bool) -> void:
 		call_deferred("focus_initial")
 
 func focus_initial() -> void:
-	if selected_hero.action == HeroData.ActionMode.NONE:
-		buttons[HeroData.ActionMode.BASIC_ATTACK].grab_focus()
-	else:
-		buttons[selected_hero.action].grab_focus()
+	if not is_visible_in_tree(): return
+	
+	var action = selected_hero.action
+	if action == HeroData.ActionMode.NONE:
+		action = HeroData.ActionMode.BASIC_ATTACK
+	
+	var b = buttons[action]
+	if b:
+		b.grab_focus()
