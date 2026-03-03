@@ -11,21 +11,33 @@ var damage_text : PackedScene = preload("res://scenes/ui/damage_text.tscn")
 @onready var hp_bar: HPBar = $HPBar
 @onready var element_icon : TextureRect = $HPBar.get_child(0).get_child(0)
 @onready var sprite: AnimatedSprite2D = $Sprite
-@onready var target_component: TargetProxy = $TargetComponent
+@onready var target_component: Button = $TargetComponent
 
+var data : UnitData
 var intent : Ability
 var current_target : Array[Entity]
 
 var model 
 
-var data : UnitData
-
 # depicts entity
 @export var targetable := true
 
 func _ready() -> void:
-	target_component.connect("has_focus", outline_me)
 	data.health_changed.connect(hp_bar.update)
+	
+	input_event.connect(_on_input_event)
+	
+	target_component.focus_exited.connect(func():
+			outline_me(false))
+	target_component.focus_entered.connect(func():
+			outline_me(true))
+	mouse_entered.connect(func():
+		if target_component.visible:
+			target_component.grab_focus())
+	mouse_exited.connect(func():
+		if target_component.visible:
+			target_component.release_focus())
+	
 	prepare_health_bar()
 	position_health_bar()
 
@@ -38,6 +50,8 @@ func position_health_bar():
 	var frame_tex = sprite.sprite_frames.get_frame_texture(sprite.animation, sprite.frame)
 	var sprite_height = frame_tex.get_size().y * sprite.scale.y
 	hp_bar.position.y = -(sprite_height / 2)
+	
+	target_component.position.y = hp_bar.position.y
 
 @abstract func setup(res : UnitData) -> void
 @abstract func new_turn() -> void
@@ -90,3 +104,10 @@ func highlight_me(enabled : bool) -> void:
 
 func outline_me(enabled : bool) -> void:
 	sprite.material.set_shader_parameter("active", enabled)
+
+func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void: 
+	if event is InputEventMouseButton and event.is_pressed():
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			print("%s: %d/%d" % [name, data.stats["HEALTH"], data.stats["HEALTH_MAX"]])
+			if targetable and target_component.visible:
+				target_component.pressed.emit()

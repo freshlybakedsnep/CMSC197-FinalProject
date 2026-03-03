@@ -3,7 +3,6 @@
 [ext_resource type="Shader" uid="uid://byk63wjvv8dun" path="res://entity_outline.gdshader" id="1_03rkj"]
 [ext_resource type="Texture2D" uid="uid://coix0iaueaui5" path="res://assets/place_holder.png" id="2_uqc13"]
 [ext_resource type="PackedScene" uid="uid://cp0dcct1p2u3d" path="res://scenes/ui/hp_bar.tscn" id="3_nwmpt"]
-[ext_resource type="Script" uid="uid://cucmic6nwe2vl" path="res://scenes/entity/target_component.gd" id="5_pimh3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_03rkj"]
 resource_local_to_scene = true
@@ -30,13 +29,15 @@ size = Vector2(20, 24)
 
 [node name="Entity" type="Area2D" unique_id=1924993659 groups=["entities"]]
 
+[node name="Statuses" type="Node" parent="." unique_id=453684751]
+
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=229155458]
 material = SubResource("ShaderMaterial_03rkj")
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_nwmpt")
 offset = Vector2(0.5, -5)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=427758308]
+[node name="Hitbox" type="CollisionShape2D" parent="." unique_id=427758308]
 position = Vector2(-5, -3)
 scale = Vector2(4, 4)
 shape = SubResource("RectangleShape2D_03rkj")
@@ -44,20 +45,7 @@ shape = SubResource("RectangleShape2D_03rkj")
 [node name="HPBar" parent="." unique_id=11478821 instance=ExtResource("3_nwmpt")]
 visible = false
 
-[node name="TargetComponent" type="Node2D" parent="." unique_id=805068806]
+[node name="TargetComponent" type="Button" parent="." unique_id=1451731070]
 visible = false
-script = ExtResource("5_pimh3")
-
-[node name="FocusProxy" type="Button" parent="TargetComponent" unique_id=1387911646]
 modulate = Color(1, 1, 1, 0)
-offset_right = 8.0
-offset_bottom = 8.0
-mouse_filter = 2
-mouse_behavior_recursive = 1
-
-[node name="Statuses" type="Node" parent="." unique_id=453684751]
-
-[connection signal="input_event" from="." to="TargetComponent" method="_on_entity_input_event"]
-[connection signal="mouse_entered" from="." to="TargetComponent" method="grab_focus"]
-[connection signal="focus_entered" from="TargetComponent/FocusProxy" to="TargetComponent" method="grab_focus"]
-[connection signal="focus_exited" from="TargetComponent/FocusProxy" to="TargetComponent" method="focus_lost"]
+mouse_filter = 1
