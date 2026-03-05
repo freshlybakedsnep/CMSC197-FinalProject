@@ -31,27 +31,29 @@ enum ModifiableStat {
 @export var hits := 1 :
 	set(value): hits = max(1, value)
 
-
-
 func trigger(source : Entity, recipient : Entity) -> void:
 	if !is_instance_valid(recipient):
 		effect_finished.emit()
 		return
 	
 	var f = status_node.instantiate() as StatusCondition
-	f.name = effect_name
-	
-	var output = formula.calculate(source.data, recipient.data)
-	f.setup(output, recipient, effect_name)
+	var info := {
+		"host": source,
+		"name": effect_name,
+		"stat": ModifiableStat.find_key(stat),
+		"value": formula.calculate(source.data, recipient.data),
+		"is_buff": is_buff,
+		"is_removable": is_removable,
+		"is_permanent": is_permanent,
+		"duration": duration,
+		"hit-based": hit_based,
+		"hits": hits
+	}
+	f.setup(info)
 	f.add_to_group("buffs" if is_buff else "debuffs")
 	
-	if !is_permanent:
-		f.set_duration(duration)
-	
-	if hit_based:
-		f.set_hits(hits)
-	
-	recipient.apply_status(f, ModifiableStat.find_key(stat))
+	recipient.highlight_me(true)
+	await recipient.apply_status(f, ModifiableStat.find_key(stat))
 	effect_finished.emit()
 
 func _validate_property(property: Dictionary) -> void:
@@ -61,9 +63,6 @@ func _validate_property(property: Dictionary) -> void:
 			hide = is_permanent
 		"hits":
 			hide = !hit_based
-		"target_mode", "target_group":
-			hide = inherit_target
-	
 	if hide:
 		property.usage &= ~PROPERTY_USAGE_DEFAULT
 	else:

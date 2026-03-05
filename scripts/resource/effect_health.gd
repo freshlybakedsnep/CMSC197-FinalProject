@@ -7,10 +7,6 @@ class_name HealthAdjust
 @export var is_damaging := true
 
 func trigger(source : Entity, recipient : Entity) -> void:
-	if !is_instance_valid(recipient):
-		effect_finished.emit()
-		return
-
 	var output = formula.calculate(source.data, recipient.data) * (1 if is_damaging else -1)
 	if is_damaging:
 		var m = recipient.data.get_effectiveness(source.data.stats["ELEMENT"])

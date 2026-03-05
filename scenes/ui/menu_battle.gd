@@ -6,9 +6,11 @@ signal plan_done
 @onready var party_menu: PartyMenu = $PartyMenu
 @onready var action_menu: ActionMenu = $ActionMenu
 @onready var target_menu: TargetMenu = $TargetMenu
+
 @onready var back: Button = $Back
 @onready var start_battle: Button = $MarginContainer/StartBattle
 @onready var cursor: Cursor = $Cursor
+@onready var ability_tooltip: Panel = $AbilityTooltip
 
 var selected_hero : Hero
 var menu_stack : Array
@@ -66,11 +68,10 @@ func _open_action_menu(hero : Entity) -> void:
 func _open_target_menu(action : HeroData.ActionMode) -> void:
 	var ability : Ability = (selected_hero.data as HeroData).get_ability(action)
 	if not ability: return
+	ability.lock_entities(selected_hero)
+	var target_range := ability.determine_targets(selected_hero, ability)
 	
-	ability.lock_sides(selected_hero)
-	var target_range := ability.match_suitable_targets(selected_hero, ability.target)
-	
-	if ability.mode == Ability.TargetMode.SINGLE:
+	if ability.target_mode == Ability.TargetMode.SINGLE:
 		target_menu.setup(selected_hero, target_range, action)
 		_open_menu(target_menu)
 	else:
@@ -87,11 +88,11 @@ func _on_party_ready() -> void:
 	start_battle.grab_focus()
 
 func _on_start_battle_pressed() -> void:
+	party_menu.selected_hero = null
 	print("Battle Starting!")
 	party_menu.enabled(false)
 	cursor.hide()
 	plan_done.emit()
-	
 	start_battle.focus_mode = Control.FOCUS_NONE
 	start_battle.mouse_behavior_recursive = Control.MOUSE_BEHAVIOR_DISABLED
 
