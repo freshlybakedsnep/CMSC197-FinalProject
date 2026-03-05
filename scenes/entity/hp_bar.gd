@@ -4,6 +4,9 @@ class_name HPBar
 signal finished
 var _tween : Tween
 
+func _ready() -> void:
+	hide()
+
 func update(curr : float, maxh : float) -> void:
 	if _tween:
 		_tween.kill()

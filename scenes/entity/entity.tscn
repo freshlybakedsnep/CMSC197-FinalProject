@@ -2,7 +2,6 @@
 
 [ext_resource type="Shader" uid="uid://byk63wjvv8dun" path="res://entity_outline.gdshader" id="1_03rkj"]
 [ext_resource type="Texture2D" uid="uid://coix0iaueaui5" path="res://assets/place_holder.png" id="2_uqc13"]
-[ext_resource type="PackedScene" uid="uid://cp0dcct1p2u3d" path="res://scenes/ui/hp_bar.tscn" id="3_nwmpt"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_03rkj"]
 resource_local_to_scene = true
@@ -38,12 +37,10 @@ sprite_frames = SubResource("SpriteFrames_nwmpt")
 offset = Vector2(0.5, -5)
 
 [node name="Hitbox" type="CollisionShape2D" parent="." unique_id=427758308]
+visible = false
 position = Vector2(-5, -3)
 scale = Vector2(4, 4)
 shape = SubResource("RectangleShape2D_03rkj")
-
-[node name="HPBar" parent="." unique_id=11478821 instance=ExtResource("3_nwmpt")]
-visible = false
 
 [node name="TargetComponent" type="Button" parent="." unique_id=1451731070]
 visible = false

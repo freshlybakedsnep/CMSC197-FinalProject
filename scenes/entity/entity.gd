@@ -9,7 +9,6 @@ signal dead
 var damage_text : PackedScene = preload("res://scenes/ui/damage_text.tscn")
 @onready var statuses: Node = $Statuses
 @onready var hp_bar: HPBar = $HPBar
-@onready var element_icon : TextureRect = $HPBar.get_child(0).get_child(0)
 @onready var sprite: AnimatedSprite2D = $Sprite
 @onready var target_component: Button = $TargetComponent
 
@@ -38,13 +37,7 @@ func _ready() -> void:
 		if target_component.visible:
 			target_component.release_focus())
 	
-	prepare_health_bar()
 	position_health_bar()
-
-func prepare_health_bar() -> void:
-	element_icon.texture = load("res://assets/jobs/El%s.png" % str(data.stats["ELEMENT"]+1))
-	if data is HeroData:
-		element_icon.hide()
 
 func position_health_bar():
 	var frame_tex = sprite.sprite_frames.get_frame_texture(sprite.animation, sprite.frame)
@@ -60,12 +53,19 @@ func position_health_bar():
 
 func do_action() -> void:
 	print("%s uses %s" % [data.entity_name, intent.ability_name])
-	await intent.take_effect(self, current_target)
+	await intent.cast(self)
 	entity_action_over.emit()
 
 func apply_status(status : StatusCondition, stat : StringName) -> void:
 	var t = create_tween()
-	t.tween_property(self, "modulate", Color(0.727, 0.55, 0.383, 1.0), 0.1)
+	
+	var c : Color
+	if status.is_buff:
+		c = Color(1.0, 0.816, 0.502, 1.0)
+	else:
+		c = Color(0.596, 0.784, 0.851, 1.0)
+	
+	t.tween_property(self, "modulate", c, 0.1)
 	await t.finished
 	t.stop()
 	var x = create_tween()
