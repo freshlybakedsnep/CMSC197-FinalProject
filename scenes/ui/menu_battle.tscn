@@ -41,6 +41,7 @@ mouse_behavior_recursive = 2
 text = "Start Battle!"
 
 [node name="AbilityTooltip" type="Panel" parent="." unique_id=1538801652]
+visible = false
 layout_mode = 0
 offset_left = 720.0
 offset_top = 176.0
@@ -163,6 +164,7 @@ expand_icon = true
 
 [node name="Cursor" parent="." unique_id=224305860 instance=ExtResource("7_j33cn")]
 layout_mode = 1
+cursor_offset = Vector2(0, 5)
 
 [connection signal="pressed" from="MarginContainer/StartBattle" to="." method="_on_start_battle_pressed"]
 [connection signal="pressed" from="MarginContainer/StartBattle" to="PartyMenu" method="disable"]

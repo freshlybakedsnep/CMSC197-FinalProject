@@ -51,7 +51,7 @@ func focus_initial() -> void:
 	if selected_hero:
 		if (selected_hero.action == HeroData.ActionMode.NONE 
 			and selected_hero.data.state == UnitData.State.NORMAL):
-				hero_to_hud[selected_hero].grab_focus()
+				hero_to_hud[(selected_hero as Entity)].grab_focus()
 				return
 	
 	for hero in hero_to_hud:

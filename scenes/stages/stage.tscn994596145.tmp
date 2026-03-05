@@ -96,19 +96,5 @@ z_index = 1
 wait_time = 0.5
 one_shot = true
 
-[node name="TurnCount" type="Label" parent="." unique_id=1079103063]
-offset_left = 87.0
-offset_top = 77.0
-offset_right = 132.0
-offset_bottom = 100.0
-text = "Turn: "
-
-[node name="EnemyCount" type="Label" parent="." unique_id=1301938050]
-offset_left = 87.0
-offset_top = 107.0
-offset_right = 132.0
-offset_bottom = 130.0
-text = "Enemies Left: "
-
 [connection signal="turn_changed" from="." to="CommandUI" method="turn_start"]
 [connection signal="plan_done" from="CommandUI" to="." method="start_fight"]
