@@ -62,8 +62,9 @@ func start_battle() -> void:
 
 func start_turn() -> void:
 	turn_count += 1
+	$TurnCount.text = "Turn: " + str(turn_count)
 	enemies.fill_vacancies()
-	
+	$EnemyCount.text = "Enemies Left: " + str(enemies.enemy_pool.size())
 	for e in get_tree().get_nodes_in_group("entities"):
 		if (e as Entity).data.state == UnitData.State.NORMAL:
 			e.new_turn()
