@@ -1,16 +1,15 @@
 [gd_resource type="Resource" script_class="EnemyData" format=3 uid="uid://bu70ke42l84bf"]
 
 [ext_resource type="Script" uid="uid://c8d4ukuf2tkk0" path="res://scripts/resource/ability.gd" id="1_k071p"]
-[ext_resource type="Resource" uid="uid://ddn6x0h8smtqk" path="res://resources/abilities/tackle.tres" id="2_lb0tw"]
+[ext_resource type="Resource" uid="uid://b125y36r2vep" path="res://resources/abilities/BA-ST-1hit.tres" id="2_pssbi"]
 [ext_resource type="Script" uid="uid://ddsxg1ao3vu1d" path="res://scripts/resource/data_enemy.gd" id="3_f4jmt"]
-[ext_resource type="Resource" uid="uid://c53384fojvadq" path="res://resources/abilities/slime_ult.tres" id="4_ey5h4"]
 
 [resource]
 script = ExtResource("3_f4jmt")
 max_charges = 3
 entity_name = "Slime"
 elemental_type = 2
-basic_atk = Array[ExtResource("1_k071p")]([ExtResource("2_lb0tw")])
-ultimate = Array[ExtResource("1_k071p")]([ExtResource("4_ey5h4")])
+basic_atk = Array[ExtResource("1_k071p")]([ExtResource("2_pssbi")])
+ultimate = Array[ExtResource("1_k071p")]([ExtResource("2_pssbi")])
 base_attack = 6
 metadata/_custom_type_script = "uid://ddsxg1ao3vu1d"

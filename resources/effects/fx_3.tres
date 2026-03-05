@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="EffectGroup" format=3 uid="uid://cf46nwfv2aywv"]
+
+[ext_resource type="Script" uid="uid://np6c631gwyc1" path="res://scripts/resource/effect.gd" id="1_ax6c6"]
+[ext_resource type="Script" uid="uid://dvxwo2q1trkuf" path="res://scripts/resource/effect_group.gd" id="2_2337r"]
+[ext_resource type="Script" uid="uid://cam2fjh06h71s" path="res://scripts/resource/value_flat.gd" id="2_x7jpr"]
+[ext_resource type="Script" uid="uid://fepr2h8vccrk" path="res://scripts/resource/effect_stats.gd" id="3_wo4q5"]
+[ext_resource type="PackedScene" uid="uid://ckv0p3jisj157" path="res://scenes/status_cond.tscn" id="4_uh4s2"]
+
+[sub_resource type="Resource" id="Resource_1ows1"]
+script = ExtResource("2_x7jpr")
+amount = -2.0
+metadata/_custom_type_script = "uid://cam2fjh06h71s"
+
+[sub_resource type="Resource" id="Resource_2n7nb"]
+Resource = null
+resource_path = "res://resources/effects/fx_3.tres::Resource_2n7nb"
+resource_scene_unique_id = "Resource_2n7nb"
+script = ExtResource("3_wo4q5")
+status_node = ExtResource("4_uh4s2")
+effect_name = "-2 SPD"
+stat = 3
+is_buff = false
+duration = 2
+formula = SubResource("Resource_1ows1")
+metadata/_custom_type_script = "uid://fepr2h8vccrk"
+
+[resource]
+Resource = null
+resource_path = "res://resources/effects/fx_3.tres"
+resource_scene_unique_id = ""
+script = ExtResource("2_2337r")
+inherit_targets = true
+effects = Array[ExtResource("1_ax6c6")]([SubResource("Resource_2n7nb")])
+metadata/_custom_type_script = "uid://dvxwo2q1trkuf"
