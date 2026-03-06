@@ -21,11 +21,9 @@ var enemy_formation : Dictionary
 func _ready() -> void:
 	party_menu.hero_selected.connect(_open_action_menu)
 	action_menu.action_selected.connect(_open_target_menu)
-	target_menu.target_selected.connect(_close_to_root)
 	action_menu.add_back(back)
 	action_menu.hide()
 	target_menu.hide()
-	
 	menu_stack.append(party_menu)
 
 func connect_formations(enemies : Dictionary, heroes : Array[Entity]) -> void:
@@ -68,16 +66,11 @@ func _open_action_menu(hero : Entity) -> void:
 func _open_target_menu(action : HeroData.ActionMode) -> void:
 	var ability : Ability = (selected_hero.data as HeroData).get_ability(action)
 	if not ability: return
-	ability.lock_entities(selected_hero)
-	var target_range := ability.determine_targets(selected_hero, ability)
-	
-	if ability.target_mode == Ability.TargetMode.SINGLE:
-		target_menu.setup(selected_hero, target_range, action)
-		_open_menu(target_menu)
-	else:
-		selected_hero.set_intent(action)
-		selected_hero.current_target.assign(target_range)
-		_close_to_root()
+	target_menu.setup(
+		{"selected_hero": selected_hero, 
+		"ability": ability,
+		"action": action})
+	_open_menu(target_menu)
 
 func _on_party_ready() -> void:
 	print("Ready for Battle!")

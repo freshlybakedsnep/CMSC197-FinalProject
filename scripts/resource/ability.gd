@@ -17,8 +17,12 @@ var downtime : int = 0
 		notify_property_list_changed()
 enum TargetGroup {SELF, ALLY_ONLY, PARTY, ENEMY}
 
-@export var target_mode : TargetMode
-enum TargetMode {SINGLE, AOE, RANDOM}
+@export var target_mode : TargetMode :
+	set(value):
+		target_mode = value
+		notify_property_list_changed()
+enum TargetMode {SINGLE, AOE, RANDOM, MULTIPLE}
+@export var target_count := 1
 
 const additional : Array[StringName] = [&"mode"]
 
@@ -34,13 +38,17 @@ var enemies : Array
 var heroes : Array
 
 func _validate_property(property: Dictionary) -> void:
-	if property.name in ["target_mode", "cooldown", "cost"]:
+	if property.name in ["target_mode", "cooldown", "cost", "target_count"]:
 		var hide = false
 		match property.name:
 			"target_mode":
 				hide = target_group == TargetGroup.SELF
 			"cooldown", "cost":
 				hide = basic_ability == true
+			"target_count":
+				hide = (target_mode == TargetMode.AOE or
+						target_mode == TargetMode.SINGLE or 
+						target_group == TargetGroup.SELF)
 		if hide:
 			property.usage &= ~PROPERTY_USAGE_EDITOR
 		else:
@@ -48,6 +56,9 @@ func _validate_property(property: Dictionary) -> void:
 
 func cast(src: Entity) -> void:
 	lock_entities(src)
+	if target_mode == TargetMode.RANDOM:
+		src.set_target(random(src.current_target))
+	
 	for fx in effects:
 		var targets = finalize_targets(src, fx)
 		await fx.trigger(src, targets, ability_level)
@@ -60,7 +71,7 @@ func lock_entities(src: Entity) -> void:
 	
 	enemies = enemies.filter(func(x): return is_instance_valid(x) and x.data.state > 0)
 	heroes = heroes.filter(func(x): return is_instance_valid(x) and x.data.state > 0)
-	
+
 func determine_targets(src: Entity, variant) -> Array[Entity]:
 	var out : Array
 	
@@ -80,19 +91,24 @@ func determine_targets(src: Entity, variant) -> Array[Entity]:
 	return targets
 
 func finalize_targets(src: Entity, fg: EffectGroup) -> Array[Entity]:
-	var targets : Array[Entity]
 	if fg.inherit_targets:
-		if target_mode != TargetMode.RANDOM:
+		if not src.current_target.is_empty():
 			return src.current_target
-		targets = determine_targets(src, self)
-	else:
-		targets = determine_targets(src, fg)
 	
-	if fg.target_mode == TargetMode.AOE:
-		print("hitting all")
-		return targets
-	else:
-		if fg.target_mode == TargetMode.SINGLE and target_mode == TargetMode.SINGLE and src.current_target:
+	var pool: Array[Entity] = determine_targets(src, fg)
+	match fg.target_mode:
+		TargetMode.AOE:
+			return pool
+		TargetMode.SINGLE:
+			if src.current_target.size() > 0:
+				return [src.current_target[0]]
+			return pool.pick_random()
+		TargetMode.RANDOM:
+			return random(pool)
+		TargetMode.MULTIPLE:
 			return src.current_target
-		print(targets)
-		return [targets.pick_random()]
+	return []
+
+func random(pool: Array[Entity]) -> Array[Entity]:
+	pool.shuffle()
+	return pool.slice(0, min(pool.size(), target_count))
