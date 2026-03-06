@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="HeroData" format=3 uid="uid://b7vq1xkbpws45"]
+
+[ext_resource type="Script" uid="uid://c8d4ukuf2tkk0" path="res://scripts/resource/ability.gd" id="1_abcr4"]
+[ext_resource type="Resource" uid="uid://b125y36r2vep" path="res://resources/abilities/BA-ST-1hit.tres" id="2_mirvs"]
+[ext_resource type="Script" uid="uid://nqhxig82acgw" path="res://scripts/resource/data_hero.gd" id="2_wsd36"]
+[ext_resource type="Resource" uid="uid://dncie7g82gll2" path="res://resources/abilities/00_guard.tres" id="4_6bvby"]
+[ext_resource type="Resource" uid="uid://brrcxsb6r4ac0" path="res://resources/abilities/SK-AOE-heal-1time.tres" id="5_08qix"]
+[ext_resource type="Resource" uid="uid://bk521n2um3cus" path="res://resources/abilities/SK-ST-heal-1time.tres" id="6_tod0d"]
+[ext_resource type="Texture2D" uid="uid://ckpqbwkytcvof" path="res://assets/sprites/rutenix.webp" id="7_3n2ro"]
+[ext_resource type="Resource" uid="uid://dsqjr07qqvyc" path="res://resources/abilities/EX-partyhealbuff.tres" id="8_01m7o"]
+
+[resource]
+script = ExtResource("2_wsd36")
+character_class = 2
+entity_name = "Rutenix"
+sprite = ExtResource("7_3n2ro")
+elemental_type = 3
+basic_atk = Array[ExtResource("1_abcr4")]([ExtResource("2_mirvs")])
+skills = Array[ExtResource("1_abcr4")]([ExtResource("4_6bvby"), ExtResource("5_08qix"), ExtResource("6_tod0d")])
+ultimate = Array[ExtResource("1_abcr4")]([ExtResource("8_01m7o")])
+base_health = 15
+base_speed = 7
+metadata/_custom_type_script = "uid://nqhxig82acgw"

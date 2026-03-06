@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Ability" format=3 uid="uid://brrcxsb6r4ac0"]
+
+[ext_resource type="Texture2D" uid="uid://c2l0sgxhal5k6" path="res://assets/icon_test.png" id="1_0s7ha"]
+[ext_resource type="Script" uid="uid://dvxwo2q1trkuf" path="res://scripts/resource/effect_group.gd" id="2_rod5n"]
+[ext_resource type="Resource" uid="uid://bhh2bumj8i3v4" path="res://resources/effects/fx_4.tres" id="3_xpgvx"]
+[ext_resource type="Script" uid="uid://c8d4ukuf2tkk0" path="res://scripts/resource/ability.gd" id="4_2srhr"]
+
+[resource]
+script = ExtResource("4_2srhr")
+ability_name = "SK-AOE-heal-1time"
+target_group = 2
+target_mode = 1
+cooldown = 2
+effects = Array[ExtResource("2_rod5n")]([ExtResource("3_xpgvx")])
+metadata/_custom_type_script = "uid://c8d4ukuf2tkk0"

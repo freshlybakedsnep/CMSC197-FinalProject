@@ -16,6 +16,7 @@ script = ExtResource("1_ioygu")
 ability_name = "Ability Random 3-hits"
 target_group = 3
 target_mode = 2
+cooldown = 3
 effects = Array[ExtResource("9_m4cel")]([ExtResource("10_walxx"), ExtResource("10_walxx"), ExtResource("10_walxx")])
 metadata/_custom_type_script = "uid://c8d4ukuf2tkk0"
 
