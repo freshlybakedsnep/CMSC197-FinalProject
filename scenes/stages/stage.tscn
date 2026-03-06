@@ -8,10 +8,9 @@
 [ext_resource type="Resource" uid="uid://bu70ke42l84bf" path="res://resources/enemies/slime.tres" id="6_0fp0l"]
 [ext_resource type="Script" uid="uid://c8d4ukuf2tkk0" path="res://scripts/resource/ability.gd" id="7_ehqcs"]
 [ext_resource type="Resource" uid="uid://b125y36r2vep" path="res://resources/abilities/BA-ST-1hit.tres" id="8_ltv8x"]
-[ext_resource type="PackedScene" uid="uid://3vg0err7ohtm" path="res://scenes/stages/formation_enemy.tscn" id="10_q2835"]
-[ext_resource type="PackedScene" uid="uid://b6ibb4e5hmygc" path="res://scenes/entity/entity_enemy.tscn" id="11_g1c6t"]
-[ext_resource type="PackedScene" uid="uid://cv1pps7l0sce7" path="res://scenes/stages/formation_hero.tscn" id="12_cxkqe"]
-[ext_resource type="PackedScene" uid="uid://d36xbln731vef" path="res://scenes/entity/entity_hero.tscn" id="13_1gwe1"]
+[ext_resource type="PackedScene" uid="uid://bcdyij8txqpmr" path="res://scenes/stages/formation_enemy.tscn" id="10_q2835"]
+[ext_resource type="PackedScene" uid="uid://oyeqlnpaeldy" path="res://scenes/stages/formation_hero.tscn" id="12_cxkqe"]
+[ext_resource type="FontFile" uid="uid://dmgqmwfwyqfc0" path="res://assets/FOT-Aokane Std.ttf" id="12_mim2l"]
 [ext_resource type="PackedScene" uid="uid://bwtxguku00kwa" path="res://scenes/ui/menu_battle.tscn" id="14_dkcyh"]
 
 [sub_resource type="Resource" id="Resource_t8y0b"]
@@ -70,8 +69,13 @@ metadata/_custom_type_script = "uid://cx656sdytf30u"
 
 [sub_resource type="Resource" id="Resource_dexii"]
 script = ExtResource("3_bphci")
-waves = Array[ExtResource("4_53hmt")]([SubResource("Resource_yd2gm")])
+waves = Array[ExtResource("4_53hmt")]([SubResource("Resource_yd2gm"), SubResource("Resource_yd2gm")])
 metadata/_custom_type_script = "uid://lhx7sp8rhhjr"
+
+[sub_resource type="LabelSettings" id="LabelSettings_ltv8x"]
+font = ExtResource("12_mim2l")
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Stage" type="Node" unique_id=871806380]
 script = ExtResource("1_oa6vd")
@@ -81,13 +85,11 @@ stage_info = SubResource("Resource_dexii")
 [node name="Background" type="Node2D" parent="." unique_id=1792994303]
 z_index = -1
 
-[node name="Enemies" parent="." unique_id=1419791244 instance=ExtResource("10_q2835")]
-position = Vector2(350, 320)
-entity_scene = ExtResource("11_g1c6t")
+[node name="Enemies" parent="." unique_id=689653097 instance=ExtResource("10_q2835")]
+position = Vector2(350, 280)
 
-[node name="Heroes" parent="." unique_id=689653097 instance=ExtResource("12_cxkqe")]
-position = Vector2(900, 400)
-entity_scene = ExtResource("13_1gwe1")
+[node name="Heroes" parent="." unique_id=2033338877 instance=ExtResource("12_cxkqe")]
+position = Vector2(850, 440)
 
 [node name="CommandUI" parent="." unique_id=1732962988 instance=ExtResource("14_dkcyh")]
 z_index = 1
@@ -102,6 +104,7 @@ offset_top = 77.0
 offset_right = 132.0
 offset_bottom = 100.0
 text = "Turn: "
+label_settings = SubResource("LabelSettings_ltv8x")
 
 [node name="EnemyCount" type="Label" parent="." unique_id=1301938050]
 offset_left = 87.0
@@ -109,6 +112,15 @@ offset_top = 107.0
 offset_right = 132.0
 offset_bottom = 130.0
 text = "Enemies Left: "
+label_settings = SubResource("LabelSettings_ltv8x")
+
+[node name="Wave" type="Label" parent="." unique_id=2103186627]
+offset_left = 87.0
+offset_top = 138.0
+offset_right = 195.0
+offset_bottom = 161.0
+text = "Wave: x/x"
+label_settings = SubResource("LabelSettings_ltv8x")
 
 [connection signal="turn_changed" from="." to="CommandUI" method="turn_start"]
 [connection signal="plan_done" from="CommandUI" to="." method="start_fight"]

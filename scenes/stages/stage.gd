@@ -26,6 +26,7 @@ func _ready() -> void:
 
 func load_next_wave() -> bool:
 	current_wave_index += 1
+	$Wave.text = "Wave: %s/%s" % [current_wave_index+1, stage_info.waves.size()] 
 	if current_wave_index >= stage_info.waves.size():
 		return false
 	
