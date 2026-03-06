@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://d25b86f1mxfqj"]
+
+[node name="Formation" type="Node2D" unique_id=689653097]
+
+[node name="pos1" type="Marker2D" parent="." unique_id=507830191]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(-160, 10)
+
+[node name="pos2" type="Marker2D" parent="." unique_id=313020340]
+y_sort_enabled = true
+position = Vector2(-85, -10)
+
+[node name="pos3" type="Marker2D" parent="." unique_id=1971730018]
+z_index = 1
+y_sort_enabled = true
+
+[node name="pos4" type="Marker2D" parent="." unique_id=264810793]
+y_sort_enabled = true
+position = Vector2(70, -20)
+
+[node name="pos5" type="Marker2D" parent="." unique_id=1400350062]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(155, -10)

@@ -1,26 +1,24 @@
-[gd_scene format=3 uid="uid://cv1pps7l0sce7"]
+[gd_scene format=3 uid="uid://oyeqlnpaeldy"]
 
 [ext_resource type="Script" uid="uid://cpvwcgai5b0d1" path="res://scenes/stages/formation_hero.gd" id="1_fb83y"]
+[ext_resource type="PackedScene" uid="uid://d25b86f1mxfqj" path="res://scenes/stages/formation.tscn" id="1_srygu"]
+[ext_resource type="PackedScene" uid="uid://d36xbln731vef" path="res://scenes/entity/entity_hero.tscn" id="3_hcaid"]
 
-[node name="Heroes" type="Node2D" unique_id=689653097]
+[node name="Formation" unique_id=689653097 instance=ExtResource("1_srygu")]
 script = ExtResource("1_fb83y")
+entity_scene = ExtResource("3_hcaid")
 
-[node name="pos1" type="Marker2D" parent="." unique_id=507830191]
-y_sort_enabled = true
+[node name="pos1" parent="." index="0" unique_id=507830191]
 position = Vector2(-130, 10)
 
-[node name="pos2" type="Marker2D" parent="." unique_id=313020340]
-y_sort_enabled = true
-position = Vector2(-65, 60)
+[node name="pos2" parent="." index="1" unique_id=313020340]
+position = Vector2(-65, -60)
 
-[node name="pos3" type="Marker2D" parent="." unique_id=264810793]
-y_sort_enabled = true
+[node name="pos3" parent="." index="2" unique_id=1971730018]
 position = Vector2(0, -20)
 
-[node name="pos4" type="Marker2D" parent="." unique_id=1971730018]
-y_sort_enabled = true
+[node name="pos4" parent="." index="3" unique_id=264810793]
 position = Vector2(65, 60)
 
-[node name="pos5" type="Marker2D" parent="." unique_id=1736645290]
-y_sort_enabled = true
+[node name="pos5" parent="." index="4" unique_id=1400350062]
 position = Vector2(130, 10)
