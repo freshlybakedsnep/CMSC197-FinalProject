@@ -13,6 +13,9 @@ outline_color = Color(0, 0, 0, 1)
 position = Vector2(32, 0)
 script = ExtResource("1_c6dak")
 duration = 0.4
+strong_color = Color(1, 0.6784314, 0.32156864, 1)
+weaker_color = Color(0.61960787, 0.70980394, 1, 1)
+heal_color = Color(0, 0.8980392, 0, 1)
 
 [node name="Label" type="Label" parent="." unique_id=493253027]
 z_index = 10

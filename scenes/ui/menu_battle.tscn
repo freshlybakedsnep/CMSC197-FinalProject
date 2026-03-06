@@ -2,11 +2,19 @@
 
 [ext_resource type="Script" uid="uid://b3l666p10m5jc" path="res://scenes/ui/menu_battle.gd" id="1_qyamm"]
 [ext_resource type="Script" uid="uid://f486luiaamwq" path="res://scenes/ui/menu_party.gd" id="2_0bl1x"]
+[ext_resource type="FontFile" uid="uid://dmgqmwfwyqfc0" path="res://assets/FOT-Aokane Std.ttf" id="2_h1ljj"]
 [ext_resource type="Script" uid="uid://cce2y4tb4nn2v" path="res://scenes/ui/action_menu.gd" id="3_h1ljj"]
 [ext_resource type="PackedScene" uid="uid://ntkoceor2v43" path="res://scenes/ui/hero_hud.tscn" id="3_j33cn"]
 [ext_resource type="PackedScene" uid="uid://dd44kt0ng0qeu" path="res://scenes/ui/skill_button.tscn" id="4_hpdg0"]
 [ext_resource type="Script" uid="uid://5qfltf3003g0" path="res://scenes/ui/menu_target.gd" id="5_rucv6"]
 [ext_resource type="PackedScene" uid="uid://cqig8vtkfogja" path="res://scripts/cursor.tscn" id="7_j33cn"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ww08t"]
+line_spacing = 0.0
+font = ExtResource("2_h1ljj")
+font_size = 12
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
 
 [node name="BattleMenuManager" type="Control" unique_id=971412710]
 layout_mode = 3
@@ -47,6 +55,51 @@ offset_left = 720.0
 offset_top = 176.0
 offset_right = 1070.0
 offset_bottom = 276.0
+focus_behavior_recursive = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="AbilityTooltip" unique_id=329683759]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AbilityTooltip/MarginContainer" unique_id=1648699501]
+layout_mode = 2
+
+[node name="Title" type="HBoxContainer" parent="AbilityTooltip/MarginContainer/VBoxContainer" unique_id=74498438]
+layout_mode = 2
+
+[node name="AbilityName" type="Label" parent="AbilityTooltip/MarginContainer/VBoxContainer/Title" unique_id=1093190935]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Ability Name"
+
+[node name="Level" type="Label" parent="AbilityTooltip/MarginContainer/VBoxContainer/Title" unique_id=407218876]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "II"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="AbilityTooltip/MarginContainer/VBoxContainer" unique_id=1222637764]
+layout_mode = 2
+size_flags_vertical = 3
+scroll_hint_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AbilityTooltip/MarginContainer/VBoxContainer/ScrollContainer" unique_id=115436299]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="AbilityFlavor" type="Label" parent="AbilityTooltip/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" unique_id=483466133]
+custom_minimum_size = Vector2(300, 20)
+layout_mode = 2
+text = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+label_settings = SubResource("LabelSettings_ww08t")
+autowrap_mode = 1
 
 [node name="PartyMenu" type="HBoxContainer" parent="." unique_id=296522800]
 layout_mode = 1
@@ -138,7 +191,7 @@ layout_mode = 2
 [node name="SkillEx" parent="ActionMenu" unique_id=2125153524 instance=ExtResource("4_hpdg0")]
 layout_mode = 2
 
-[node name="TargetMenu" type="HBoxContainer" parent="." unique_id=189218388]
+[node name="TargetMenu" type="Control" parent="." unique_id=37425758]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -155,10 +208,26 @@ script = ExtResource("5_rucv6")
 
 [node name="Back" type="Button" parent="TargetMenu" unique_id=24818383]
 custom_minimum_size = Vector2(64, 32)
-layout_mode = 2
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 32.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Back"
+icon_alignment = 1
+expand_icon = true
+
+[node name="Confirm" type="Button" parent="TargetMenu" unique_id=68625890]
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 0
+offset_top = 171.0
+offset_right = 71.0
+offset_bottom = 203.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+disabled = true
+text = "Confirm
+"
 icon_alignment = 1
 expand_icon = true
 
@@ -171,3 +240,5 @@ cursor_offset = Vector2(0, 5)
 [connection signal="party_ready" from="PartyMenu" to="." method="_on_party_ready"]
 [connection signal="pressed" from="Back" to="." method="_close_menu"]
 [connection signal="pressed" from="TargetMenu/Back" to="." method="_close_menu"]
+[connection signal="pressed" from="TargetMenu/Confirm" to="." method="_close_to_root"]
+[connection signal="pressed" from="TargetMenu/Confirm" to="TargetMenu" method="confirm_selection"]
