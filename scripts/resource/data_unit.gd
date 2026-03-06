@@ -48,6 +48,10 @@ func get_effectiveness(element : ElementalType) -> float:
 
 func modify_stat(stat_name : StringName, value : int) -> void:
 	stats[stat_name] = stats[stat_name] + value
+	if stat_name == "HEALTH_MAX":
+		health_changed.emit(stats["HEALTH"], stats["HEALTH_MAX"])
+		if value > 0:
+			modify_stat("HEALTH", value)
 	if stat_name == "HEALTH":
 		stats["HEALTH"] = clamp(stats["HEALTH"], 0, stats["HEALTH_MAX"])
 		health_changed.emit(stats["HEALTH"], stats["HEALTH_MAX"])

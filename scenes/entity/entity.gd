@@ -7,6 +7,7 @@ signal entity_eliminated
 signal dead
 
 var damage_text : PackedScene = preload("res://scenes/ui/damage_text.tscn")
+var effect_text : PackedScene = preload("res://scenes/ui/effect_text.tscn")
 @onready var statuses: Node = $Statuses
 @onready var hp_bar: HPBar = $HPBar
 @onready var sprite: AnimatedSprite2D = $Sprite
@@ -25,11 +26,6 @@ func _ready() -> void:
 	data.health_changed.connect(hp_bar.update)
 	
 	input_event.connect(_on_input_event)
-	
-	target_component.focus_exited.connect(func():
-			outline_me(false))
-	target_component.focus_entered.connect(func():
-			outline_me(true))
 	mouse_entered.connect(func():
 		if target_component.visible:
 			target_component.grab_focus())
@@ -49,7 +45,7 @@ func position_health_bar():
 @abstract func setup(res : UnitData) -> void
 @abstract func new_turn() -> void
 @abstract func end_turn() -> void
-@abstract func set_target() -> void
+@abstract func set_target(entity) -> void
 
 func do_action() -> void:
 	print("%s uses %s" % [data.entity_name, intent.ability_name])
@@ -57,8 +53,10 @@ func do_action() -> void:
 	entity_action_over.emit()
 
 func apply_status(status : StatusCondition, stat : StringName) -> void:
+	var tw = effect_text.instantiate() as EffectText
+	tw.effect(status.stat, status.is_buff)
+	add_child(tw)
 	var t = create_tween()
-	
 	var c : Color
 	if status.is_buff:
 		c = Color(1.0, 0.816, 0.502, 1.0)

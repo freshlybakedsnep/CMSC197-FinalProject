@@ -21,6 +21,6 @@ func set_intent(act : HeroData.ActionMode) -> void:
 	intent = (data as HeroData).ability_preset[act]
 	action = act
 
-func set_target(entity : Entity = null) -> void:
+func set_target(entity : Array[Entity]) -> void:
 	current_target.clear()
-	current_target.append(entity)
+	current_target.append_array(entity)

@@ -27,14 +27,17 @@ func end_turn() -> void:
 	for stat in statuses.get_children():
 		(stat as StatusCondition).reduce_duration()
 
-func set_target() -> void:
+func set_target(entity = null) -> void:
 	current_target.clear()
 	intent.lock_entities(self)
 	var valid_targets = intent.determine_targets(self, intent)
 	
 	match intent.target_mode:
-		Ability.TargetMode.AOE, Ability.TargetMode.RANDOM:
+		Ability.TargetMode.AOE:
 			current_target.assign(valid_targets)
+		Ability.TargetMode.RANDOM, Ability.TargetMode.MULTIPLE:
+			valid_targets.shuffle()
+			current_target.assign(valid_targets.slice(0, intent.target_count))
 		_: 
 			while true:
 				var p = valid_targets.pick_random()

@@ -17,14 +17,14 @@ func setup(data: Dictionary) -> void:
 			self.set(attr, data[attr])
 
 func reduce_duration() -> void:
-	if !is_permanent: return
+	if is_permanent: return
 	duration -= 1
 	if duration <= 0: 
 		remove()
 		queue_free()
 
 func reduce_hits() -> void:
-	if !hit_based: return
+	if hit_based: return
 	hits -= 1
 	if hits <= 0: 
 		remove()

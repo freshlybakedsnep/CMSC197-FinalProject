@@ -4,7 +4,7 @@ class_name StatModify
 
 # manipulate a stat of the target
 
-var status_node = preload("res://status_cond.tscn")
+var status_node = preload("res://scenes/status_cond.tscn")
 @export var effect_name : String = ""
 
 @export var stat : ModifiableStat
@@ -38,7 +38,7 @@ func trigger(source : Entity, recipient : Entity) -> void:
 	
 	var f = status_node.instantiate() as StatusCondition
 	var info := {
-		"host": source,
+		"host": recipient,
 		"name": effect_name,
 		"stat": ModifiableStat.find_key(stat),
 		"value": formula.calculate(source.data, recipient.data),
