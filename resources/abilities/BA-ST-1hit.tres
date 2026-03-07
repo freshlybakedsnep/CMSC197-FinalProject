@@ -9,7 +9,6 @@
 script = ExtResource("4_ohevh")
 ability_name = "1-hit ST"
 target_group = 3
-target_mode = 3
 target_count = 2
 basic_ability = true
 effects = Array[ExtResource("2_ey2od")]([ExtResource("3_3hrwa")])

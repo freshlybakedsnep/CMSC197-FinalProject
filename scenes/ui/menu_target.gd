@@ -33,6 +33,10 @@ func setup(data: Dictionary) -> void:
 		var unit = display_targets[i]
 		var b : Button = unit.target_component
 		
+		if not b.focus_entered.is_connected(predict_outcome):
+			b.focus_entered.connect(func(): predict_outcome(unit, true))
+			b.focus_exited.connect(func(): predict_outcome(unit, false))
+		
 		if b.pressed.is_connected(selected_target):
 			b.pressed.disconnect(selected_target)
 		b.pressed.connect(selected_target.bind(unit))
@@ -42,9 +46,14 @@ func setup(data: Dictionary) -> void:
 		
 		if (targets.has(unit) or
 			ability.target_mode == Ability.TargetMode.AOE or
-			ability.target_mode == Ability.TargetMode.RANDOM):
+			ability.target_mode == Ability.TargetMode.RANDOM or 
+			(ability.target_group == Ability.TargetGroup.SELF and
+			unit == selected_hero)):
 			unit.outline_me(true)
 			current_selection.append(unit)
+			predict_outcome(unit, true)
+		else:
+			predict_outcome(unit, false)
 		
 		if i > 0:
 			var lb = display_targets[i-1].target_component
@@ -61,6 +70,7 @@ func setup(data: Dictionary) -> void:
 		back.focus_neighbor_bottom = display_targets.front().target_component.get_path()
 		confirm.focus_neighbor_top = display_targets.front().target_component.get_path()
 	
+	ability.simulate(selected_hero)
 	confirm_button()
 
 func confirm_button() -> void:
@@ -73,6 +83,18 @@ func confirm_button() -> void:
 	
 	if current_selection.size() >= required_targets:
 		confirm.grab_focus()
+
+func predict_outcome(unit: Entity, shown: bool) -> void:
+	if not shown:
+		if (ability.target_mode != Ability.TargetMode.AOE and
+		!current_selection.has(unit)):
+			unit.hp_bar.clear_prediction()
+			return
+	
+	if ability.target_mode == Ability.TargetMode.RANDOM:
+		unit.hp_bar.clear_prediction()
+		return
+	unit.hp_bar.call_deferred("display_prediction")
 
 func enabled(toggled : bool) -> void:
 	visible = toggled
@@ -113,7 +135,9 @@ func selected_target(unit: Entity) -> void:
 				unit.outline_me(false)
 			else:
 				if ability.target_mode == Ability.TargetMode.SINGLE:
-					for u in current_selection: u.outline_me(false)
+					for u in current_selection: 
+						u.outline_me(false)
+						u.hp_bar.clear_prediction()
 					current_selection.clear()
 				
 				if current_selection.size() < required_targets:

@@ -18,15 +18,24 @@ func _ready() -> void:
 	finished.emit()
 	queue_free()
 
-func amount(x : float, v : float, h : bool) -> void:
-	$Label.text = str(int(abs(x)))
-	
-	if h:
-		match v:
-			2.0: modulate = strong_color
-			0.5: modulate = weaker_color
-	else:
+func modify(hit_data: Dictionary, is_damaging: bool, is_pierce) -> void:
+	$Label.text = str(abs(hit_data["result"]))
+	if !is_damaging:
 		modulate = heal_color
+		return
+		
+	match hit_data["resistance"]:
+		UnitData.DefenseState.INVINCIBLE:
+			if !is_pierce:
+				$Label.text = "BLOCKED"
+				return
+		UnitData.DefenseState.ABSORB:
+			modulate = heal_color
+			return
+	
+	match hit_data["type_mult"]:
+		2.0: modulate = strong_color
+		0.5: modulate = weaker_color
 
 func effect(x: String, b: bool) -> void:
 	$Label.text = x

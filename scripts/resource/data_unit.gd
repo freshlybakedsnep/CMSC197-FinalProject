@@ -12,7 +12,7 @@ const TypeChart = {
 }
 
 var state : State 
-enum State {DEAD, DOWN, NORMAL}
+enum State {DEAD, NORMAL}
 
 @export_category("Entity Information")
 @export var entity_name := "Entity"
@@ -41,10 +41,43 @@ var stats : Dictionary = {
 	"ELEMENT" : 0
 }
 
-func get_effectiveness(element : ElementalType) -> float:
-	if TypeChart.has(element):
-		return TypeChart[elemental_type].get(element, 1.0)
-	return 0
+var resistance : DefenseState
+enum DefenseState {NORMAL, GUARD, INVINCIBLE, ABSORB}
+
+func calculate_hit(incoming: float, attacker_el: ElementalType, bypass: bool = false) -> Dictionary:
+	var type_mult: float = 1.0
+	if TypeChart.has(attacker_el):
+		type_mult = TypeChart[elemental_type].get(attacker_el, 1.0)
+	var def_mult: float = 1.0
+	
+	match resistance:
+		DefenseState.GUARD:
+			def_mult *= 0.75
+		DefenseState.ABSORB:
+			def_mult *= -1.0
+		DefenseState.INVINCIBLE:
+			if !bypass:
+				def_mult *= 0.0
+		
+	var final_dmg = incoming * type_mult * def_mult
+	
+	return {
+		"result": int(final_dmg),
+		"type_mult": type_mult,
+		"resistance": resistance
+	}
+
+func calculate_heal(incoming: float) -> Dictionary:
+	var final_heal = incoming
+	
+	if stats.has("HEAL_MOD"):
+		final_heal *= stats["HEAL_MOD"]
+	
+	return {
+		"result": int(final_heal),
+		"type_mult": 1.0,
+		"resistance": resistance
+	}
 
 func modify_stat(stat_name : StringName, value : int) -> void:
 	stats[stat_name] = stats[stat_name] + value

@@ -22,7 +22,14 @@ enum TargetGroup {SELF, ALLY_ONLY, PARTY, ENEMY}
 		target_mode = value
 		notify_property_list_changed()
 enum TargetMode {SINGLE, AOE, RANDOM, MULTIPLE}
-@export var target_count := 1
+@export var target_count := 1 :
+	set(value):
+		if target_mode == TargetMode.MULTIPLE:
+			target_count = clamp(value, 0, 5)
+		else:
+			target_count = 1
+		notify_property_list_changed()
+		
 
 const additional : Array[StringName] = [&"mode"]
 
@@ -47,8 +54,8 @@ func _validate_property(property: Dictionary) -> void:
 				hide = basic_ability == true
 			"target_count":
 				hide = (target_mode == TargetMode.AOE or
-						target_mode == TargetMode.SINGLE or 
-						target_group == TargetGroup.SELF)
+					target_mode == TargetMode.SINGLE or 
+					target_group == TargetGroup.SELF)
 		if hide:
 			property.usage &= ~PROPERTY_USAGE_EDITOR
 		else:
@@ -63,6 +70,28 @@ func cast(src: Entity) -> void:
 		var targets = finalize_targets(src, fx)
 		await fx.trigger(src, targets, ability_level)
 	downtime = cooldown + 1
+
+func simulate(src: Entity) -> void:
+	lock_entities(src)
+	for entity in enemies + heroes:
+		entity.hp_bar.reset()
+	
+	for fx in effects:
+		var targets = determine_targets(src, fx)
+		if fx.inherit_targets:
+			targets = determine_targets(src, self)
+		if fx.target_mode == TargetMode.RANDOM:
+			continue
+		for f in fx.effects:
+			if f is HealthAdjust:
+				for tar in targets:
+					var base = f.formula.calculate(src.data, tar.data)
+					var hit = 0
+					if f.is_damaging:
+						hit = tar.data.calculate_hit(-base, src.data.stats["ELEMENT"])["result"]
+					else:
+						hit = tar.data.calculate_heal(base)["result"]
+					tar.hp_bar.update_prediction(hit)
 
 func lock_entities(src: Entity) -> void:
 	var tree = src.get_tree()
@@ -102,7 +131,7 @@ func finalize_targets(src: Entity, fg: EffectGroup) -> Array[Entity]:
 		TargetMode.SINGLE:
 			if src.current_target.size() > 0:
 				return [src.current_target[0]]
-			return pool.pick_random()
+			return [pool.pick_random()]
 		TargetMode.RANDOM:
 			return random(pool)
 		TargetMode.MULTIPLE:

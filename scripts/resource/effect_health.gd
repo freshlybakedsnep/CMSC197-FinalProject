@@ -7,17 +7,14 @@ class_name HealthAdjust
 @export var is_damaging := true
 
 func trigger(source : Entity, recipient : Entity) -> void:
-	var output = formula.calculate(source.data, recipient.data) * (1 if is_damaging else -1)
+	var base_power = formula.calculate(source.data, recipient.data)
+	var result: Dictionary
+	
 	if is_damaging:
-		var m = recipient.data.get_effectiveness(source.data.stats["ELEMENT"])
-		output *= m
-		if recipient is Hero:
-			if recipient.action == HeroData.ActionMode.GUARD_ATTACK:
-				output *= 0.5
-		print("%s deals %d DMG to %s" % [source.data.entity_name, int(output), recipient.data.entity_name])
+		result = recipient.data.calculate_hit(-base_power, source.data.stats["ELEMENT"])
 	else:
-		print("%s recovers %d HP to %s" % [source.data.entity_name, int(abs(output)), recipient.data.entity_name])
+		result = recipient.data.calculate_heal(base_power)
 	
 	recipient.highlight_me(true)
-	await recipient.modify_health(int(output), source.data.stats["ELEMENT"], is_damaging)
+	await recipient.modify_health(result, is_damaging, false)
 	effect_finished.emit()

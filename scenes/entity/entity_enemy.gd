@@ -1,12 +1,12 @@
 extends Entity
 class_name Enemy
 
-@onready var element_icon : TextureRect = $HPBar/HealthBar/Icon
+@onready var element_icon : TextureRect = $HPBar/Icon
 @onready var charge: ProgressBar = $HPBar/Charge
 
 func setup(res : UnitData) -> void:
 	data = (res as EnemyData)
-	name = data.entity_name
+	name = res.entity_name
 
 func position_health_bar():
 	var frame_tex = sprite.sprite_frames.get_frame_texture(sprite.animation, sprite.frame)
@@ -27,7 +27,7 @@ func end_turn() -> void:
 	for stat in statuses.get_children():
 		(stat as StatusCondition).reduce_duration()
 
-func set_target(entity = null) -> void:
+func set_target(_entity = null) -> void:
 	current_target.clear()
 	intent.lock_entities(self)
 	var valid_targets = intent.determine_targets(self, intent)
@@ -42,7 +42,7 @@ func set_target(entity = null) -> void:
 			while true:
 				var p = valid_targets.pick_random()
 				if p == null: break
-				if p.targetable:
+				if p.targetable and not p.data.stats["HEALTH"] <= 0:
 					current_target.append(p)
 					break
 				else:

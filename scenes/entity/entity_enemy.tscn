@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cb5wxytvtgwv" path="res://assets/El4kind5.png" id="5_6yejr"]
 [ext_resource type="FontFile" uid="uid://dmgqmwfwyqfc0" path="res://assets/FOT-Aokane Std.ttf" id="6_6yejr"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_e0n8s"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6yejr"]
 resource_local_to_scene = true
 shader = ExtResource("3_snn0t")
 shader_parameter/active = false
@@ -52,7 +52,41 @@ corner_detail = 2
 anti_aliasing = false
 anti_aliasing_size = 0.01
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6yejr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e0n8s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6yejr"]
+bg_color = Color(0.98632056, 0.8756979, 0.8739301, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 2
+anti_aliasing = false
+anti_aliasing_size = 0.01
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vxier"]
+bg_color = Color(1, 0.97933334, 0.69, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 2
+anti_aliasing = false
+anti_aliasing_size = 0.01
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_63xvp"]
 bg_color = Color(0.972549, 0.92941177, 0.08235294, 1)
 border_width_left = 2
 border_width_top = 2
@@ -71,7 +105,7 @@ anti_aliasing_size = 0.01
 script = ExtResource("2_2246m")
 
 [node name="Sprite" parent="." index="1" unique_id=229155458]
-material = SubResource("ShaderMaterial_e0n8s")
+material = SubResource("ShaderMaterial_6yejr")
 
 [node name="HPBar" type="Node2D" parent="." index="4" unique_id=388698013]
 script = ExtResource("4_5x2i8")
@@ -105,7 +139,7 @@ value = 100.0
 rounded = true
 show_percentage = false
 
-[node name="HealthBar" type="ProgressBar" parent="HPBar" index="2" unique_id=843736757]
+[node name="Bar" type="ProgressBar" parent="HPBar" index="2" unique_id=1748643561]
 custom_minimum_size = Vector2(64, 12)
 anchors_preset = 8
 anchor_left = 0.5
@@ -121,19 +155,82 @@ grow_vertical = 2
 size_flags_vertical = 4
 mouse_filter = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_l5k73")
+theme_override_styles/fill = SubResource("StyleBoxEmpty_6yejr")
+value = 100.0
+rounded = true
+show_percentage = false
+
+[node name="GhostBar" type="ProgressBar" parent="HPBar" index="3" unique_id=1135790996]
+custom_minimum_size = Vector2(64, 12)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = 14.0
+offset_right = 32.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_e0n8s")
+theme_override_styles/fill = SubResource("StyleBoxFlat_6yejr")
+value = 100.0
+rounded = true
+show_percentage = false
+
+[node name="PreviewBar" type="ProgressBar" parent="HPBar" index="4" unique_id=211559545]
+visible = false
+custom_minimum_size = Vector2(64, 12)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = 14.0
+offset_right = 32.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_e0n8s")
 theme_override_styles/fill = SubResource("StyleBoxFlat_vxier")
 value = 100.0
 rounded = true
 show_percentage = false
 
-[node name="Icon" type="TextureRect" parent="HPBar/HealthBar" index="0" unique_id=639128039]
+[node name="HealthBar" type="ProgressBar" parent="HPBar" index="5" unique_id=843736757]
+custom_minimum_size = Vector2(64, 12)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = 14.0
+offset_right = 32.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_e0n8s")
+theme_override_styles/fill = SubResource("StyleBoxFlat_63xvp")
+value = 100.0
+rounded = true
+show_percentage = false
+
+[node name="Icon" type="TextureRect" parent="HPBar" index="6" unique_id=639128039]
 z_index = 1
 custom_minimum_size = Vector2(24, 24)
-layout_mode = 0
-offset_left = -12.0
-offset_top = -6.0
-offset_right = 12.0
-offset_bottom = 18.0
+offset_left = -44.0
+offset_top = 8.0
+offset_right = -20.0
+offset_bottom = 32.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2

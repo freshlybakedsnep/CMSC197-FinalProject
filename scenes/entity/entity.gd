@@ -23,6 +23,7 @@ var model
 @export var targetable := true
 
 func _ready() -> void:
+	hp_bar.initialize(data.stats["HEALTH"], data.stats["HEALTH_MAX"])
 	data.health_changed.connect(hp_bar.update)
 	
 	input_event.connect(_on_input_event)
@@ -39,7 +40,6 @@ func position_health_bar():
 	var frame_tex = sprite.sprite_frames.get_frame_texture(sprite.animation, sprite.frame)
 	var sprite_height = frame_tex.get_size().y * sprite.scale.y
 	hp_bar.position.y = -(sprite_height / 2)
-	
 	target_component.position.y = hp_bar.position.y
 
 @abstract func setup(res : UnitData) -> void
@@ -74,13 +74,10 @@ func apply_status(status : StatusCondition, stat : StringName) -> void:
 	#print("%s receives a %s" % [name, status.name])
 	#print("%s: %s" % [stat, data.stats[stat]])
 
-func modify_health(incoming : int, el : UnitData.ElementalType, 
-	damaging : bool) -> void:
-	data.modify_stat("HEALTH", -incoming)
-	hp_bar.show()
+func modify_health(hit_data: Dictionary, damaging: bool, pierce: bool) -> void:
+	data.modify_stat("HEALTH", hit_data["result"])
 	var t = damage_text.instantiate() as DamageText
-	var m = data.get_effectiveness(el)
-	t.amount(incoming, m, damaging)
+	t.modify(hit_data, damaging, pierce)
 	hp_bar.add_child(t)
 	await t.finished
 

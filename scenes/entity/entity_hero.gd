@@ -5,7 +5,7 @@ var action : HeroData.ActionMode
 
 func setup(res : UnitData) -> void:
 	data = (res as HeroData)
-	name = data.entity_name
+	name = res.entity_name
 
 func new_turn() -> void:
 	action = HeroData.ActionMode.NONE
@@ -19,6 +19,12 @@ func end_turn() -> void:
 
 func set_intent(act : HeroData.ActionMode) -> void:
 	intent = (data as HeroData).ability_preset[act]
+	match act: 
+		HeroData.ActionMode.GUARD_ATTACK:
+			data.resistance = UnitData.DefenseState.GUARD
+		_:
+			data.resistance = UnitData.DefenseState.NORMAL
+	
 	action = act
 
 func set_target(entity : Array[Entity]) -> void:

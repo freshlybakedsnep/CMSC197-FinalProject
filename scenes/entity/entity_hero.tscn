@@ -5,7 +5,7 @@
 [ext_resource type="Shader" uid="uid://byk63wjvv8dun" path="res://entity_outline.gdshader" id="3_eqxr6"]
 [ext_resource type="Script" uid="uid://bbqureqt1r8x1" path="res://scenes/entity/hp_bar.gd" id="4_v43pe"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dk4lf"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v43pe"]
 resource_local_to_scene = true
 shader = ExtResource("3_eqxr6")
 shader_parameter/active = false
@@ -14,7 +14,7 @@ shader_parameter/outline_thickness = 0.5
 shader_parameter/alpha_threshold = 0.50000002049012
 shader_parameter/is_bright = false
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hsu7g"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dk4lf"]
 bg_color = Color(0, 0, 0, 1)
 border_width_left = 2
 border_width_top = 2
@@ -29,7 +29,41 @@ corner_detail = 2
 anti_aliasing = false
 anti_aliasing_size = 0.01
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j7udw"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hsu7g"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j7udw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v43pe"]
+bg_color = Color(0.98632056, 0.8756979, 0.8739301, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 2
+anti_aliasing = false
+anti_aliasing_size = 0.01
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_km6u6"]
+bg_color = Color(1, 0.97933334, 0.69, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 2
+anti_aliasing = false
+anti_aliasing_size = 0.01
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sfyxa"]
 bg_color = Color(0.972549, 0.92941177, 0.08235294, 1)
 border_width_left = 2
 border_width_top = 2
@@ -48,12 +82,12 @@ anti_aliasing_size = 0.01
 script = ExtResource("2_v30cd")
 
 [node name="Sprite" parent="." index="1" unique_id=229155458]
-material = SubResource("ShaderMaterial_dk4lf")
+material = SubResource("ShaderMaterial_v43pe")
 
 [node name="HPBar" type="Node2D" parent="." index="4" unique_id=786944719]
 script = ExtResource("4_v43pe")
 
-[node name="HealthBar" type="ProgressBar" parent="HPBar" index="0" unique_id=1658230151]
+[node name="Bar" type="ProgressBar" parent="HPBar" index="0" unique_id=1585426767]
 custom_minimum_size = Vector2(64, 12)
 anchors_preset = 8
 anchor_left = 0.5
@@ -61,15 +95,76 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -32.0
-offset_top = -6.0
 offset_right = 32.0
-offset_bottom = 6.0
+offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 4
 mouse_filter = 2
-theme_override_styles/background = SubResource("StyleBoxFlat_hsu7g")
-theme_override_styles/fill = SubResource("StyleBoxFlat_j7udw")
+theme_override_styles/background = SubResource("StyleBoxFlat_dk4lf")
+theme_override_styles/fill = SubResource("StyleBoxEmpty_hsu7g")
+value = 100.0
+rounded = true
+show_percentage = false
+
+[node name="GhostBar" type="ProgressBar" parent="HPBar" index="1" unique_id=2067282931]
+custom_minimum_size = Vector2(64, 12)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_right = 32.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_j7udw")
+theme_override_styles/fill = SubResource("StyleBoxFlat_v43pe")
+value = 100.0
+rounded = true
+show_percentage = false
+
+[node name="PreviewBar" type="ProgressBar" parent="HPBar" index="2" unique_id=487370787]
+visible = false
+custom_minimum_size = Vector2(64, 12)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_right = 32.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_j7udw")
+theme_override_styles/fill = SubResource("StyleBoxFlat_km6u6")
+value = 100.0
+rounded = true
+show_percentage = false
+
+[node name="HealthBar" type="ProgressBar" parent="HPBar" index="3" unique_id=351347924]
+custom_minimum_size = Vector2(64, 12)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_right = 32.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_j7udw")
+theme_override_styles/fill = SubResource("StyleBoxFlat_sfyxa")
+step = 0.0
 value = 100.0
 rounded = true
 show_percentage = false
