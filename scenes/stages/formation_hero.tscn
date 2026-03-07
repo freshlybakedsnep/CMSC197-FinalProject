@@ -9,16 +9,13 @@ script = ExtResource("1_fb83y")
 entity_scene = ExtResource("3_hcaid")
 
 [node name="pos1" parent="." index="0" unique_id=507830191]
-position = Vector2(-130, 10)
+position = Vector2(-130, 20)
 
 [node name="pos2" parent="." index="1" unique_id=313020340]
-position = Vector2(-65, -60)
-
-[node name="pos3" parent="." index="2" unique_id=1971730018]
-position = Vector2(0, -20)
+position = Vector2(-65, -30)
 
 [node name="pos4" parent="." index="3" unique_id=264810793]
-position = Vector2(65, 60)
+position = Vector2(65, 50)
 
 [node name="pos5" parent="." index="4" unique_id=1400350062]
-position = Vector2(130, 10)
+position = Vector2(130, 20)

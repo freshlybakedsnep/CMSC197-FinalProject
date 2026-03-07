@@ -9,6 +9,11 @@
 [ext_resource type="Script" uid="uid://5qfltf3003g0" path="res://scenes/ui/menu_target.gd" id="5_rucv6"]
 [ext_resource type="PackedScene" uid="uid://cqig8vtkfogja" path="res://scripts/cursor.tscn" id="7_j33cn"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_h1ljj"]
+font = ExtResource("2_h1ljj")
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_ww08t"]
 line_spacing = 0.0
 font = ExtResource("2_h1ljj")
@@ -51,10 +56,10 @@ text = "Start Battle!"
 [node name="AbilityTooltip" type="Panel" parent="." unique_id=1538801652]
 visible = false
 layout_mode = 0
-offset_left = 720.0
+offset_left = 700.0
 offset_top = 176.0
-offset_right = 1070.0
-offset_bottom = 276.0
+offset_right = 1050.0
+offset_bottom = 311.0
 focus_behavior_recursive = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="AbilityTooltip" unique_id=329683759]
@@ -75,15 +80,23 @@ layout_mode = 2
 [node name="Title" type="HBoxContainer" parent="AbilityTooltip/MarginContainer/VBoxContainer" unique_id=74498438]
 layout_mode = 2
 
-[node name="AbilityName" type="Label" parent="AbilityTooltip/MarginContainer/VBoxContainer/Title" unique_id=1093190935]
+[node name="ActionMode" type="Label" parent="AbilityTooltip/MarginContainer/VBoxContainer/Title" unique_id=1093190935]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Basic Attack:"
+label_settings = SubResource("LabelSettings_h1ljj")
+
+[node name="AbilityName" type="Label" parent="AbilityTooltip/MarginContainer/VBoxContainer/Title" unique_id=2101475171]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Ability Name"
+label_settings = SubResource("LabelSettings_h1ljj")
 
 [node name="Level" type="Label" parent="AbilityTooltip/MarginContainer/VBoxContainer/Title" unique_id=407218876]
 layout_mode = 2
 size_flags_horizontal = 0
-text = "II"
+text = "(Lv1)"
+label_settings = SubResource("LabelSettings_h1ljj")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="AbilityTooltip/MarginContainer/VBoxContainer" unique_id=1222637764]
 layout_mode = 2
@@ -198,10 +211,6 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -40.0
-offset_top = -210.0
-offset_right = 24.0
-offset_bottom = -178.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("5_rucv6")
@@ -209,8 +218,10 @@ script = ExtResource("5_rucv6")
 [node name="Back" type="Button" parent="TargetMenu" unique_id=24818383]
 custom_minimum_size = Vector2(64, 32)
 layout_mode = 0
-offset_right = 64.0
-offset_bottom = 32.0
+offset_left = -32.0
+offset_top = -154.0
+offset_right = 32.0
+offset_bottom = -122.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Back"
@@ -220,9 +231,10 @@ expand_icon = true
 [node name="Confirm" type="Button" parent="TargetMenu" unique_id=68625890]
 custom_minimum_size = Vector2(64, 32)
 layout_mode = 0
-offset_top = 171.0
-offset_right = 71.0
-offset_bottom = 203.0
+offset_left = -35.5
+offset_top = 87.0
+offset_right = 35.5
+offset_bottom = 119.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 disabled = true

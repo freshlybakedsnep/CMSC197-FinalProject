@@ -10,6 +10,14 @@ signal turn_changed()
 @onready var interval: Timer = $Interval
 
 @export var stage_info : StageInfo
+
+var current_phase: Phase
+enum Phase {
+	COMMAND,
+	COMBAT,
+	CONCLUDE
+}
+
 var current_wave : Array[EnemyData]
 var current_wave_index := -1
 
@@ -21,7 +29,7 @@ var eliminated : Array[Entity]
 func _ready() -> void:
 	heroes.setup(actor_finished, eliminated)
 	enemies.setup(actor_finished, eliminated)
-	command_ui.connect_formations(enemies.formation, heroes.formation.values().filter(func(f): return f))
+	command_ui.connect_formations(enemies, heroes)
 	start_battle()
 
 func load_next_wave() -> bool:
@@ -62,6 +70,8 @@ func start_battle() -> void:
 	start_turn()
 
 func start_turn() -> void:
+	current_phase = Phase.COMMAND
+	
 	turn_count += 1
 	$TurnCount.text = "Turn: " + str(turn_count)
 	enemies.fill_vacancies()
@@ -75,6 +85,8 @@ func start_turn() -> void:
 	turn_changed.emit()
 
 func start_fight() -> void:
+	current_phase = Phase.COMBAT
+	
 	RenderingServer.global_shader_parameter_set("screen_dim_amount", 0.3)
 	for ent in turn_queue:
 		if ent is Hero:
@@ -84,6 +96,7 @@ func start_fight() -> void:
 	next_actor()
 
 func end_turn():
+	current_phase = Phase.CONCLUDE
 	RenderingServer.global_shader_parameter_set("screen_dim_amount", 1.0)
 	acted.clear()
 	for e in get_tree().get_nodes_in_group("entities"):

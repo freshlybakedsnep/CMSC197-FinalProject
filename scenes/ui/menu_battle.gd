@@ -14,9 +14,9 @@ signal plan_done
 
 var selected_hero : Hero
 var menu_stack : Array
-var current_hero_node : Entity
 
-var enemy_formation : Dictionary
+var enemy_formation: Vector2
+var hero_formation: Vector2
 
 func _ready() -> void:
 	party_menu.hero_selected.connect(_open_action_menu)
@@ -26,15 +26,19 @@ func _ready() -> void:
 	target_menu.hide()
 	menu_stack.append(party_menu)
 
-func connect_formations(enemies : Dictionary, heroes : Array[Entity]) -> void:
-	enemy_formation = enemies
-	party_menu.setup(heroes)
+func connect_formations(enemies: EnemyFormation, heroes: HeroFormation) -> void:
+	enemy_formation = enemies.global_position
+	hero_formation = heroes.global_position
+	party_menu.setup(heroes.formation.values().filter(func(f): return f))
 
 func turn_start() -> void:
+	self.process_mode = Node.PROCESS_MODE_INHERIT
+	
+	cursor.show()
+	start_battle.show()
+	party_menu.enabled(true)
 	start_battle.disabled = true
 	start_battle.focus_mode = Control.FOCUS_NONE
-	party_menu.enabled(true)
-	cursor.show()
 
 func _close_menu() -> void:
 	var x = menu_stack.pop_back()
@@ -66,6 +70,10 @@ func _open_action_menu(hero : Entity) -> void:
 func _open_target_menu(action : HeroData.ActionMode) -> void:
 	var ability : Ability = (selected_hero.data as HeroData).get_ability(action)
 	if not ability: return
+	if ability.target_group != Ability.TargetGroup.ENEMY:
+		target_menu.global_position = hero_formation
+	else:
+		target_menu.global_position = enemy_formation
 	target_menu.setup(
 		{"selected_hero": selected_hero, 
 		"ability": ability,
@@ -83,11 +91,16 @@ func _on_party_ready() -> void:
 func _on_start_battle_pressed() -> void:
 	party_menu.selected_hero = null
 	print("Battle Starting!")
+	
 	party_menu.enabled(false)
 	cursor.hide()
 	plan_done.emit()
+	
+	self.process_mode = Node.PROCESS_MODE_DISABLED
+	start_battle.disabled = true
 	start_battle.focus_mode = Control.FOCUS_NONE
 	start_battle.mouse_behavior_recursive = Control.MOUSE_BEHAVIOR_DISABLED
+	start_battle.hide()
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
