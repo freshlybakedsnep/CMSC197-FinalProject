@@ -1,11 +1,10 @@
 @tool
 extends Effect
 class_name StatModify
-
 # manipulate a stat of the target
-
-var status_node = preload("res://scenes/status_cond.tscn")
+@export var icon: Texture
 @export var effect_name : String = ""
+@export var description : String
 
 @export var stat : ModifiableStat
 enum ModifiableStat {
@@ -36,10 +35,11 @@ func trigger(source : Entity, recipient : Entity) -> void:
 		effect_finished.emit()
 		return
 	
-	var f = status_node.instantiate() as StatusCondition
+	var f = StatusMod.new()
 	var info := {
 		"host": recipient,
 		"name": effect_name,
+		"icon": icon,
 		"stat": ModifiableStat.find_key(stat),
 		"value": formula.calculate(source.data, recipient.data),
 		"is_buff": is_buff,
@@ -53,7 +53,7 @@ func trigger(source : Entity, recipient : Entity) -> void:
 	f.add_to_group("buffs" if is_buff else "debuffs")
 	
 	recipient.highlight_me(true)
-	await recipient.apply_status(f, ModifiableStat.find_key(stat))
+	await f.apply()
 	effect_finished.emit()
 
 func _validate_property(property: Dictionary) -> void:

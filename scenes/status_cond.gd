@@ -1,9 +1,12 @@
 extends Node
 class_name StatusCondition
 
-var host : Entity = null
-var value := 0
-var stat : StringName
+var effect_text : PackedScene = preload("res://scenes/ui/effect_text.tscn")
+
+var host: Entity = null
+var icon: Texture = null
+var description: String
+
 var is_buff := true
 var is_removable := true
 var is_permanent := false
@@ -16,20 +19,35 @@ func setup(data: Dictionary) -> void:
 		if attr in self:
 			self.set(attr, data[attr])
 
+func spawn_label(text: String, col: Color = Color.WHITE) -> void:
+	var t = effect_text.instantiate() as EffectText
+	t.effect(text, col, is_buff)
+	host.add_child(t)
+	await t.finished
+
 func reduce_duration() -> void:
 	if is_permanent: return
 	duration -= 1
-	if duration <= 0: 
-		remove()
-		queue_free()
+	if duration <= 0: expire()
 
 func reduce_hits() -> void:
 	if hit_based: return
 	hits -= 1
 	if hits <= 0: 
-		remove()
-		queue_free()
+		expire()
 
-func remove() -> void:
-	if !is_removable: return
-	host.data.modify_stat(stat, -value) 
+func dispel() -> bool:
+	if !is_removable: return false
+	revert()
+	queue_free()
+	return true
+
+func expire() -> void:
+	revert()
+	queue_free()
+
+func apply() -> void:
+	pass
+
+func revert() -> void:
+	pass

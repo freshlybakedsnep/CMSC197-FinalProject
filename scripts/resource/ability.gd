@@ -98,8 +98,8 @@ func lock_entities(src: Entity) -> void:
 	enemies = tree.get_nodes_in_group("enemies").filter(func(x): return x is Entity)
 	heroes = tree.get_nodes_in_group("heroes").filter(func(x): return x is Entity)
 	
-	enemies = enemies.filter(func(x): return is_instance_valid(x) and x.data.state > 0)
-	heroes = heroes.filter(func(x): return is_instance_valid(x) and x.data.state > 0)
+	enemies = enemies.filter(func(x): return is_instance_valid(x) and x.data.state > 0 and x.data.stats["HEALTH"] > 0)
+	heroes = heroes.filter(func(x): return is_instance_valid(x) and x.data.state > 0 and x.data.stats["HEALTH"] > 0)
 
 func determine_targets(src: Entity, variant) -> Array[Entity]:
 	var out : Array

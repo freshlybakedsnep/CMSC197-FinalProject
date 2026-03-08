@@ -1,6 +1,3 @@
 [gd_scene format=3 uid="uid://ckv0p3jisj157"]
 
-[ext_resource type="Script" uid="uid://tjr46gxilggy" path="res://scenes/status_cond.gd" id="1_om4ch"]
-
 [node name="StatusCond" type="Node" unique_id=17123256]
-script = ExtResource("1_om4ch")

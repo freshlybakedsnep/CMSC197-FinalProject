@@ -47,32 +47,22 @@ func position_health_bar():
 @abstract func end_turn() -> void
 @abstract func set_target(entity) -> void
 
+func is_stunned() -> bool:
+	return data.ailments.get("STUN", 0) > 0
+
+func is_silenced() -> bool:
+	return data.ailments.get("SILENCE", 0) > 0
+
 func do_action() -> void:
 	print("%s uses %s" % [data.entity_name, intent.ability_name])
+	if is_silenced() and !intent.basic_ability:
+		intent = data.basic_atk[0]
+		var x = intent.determine_targets(self, intent)
+		current_target = current_target.filter(func(f): return f in x)
+		if current_target.is_empty():
+			current_target = intent.random(x)
 	await intent.cast(self)
 	entity_action_over.emit()
-
-func apply_status(status : StatusCondition, stat : StringName) -> void:
-	var tw = effect_text.instantiate() as EffectText
-	tw.effect(status.stat, status.is_buff)
-	add_child(tw)
-	var t = create_tween()
-	var c : Color
-	if status.is_buff:
-		c = Color(1.0, 0.816, 0.502, 1.0)
-	else:
-		c = Color(0.596, 0.784, 0.851, 1.0)
-	
-	t.tween_property(self, "modulate", c, 0.1)
-	await t.finished
-	t.stop()
-	var x = create_tween()
-	x.tween_property(self, "modulate", Color(1.0, 1.0, 1.0, 1.0), 0.1 )
-	#print("%s: %s" % [stat, data.stats[stat]])
-	statuses.add_child(status)
-	data.modify_stat(stat, status.value)
-	#print("%s receives a %s" % [name, status.name])
-	#print("%s: %s" % [stat, data.stats[stat]])
 
 func modify_health(hit_data: Dictionary, damaging: bool, pierce: bool) -> void:
 	data.modify_stat("HEALTH", hit_data["result"])

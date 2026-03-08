@@ -29,8 +29,10 @@ func load_menu(hero : Entity) -> void:
 	for i in buttons:
 		var abil : Ability = dat.ability_preset.get(i)
 		var skill_icon := abil.ability_icon
-		var duration : int = abil.downtime
-		buttons[i].set_assets(skill_icon, duration)
+		if selected_hero.is_silenced() and not abil.basic_ability:
+			buttons[i].set_assets(skill_icon, "X", true)
+		else:
+			buttons[i].set_assets(skill_icon, str(abil.downtime), abil.downtime > 0)
 
 func select_action(action : HeroData.ActionMode) -> void:
 	if selected_hero:

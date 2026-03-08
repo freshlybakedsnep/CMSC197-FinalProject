@@ -29,7 +29,8 @@ func _validate_property(property: Dictionary) -> void:
 func trigger(src: Entity, targets: Array[Entity], level : int) -> void:
 	for fx in effects:
 		for t in targets:
-			fx.formula.set_level(level)
+			if fx.formula:
+				fx.formula.set_level(level)
 			fx.trigger(src, t)
 		await src.get_tree().create_timer(0.5).timeout
 	

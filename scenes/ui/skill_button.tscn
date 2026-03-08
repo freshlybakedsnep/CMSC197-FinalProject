@@ -62,7 +62,7 @@ grow_vertical = 2
 texture = ExtResource("2_p80kq")
 expand_mode = 1
 
-[node name="Cooldown" type="Label" parent="." unique_id=832518331]
+[node name="Indicator" type="Label" parent="." unique_id=832518331]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

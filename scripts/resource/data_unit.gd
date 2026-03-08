@@ -40,6 +40,12 @@ var stats : Dictionary = {
 	"SPEED" : 0,
 	"ELEMENT" : 0
 }
+var ailments : Dictionary = {
+	"STUN": 0,
+	"SILENCE": 0,
+}
+
+var status_conditions = []
 
 var resistance : DefenseState
 enum DefenseState {NORMAL, GUARD, INVINCIBLE, ABSORB}

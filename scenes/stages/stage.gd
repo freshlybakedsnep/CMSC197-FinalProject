@@ -123,6 +123,12 @@ func next_actor() -> void:
 		actor.highlight_me(true)
 		actor.outline_me(true)
 		acted.append(actor)
+		
+		if actor.is_stunned():
+			print(actor.name + " is STUNNED! Skipping turn.")
+			next_actor()
+			return
+		
 		actor.do_action()
 	else:
 		next_actor()
