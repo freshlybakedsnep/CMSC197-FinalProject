@@ -28,16 +28,17 @@ func update(current: float, maximum: float) -> void:
 	ghost_bar.max_value = maximum
 	preview_bar.max_value = maximum
 	
-	main_bar.value = current
 	preview_bar.value = current
 	
 	if _tween: _tween.kill()
 	_tween = create_tween()
 	_tween.set_parallel(false)
 	_tween.tween_interval(0.2)
-	if current < maximum:
+	if current < main_bar.value:
+		main_bar.value = current
 		_tween.tween_property(ghost_bar, "value", current, 0.4).set_trans(Tween.TRANS_SINE)
 	else:
+		ghost_bar.value = current
 		_tween.tween_property(main_bar, "value", current, 0.4).set_trans(Tween.TRANS_SINE)
 	
 	_tween.tween_interval(0.5)
