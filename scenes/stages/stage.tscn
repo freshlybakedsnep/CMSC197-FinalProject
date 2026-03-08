@@ -8,6 +8,7 @@
 [ext_resource type="Resource" uid="uid://bu70ke42l84bf" path="res://resources/enemies/slime.tres" id="6_0fp0l"]
 [ext_resource type="Script" uid="uid://c8d4ukuf2tkk0" path="res://scripts/resource/ability.gd" id="7_ehqcs"]
 [ext_resource type="Resource" uid="uid://b125y36r2vep" path="res://resources/abilities/BA-ST-1hit.tres" id="8_ltv8x"]
+[ext_resource type="Resource" uid="uid://biybuo381ctnj" path="res://resources/abilities/silence2turn.tres" id="9_ltv8x"]
 [ext_resource type="PackedScene" uid="uid://bcdyij8txqpmr" path="res://scenes/stages/formation_enemy.tscn" id="10_q2835"]
 [ext_resource type="PackedScene" uid="uid://oyeqlnpaeldy" path="res://scenes/stages/formation_hero.tscn" id="12_cxkqe"]
 [ext_resource type="FontFile" uid="uid://dmgqmwfwyqfc0" path="res://assets/FOT-Aokane Std.ttf" id="12_mim2l"]
@@ -17,7 +18,7 @@
 script = ExtResource("5_tsors")
 max_charges = 3
 entity_name = "Slime"
-basic_atk = Array[ExtResource("7_ehqcs")]([ExtResource("8_ltv8x")])
+basic_atk = Array[ExtResource("7_ehqcs")]([ExtResource("9_ltv8x")])
 ultimate = Array[ExtResource("7_ehqcs")]([ExtResource("8_ltv8x")])
 base_attack = 6
 metadata/_custom_type_script = "uid://ddsxg1ao3vu1d"

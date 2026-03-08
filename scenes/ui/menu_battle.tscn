@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://ntkoceor2v43" path="res://scenes/ui/hero_hud.tscn" id="3_j33cn"]
 [ext_resource type="PackedScene" uid="uid://dd44kt0ng0qeu" path="res://scenes/ui/skill_button.tscn" id="4_hpdg0"]
 [ext_resource type="Script" uid="uid://5qfltf3003g0" path="res://scenes/ui/menu_target.gd" id="5_rucv6"]
-[ext_resource type="PackedScene" uid="uid://cqig8vtkfogja" path="res://scripts/cursor.tscn" id="7_j33cn"]
+[ext_resource type="PackedScene" uid="uid://cqig8vtkfogja" path="res://scenes/ui/cursor.tscn" id="7_j33cn"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_h1ljj"]
 font = ExtResource("2_h1ljj")

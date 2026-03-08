@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c51rmprgm5hh4" path="res://assets/sprites/ricano.webp" id="3_rjnm5"]
 [ext_resource type="Resource" uid="uid://dncie7g82gll2" path="res://resources/abilities/00_guard.tres" id="4_8013r"]
 [ext_resource type="Resource" uid="uid://2pojq67m7jq8" path="res://resources/abilities/SK-AOE-1hit-enemy.tres" id="5_v3pr0"]
-[ext_resource type="Resource" uid="uid://bqlepyn8agy1i" path="res://resources/abilities/SK-AOE-Debuff-enemy.tres" id="6_8013r"]
+[ext_resource type="Resource" uid="uid://5yue4ium7u4v" path="res://resources/abilities/stun1turn.tres" id="6_8013r"]
 [ext_resource type="Texture2D" uid="uid://c2l0sgxhal5k6" path="res://assets/icon_test.png" id="8_6jlkw"]
 [ext_resource type="Script" uid="uid://dvxwo2q1trkuf" path="res://scripts/resource/effect_group.gd" id="9_m4cel"]
 [ext_resource type="Resource" uid="uid://d27pp31krqrvf" path="res://resources/effects/fx_0.tres" id="10_walxx"]

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CrowdControl" format=3 uid="uid://bpqwlot1t50fr"]
+
+[ext_resource type="Script" uid="uid://k56inw1oua2" path="res://scripts/resource/effect_cc.gd" id="1_b77ll"]
+
+[resource]
+Resource = null
+resource_path = "res://resources/effects/effect_cc_test.tres"
+resource_scene_unique_id = ""
+script = ExtResource("1_b77ll")
+effect_name = null
+description = null
+metadata/_custom_type_script = "uid://k56inw1oua2"
