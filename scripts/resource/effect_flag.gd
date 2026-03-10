@@ -1,13 +1,13 @@
 @tool
 extends Effect
-class_name CrowdControl
+class_name StatFlag
 # general constructor for stun, silence, and taunt
 @export var icon: Texture
 @export var effect_name : String = ""
 @export var description : String
 
-@export var type : ControlType
-enum ControlType {
+@export var type : Flag
+enum Flag {
 	STUN,
 	SILENCE,
 	TAUNT
@@ -34,7 +34,7 @@ func trigger(source : Entity, recipient : Entity) -> void:
 		effect_finished.emit()
 		return
 	
-	var f = StatusCC.new()
+	var f = StatusFlag.new()
 	var info := {
 		"host": recipient,
 		"name": effect_name,

@@ -40,9 +40,11 @@ var stats : Dictionary = {
 	"SPEED" : 0,
 	"ELEMENT" : 0
 }
-var ailments : Dictionary = {
+
+var flags : Dictionary = {
 	"STUN": 0,
 	"SILENCE": 0,
+	"PIERCING": 0
 }
 
 var status_conditions = []
@@ -50,22 +52,31 @@ var status_conditions = []
 var resistance : DefenseState
 enum DefenseState {NORMAL, GUARD, INVINCIBLE, ABSORB}
 
-func calculate_hit(incoming: float, attacker_el: ElementalType, bypass: bool = false) -> Dictionary:
+func calculate_hit(incoming: float, attacker_el: ElementalType, bypass: bool = false, ignore: bool = false) -> Dictionary:
+	# type effectiveness of the damage
 	var type_mult: float = 1.0
 	if TypeChart.has(attacker_el):
 		type_mult = TypeChart[elemental_type].get(attacker_el, 1.0)
-	var def_mult: float = 1.0
 	
+	# ignore defense
+	var def_mit := 1.0
+	if not ignore:
+		var k: float = 100.0
+		def_mit = k / (k + stats["DEFENSE"])
+	
+	# scales based on their behavior
+	var state_mult: float = 1.0
 	match resistance:
 		DefenseState.GUARD:
-			def_mult *= 0.75
+			state_mult *= 0.75
 		DefenseState.ABSORB:
-			def_mult *= -1.0
+			state_mult *= -1.0
 		DefenseState.INVINCIBLE:
 			if !bypass:
-				def_mult *= 0.0
-		
-	var final_dmg = incoming * type_mult * def_mult
+				state_mult *= 0.0
+	
+	# math
+	var final_dmg = incoming * def_mit * type_mult * state_mult
 	
 	return {
 		"result": int(final_dmg),
@@ -76,6 +87,7 @@ func calculate_hit(incoming: float, attacker_el: ElementalType, bypass: bool = f
 func calculate_heal(incoming: float) -> Dictionary:
 	var final_heal = incoming
 	
+	# a.k.a. healing effectiveness
 	if stats.has("HEAL_MOD"):
 		final_heal *= stats["HEAL_MOD"]
 	

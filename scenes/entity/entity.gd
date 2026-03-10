@@ -48,10 +48,10 @@ func position_health_bar():
 @abstract func set_target(entity) -> void
 
 func is_stunned() -> bool:
-	return data.ailments.get("STUN", 0) > 0
+	return data.flags.get("STUN", 0) > 0
 
 func is_silenced() -> bool:
-	return data.ailments.get("SILENCE", 0) > 0
+	return data.flags.get("SILENCE", 0) > 0
 
 func do_action() -> void:
 	print("%s uses %s" % [data.entity_name, intent.ability_name])
