@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="HealthEffect" format=3 uid="uid://dr53ni2nm767o"]
+
+[ext_resource type="Resource" uid="uid://ddhge0fffuv2f" path="res://resources/ability/value/60-100%ownATK.tres" id="1_eqmg5"]
+[ext_resource type="Script" uid="uid://dt538323xnk4w" path="res://revised/action/effect_health.gd" id="2_ia86c"]
+
+[resource]
+script = ExtResource("2_ia86c")
+is_damaging = false
+formula = ExtResource("1_eqmg5")
+metadata/_custom_type_script = "uid://dt538323xnk4w"

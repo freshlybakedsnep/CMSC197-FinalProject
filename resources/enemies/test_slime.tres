@@ -1,0 +1,54 @@
+[gd_resource type="Resource" script_class="EnemyData" format=3 uid="uid://db8wjrcpyke2a"]
+
+[ext_resource type="Script" uid="uid://bl2qf613jng43" path="res://revised/entity/entity_component.gd" id="1_rwtre"]
+[ext_resource type="Script" uid="uid://ddsxg1ao3vu1d" path="res://revised/entity/ent_enemy.gd" id="2_ljfmg"]
+[ext_resource type="Script" uid="uid://bq4jpvro24bfo" path="res://revised/components/stats_component.gd" id="2_rmjao"]
+[ext_resource type="Script" uid="uid://bdmenxynhc50j" path="res://revised/action/action.gd" id="3_x18yb"]
+[ext_resource type="Resource" uid="uid://c3q57rkxtt5ah" path="res://resources/ability/ST_dmg.tres" id="4_rmjao"]
+[ext_resource type="Script" uid="uid://dsu1t80330rqd" path="res://revised/components/action_component.gd" id="5_v5i3a"]
+[ext_resource type="Script" uid="uid://c6g2xy001wklx" path="res://revised/components/element_component.gd" id="6_q3br0"]
+[ext_resource type="Script" uid="uid://cm88ovm7gjp44" path="res://revised/components/status_component.gd" id="7_mmqww"]
+[ext_resource type="Resource" uid="uid://bdnkx1a8e24j4" path="res://resources/ability/AOE_dmg.tres" id="7_pw5yq"]
+[ext_resource type="Script" uid="uid://cpffl8bnew7fl" path="res://revised/components/ai_controller.gd" id="8_q6ims"]
+[ext_resource type="Script" uid="uid://ug5unx6nj7be" path="res://revised/components/resource_component.gd" id="9_sfq5q"]
+
+[sub_resource type="Resource" id="Resource_jncna"]
+script = ExtResource("2_rmjao")
+base_stats = {
+"ATK": 5,
+"DEF": 2,
+"HP": 40,
+"SPD": 5
+}
+metadata/_custom_type_script = "uid://bq4jpvro24bfo"
+
+[sub_resource type="Resource" id="Resource_syrdu"]
+script = ExtResource("5_v5i3a")
+basic_pool = Array[ExtResource("3_x18yb")]([ExtResource("4_rmjao")])
+ultimates = Array[ExtResource("3_x18yb")]([ExtResource("7_pw5yq")])
+metadata/_custom_type_script = "uid://dsu1t80330rqd"
+
+[sub_resource type="Resource" id="Resource_s5yfr"]
+script = ExtResource("6_q3br0")
+my_elem = 2
+metadata/_custom_type_script = "uid://c6g2xy001wklx"
+
+[sub_resource type="Resource" id="Resource_p3iaq"]
+script = ExtResource("7_mmqww")
+metadata/_custom_type_script = "uid://cm88ovm7gjp44"
+
+[sub_resource type="Resource" id="Resource_jel85"]
+script = ExtResource("8_q6ims")
+metadata/_custom_type_script = "uid://cpffl8bnew7fl"
+
+[sub_resource type="Resource" id="Resource_s2s0s"]
+script = ExtResource("9_sfq5q")
+res_name = "Charge"
+start_amount = -1
+metadata/_custom_type_script = "uid://ug5unx6nj7be"
+
+[resource]
+script = ExtResource("2_ljfmg")
+entity_name = "Slime"
+components = Array[ExtResource("1_rwtre")]([SubResource("Resource_jncna"), SubResource("Resource_syrdu"), SubResource("Resource_s5yfr"), SubResource("Resource_p3iaq"), SubResource("Resource_jel85"), SubResource("Resource_s2s0s")])
+metadata/_custom_type_script = "uid://ddsxg1ao3vu1d"

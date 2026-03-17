@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="StatusEffect" format=3 uid="uid://dkkbq74oxeg1o"]
+
+[ext_resource type="Script" uid="uid://x82xxogtaoe5" path="res://revised/action/value_flat.gd" id="1_311r5"]
+[ext_resource type="Script" uid="uid://b7wmacmexid3k" path="res://revised/action/effect_status.gd" id="2_r703h"]
+
+[sub_resource type="Resource" id="Resource_twmir"]
+script = ExtResource("1_311r5")
+metadata/_custom_type_script = "uid://x82xxogtaoe5"
+
+[resource]
+script = ExtResource("2_r703h")
+status_key = &"TAUNT"
+turns = 2
+behavior = 3
+formula = SubResource("Resource_twmir")
+metadata/_custom_type_script = "uid://b7wmacmexid3k"

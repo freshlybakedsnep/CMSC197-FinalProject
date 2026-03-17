@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EffectGroup" format=3 uid="uid://cwnu8n1b3imnv"]
+
+[ext_resource type="Script" uid="uid://df5c28vkm6a78" path="res://revised/action/effect.gd" id="1_ea1i7"]
+[ext_resource type="Resource" uid="uid://dkkbq74oxeg1o" path="res://resources/ability/effect/taunt.tres" id="2_ea1i7"]
+[ext_resource type="Script" uid="uid://djkmvtkrgtp6u" path="res://revised/action/effect_group.gd" id="3_25ykt"]
+
+[resource]
+script = ExtResource("3_25ykt")
+inherit_target = true
+effects = Array[ExtResource("1_ea1i7")]([ExtResource("2_ea1i7")])
+metadata/_custom_type_script = "uid://djkmvtkrgtp6u"

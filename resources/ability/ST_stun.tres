@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Action" format=3 uid="uid://cq7qno4tcufth"]
+
+[ext_resource type="Texture2D" uid="uid://c2l0sgxhal5k6" path="res://assets/icon_test.png" id="1_4gaoa"]
+[ext_resource type="Script" uid="uid://djkmvtkrgtp6u" path="res://revised/action/effect_group.gd" id="2_f0yfg"]
+[ext_resource type="Resource" uid="uid://c3gcq04i6py35" path="res://resources/ability/effect_group/inherit_stun.tres" id="3_4gaoa"]
+[ext_resource type="Script" uid="uid://bdmenxynhc50j" path="res://revised/action/action.gd" id="4_1qgtn"]
+
+[resource]
+script = ExtResource("4_1qgtn")
+action_name = "ST Stun"
+action_icon = ExtResource("1_4gaoa")
+level = 1
+target_group = 3
+effect_groups = Array[ExtResource("2_f0yfg")]([ExtResource("3_4gaoa")])
+metadata/_custom_type_script = "uid://bdmenxynhc50j"

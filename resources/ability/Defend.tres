@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="Action" format=3 uid="uid://cvn20gih60uto"]
+
+[ext_resource type="Script" uid="uid://djkmvtkrgtp6u" path="res://revised/action/effect_group.gd" id="1_ksfhh"]
+[ext_resource type="Texture2D" uid="uid://c2l0sgxhal5k6" path="res://assets/icon_test.png" id="1_ne3h8"]
+[ext_resource type="Script" uid="uid://bdmenxynhc50j" path="res://revised/action/action.gd" id="2_4cksu"]
+[ext_resource type="Script" uid="uid://df5c28vkm6a78" path="res://revised/action/effect.gd" id="3_n0728"]
+[ext_resource type="Script" uid="uid://x82xxogtaoe5" path="res://revised/action/value_flat.gd" id="4_08h43"]
+[ext_resource type="Script" uid="uid://b7wmacmexid3k" path="res://revised/action/effect_status.gd" id="5_sy8ko"]
+
+[sub_resource type="Resource" id="Resource_laowq"]
+script = ExtResource("4_08h43")
+metadata/_custom_type_script = "uid://x82xxogtaoe5"
+
+[sub_resource type="Resource" id="Resource_6wq2l"]
+script = ExtResource("5_sy8ko")
+status_key = &"DEFEND"
+formula = SubResource("Resource_laowq")
+metadata/_custom_type_script = "uid://b7wmacmexid3k"
+
+[sub_resource type="Resource" id="Resource_whrce"]
+script = ExtResource("1_ksfhh")
+inherit_target = true
+effects = Array[ExtResource("3_n0728")]([SubResource("Resource_6wq2l")])
+metadata/_custom_type_script = "uid://djkmvtkrgtp6u"
+
+[resource]
+script = ExtResource("2_4cksu")
+action_name = "Guarding"
+action_icon = ExtResource("1_ne3h8")
+level = 1
+effect_groups = Array[ExtResource("1_ksfhh")]([SubResource("Resource_whrce")])
+metadata/_custom_type_script = "uid://bdmenxynhc50j"

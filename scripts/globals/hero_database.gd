@@ -26,3 +26,14 @@ func load_all() -> void:
 		
 		file_name = dir.get_next()
 	print("Library: Loaded ", library.size(), " characters.")
+
+func get_hero(hero_name: String) -> HeroData:
+	if library.has(hero_name):
+		var hero = library[hero_name].duplicate(true) as HeroData
+		
+		# initialize each component
+		for comp in hero.components.values():
+			if comp.has_method("initialize"):
+				comp.initialize()
+		return hero
+	return null

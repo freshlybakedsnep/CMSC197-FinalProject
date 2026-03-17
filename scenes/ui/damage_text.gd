@@ -18,20 +18,15 @@ func _ready() -> void:
 	finished.emit()
 	queue_free()
 
-func modify(hit_data: Dictionary, is_damaging: bool, is_pierce) -> void:
-	$Label.text = str(abs(hit_data["result"]))
+func modify(hit_data: Dictionary, is_damaging: bool) -> void:
+	$Label.text = str(abs(hit_data["final_dmg"]))
 	if !is_damaging:
 		modulate = heal_color
 		return
-		
-	match hit_data["resistance"]:
-		UnitData.DefenseState.INVINCIBLE:
-			if !is_pierce:
-				$Label.text = "BLOCKED"
-				return
-		UnitData.DefenseState.ABSORB:
-			modulate = heal_color
-			return
+	
+	if hit_data["blocked"]:
+		$Label.text = "BLOCKED"
+		return
 	
 	match hit_data["type_mult"]:
 		2.0: modulate = strong_color

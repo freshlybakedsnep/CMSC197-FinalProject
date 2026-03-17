@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EffectGroup" format=3 uid="uid://c3gcq04i6py35"]
+
+[ext_resource type="Script" uid="uid://df5c28vkm6a78" path="res://revised/action/effect.gd" id="1_stuxf"]
+[ext_resource type="Resource" uid="uid://gwpp7a16rl1" path="res://resources/ability/effect/stun.tres" id="2_stuxf"]
+[ext_resource type="Script" uid="uid://djkmvtkrgtp6u" path="res://revised/action/effect_group.gd" id="3_as4ve"]
+
+[resource]
+script = ExtResource("3_as4ve")
+inherit_target = true
+effects = Array[ExtResource("1_stuxf")]([ExtResource("2_stuxf")])
+metadata/_custom_type_script = "uid://djkmvtkrgtp6u"

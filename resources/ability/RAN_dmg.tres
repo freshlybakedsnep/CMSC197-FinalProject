@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Action" format=3 uid="uid://d14n3vqbqsfy7"]
+
+[ext_resource type="Texture2D" uid="uid://c2l0sgxhal5k6" path="res://assets/icon_test.png" id="1_b6to7"]
+[ext_resource type="Script" uid="uid://djkmvtkrgtp6u" path="res://revised/action/effect_group.gd" id="2_ifs31"]
+[ext_resource type="Resource" uid="uid://cry5hs3tl715e" path="res://resources/ability/effect_group/inherit_dmg60-100%ownATK.tres" id="3_onn3l"]
+[ext_resource type="Script" uid="uid://bdmenxynhc50j" path="res://revised/action/action.gd" id="4_boymh"]
+
+[resource]
+script = ExtResource("4_boymh")
+action_name = "Random Hitter"
+action_icon = ExtResource("1_b6to7")
+level = 1
+target_group = 3
+target_mode = 3
+target_count = 2
+cooldown = 2
+effect_groups = Array[ExtResource("2_ifs31")]([ExtResource("3_onn3l")])
+metadata/_custom_type_script = "uid://bdmenxynhc50j"

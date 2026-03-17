@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Action" format=3 uid="uid://0uyg5dgut0f4"]
+
+[ext_resource type="Texture2D" uid="uid://c2l0sgxhal5k6" path="res://assets/icon_test.png" id="1_shoej"]
+[ext_resource type="Script" uid="uid://djkmvtkrgtp6u" path="res://revised/action/effect_group.gd" id="2_2sa37"]
+[ext_resource type="Resource" uid="uid://dk74nfjn0nts5" path="res://resources/ability/effect_group/inherit_heal60-100%ownATK.tres" id="3_shoej"]
+[ext_resource type="Script" uid="uid://bdmenxynhc50j" path="res://revised/action/action.gd" id="4_ie4al"]
+
+[resource]
+script = ExtResource("4_ie4al")
+action_name = "SELF heal"
+action_icon = ExtResource("1_shoej")
+level = 1
+effect_groups = Array[ExtResource("2_2sa37")]([ExtResource("3_shoej")])
+metadata/_custom_type_script = "uid://bdmenxynhc50j"

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Action" format=3 uid="uid://bdnkx1a8e24j4"]
+
+[ext_resource type="Texture2D" uid="uid://c2l0sgxhal5k6" path="res://assets/icon_test.png" id="1_86eh6"]
+[ext_resource type="Script" uid="uid://djkmvtkrgtp6u" path="res://revised/action/effect_group.gd" id="2_im6n3"]
+[ext_resource type="Resource" uid="uid://cry5hs3tl715e" path="res://resources/ability/effect_group/inherit_dmg60-100%ownATK.tres" id="3_s63t1"]
+[ext_resource type="Script" uid="uid://bdmenxynhc50j" path="res://revised/action/action.gd" id="4_3hruj"]
+
+[resource]
+script = ExtResource("4_3hruj")
+action_name = "AoE Damage"
+action_icon = ExtResource("1_86eh6")
+level = 1
+target_group = 3
+target_mode = 2
+cooldown = 2
+cost = 5
+effect_groups = Array[ExtResource("2_im6n3")]([ExtResource("3_s63t1")])
+metadata/_custom_type_script = "uid://bdmenxynhc50j"

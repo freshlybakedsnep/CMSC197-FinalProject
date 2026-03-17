@@ -11,8 +11,6 @@ outline_color = Color(0, 0, 0, 1)
 [node name="EffectText" type="Node2D" unique_id=772494065]
 script = ExtResource("1_dip3p")
 duration = 0.7
-buff_color = Color(1, 0.6784314, 0.32156864, 1)
-dbff_color = Color(0.61960787, 0.70980394, 1, 1)
 
 [node name="Label" type="Label" parent="." unique_id=493253027]
 z_index = 10
