@@ -1,0 +1,271 @@
+[gd_scene format=3 uid="uid://c6b4l3yqvllgy"]
+
+[ext_resource type="Script" uid="uid://ciiwy4ojou0tj" path="res://revised/entity/entity.gd" id="1_0p8rp"]
+[ext_resource type="Shader" uid="uid://byk63wjvv8dun" path="res://entity_outline.gdshader" id="2_u7y06"]
+[ext_resource type="Texture2D" uid="uid://coix0iaueaui5" path="res://assets/place_holder.png" id="3_lk8ta"]
+[ext_resource type="Script" uid="uid://bbqureqt1r8x1" path="res://revised/entity/hp_bar.gd" id="4_xk0ck"]
+[ext_resource type="FontFile" uid="uid://dmgqmwfwyqfc0" path="res://assets/FOT-Aokane Std.ttf" id="5_686q4"]
+[ext_resource type="Texture2D" uid="uid://cb5wxytvtgwv" path="res://assets/El4kind5.png" id="6_a0j2l"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_03rkj"]
+resource_local_to_scene = true
+shader = ExtResource("2_u7y06")
+shader_parameter/active = false
+shader_parameter/outline_color = Color(1, 1, 1, 1)
+shader_parameter/outline_thickness = 0.5
+shader_parameter/alpha_threshold = 0.50000002049012
+shader_parameter/is_bright = false
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nwmpt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_lk8ta")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_03rkj"]
+size = Vector2(20, 24)
+
+[sub_resource type="LabelSettings" id="LabelSettings_xc43p"]
+font = ExtResource("5_686q4")
+font_size = 12
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_62ivy"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.5058824, 0.6313726, 0.47058824, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 2
+anti_aliasing = false
+anti_aliasing_size = 0.01
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a10wd"]
+bg_color = Color(0.8195374, 0.01965246, 1.0588765e-06, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 2
+anti_aliasing = false
+anti_aliasing_size = 0.01
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cliqk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v7fft"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f7red"]
+bg_color = Color(0.98632056, 0.8756979, 0.8739301, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 2
+anti_aliasing = false
+anti_aliasing_size = 0.01
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_th8ix"]
+bg_color = Color(1, 0.97933334, 0.69, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 2
+anti_aliasing = false
+anti_aliasing_size = 0.01
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_65kdc"]
+bg_color = Color(0.972549, 0.92941177, 0.08235294, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 2
+anti_aliasing = false
+anti_aliasing_size = 0.01
+
+[node name="Entity" type="Area2D" unique_id=1924993659 groups=["entities"]]
+script = ExtResource("1_0p8rp")
+
+[node name="Statuses" type="Node" parent="." unique_id=453684751]
+
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=229155458]
+material = SubResource("ShaderMaterial_03rkj")
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_nwmpt")
+offset = Vector2(0.5, -5)
+
+[node name="Hitbox" type="CollisionShape2D" parent="." unique_id=427758308]
+visible = false
+position = Vector2(-5, -3)
+scale = Vector2(4, 4)
+shape = SubResource("RectangleShape2D_03rkj")
+
+[node name="TargetComponent" type="Button" parent="." unique_id=1451731070]
+visible = false
+modulate = Color(1, 1, 1, 0)
+mouse_filter = 1
+
+[node name="HPBar" type="Node2D" parent="." unique_id=200903908]
+script = ExtResource("4_xk0ck")
+
+[node name="Name" type="Label" parent="HPBar" unique_id=963951141]
+visible = false
+z_index = 2
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -37.5
+offset_right = 37.5
+offset_bottom = 13.0
+grow_horizontal = 2
+text = "LONGNAME"
+label_settings = SubResource("LabelSettings_xc43p")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Resource" type="ProgressBar" parent="HPBar" unique_id=561563155]
+visible = false
+custom_minimum_size = Vector2(60, 12)
+offset_left = -35.0
+offset_top = 19.0
+offset_right = 25.0
+offset_bottom = 31.0
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_62ivy")
+theme_override_styles/fill = SubResource("StyleBoxFlat_a10wd")
+step = 1.0
+value = 100.0
+rounded = true
+show_percentage = false
+
+[node name="Bar" type="ProgressBar" parent="HPBar" unique_id=1316727549]
+custom_minimum_size = Vector2(64, 12)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = 14.0
+offset_right = 32.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_62ivy")
+theme_override_styles/fill = SubResource("StyleBoxEmpty_cliqk")
+value = 100.0
+rounded = true
+show_percentage = false
+
+[node name="GhostBar" type="ProgressBar" parent="HPBar" unique_id=1056372131]
+custom_minimum_size = Vector2(64, 12)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = 14.0
+offset_right = 32.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_v7fft")
+theme_override_styles/fill = SubResource("StyleBoxFlat_f7red")
+value = 100.0
+rounded = true
+show_percentage = false
+
+[node name="PreviewBar" type="ProgressBar" parent="HPBar" unique_id=222148780]
+visible = false
+custom_minimum_size = Vector2(64, 12)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = 14.0
+offset_right = 32.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_v7fft")
+theme_override_styles/fill = SubResource("StyleBoxFlat_th8ix")
+value = 100.0
+rounded = true
+show_percentage = false
+
+[node name="HealthBar" type="ProgressBar" parent="HPBar" unique_id=1938520613]
+custom_minimum_size = Vector2(64, 12)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = 14.0
+offset_right = 32.0
+offset_bottom = 26.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_v7fft")
+theme_override_styles/fill = SubResource("StyleBoxFlat_65kdc")
+value = 100.0
+rounded = true
+show_percentage = false
+
+[node name="Icon" type="TextureRect" parent="HPBar" unique_id=83962341]
+visible = false
+z_index = 1
+custom_minimum_size = Vector2(24, 24)
+offset_left = -44.0
+offset_top = 8.0
+offset_right = -20.0
+offset_bottom = 32.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("6_a0j2l")
+expand_mode = 1

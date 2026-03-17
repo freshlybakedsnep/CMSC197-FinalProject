@@ -1,76 +1,75 @@
 [gd_scene format=3 uid="uid://bifyp6opkfsfo"]
 
 [ext_resource type="Script" uid="uid://dfwilkkfsbqyu" path="res://scenes/stages/stage.gd" id="1_oa6vd"]
-[ext_resource type="PackedScene" uid="uid://c6b4l3yqvllgy" path="res://scenes/entity/entity.tscn" id="2_22nv1"]
-[ext_resource type="Script" uid="uid://lhx7sp8rhhjr" path="res://scripts/resource/stage_info.gd" id="3_bphci"]
-[ext_resource type="Script" uid="uid://cx656sdytf30u" path="res://scripts/resource/wave.gd" id="4_53hmt"]
-[ext_resource type="Script" uid="uid://ddsxg1ao3vu1d" path="res://scripts/resource/data_enemy.gd" id="5_tsors"]
-[ext_resource type="Resource" uid="uid://bu70ke42l84bf" path="res://resources/enemies/slime.tres" id="6_0fp0l"]
-[ext_resource type="Script" uid="uid://c8d4ukuf2tkk0" path="res://scripts/resource/ability.gd" id="7_ehqcs"]
-[ext_resource type="Resource" uid="uid://b125y36r2vep" path="res://resources/abilities/BA-ST-1hit.tres" id="8_ltv8x"]
-[ext_resource type="Resource" uid="uid://biybuo381ctnj" path="res://resources/abilities/silence2turn.tres" id="9_ltv8x"]
+[ext_resource type="Script" uid="uid://lhx7sp8rhhjr" path="res://scripts/stage_info.gd" id="2_sponv"]
+[ext_resource type="Script" uid="uid://cx656sdytf30u" path="res://scripts/wave.gd" id="3_sc1co"]
+[ext_resource type="Script" uid="uid://ddsxg1ao3vu1d" path="res://revised/entity/ent_enemy.gd" id="4_2lgi4"]
+[ext_resource type="Resource" uid="uid://db8wjrcpyke2a" path="res://resources/enemies/test_slime.tres" id="5_mim2l"]
+[ext_resource type="Script" uid="uid://bl2qf613jng43" path="res://revised/entity/entity_component.gd" id="5_vss0j"]
+[ext_resource type="Script" uid="uid://bq4jpvro24bfo" path="res://revised/components/stats_component.gd" id="6_b4ioo"]
+[ext_resource type="Script" uid="uid://bdmenxynhc50j" path="res://revised/action/action.gd" id="7_m4is4"]
+[ext_resource type="Resource" uid="uid://c3q57rkxtt5ah" path="res://resources/ability/ST_dmg.tres" id="8_s5gfg"]
+[ext_resource type="Script" uid="uid://dsu1t80330rqd" path="res://revised/components/action_component.gd" id="9_jwt2s"]
+[ext_resource type="Resource" uid="uid://bdnkx1a8e24j4" path="res://resources/ability/AOE_dmg.tres" id="10_f5iea"]
 [ext_resource type="PackedScene" uid="uid://bcdyij8txqpmr" path="res://scenes/stages/formation_enemy.tscn" id="10_q2835"]
+[ext_resource type="Script" uid="uid://c6g2xy001wklx" path="res://revised/components/element_component.gd" id="11_luw21"]
 [ext_resource type="PackedScene" uid="uid://oyeqlnpaeldy" path="res://scenes/stages/formation_hero.tscn" id="12_cxkqe"]
+[ext_resource type="Script" uid="uid://cm88ovm7gjp44" path="res://revised/components/status_component.gd" id="12_jy37n"]
 [ext_resource type="FontFile" uid="uid://dmgqmwfwyqfc0" path="res://assets/FOT-Aokane Std.ttf" id="12_mim2l"]
-[ext_resource type="PackedScene" uid="uid://bwtxguku00kwa" path="res://scenes/ui/menu_battle.tscn" id="14_dkcyh"]
+[ext_resource type="Script" uid="uid://cpffl8bnew7fl" path="res://revised/components/ai_controller.gd" id="13_npxwx"]
+[ext_resource type="Script" uid="uid://ug5unx6nj7be" path="res://revised/components/resource_component.gd" id="14_47fwr"]
+[ext_resource type="PackedScene" uid="uid://bwtxguku00kwa" path="res://revised/menu_ui/menu_battle.tscn" id="14_dkcyh"]
 
-[sub_resource type="Resource" id="Resource_t8y0b"]
-script = ExtResource("5_tsors")
-max_charges = 3
+[sub_resource type="Resource" id="Resource_jncna"]
+script = ExtResource("6_b4ioo")
+base_stats = {
+"ATK": 5,
+"DEF": 2,
+"HP": 40,
+"SPD": 5
+}
+metadata/_custom_type_script = "uid://bq4jpvro24bfo"
+
+[sub_resource type="Resource" id="Resource_syrdu"]
+script = ExtResource("9_jwt2s")
+basic_pool = Array[ExtResource("7_m4is4")]([ExtResource("8_s5gfg")])
+ultimates = Array[ExtResource("7_m4is4")]([ExtResource("10_f5iea")])
+metadata/_custom_type_script = "uid://dsu1t80330rqd"
+
+[sub_resource type="Resource" id="Resource_s5yfr"]
+script = ExtResource("11_luw21")
+my_elem = 2
+metadata/_custom_type_script = "uid://c6g2xy001wklx"
+
+[sub_resource type="Resource" id="Resource_p3iaq"]
+script = ExtResource("12_jy37n")
+metadata/_custom_type_script = "uid://cm88ovm7gjp44"
+
+[sub_resource type="Resource" id="Resource_jel85"]
+script = ExtResource("13_npxwx")
+metadata/_custom_type_script = "uid://cpffl8bnew7fl"
+
+[sub_resource type="Resource" id="Resource_s2s0s"]
+script = ExtResource("14_47fwr")
+res_name = "Charge"
+start_amount = -1
+metadata/_custom_type_script = "uid://ug5unx6nj7be"
+
+[sub_resource type="Resource" id="Resource_xup2i"]
+script = ExtResource("4_2lgi4")
+starting_position = 5
 entity_name = "Slime"
-basic_atk = Array[ExtResource("7_ehqcs")]([ExtResource("9_ltv8x")])
-ultimate = Array[ExtResource("7_ehqcs")]([ExtResource("8_ltv8x")])
-base_attack = 6
+components = Array[ExtResource("5_vss0j")]([SubResource("Resource_jncna"), SubResource("Resource_syrdu"), SubResource("Resource_s5yfr"), SubResource("Resource_p3iaq"), SubResource("Resource_jel85"), SubResource("Resource_s2s0s")])
 metadata/_custom_type_script = "uid://ddsxg1ao3vu1d"
 
-[sub_resource type="Resource" id="Resource_00upb"]
-script = ExtResource("5_tsors")
-max_charges = 3
-entity_name = "Slime"
-elemental_type = 1
-basic_atk = Array[ExtResource("7_ehqcs")]([ExtResource("8_ltv8x")])
-ultimate = Array[ExtResource("7_ehqcs")]([ExtResource("8_ltv8x")])
-base_attack = 6
-metadata/_custom_type_script = "uid://ddsxg1ao3vu1d"
-
-[sub_resource type="Resource" id="Resource_45d02"]
-script = ExtResource("5_tsors")
-max_charges = 3
-entity_name = "Slime"
-elemental_type = 3
-basic_atk = Array[ExtResource("7_ehqcs")]([ExtResource("8_ltv8x")])
-ultimate = Array[ExtResource("7_ehqcs")]([ExtResource("8_ltv8x")])
-base_attack = 6
-metadata/_custom_type_script = "uid://ddsxg1ao3vu1d"
-
-[sub_resource type="Resource" id="Resource_6pxpj"]
-script = ExtResource("5_tsors")
-max_charges = 3
-entity_name = "Slime"
-elemental_type = 4
-basic_atk = Array[ExtResource("7_ehqcs")]([ExtResource("8_ltv8x")])
-ultimate = Array[ExtResource("7_ehqcs")]([ExtResource("8_ltv8x")])
-base_attack = 6
-metadata/_custom_type_script = "uid://ddsxg1ao3vu1d"
-
-[sub_resource type="Resource" id="Resource_nwfru"]
-script = ExtResource("5_tsors")
-max_charges = 3
-entity_name = "Slime"
-elemental_type = 2
-basic_atk = Array[ExtResource("7_ehqcs")]([ExtResource("8_ltv8x")])
-ultimate = Array[ExtResource("7_ehqcs")]([ExtResource("8_ltv8x")])
-base_attack = 6
-metadata/_custom_type_script = "uid://ddsxg1ao3vu1d"
-
-[sub_resource type="Resource" id="Resource_yd2gm"]
-script = ExtResource("4_53hmt")
-enemies = Array[ExtResource("5_tsors")]([ExtResource("6_0fp0l"), SubResource("Resource_t8y0b"), SubResource("Resource_00upb"), SubResource("Resource_45d02"), SubResource("Resource_6pxpj"), SubResource("Resource_nwfru")])
+[sub_resource type="Resource" id="Resource_sponv"]
+script = ExtResource("3_sc1co")
+enemies = Array[ExtResource("4_2lgi4")]([SubResource("Resource_xup2i"), ExtResource("5_mim2l")])
 metadata/_custom_type_script = "uid://cx656sdytf30u"
 
-[sub_resource type="Resource" id="Resource_dexii"]
-script = ExtResource("3_bphci")
-waves = Array[ExtResource("4_53hmt")]([SubResource("Resource_yd2gm"), SubResource("Resource_yd2gm")])
+[sub_resource type="Resource" id="Resource_t8y0b"]
+script = ExtResource("2_sponv")
+waves = Array[ExtResource("3_sc1co")]([SubResource("Resource_sponv")])
 metadata/_custom_type_script = "uid://lhx7sp8rhhjr"
 
 [sub_resource type="LabelSettings" id="LabelSettings_ltv8x"]
@@ -80,8 +79,7 @@ outline_color = Color(0, 0, 0, 1)
 
 [node name="Stage" type="Node" unique_id=871806380]
 script = ExtResource("1_oa6vd")
-entity = ExtResource("2_22nv1")
-stage_info = SubResource("Resource_dexii")
+stage_info = SubResource("Resource_t8y0b")
 
 [node name="Background" type="Node2D" parent="." unique_id=1792994303]
 z_index = -1

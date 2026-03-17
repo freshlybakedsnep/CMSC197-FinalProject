@@ -16,7 +16,7 @@ func fill_vacancies() -> void:
 		if enemy_res == null : return
 		
 		enemy_res = enemy_res.duplicate(true)
-		enemy_res.reset_to_default()
+		enemy_res.initialize()
 		
 		if names.keys().has(enemy_res.entity_name):
 			names[enemy_res.entity_name] += 1
@@ -24,10 +24,8 @@ func fill_vacancies() -> void:
 		else:
 			names[enemy_res.entity_name] = 1
 		
-		var enemy_node = spawn_entity(enemy_res)
+		var enemy_node = spawn_entity(enemy_res, false)
 		enemy_node.add_to_group("enemies")
-		enemy_node.entity_action_over.connect(next_move)
-		enemy_node.entity_eliminated.connect(func(): deathrow.append(enemy_node))
 		probe_and_position(enemy_node, enemy_res.starting_position)
 
 func is_wave_clear() -> bool:

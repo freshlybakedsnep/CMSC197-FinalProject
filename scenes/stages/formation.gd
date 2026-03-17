@@ -24,9 +24,13 @@ func _ready() -> void:
 		5: pos5
 	}
 
-func spawn_entity(res) -> Entity:
-	var h = entity_scene.instantiate()
+func spawn_entity(res: EntityData, is_hero: bool) -> Entity:
+	var h = entity_scene.instantiate() as Entity
+	res.initialize_entity()
+	BattleRegistry.register_entity(res, h, is_hero)
 	h.setup(res)
+	h.entity_action_over.connect(next_move)
+	h.entity_eliminated.connect(func(): if h not in deathrow: deathrow.append(h))
 	return h
 
 func setup(callable : Callable, death_row : Array) -> void:

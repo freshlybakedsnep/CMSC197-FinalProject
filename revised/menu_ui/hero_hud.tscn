@@ -1,0 +1,173 @@
+[gd_scene format=3 uid="uid://ntkoceor2v43"]
+
+[ext_resource type="Script" uid="uid://dlh588ibhynuh" path="res://revised/menu_ui/hero_hud.gd" id="1_eqevu"]
+[ext_resource type="Texture2D" uid="uid://i7jt4s0h8fiq" path="res://assets/sprites/anuberus.webp" id="2_ttu7u"]
+[ext_resource type="Texture2D" uid="uid://djsmku1wj884k" path="res://icon.svg" id="3_jcuw5"]
+[ext_resource type="FontFile" uid="uid://dmgqmwfwyqfc0" path="res://assets/FOT-Aokane Std.ttf" id="4_eqevu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eqevu"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jk0qd"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_veipn"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.75)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eqevu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f02a4"]
+atlas = ExtResource("2_ttu7u")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ttu7u"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.5058824, 0.6313726, 0.47058824, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 2
+anti_aliasing = false
+anti_aliasing_size = 0.01
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jcuw5"]
+bg_color = Color(0.972549, 0.92941177, 0.08235294, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.5058824, 0.6313726, 0.47058824, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 2
+anti_aliasing = false
+anti_aliasing_size = 0.01
+
+[sub_resource type="LabelSettings" id="LabelSettings_jk0qd"]
+font = ExtResource("4_eqevu")
+font_size = 12
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+
+[node name="HeroHUD" type="Button" unique_id=276299336]
+custom_minimum_size = Vector2(90, 90)
+offset_right = 90.0
+offset_bottom = 90.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_eqevu")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jk0qd")
+theme_override_styles/hover = SubResource("StyleBoxFlat_veipn")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_eqevu")
+theme_override_styles/focus = SubResource("StyleBoxFlat_veipn")
+script = ExtResource("1_eqevu")
+
+[node name="Draw" type="CanvasGroup" parent="." unique_id=1863510203]
+show_behind_parent = true
+
+[node name="Margin" type="MarginContainer" parent="Draw" unique_id=1907783472]
+custom_minimum_size = Vector2(90, 90)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 90.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Detail" type="VBoxContainer" parent="Draw/Margin" unique_id=633820809]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+mouse_behavior_recursive = 1
+theme_override_constants/separation = -2
+
+[node name="Portrait" type="TextureRect" parent="Draw/Margin/Detail" unique_id=1892135732]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+mouse_behavior_recursive = 1
+texture = SubResource("AtlasTexture_f02a4")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Draw/Margin/Detail/Portrait" unique_id=1504006256]
+layout_mode = 1
+offset_right = 32.0
+offset_bottom = 32.0
+mouse_filter = 2
+mouse_behavior_recursive = 1
+theme_override_constants/margin_left = -16
+theme_override_constants/margin_top = -8
+
+[node name="Class" type="TextureRect" parent="Draw/Margin/Detail/Portrait/MarginContainer" unique_id=692024625]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+mouse_behavior_recursive = 1
+texture = ExtResource("3_jcuw5")
+expand_mode = 1
+
+[node name="Health" type="ProgressBar" parent="Draw/Margin/Detail" unique_id=288995442]
+custom_minimum_size = Vector2(44, 12)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_ttu7u")
+theme_override_styles/fill = SubResource("StyleBoxFlat_jcuw5")
+rounded = true
+show_percentage = false
+
+[node name="Value" type="Label" parent="Draw/Margin/Detail/Health" unique_id=33087226]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.5
+offset_top = -6.5
+offset_right = 12.5
+offset_bottom = 6.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "000"
+label_settings = SubResource("LabelSettings_jk0qd")
+horizontal_alignment = 1
+vertical_alignment = 1

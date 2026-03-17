@@ -3,7 +3,6 @@ class_name Stage
 
 signal turn_changed()
 
-@export var entity : PackedScene
 @onready var command_ui: BattleMenu = $CommandUI
 @onready var enemies : EnemyFormation = $Enemies
 @onready var heroes : HeroFormation = $Heroes
@@ -43,11 +42,6 @@ func load_next_wave() -> bool:
 	enemies.load_wave(curr_wave)
 	return true
 
-func party_wiped() -> bool:
-	return get_tree().get_nodes_in_group("heroes").all(
-		func(h): return h.data.stats["HEALTH"] <= 0
-	)
-
 func update_turn_order() -> void:
 	turn_queue.clear()
 	for unit in get_tree().get_nodes_in_group("entities"):
@@ -58,12 +52,17 @@ func update_turn_order() -> void:
 		if (not is_instance_valid(unit) or 
 			eliminated.has(unit) or 
 			acted.has(unit) or 
-			unit.data.state == UnitData.State.DEAD):
+			unit.data.state == EntityData.State.DEAD):
 			continue
 		turn_queue.append(unit)
 		
-	turn_queue.sort_custom(
-		func(a, b) : return a.data.stats["SPEED"] > b.data.stats["SPEED"])
+	turn_queue.sort_custom(func(a, b):
+		var ap = _get_prio(a)
+		var bp = _get_prio(b)
+		
+		if ap != bp: return ap > bp
+		return _get_spd(a) > _get_spd(b)
+	)
 
 func start_battle() -> void:
 	load_next_wave()
@@ -71,14 +70,16 @@ func start_battle() -> void:
 
 func start_turn() -> void:
 	current_phase = Phase.COMMAND
-	
 	turn_count += 1
 	$TurnCount.text = "Turn: " + str(turn_count)
+	
 	enemies.fill_vacancies()
 	$EnemyCount.text = "Enemies Left: " + str(enemies.enemy_pool.size())
+	
 	for e in get_tree().get_nodes_in_group("entities"):
-		if (e as Entity).data.state == UnitData.State.NORMAL:
+		if e.data.state == EntityData.State.NORMAL:
 			e.new_turn()
+			pass
 	
 	update_turn_order()
 	print("\nTurn %d" % turn_count)
@@ -88,19 +89,25 @@ func start_fight() -> void:
 	current_phase = Phase.COMBAT
 	
 	RenderingServer.global_shader_parameter_set("screen_dim_amount", 0.3)
-	for ent in turn_queue:
-		if ent is Hero:
-			if (ent as Hero).action == HeroData.ActionMode.GUARD_ATTACK:
-				turn_queue.erase(ent)
-				acted.append(ent)
 	next_actor()
+
+func _get_prio(ent: Entity) -> int:
+	var act_sys : ActionComponent = ent.data.get_comp(EntityComponent.Type.ACTION)
+	var cont = ent.data.get_comp(EntityComponent.Type.CONTROLLER)
+	if act_sys and cont:
+		return act_sys.get_priority(cont.queued_action)
+	return 0
+
+func _get_spd(ent: Entity)-> int:
+	var stat : StatsComponent = ent.data.get_comp(EntityComponent.Type.STATS)
+	if stat:
+		return stat.get_stat("SPD")
+	return 0
 
 func end_turn():
 	current_phase = Phase.CONCLUDE
 	RenderingServer.global_shader_parameter_set("screen_dim_amount", 1.0)
 	acted.clear()
-	for e in get_tree().get_nodes_in_group("entities"):
-		e.end_turn()
 	
 	if enemies.is_wave_clear():
 		print("Wave Clear!")
@@ -119,17 +126,24 @@ func next_actor() -> void:
 		return
 	
 	var actor : Entity = turn_queue.pop_front()
-	if actor.data.state == UnitData.State.NORMAL:
+	if actor.data.state == EntityData.State.NORMAL:
+		acted.append(actor)
 		actor.highlight_me(true)
 		actor.outline_me(true)
-		acted.append(actor)
+		# and any code to trigger any lingering/running effects
 		
-		if actor.is_stunned():
+		var status : StatusComponent = actor.data.get_comp(EntityComponent.Type.STATUS)
+		if status and status.is_incapacitated():
 			print(actor.name + " is STUNNED! Skipping turn.")
-			next_actor()
+			actor_finished()
 			return
 		
-		actor.do_action()
+		var controller = actor.data.get_comp(EntityComponent.Type.CONTROLLER)
+		var decision : Dictionary = controller.get_next_action()
+		
+		if not decision.is_empty():
+			await ActionParser.execute(actor, decision["action"], decision["targets"])
+		controller.clear_queue()
 	else:
 		next_actor()
 
@@ -139,7 +153,7 @@ func actor_finished() -> void:
 	await interval.timeout
 	await clear_the_dead()
 	
-	if party_wiped():
+	if heroes.wiped():
 		print("Game Over!")
 		return
 	next_actor()
@@ -154,11 +168,9 @@ func clear_the_dead() -> void:
 		if ent.is_in_group("died"): continue
 		ent.add_to_group("died")
 		await ent.die()
-		
-		if ent is Enemy:
+		ent.data.state = EntityData.State.DEAD
+		if ent.data.faction == EntityData.Faction.ENEMY:
 			enemies.remove_from_formation(ent)
 			print(ent.name, " is deleted")
 			ent.queue_free()
-		else:
-			ent.data.state = UnitData.State.DEAD
 		ent.remove_from_group("entities")

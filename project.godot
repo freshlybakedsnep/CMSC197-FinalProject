@@ -23,6 +23,7 @@ config/icon="res://icon.svg"
 
 PartyManager="*res://scripts/globals/party_manager.gd"
 HeroDatabase="*res://scripts/globals/hero_database.gd"
+BattleRegistry="*uid://cukk0c3cvcvfo"
 
 [display]
 
