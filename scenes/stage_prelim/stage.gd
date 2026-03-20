@@ -1,7 +1,7 @@
 extends Node
 class_name Stage
 
-signal turn_changed()
+@onready var state_machine: GameStateMachine = $StateMachine
 
 @onready var command_ui: BattleMenu = $CommandUI
 @onready var enemies : EnemyFormation = $Enemies
@@ -9,13 +9,6 @@ signal turn_changed()
 @onready var interval: Timer = $Interval
 
 @export var stage_info : StageInfo
-
-var current_phase: Phase
-enum Phase {
-	COMMAND,
-	COMBAT,
-	CONCLUDE
-}
 
 var current_wave : Array[EnemyData]
 var current_wave_index := -1
@@ -26,10 +19,25 @@ var acted : Array[Entity]
 var eliminated : Array[Entity]
 
 func _ready() -> void:
-	heroes.setup(actor_finished, eliminated)
-	enemies.setup(actor_finished, eliminated)
+	state_machine.handler = self
+	
+	heroes.setup(eliminated)
+	enemies.setup(eliminated)
 	command_ui.connect_formations(enemies, heroes)
-	start_battle()
+	
+	load_next_wave()
+	
+	state_machine.register_state("start", BattleEvents.TurnStart)
+	state_machine.register_state("plan", BattleEvents.PlanState)
+	state_machine.register_state("combat", BattleEvents.CombatState)
+	state_machine.register_state("act", BattleEvents.ActingState)
+	state_machine.register_state("end", BattleEvents.TurnEnd)
+	
+	state_machine.register_state("win", BattleEvents.Win)
+	state_machine.register_state("lose", BattleEvents.GameOver)
+	
+	state_machine.change("start")
+	state_machine._process_pending()
 
 func load_next_wave() -> bool:
 	current_wave_index += 1
@@ -64,12 +72,7 @@ func update_turn_order() -> void:
 		return _get_spd(a) > _get_spd(b)
 	)
 
-func start_battle() -> void:
-	load_next_wave()
-	start_turn()
-
 func start_turn() -> void:
-	current_phase = Phase.COMMAND
 	turn_count += 1
 	$TurnCount.text = "Turn: " + str(turn_count)
 	
@@ -78,18 +81,8 @@ func start_turn() -> void:
 	
 	for e in get_tree().get_nodes_in_group("entities"):
 		if e.data.state == EntityData.State.NORMAL:
-			e.new_turn()
-			pass
-	
-	update_turn_order()
+			e.reset()
 	print("\nTurn %d" % turn_count)
-	turn_changed.emit()
-
-func start_fight() -> void:
-	current_phase = Phase.COMBAT
-	
-	RenderingServer.global_shader_parameter_set("screen_dim_amount", 0.3)
-	next_actor()
 
 func _get_prio(ent: Entity) -> int:
 	var act_sys : ActionComponent = ent.data.get_comp(EntityComponent.Type.ACTION)
@@ -103,60 +96,6 @@ func _get_spd(ent: Entity)-> int:
 	if stat:
 		return stat.get_stat("SPD")
 	return 0
-
-func end_turn():
-	current_phase = Phase.CONCLUDE
-	RenderingServer.global_shader_parameter_set("screen_dim_amount", 1.0)
-	acted.clear()
-	
-	if enemies.is_wave_clear():
-		print("Wave Clear!")
-		if !load_next_wave():
-			# code to update data on party manager 
-			print("Stage Clear!")
-			return
-	
-	start_turn()
-
-func next_actor() -> void:
-	update_turn_order()
-	
-	if enemies.has_vacancies() >= 5 or turn_queue.is_empty():
-		end_turn()
-		return
-	
-	var actor : Entity = turn_queue.pop_front()
-	if actor.data.state == EntityData.State.NORMAL:
-		acted.append(actor)
-		actor.highlight_me(true)
-		actor.outline_me(true)
-		# and any code to trigger any lingering/running effects
-		
-		var status : StatusComponent = actor.data.get_comp(EntityComponent.Type.STATUS)
-		if status and status.is_incapacitated():
-			print(actor.name + " is STUNNED! Skipping turn.")
-			actor_finished()
-			return
-		
-		var controller = actor.data.get_comp(EntityComponent.Type.CONTROLLER)
-		var decision : Dictionary = controller.get_next_action()
-		
-		if not decision.is_empty():
-			await ActionParser.execute(actor, decision["action"], decision["targets"])
-		controller.clear_queue()
-	else:
-		next_actor()
-
-func actor_finished() -> void:
-	print("")
-	interval.start()
-	await interval.timeout
-	await clear_the_dead()
-	
-	if heroes.wiped():
-		print("Game Over!")
-		return
-	next_actor()
 
 func clear_the_dead() -> void:
 	if !eliminated: return
