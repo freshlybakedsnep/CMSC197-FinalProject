@@ -51,6 +51,7 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 mouse_behavior_recursive = 2
+disabled = true
 text = "Start Battle!"
 
 [node name="AbilityTooltip" type="Panel" parent="." unique_id=1538801652]
@@ -248,7 +249,6 @@ layout_mode = 1
 cursor_offset = Vector2(0, 5)
 
 [connection signal="pressed" from="MarginContainer/StartBattle" to="." method="_on_start_battle_pressed"]
-[connection signal="pressed" from="MarginContainer/StartBattle" to="PartyMenu" method="disable"]
 [connection signal="party_ready" from="PartyMenu" to="." method="_on_party_ready"]
 [connection signal="pressed" from="Back" to="." method="_close_menu"]
 [connection signal="pressed" from="TargetMenu/Back" to="." method="_close_menu"]

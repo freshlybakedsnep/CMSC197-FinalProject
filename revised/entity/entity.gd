@@ -70,7 +70,7 @@ func _on_state_changed(new_state: EntityData.State) -> void:
 			sprite.self_modulate.a = 1.0
 			# respawn animation if dead
 
-func new_turn() -> void:
+func reset() -> void:
 	var act_sys : ActionComponent = data.get_comp(ElementComponent.Type.ACTION)
 	if act_sys: act_sys.tick_cooldowns()
 	

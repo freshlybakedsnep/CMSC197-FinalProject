@@ -1,6 +1,6 @@
 class_name ActionParser
-static var damage_text : PackedScene = preload("res://scenes/ui/damage_text.tscn")
-static var effect_text : PackedScene = preload("res://scenes/ui/effect_text.tscn")
+static var damage_text : PackedScene = preload("res://scenes/stage_prelim/ui/damage_text.tscn")
+static var effect_text : PackedScene = preload("res://scenes/stage_prelim/ui/effect_text.tscn")
 
 static func execute(src: Entity, action: Action, targets: Array[EntityData] = []) -> void:
 	var curr_action := action
@@ -10,6 +10,11 @@ static func execute(src: Entity, action: Action, targets: Array[EntityData] = []
 	var act : ActionComponent = src.data.get_comp(EntityComponent.Type.ACTION)
 	var res : ResourceComponent = src.data.get_comp(EntityComponent.Type.RESOURCE)
 	if act:
+		# start cooldown and apply cost
+		act.start_cooldown(curr_action)
+		if res:
+			res.consume(curr_action.cost)
+			
 		# defaults the action if SILENCED
 		if status and status.has_flag("SILENCE") and action not in act.basic_pool:
 			curr_action = act.basic_pool.pick_random()
@@ -37,6 +42,8 @@ static func execute(src: Entity, action: Action, targets: Array[EntityData] = []
 			if current_targets.is_empty(): continue
 			
 			for fx in group.effects:
+				# insert animation code here
+				
 				for target in current_targets:
 					_apply_effect(src.data, target, fx, action.level)
 					
@@ -45,12 +52,6 @@ static func execute(src: Entity, action: Action, targets: Array[EntityData] = []
 						#tar_node.play_hit_vfx()
 				
 				await src.get_tree().create_timer(0.3).timeout
-		
-		act.start_cooldown(curr_action)
-	
-		if res:
-			res.consume(curr_action.cost)
-	
 	src.entity_action_over.emit()
 
 static func _apply_effect(src: EntityData, tar: EntityData, fx: Effect, level: int) -> void:

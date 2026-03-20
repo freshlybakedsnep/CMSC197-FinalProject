@@ -13,7 +13,7 @@ enum Faction { HERO, ENEMY, NEUTRAL }
 var faction : Faction = Faction.ENEMY
 
 # State
-enum State { NORMAL, DEAD, STUNNED }
+enum State { NORMAL, DEAD }
 var state : State = State.NORMAL : 
 	set(value):
 		state = value

@@ -31,14 +31,18 @@ func connect_formations(enemies: EnemyFormation, heroes: HeroFormation) -> void:
 	hero_formation = heroes.global_position
 	party_menu.setup(heroes.formation.values().filter(func(f): return f))
 
-func turn_start() -> void:
-	self.process_mode = Node.PROCESS_MODE_INHERIT
+func enabled(toggle : bool) -> void:
+	cursor.visible = toggle
+	party_menu.enabled(toggle)
 	
-	cursor.show()
-	start_battle.show()
-	party_menu.enabled(true)
+	start_battle.visible = toggle
 	start_battle.disabled = true
 	start_battle.focus_mode = Control.FOCUS_NONE
+	
+	if toggle:
+		self.process_mode = Node.PROCESS_MODE_INHERIT
+	else:
+		self.process_mode = Node.PROCESS_MODE_DISABLED
 
 func _close_menu() -> void:
 	var x = menu_stack.pop_back()
@@ -92,17 +96,8 @@ func _on_party_ready() -> void:
 
 func _on_start_battle_pressed() -> void:
 	party_menu.selected_hero = null
-	print("Battle Starting!")
-	
-	party_menu.enabled(false)
-	cursor.hide()
+	enabled(false)
 	plan_done.emit()
-	
-	self.process_mode = Node.PROCESS_MODE_DISABLED
-	start_battle.disabled = true
-	start_battle.focus_mode = Control.FOCUS_NONE
-	start_battle.mouse_behavior_recursive = Control.MOUSE_BEHAVIOR_DISABLED
-	start_battle.hide()
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
