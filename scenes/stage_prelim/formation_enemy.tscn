@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bcdyij8txqpmr"]
 
-[ext_resource type="Script" uid="uid://c4yrjkh7asd8c" path="res://scenes/stages/formation_enemy.gd" id="1_g5mgr"]
-[ext_resource type="PackedScene" uid="uid://d25b86f1mxfqj" path="res://scenes/stages/formation.tscn" id="1_mgn1u"]
+[ext_resource type="Script" uid="uid://c4yrjkh7asd8c" path="res://scenes/stage_prelim/formation_enemy.gd" id="1_g5mgr"]
+[ext_resource type="PackedScene" uid="uid://d25b86f1mxfqj" path="res://scenes/stage_prelim/formation.tscn" id="1_mgn1u"]
 [ext_resource type="PackedScene" uid="uid://c6b4l3yqvllgy" path="res://revised/entity/entity.tscn" id="3_1xpdr"]
 
 [node name="Formation" unique_id=689653097 instance=ExtResource("1_mgn1u")]

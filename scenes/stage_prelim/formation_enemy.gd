@@ -31,9 +31,6 @@ func fill_vacancies() -> void:
 func is_wave_clear() -> bool:
 	return _vacancies == 5 and enemy_pool.is_empty()
 
-func has_vacancies() -> int:
-	return _vacancies
-
 func add_to_formation(enemy : Entity, index : int, pos : Marker2D) -> void:
 	formation[index] = enemy
 	pos.add_child(enemy)

@@ -1,8 +1,8 @@
 extends EntityFormation
 class_name HeroFormation
 
-func setup(callable : Callable, death_row : Array) -> void:
-	super.setup(callable, death_row)
+func setup(death_row : Array) -> void:
+	super.setup(death_row)
 	
 	for i in PartyManager.party.size():
 		var hero_res = PartyManager.party[i]
@@ -10,6 +10,7 @@ func setup(callable : Callable, death_row : Array) -> void:
 		
 		var hero_node = spawn_entity(hero_res, true)
 		hero_node.add_to_group("heroes")
+		hero_node.data.faction = EntityData.Faction.HERO
 		formation[i+1] = hero_node
 		_positions[i+1].add_child(hero_node)
 

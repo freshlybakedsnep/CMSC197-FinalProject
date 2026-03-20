@@ -1,0 +1,125 @@
+[gd_scene format=3 uid="uid://bifyp6opkfsfo"]
+
+[ext_resource type="Script" uid="uid://dfwilkkfsbqyu" path="res://scenes/stages/stage.gd" id="1_oa6vd"]
+[ext_resource type="PackedScene" uid="uid://c6b4l3yqvllgy" path="res://scenes/entity/entity.tscn" id="2_22nv1"]
+[ext_resource type="Script" uid="uid://lhx7sp8rhhjr" path="res://scripts/resource/stage_info.gd" id="3_bphci"]
+[ext_resource type="Script" uid="uid://cx656sdytf30u" path="res://scripts/resource/wave.gd" id="4_53hmt"]
+[ext_resource type="Script" uid="uid://ddsxg1ao3vu1d" path="res://scripts/resource/data_enemy.gd" id="5_tsors"]
+[ext_resource type="Resource" uid="uid://bu70ke42l84bf" path="res://resources/enemies/slime.tres" id="6_0fp0l"]
+[ext_resource type="Script" uid="uid://c8d4ukuf2tkk0" path="res://scripts/resource/ability.gd" id="7_ehqcs"]
+[ext_resource type="Resource" path="res://resources/abilities/tackle.tres" id="8_sk0g7"]
+[ext_resource type="Texture2D" uid="uid://c2l0sgxhal5k6" path="res://assets/icon_test.png" id="9_6pxpj"]
+[ext_resource type="Script" uid="uid://np6c631gwyc1" path="res://scripts/resource/effect.gd" id="10_nwfru"]
+[ext_resource type="PackedScene" uid="uid://3vg0err7ohtm" path="res://scenes/stages/formation_enemy.tscn" id="10_q2835"]
+[ext_resource type="PackedScene" uid="uid://b6ibb4e5hmygc" path="res://scenes/entity/entity_enemy.tscn" id="11_g1c6t"]
+[ext_resource type="Script" uid="uid://ccv6s717ftoj2" path="res://scripts/resource/value_scaling.gd" id="11_vss0j"]
+[ext_resource type="Script" uid="uid://cwp6uh5wxbdq0" path="res://scripts/resource/effect_health.gd" id="12_b4ioo"]
+[ext_resource type="PackedScene" uid="uid://cv1pps7l0sce7" path="res://scenes/stages/formation_hero.tscn" id="12_cxkqe"]
+[ext_resource type="PackedScene" uid="uid://d36xbln731vef" path="res://scenes/entity/entity_hero.tscn" id="13_1gwe1"]
+[ext_resource type="PackedScene" uid="uid://bwtxguku00kwa" path="res://scenes/ui/menu_battle.tscn" id="14_dkcyh"]
+
+[sub_resource type="Resource" id="Resource_m4is4"]
+script = ExtResource("11_vss0j")
+mult_gain_per_level = 0.0
+stat = 6
+metadata/_custom_type_script = "uid://ccv6s717ftoj2"
+
+[sub_resource type="Resource" id="Resource_s5gfg"]
+Resource = null
+resource_path = "res://scenes/stages/stage.tscn::Resource_s5gfg"
+resource_scene_unique_id = "Resource_s5gfg"
+script = ExtResource("12_b4ioo")
+"Health Alteration" = null
+formula = SubResource("Resource_m4is4")
+"Targeting Settings" = null
+inherit_last_targets = null
+metadata/_custom_type_script = "uid://cwp6uh5wxbdq0"
+
+[sub_resource type="Resource" id="Resource_jwt2s"]
+script = ExtResource("7_ehqcs")
+downtime = 0
+ability_name = "Digestive Fluids"
+target_range = null
+target_mode = null
+effects = Array[ExtResource("10_nwfru")]([SubResource("Resource_s5gfg")])
+metadata/_custom_type_script = "uid://c8d4ukuf2tkk0"
+
+[sub_resource type="Resource" id="Resource_jl6nj"]
+script = ExtResource("5_tsors")
+entity_name = "Slime"
+elemental_type = 1
+basic_atk = Array[ExtResource("7_ehqcs")]([ExtResource("8_sk0g7")])
+ultimate = Array[ExtResource("7_ehqcs")]([SubResource("Resource_jwt2s")])
+base_attack = 6
+metadata/_custom_type_script = "uid://ddsxg1ao3vu1d"
+
+[sub_resource type="Resource" id="Resource_e38vs"]
+script = ExtResource("5_tsors")
+entity_name = "Slime"
+basic_atk = Array[ExtResource("7_ehqcs")]([ExtResource("8_sk0g7")])
+ultimate = Array[ExtResource("7_ehqcs")]([SubResource("Resource_jwt2s")])
+base_attack = 6
+metadata/_custom_type_script = "uid://ddsxg1ao3vu1d"
+
+[sub_resource type="Resource" id="Resource_xfx4c"]
+script = ExtResource("5_tsors")
+entity_name = "Slime"
+elemental_type = 3
+basic_atk = Array[ExtResource("7_ehqcs")]([ExtResource("8_sk0g7")])
+ultimate = Array[ExtResource("7_ehqcs")]([SubResource("Resource_jwt2s")])
+base_attack = 6
+metadata/_custom_type_script = "uid://ddsxg1ao3vu1d"
+
+[sub_resource type="Resource" id="Resource_5sts7"]
+script = ExtResource("5_tsors")
+entity_name = "Slime"
+elemental_type = 4
+basic_atk = Array[ExtResource("7_ehqcs")]([ExtResource("8_sk0g7")])
+ultimate = Array[ExtResource("7_ehqcs")]([SubResource("Resource_jwt2s")])
+base_attack = 6
+metadata/_custom_type_script = "uid://ddsxg1ao3vu1d"
+
+[sub_resource type="Resource" id="Resource_ddp0b"]
+script = ExtResource("5_tsors")
+entity_name = "Slime"
+elemental_type = 3
+basic_atk = Array[ExtResource("7_ehqcs")]([ExtResource("8_sk0g7")])
+ultimate = Array[ExtResource("7_ehqcs")]([SubResource("Resource_jwt2s")])
+base_attack = 6
+metadata/_custom_type_script = "uid://ddsxg1ao3vu1d"
+
+[sub_resource type="Resource" id="Resource_yd2gm"]
+script = ExtResource("4_53hmt")
+enemies = Array[ExtResource("5_tsors")]([ExtResource("6_0fp0l"), SubResource("Resource_jl6nj"), SubResource("Resource_e38vs"), SubResource("Resource_xfx4c"), SubResource("Resource_5sts7"), SubResource("Resource_ddp0b")])
+metadata/_custom_type_script = "uid://cx656sdytf30u"
+
+[sub_resource type="Resource" id="Resource_dexii"]
+script = ExtResource("3_bphci")
+waves = Array[ExtResource("4_53hmt")]([SubResource("Resource_yd2gm")])
+metadata/_custom_type_script = "uid://lhx7sp8rhhjr"
+
+[node name="Stage" type="Node" unique_id=871806380]
+script = ExtResource("1_oa6vd")
+entity = ExtResource("2_22nv1")
+stage_info = SubResource("Resource_dexii")
+
+[node name="Background" type="Node2D" parent="." unique_id=1792994303]
+z_index = -1
+
+[node name="Enemies" parent="." unique_id=1419791244 instance=ExtResource("10_q2835")]
+position = Vector2(350, 320)
+entity_scene = ExtResource("11_g1c6t")
+
+[node name="Heroes" parent="." unique_id=689653097 instance=ExtResource("12_cxkqe")]
+position = Vector2(900, 400)
+entity_scene = ExtResource("13_1gwe1")
+
+[node name="CommandUI" parent="." unique_id=1732962988 instance=ExtResource("14_dkcyh")]
+z_index = 1
+
+[node name="Interval" type="Timer" parent="." unique_id=762121790]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="turn_changed" from="." to="CommandUI" method="turn_start"]
+[connection signal="plan_done" from="CommandUI" to="." method="start_fight"]

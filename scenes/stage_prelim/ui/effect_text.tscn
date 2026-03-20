@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dbv4jdmhgn5pq"]
 
-[ext_resource type="Script" uid="uid://ypy7iuuw323f" path="res://scenes/ui/effect_text.gd" id="1_dip3p"]
+[ext_resource type="Script" uid="uid://ypy7iuuw323f" path="res://scenes/stage_prelim/ui/effect_text.gd" id="1_dip3p"]
 [ext_resource type="FontFile" uid="uid://dmgqmwfwyqfc0" path="res://assets/FOT-Aokane Std.ttf" id="2_q7vs1"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_dip3p"]

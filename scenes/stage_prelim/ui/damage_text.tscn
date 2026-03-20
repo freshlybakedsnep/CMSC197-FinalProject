@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dr0fvwkdc10g4"]
 
-[ext_resource type="Script" uid="uid://bajdgqeopny70" path="res://scenes/ui/damage_text.gd" id="1_c6dak"]
+[ext_resource type="Script" uid="uid://bajdgqeopny70" path="res://scenes/stage_prelim/ui/damage_text.gd" id="1_c6dak"]
 [ext_resource type="FontFile" uid="uid://dmgqmwfwyqfc0" path="res://assets/FOT-Aokane Std.ttf" id="1_skkc4"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_qnvfe"]

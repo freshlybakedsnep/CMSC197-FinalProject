@@ -8,7 +8,7 @@ signal finished
 @export var heal_color : Color
 
 func _ready() -> void:
-	var f = create_tween()
+	var f = create_tween().set_parallel(true)
 	f.tween_property(self, "position", Vector2(position.x, -25), duration).set_ease(Tween.EASE_IN)
 	await f.finished
 	
