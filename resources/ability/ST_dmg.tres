@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="Action" format=3 uid="uid://c3q57rkxtt5ah"]
 
 [ext_resource type="Texture2D" uid="uid://c2l0sgxhal5k6" path="res://assets/icon_test.png" id="1_lptkk"]
-[ext_resource type="Script" uid="uid://djkmvtkrgtp6u" path="res://revised/action/effect_group.gd" id="2_852ae"]
+[ext_resource type="Script" uid="uid://djkmvtkrgtp6u" path="res://scripts/action/effect_group.gd" id="2_852ae"]
 [ext_resource type="Resource" uid="uid://cry5hs3tl715e" path="res://resources/ability/effect_group/inherit_dmg60-100%ownATK.tres" id="3_kx0cg"]
-[ext_resource type="Script" uid="uid://bdmenxynhc50j" path="res://revised/action/action.gd" id="4_utb26"]
+[ext_resource type="Script" uid="uid://bdmenxynhc50j" path="res://scripts/action/action.gd" id="4_utb26"]
 
 [resource]
 script = ExtResource("4_utb26")

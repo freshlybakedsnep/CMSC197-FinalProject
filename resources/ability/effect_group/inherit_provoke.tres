@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="EffectGroup" format=3 uid="uid://bad80kbi2i0qm"]
 
-[ext_resource type="Script" uid="uid://df5c28vkm6a78" path="res://revised/action/effect.gd" id="1_6gwm2"]
+[ext_resource type="Script" uid="uid://df5c28vkm6a78" path="res://scripts/action/effect.gd" id="1_6gwm2"]
 [ext_resource type="Resource" uid="uid://1aojspe4epbf" path="res://resources/ability/effect/provoke.tres" id="2_6gwm2"]
-[ext_resource type="Script" uid="uid://djkmvtkrgtp6u" path="res://revised/action/effect_group.gd" id="3_6bael"]
+[ext_resource type="Script" uid="uid://djkmvtkrgtp6u" path="res://scripts/action/effect_group.gd" id="3_6bael"]
 
 [resource]
 script = ExtResource("3_6bael")

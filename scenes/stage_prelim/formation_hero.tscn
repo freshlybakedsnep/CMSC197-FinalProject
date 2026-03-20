@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cpvwcgai5b0d1" path="res://scenes/stage_prelim/formation_hero.gd" id="1_fb83y"]
 [ext_resource type="PackedScene" uid="uid://d25b86f1mxfqj" path="res://scenes/stage_prelim/formation.tscn" id="1_srygu"]
-[ext_resource type="PackedScene" uid="uid://c6b4l3yqvllgy" path="res://revised/entity/entity.tscn" id="3_hcaid"]
+[ext_resource type="PackedScene" uid="uid://c6b4l3yqvllgy" path="res://scenes/entity/entity.tscn" id="3_hcaid"]
 
 [node name="Formation" unique_id=689653097 instance=ExtResource("1_srygu")]
 script = ExtResource("1_fb83y")

@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="Action" format=3 uid="uid://cvn20gih60uto"]
 
-[ext_resource type="Script" uid="uid://djkmvtkrgtp6u" path="res://revised/action/effect_group.gd" id="1_ksfhh"]
+[ext_resource type="Script" uid="uid://djkmvtkrgtp6u" path="res://scripts/action/effect_group.gd" id="1_ksfhh"]
 [ext_resource type="Texture2D" uid="uid://c2l0sgxhal5k6" path="res://assets/icon_test.png" id="1_ne3h8"]
-[ext_resource type="Script" uid="uid://bdmenxynhc50j" path="res://revised/action/action.gd" id="2_4cksu"]
-[ext_resource type="Script" uid="uid://df5c28vkm6a78" path="res://revised/action/effect.gd" id="3_n0728"]
-[ext_resource type="Script" uid="uid://x82xxogtaoe5" path="res://revised/action/value_flat.gd" id="4_08h43"]
-[ext_resource type="Script" uid="uid://b7wmacmexid3k" path="res://revised/action/effect_status.gd" id="5_sy8ko"]
+[ext_resource type="Script" uid="uid://bdmenxynhc50j" path="res://scripts/action/action.gd" id="2_4cksu"]
+[ext_resource type="Script" uid="uid://df5c28vkm6a78" path="res://scripts/action/effect.gd" id="3_n0728"]
+[ext_resource type="Script" uid="uid://x82xxogtaoe5" path="res://scripts/action/value_flat.gd" id="4_08h43"]
+[ext_resource type="Script" uid="uid://b7wmacmexid3k" path="res://scripts/action/effect_status.gd" id="5_sy8ko"]
 
 [sub_resource type="Resource" id="Resource_laowq"]
 script = ExtResource("4_08h43")

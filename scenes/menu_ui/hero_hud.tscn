@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ntkoceor2v43"]
 
-[ext_resource type="Script" uid="uid://dlh588ibhynuh" path="res://revised/menu_ui/hero_hud.gd" id="1_eqevu"]
+[ext_resource type="Script" uid="uid://dlh588ibhynuh" path="res://scenes/menu_ui/hero_hud.gd" id="1_eqevu"]
 [ext_resource type="Texture2D" uid="uid://i7jt4s0h8fiq" path="res://assets/sprites/anuberus.webp" id="2_ttu7u"]
 [ext_resource type="Texture2D" uid="uid://djsmku1wj884k" path="res://icon.svg" id="3_jcuw5"]
 [ext_resource type="FontFile" uid="uid://dmgqmwfwyqfc0" path="res://assets/FOT-Aokane Std.ttf" id="4_eqevu"]

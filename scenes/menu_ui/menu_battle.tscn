@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://bwtxguku00kwa"]
 
-[ext_resource type="Script" uid="uid://b3l666p10m5jc" path="res://revised/menu_ui/menu_battle.gd" id="1_qyamm"]
-[ext_resource type="Script" uid="uid://f486luiaamwq" path="res://revised/menu_ui/menu_party.gd" id="2_0bl1x"]
+[ext_resource type="Script" uid="uid://b3l666p10m5jc" path="res://scenes/menu_ui/menu_battle.gd" id="1_qyamm"]
+[ext_resource type="Script" uid="uid://f486luiaamwq" path="res://scenes/menu_ui/menu_party.gd" id="2_0bl1x"]
 [ext_resource type="FontFile" uid="uid://dmgqmwfwyqfc0" path="res://assets/FOT-Aokane Std.ttf" id="2_h1ljj"]
-[ext_resource type="Script" uid="uid://cce2y4tb4nn2v" path="res://revised/menu_ui/menu_action.gd" id="3_h1ljj"]
-[ext_resource type="PackedScene" uid="uid://ntkoceor2v43" path="res://revised/menu_ui/hero_hud.tscn" id="3_j33cn"]
-[ext_resource type="PackedScene" uid="uid://dd44kt0ng0qeu" path="res://revised/menu_ui/skill_button.tscn" id="4_hpdg0"]
-[ext_resource type="Script" uid="uid://5qfltf3003g0" path="res://revised/menu_ui/menu_target.gd" id="5_rucv6"]
-[ext_resource type="PackedScene" uid="uid://cqig8vtkfogja" path="res://revised/menu_ui/cursor.tscn" id="7_j33cn"]
+[ext_resource type="Script" uid="uid://cce2y4tb4nn2v" path="res://scenes/menu_ui/menu_action.gd" id="3_h1ljj"]
+[ext_resource type="PackedScene" uid="uid://ntkoceor2v43" path="res://scenes/menu_ui/hero_hud.tscn" id="3_j33cn"]
+[ext_resource type="PackedScene" uid="uid://dd44kt0ng0qeu" path="res://scenes/menu_ui/skill_button.tscn" id="4_hpdg0"]
+[ext_resource type="Script" uid="uid://5qfltf3003g0" path="res://scenes/menu_ui/menu_target.gd" id="5_rucv6"]
+[ext_resource type="PackedScene" uid="uid://cqig8vtkfogja" path="res://scenes/menu_ui/cursor.tscn" id="7_j33cn"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_h1ljj"]
 font = ExtResource("2_h1ljj")

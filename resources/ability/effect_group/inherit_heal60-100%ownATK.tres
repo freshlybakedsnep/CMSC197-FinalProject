@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="EffectGroup" format=3 uid="uid://dk74nfjn0nts5"]
 
-[ext_resource type="Script" uid="uid://df5c28vkm6a78" path="res://revised/action/effect.gd" id="1_rvsno"]
+[ext_resource type="Script" uid="uid://df5c28vkm6a78" path="res://scripts/action/effect.gd" id="1_rvsno"]
 [ext_resource type="Resource" uid="uid://dr53ni2nm767o" path="res://resources/ability/effect/heal60-100%ownATK.tres" id="2_rvsno"]
-[ext_resource type="Script" uid="uid://djkmvtkrgtp6u" path="res://revised/action/effect_group.gd" id="3_trv6n"]
+[ext_resource type="Script" uid="uid://djkmvtkrgtp6u" path="res://scripts/action/effect_group.gd" id="3_trv6n"]
 
 [resource]
 script = ExtResource("3_trv6n")

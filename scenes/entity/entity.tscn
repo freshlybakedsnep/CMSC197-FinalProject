@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://c6b4l3yqvllgy"]
 
-[ext_resource type="Script" uid="uid://ciiwy4ojou0tj" path="res://revised/entity/entity.gd" id="1_0p8rp"]
+[ext_resource type="Script" uid="uid://ciiwy4ojou0tj" path="res://scenes/entity/entity.gd" id="1_0p8rp"]
 [ext_resource type="Shader" uid="uid://byk63wjvv8dun" path="res://entity_outline.gdshader" id="2_u7y06"]
 [ext_resource type="Texture2D" uid="uid://coix0iaueaui5" path="res://assets/place_holder.png" id="3_lk8ta"]
-[ext_resource type="Script" uid="uid://bbqureqt1r8x1" path="res://revised/entity/hp_bar.gd" id="4_xk0ck"]
+[ext_resource type="Script" uid="uid://bbqureqt1r8x1" path="res://scenes/entity/hp_bar.gd" id="4_xk0ck"]
 [ext_resource type="FontFile" uid="uid://dmgqmwfwyqfc0" path="res://assets/FOT-Aokane Std.ttf" id="5_686q4"]
 [ext_resource type="Texture2D" uid="uid://cb5wxytvtgwv" path="res://assets/El4kind5.png" id="6_a0j2l"]
 

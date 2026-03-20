@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="Action" format=3 uid="uid://dvriirguc0vps"]
 
 [ext_resource type="Texture2D" uid="uid://c2l0sgxhal5k6" path="res://assets/icon_test.png" id="1_v7viy"]
-[ext_resource type="Script" uid="uid://djkmvtkrgtp6u" path="res://revised/action/effect_group.gd" id="2_bola3"]
+[ext_resource type="Script" uid="uid://djkmvtkrgtp6u" path="res://scripts/action/effect_group.gd" id="2_bola3"]
 [ext_resource type="Resource" uid="uid://cwnu8n1b3imnv" path="res://resources/ability/effect_group/inherit_taunt.tres" id="3_v7viy"]
-[ext_resource type="Script" uid="uid://bdmenxynhc50j" path="res://revised/action/action.gd" id="4_el4xy"]
+[ext_resource type="Script" uid="uid://bdmenxynhc50j" path="res://scripts/action/action.gd" id="4_el4xy"]
 
 [resource]
 script = ExtResource("4_el4xy")

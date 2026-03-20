@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cqig8vtkfogja"]
 
 [ext_resource type="Texture2D" uid="uid://dir7730daqs6f" path="res://assets/hand_cursor0000.png" id="1_fsq4c"]
-[ext_resource type="Script" uid="uid://bme4qa8uw8vqm" path="res://revised/menu_ui/cursor.gd" id="2_5l68f"]
+[ext_resource type="Script" uid="uid://bme4qa8uw8vqm" path="res://scenes/menu_ui/cursor.gd" id="2_5l68f"]
 
 [node name="Cursor" type="TextureRect" unique_id=224305860]
 anchors_preset = 5

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ValueScaling" format=3 uid="uid://ddhge0fffuv2f"]
 
-[ext_resource type="Script" uid="uid://dhasq7k64fe7q" path="res://revised/action/value_scaling.gd" id="1_pqaaw"]
+[ext_resource type="Script" uid="uid://dhasq7k64fe7q" path="res://scripts/action/value_scaling.gd" id="1_pqaaw"]
 
 [resource]
 script = ExtResource("1_pqaaw")
