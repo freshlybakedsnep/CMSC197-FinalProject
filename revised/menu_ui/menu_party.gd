@@ -45,11 +45,10 @@ func select_hero(hero : Entity) -> void:
 
 func enabled(toggle : bool) -> void:
 	for hero in hero_to_hud:
-		match hero.data.state:
-			EntityData.State.NORMAL:
-				hero_to_hud[hero].enabled(toggle)
-				if toggle == false and selected_hero == hero:
-					hero_to_hud[hero].a.self_modulate = Color(1,1,1)
+		if hero.data.state == EntityData.State.NORMAL and can_act(hero):
+			hero_to_hud[hero].enabled(toggle)
+			if toggle == false and selected_hero == hero:
+				hero_to_hud[hero].a.self_modulate = Color(1,1,1)
 	if toggle:
 		call_deferred("focus_initial")
 
@@ -66,12 +65,18 @@ func focus_initial() -> void:
 	
 	party_ready.emit()
 
-func needs_action(ent : Entity) -> bool:
+func can_act(ent: Entity) -> bool:
 	if ent:
 		var status : StatusComponent = ent.data.get_comp(EntityComponent.Type.STATUS)
+		if status and not status.has_flag("STUN"):
+				return true
+	return false
+
+func needs_action(ent : Entity) -> bool:
+	if ent:
 		var cont : PlayerController = ent.data.get_comp(EntityComponent.Type.CONTROLLER)
-		if cont and status:
+		if cont:
 			# checks if they have no action set and if they can act at all
-			if not cont.queued_action and not status.has_flag("STUN"):
+			if not cont.queued_action and can_act(ent):
 				return true
 	return false
