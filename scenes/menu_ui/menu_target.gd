@@ -26,7 +26,6 @@ func setup(data: Dictionary) -> void:
 		action.target_mode if action.target_mode < Action.TargetMode.AOE else Action.TargetMode.AOE,
 		action.target_count,
 		action.target_state)
-	#BattleRegistry.get_potential_targets(selected_hero.data, action.target_group)
 	
 	for d in dat:
 		if d.state == action.target_state:
@@ -38,8 +37,10 @@ func setup(data: Dictionary) -> void:
 	
 	# gets the hero's previous targets
 	var cont : PlayerController = selected_hero.data.get_comp(EntityComponent.Type.CONTROLLER)
-	var que = cont.queued_targets if cont.queued_action == action else []
 	# checks if queued action is the same as the selected action
+	var que = cont.queued_targets if cont.queued_action == action else []
+	
+	print(display_targets)
 	
 	for i in display_targets.size():
 		var unit = display_targets[i]
@@ -48,9 +49,8 @@ func setup(data: Dictionary) -> void:
 		#if not b.focus_entered.is_connected(predict_outcome):
 			#b.focus_entered.connect(func(): predict_outcome(unit, true))
 			#b.focus_exited.connect(func(): predict_outcome(unit, false))
-		
-		if b.pressed.is_connected(selected_target):
-			b.pressed.disconnect(selected_target)
+		for con in b.pressed.get_connections():
+			b.pressed.disconnect(con["callable"])
 		b.pressed.connect(selected_target.bind(unit))
 		
 		b.focus_neighbor_bottom = confirm.get_path()
@@ -65,6 +65,7 @@ func setup(data: Dictionary) -> void:
 			#predict_outcome(unit, true)
 		#else:
 			#predict_outcome(unit, false)
+		
 		
 		if i > 0:
 			var lb = display_targets[i-1].target_component

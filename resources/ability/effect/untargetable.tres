@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="StatusEffect" format=3 uid="uid://y0bv3t0bb4pw"]
+
+[ext_resource type="Script" uid="uid://x82xxogtaoe5" path="res://scripts/action/value_flat.gd" id="1_wxcif"]
+[ext_resource type="Script" uid="uid://b7wmacmexid3k" path="res://scripts/action/effect_status.gd" id="2_wm2vf"]
+
+[sub_resource type="Resource" id="Resource_twmir"]
+script = ExtResource("1_wxcif")
+metadata/_custom_type_script = "uid://x82xxogtaoe5"
+
+[resource]
+script = ExtResource("2_wm2vf")
+status_key = &"UNTARGETABLE"
+turns = 2
+behavior = 3
+formula = SubResource("Resource_twmir")
+metadata/_custom_type_script = "uid://b7wmacmexid3k"

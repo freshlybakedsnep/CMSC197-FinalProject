@@ -66,15 +66,25 @@ func has_flag(flag_name: String) -> bool:
 			return true
 	return false
 
+func _has_behavior(behavior: StatusEffect.Behavior, key: StringName = &"") -> bool:
+	if not _active_status.has(behavior):
+		return false
+	if key == &"":
+		return not _active_status[behavior].is_empty()
+	return _active_status[behavior].has(key)
+
 func is_incapacitated() -> bool:
-	return _active_status.has(StatusEffect.Behavior.INCAPACITATE) and not _active_status[StatusEffect.Behavior.INCAPACITATE].is_empty() 
+	return _has_behavior(StatusEffect.Behavior.INCAPACITATE)
 
 func is_provoked() -> bool:
-	return _active_status.has(StatusEffect.Behavior.RESTRICT) and _active_status[StatusEffect.Behavior.RESTRICT].has("PROVOKE")
+	return _has_behavior(StatusEffect.Behavior.RESTRICT, &"PROVOKE")
+
+func is_targetable() -> bool:
+	return not _has_behavior(StatusEffect.Behavior.PROTECT, &"UNTARGETABLE")
 
 func get_provokers() -> Array[EntityData]:
 	var p : Array[EntityData] = []
-	if _active_status.has(StatusEffect.Behavior.RESTRICT) and _active_status[StatusEffect.Behavior.RESTRICT].has("PROVOKE"):
+	if is_provoked():
 		for mod in _active_status[StatusEffect.Behavior.RESTRICT]["PROVOKE"]:
 			var cas = mod.get("caster")
 			if cas not in p:
@@ -82,7 +92,7 @@ func get_provokers() -> Array[EntityData]:
 	return p
 
 func has_taunt() -> bool:
-	return _active_status.has(StatusEffect.Behavior.PROTECT) and _active_status[StatusEffect.Behavior.PROTECT].has("TAUNT")
+	return not _has_behavior(StatusEffect.Behavior.PROTECT, &"TAUNT")
 
 func tick_turns() -> void:
 	_process_reduction("turns")

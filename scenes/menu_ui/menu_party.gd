@@ -68,7 +68,7 @@ func focus_initial() -> void:
 func can_act(ent: Entity) -> bool:
 	if ent:
 		var status : StatusComponent = ent.data.get_comp(EntityComponent.Type.STATUS)
-		if status and not status.has_flag("STUN"):
+		if status and not status.is_incapacitated():
 				return true
 	return false
 

@@ -16,8 +16,8 @@ enum Behavior {
 # basically a flag check for special behaviors associated with it
 	NONE,			# simple status condition application
 	INCAPACITATE,	# causes entity to skip their turn
-	RESTRICT, 		# limits player's choices
-	PROTECT,		# affects damage multiplier
+	RESTRICT, 		# limits the entity's choices
+	PROTECT,		# affects damage multiplier and targeting
 	DOT				# off-battle damage application
 }
 @export var permanent : bool = false

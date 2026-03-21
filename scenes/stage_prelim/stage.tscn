@@ -5,15 +5,67 @@
 [ext_resource type="Script" uid="uid://cx656sdytf30u" path="res://scripts/wave.gd" id="3_sc1co"]
 [ext_resource type="Script" uid="uid://ddsxg1ao3vu1d" path="res://scenes/entity/ent_enemy.gd" id="4_2lgi4"]
 [ext_resource type="Resource" uid="uid://db8wjrcpyke2a" path="res://resources/enemies/test_slime.tres" id="5_ho8nq"]
+[ext_resource type="Script" uid="uid://bl2qf613jng43" path="res://scenes/entity/entity_component.gd" id="6_2xm68"]
+[ext_resource type="Script" uid="uid://bq4jpvro24bfo" path="res://scripts/components/stats_component.gd" id="7_3al4t"]
+[ext_resource type="Script" uid="uid://bdmenxynhc50j" path="res://scripts/action/action.gd" id="8_kebkx"]
+[ext_resource type="Resource" uid="uid://c3q57rkxtt5ah" path="res://resources/ability/ST_dmg.tres" id="9_u3bu7"]
+[ext_resource type="Resource" uid="uid://dpidsf1drgduj" path="res://resources/ability/SELF_untargetable.tres" id="10_jdhf4"]
 [ext_resource type="PackedScene" uid="uid://bcdyij8txqpmr" path="res://scenes/stage_prelim/formation_enemy.tscn" id="10_q2835"]
+[ext_resource type="Script" uid="uid://dsu1t80330rqd" path="res://scripts/components/action_component.gd" id="11_en1d0"]
 [ext_resource type="PackedScene" uid="uid://oyeqlnpaeldy" path="res://scenes/stage_prelim/formation_hero.tscn" id="12_cxkqe"]
+[ext_resource type="Resource" uid="uid://bdnkx1a8e24j4" path="res://resources/ability/AOE_dmg.tres" id="12_k3x5l"]
 [ext_resource type="FontFile" uid="uid://dmgqmwfwyqfc0" path="res://assets/FOT-Aokane Std.ttf" id="12_mim2l"]
+[ext_resource type="Script" uid="uid://c6g2xy001wklx" path="res://scripts/components/element_component.gd" id="13_mlihk"]
+[ext_resource type="Script" uid="uid://cm88ovm7gjp44" path="res://scripts/components/status_component.gd" id="14_0vnh0"]
 [ext_resource type="PackedScene" uid="uid://bwtxguku00kwa" path="res://scenes/menu_ui/menu_battle.tscn" id="14_dkcyh"]
+[ext_resource type="Script" uid="uid://cpffl8bnew7fl" path="res://scripts/components/ai_controller.gd" id="15_eoap2"]
+[ext_resource type="Script" uid="uid://ug5unx6nj7be" path="res://scripts/components/resource_component.gd" id="16_ejsep"]
 [ext_resource type="Script" uid="uid://bmoddb5swqv0y" path="res://scripts/state_machine.gd" id="18_s5gfg"]
+
+[sub_resource type="Resource" id="Resource_jncna"]
+script = ExtResource("7_3al4t")
+base_stats = {
+"ATK": 5,
+"DEF": 2,
+"HP": 10,
+"SPD": 5
+}
+metadata/_custom_type_script = "uid://bq4jpvro24bfo"
+
+[sub_resource type="Resource" id="Resource_syrdu"]
+script = ExtResource("11_en1d0")
+basic_pool = Array[ExtResource("8_kebkx")]([ExtResource("9_u3bu7"), ExtResource("10_jdhf4")])
+ultimates = Array[ExtResource("8_kebkx")]([ExtResource("12_k3x5l")])
+metadata/_custom_type_script = "uid://dsu1t80330rqd"
+
+[sub_resource type="Resource" id="Resource_s5yfr"]
+script = ExtResource("13_mlihk")
+my_elem = 1
+metadata/_custom_type_script = "uid://c6g2xy001wklx"
+
+[sub_resource type="Resource" id="Resource_p3iaq"]
+script = ExtResource("14_0vnh0")
+metadata/_custom_type_script = "uid://cm88ovm7gjp44"
+
+[sub_resource type="Resource" id="Resource_jel85"]
+script = ExtResource("15_eoap2")
+metadata/_custom_type_script = "uid://cpffl8bnew7fl"
+
+[sub_resource type="Resource" id="Resource_s2s0s"]
+script = ExtResource("16_ejsep")
+res_name = "Charge"
+start_amount = -1
+metadata/_custom_type_script = "uid://ug5unx6nj7be"
+
+[sub_resource type="Resource" id="Resource_anduq"]
+script = ExtResource("4_2lgi4")
+entity_name = "Slime"
+components = Array[ExtResource("6_2xm68")]([SubResource("Resource_jncna"), SubResource("Resource_syrdu"), SubResource("Resource_s5yfr"), SubResource("Resource_p3iaq"), SubResource("Resource_jel85"), SubResource("Resource_s2s0s")])
+metadata/_custom_type_script = "uid://ddsxg1ao3vu1d"
 
 [sub_resource type="Resource" id="Resource_sponv"]
 script = ExtResource("3_sc1co")
-enemies = Array[ExtResource("4_2lgi4")]([ExtResource("5_ho8nq")])
+enemies = Array[ExtResource("4_2lgi4")]([ExtResource("5_ho8nq"), ExtResource("5_ho8nq"), SubResource("Resource_anduq")])
 metadata/_custom_type_script = "uid://cx656sdytf30u"
 
 [sub_resource type="Resource" id="Resource_t8y0b"]

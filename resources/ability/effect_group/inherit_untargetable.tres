@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EffectGroup" format=3 uid="uid://bv0nfqfy6s6yi"]
+
+[ext_resource type="Script" uid="uid://df5c28vkm6a78" path="res://scripts/action/effect.gd" id="1_kmu2s"]
+[ext_resource type="Resource" uid="uid://y0bv3t0bb4pw" path="res://resources/ability/effect/untargetable.tres" id="2_kmu2s"]
+[ext_resource type="Script" uid="uid://djkmvtkrgtp6u" path="res://scripts/action/effect_group.gd" id="3_knlwh"]
+
+[resource]
+script = ExtResource("3_knlwh")
+inherit_target = true
+effects = Array[ExtResource("1_kmu2s")]([ExtResource("2_kmu2s")])
+metadata/_custom_type_script = "uid://djkmvtkrgtp6u"

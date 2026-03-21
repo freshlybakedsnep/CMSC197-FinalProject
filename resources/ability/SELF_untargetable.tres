@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Action" format=3 uid="uid://dpidsf1drgduj"]
+
+[ext_resource type="Texture2D" uid="uid://c2l0sgxhal5k6" path="res://assets/icon_test.png" id="1_6c5up"]
+[ext_resource type="Script" uid="uid://djkmvtkrgtp6u" path="res://scripts/action/effect_group.gd" id="2_73vwc"]
+[ext_resource type="Resource" uid="uid://bv0nfqfy6s6yi" path="res://resources/ability/effect_group/inherit_untargetable.tres" id="3_6c5up"]
+[ext_resource type="Script" uid="uid://bdmenxynhc50j" path="res://scripts/action/action.gd" id="4_o6hy3"]
+
+[resource]
+script = ExtResource("4_o6hy3")
+action_name = "SELF untargetable"
+action_icon = ExtResource("1_6c5up")
+level = 1
+effect_groups = Array[ExtResource("2_73vwc")]([ExtResource("3_6c5up")])
+metadata/_custom_type_script = "uid://bdmenxynhc50j"
