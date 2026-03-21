@@ -55,7 +55,7 @@ func _process(delta: float) -> void:
 		var transition = state.update(delta)
 		if transition != "" and transition != "repeat":
 			change(transition)
-		elif state.update(delta) == "repeat":
+		elif transition == "repeat":
 			repeat = true
 	
 	# DRAW
