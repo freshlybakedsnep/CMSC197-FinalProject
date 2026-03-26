@@ -78,3 +78,18 @@ static func _apply_effect(src: EntityData, tar: EntityData, fx: Effect, level: i
 				t.effect(eff["key"], Color.WHITE, eff["params"].get("is_buff", true))
 	tar.host.add_child(t)
 	await t.finished
+
+static func get_prediction(src: EntityData, tar: EntityData, action: Action) -> Dictionary:
+	var results = []
+	
+	if action.effect_groups.is_empty(): return {}
+	var group = action.effect_groups[0]
+	
+	for fx: Effect in group.effects:
+		var eff_data = fx.get_effect_data(src, tar, action.level)
+		
+		if eff_data.get("type") == "HEALTH":
+			var res = CombatResolver.resolve_health_adjust(src, tar, eff_data)
+			results.append(res)
+		
+	return {"results": results}

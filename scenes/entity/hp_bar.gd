@@ -50,9 +50,9 @@ func reset() -> void:
 	preview_bar.value = main_bar.value
 
 func update_prediction(amount: int) -> void:
-	var current = preview_bar.value
+	var current = main_bar.value
 	preview_bar.max_value = main_bar.max_value
-	preview_bar.value = clampi(current + amount, 0, main_bar.max_value)
+	preview_bar.value = clamp(current + amount, 0, main_bar.max_value)
 
 func display_prediction() -> void:
 	ghost_bar.hide()

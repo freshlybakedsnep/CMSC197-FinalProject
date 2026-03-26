@@ -32,6 +32,7 @@ func setup(data: Dictionary) -> void:
 			var ent : Entity = BattleRegistry.get_entity(d)
 			if ent:
 				display_targets.append(ent)
+				_update_prediction(ent)
 	# calls policies to determine the scope
 	required_targets = min(display_targets.size(), action.target_count)
 	
@@ -40,15 +41,14 @@ func setup(data: Dictionary) -> void:
 	# checks if queued action is the same as the selected action
 	var que = cont.queued_targets if cont.queued_action == action else []
 	
-	print(display_targets)
-	
 	for i in display_targets.size():
 		var unit = display_targets[i]
 		var b : Button = unit.target_component
 		
-		#if not b.focus_entered.is_connected(predict_outcome):
-			#b.focus_entered.connect(func(): predict_outcome(unit, true))
-			#b.focus_exited.connect(func(): predict_outcome(unit, false))
+		if not b.focus_entered.is_connected(predict_outcome):
+			b.focus_entered.connect(func(): predict_outcome(unit, true))
+			b.focus_exited.connect(func(): predict_outcome(unit, false))
+		
 		for con in b.pressed.get_connections():
 			b.pressed.disconnect(con["callable"])
 		b.pressed.connect(selected_target.bind(unit))
@@ -62,10 +62,9 @@ func setup(data: Dictionary) -> void:
 			unit == selected_hero)):
 			unit.outline_me(true)
 			current_selection.append(unit)
-			#predict_outcome(unit, true)
-		#else:
-			#predict_outcome(unit, false)
-		
+			predict_outcome(unit, true)
+		else:
+			predict_outcome(unit, false)
 		
 		if i > 0:
 			var lb = display_targets[i-1].target_component
@@ -95,17 +94,25 @@ func confirm_button() -> void:
 	if current_selection.size() >= required_targets:
 		confirm.grab_focus()
 
-#func predict_outcome(unit: Entity, shown: bool) -> void:
-	#if not shown:
-		#if (ability.target_mode != Ability.TargetMode.AOE and
-		#!current_selection.has(unit)):
-			#unit.hp_bar.clear_prediction()
-			#return
-	#
-	#if ability.target_mode == Ability.TargetMode.RANDOM:
-		#unit.hp_bar.clear_prediction()
-		#return
-	#unit.hp_bar.call_deferred("display_prediction")
+func _update_prediction(unit: Entity) -> void:
+	unit.hp_bar.clear_prediction()
+	unit.hp_bar.reset()
+	
+	var pred = ActionParser.get_prediction(selected_hero.data, unit.data, action)
+	for res in pred.get("results", []):
+		unit.hp_bar.update_prediction(-res["final"])
+
+func predict_outcome(unit: Entity, shown: bool) -> void:
+	if not shown:
+		if (action.target_mode != Action.TargetMode.AOE and
+		!current_selection.has(unit)):
+			unit.hp_bar.clear_prediction()
+			return
+	
+	if action.target_mode == Action.TargetMode.RANDOM:
+		unit.hp_bar.clear_prediction()
+		return
+	unit.hp_bar.call_deferred("display_prediction")
 
 func enabled(toggled : bool) -> void:
 	visible = toggled
@@ -156,8 +163,6 @@ func selected_target(unit: Entity) -> void:
 				if current_selection.size() < required_targets:
 					current_selection.append(unit)
 					unit.outline_me(true)
-	back.focus_neighbor_bottom = unit.target_component.get_path()
-	confirm.focus_neighbor_top = unit.target_component.get_path()
 	confirm_button()
 
 func confirm_selection() -> void:
