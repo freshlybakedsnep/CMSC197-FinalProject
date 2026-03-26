@@ -2,9 +2,12 @@ class_name ActionParser
 static var damage_text : PackedScene = preload("res://scenes/stage_prelim/ui/damage_text.tscn")
 static var effect_text : PackedScene = preload("res://scenes/stage_prelim/ui/effect_text.tscn")
 
+static func _is_alive(ent: EntityData) -> bool:
+	return is_instance_valid(ent.host) and ent.state != EntityData.State.DEAD
+
 static func execute(src: Entity, action: Action, targets: Array[EntityData] = []) -> void:
 	var curr_action := action
-	var main_targets : Array[EntityData] = targets
+	var main_targets : Array[EntityData] = targets.filter(_is_alive)
 	
 	var status : StatusComponent = src.data.get_comp(EntityComponent.Type.STATUS)
 	var act : ActionComponent = src.data.get_comp(EntityComponent.Type.ACTION)
