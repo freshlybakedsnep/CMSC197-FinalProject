@@ -61,7 +61,7 @@ static func _apply_effect(src: EntityData, tar: EntityData, fx: Effect, level: i
 	match eff.get("type"):
 		"HEALTH":
 			var result = CombatResolver.resolve_health_adjust(src, tar, eff)
-			stats.modify_stat("CURR_HP", -result["final_dmg"])
+			stats.modify_stat("CURR_HP", -result["final"])
 			
 			t = damage_text.instantiate() as DamageText
 			t.modify(result, eff.get("is_damaging"))

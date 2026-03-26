@@ -19,7 +19,7 @@ func _ready() -> void:
 	queue_free()
 
 func modify(hit_data: Dictionary, is_damaging: bool) -> void:
-	$Label.text = str(abs(hit_data["final_dmg"]))
+	$Label.text = str(abs(hit_data["final"]))
 	if !is_damaging:
 		modulate = heal_color
 		return

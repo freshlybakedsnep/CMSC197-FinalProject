@@ -9,7 +9,7 @@ static func resolve_health_adjust (
 	if not effect_data["is_damaging"]:
 		damage *= -1.0
 		return {
-			"final_dmg": int(damage),
+			"final": int(damage),
 			"ignore_def": false,
 			"type_mult": 1.0,
 			"blocked": false
@@ -46,7 +46,7 @@ static func resolve_health_adjust (
 	var final_dmg = int(max(0 if blocked else 1, damage))
 	
 	return {
-		"final_dmg": final_dmg,
+		"final": final_dmg,
 		"ignore_def": effect_data.get("ignore_def", false),
 		"type_mult": type_mult,
 		"blocked": blocked
