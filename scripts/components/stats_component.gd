@@ -19,18 +19,16 @@ var live : Dictionary = {}
 func initialize() -> void:
 	for stat in base_stats:
 		live[stat] = base_stats[stat]
-		if stat == "HP":
-			live["CURR_HP"] = base_stats[stat]
+		if stat == &"HP":
+			live[&"CURR_HP"] = base_stats[stat]
 
-func get_stat(stat_name: String) -> int:
+func get_stat(stat_name: StringName) -> int:
 	# base value
 	var base = live.get(stat_name, 0)
 	
 	# gets any buffs we have on that specific stat
 	var status = host.get_comp(EntityComponent.Type.STATUS)
-	if status:
-		return int(base + status.get_total_modifier(stat_name))
-	
+	if status: return int(base + status.get_total_modifier(stat_name))
 	return base
 
 func modify_stat(stat_name: String, amount: int) -> void:
@@ -39,6 +37,6 @@ func modify_stat(stat_name: String, amount: int) -> void:
 	live[stat_name] += amount
 	
 	match stat_name:
-		"CURR_HP", "HP":
-			live["CURR_HP"] = clamp(live["CURR_HP"], 0, live["HP"])
-			health_changed.emit(live["CURR_HP"], live["HP"])
+		&"CURR_HP", &"HP":
+			live[&"CURR_HP"] = clamp(live[&"CURR_HP"], 0, live[&"HP"])
+			health_changed.emit(live[&"CURR_HP"], live[&"HP"])

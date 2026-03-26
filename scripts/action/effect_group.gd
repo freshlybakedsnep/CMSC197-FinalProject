@@ -20,12 +20,12 @@ class_name EffectGroup
 @export var effects : Array[Effect]
 
 func _validate_property(property: Dictionary) -> void:
-	if property.name in ["target_mode", "target_count", "target_state"]:
+	if property.name in [&"target_mode", &"target_count", &"target_state"]:
 		var hide := false
 		match property.name:
-			"target_mode", "target_state":
+			&"target_mode", &"target_state":
 				hide = target_group == Action.TargetGroup.SELF
-			"target_count":
+			&"target_count":
 				hide = (target_mode == Action.TargetMode.AOE or
 					target_mode == Action.TargetMode.SINGLE or 
 					target_group == Action.TargetGroup.SELF)

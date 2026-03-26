@@ -32,20 +32,20 @@ enum Behavior {
 func get_effect_data(src: EntityData, tar: EntityData, level: int) -> Dictionary:
 	formula.set_level(level)
 	return {
-		"type": "STATUS",
-		"key": status_key,
-		"params": {
-			"val": formula.calculate(src, tar),
-			"turns": turns,
-			"hits": hits,
-			"hit-based": hit_based,
-			"permanent": permanent,
-			"removable": removable,
-			"trigger_on": trigger,
-			"id": id,
-			"is_buff": is_buff,
-			"behavior": behavior,
-			"caster": src,
-			"unique": unique
+		&"type": &"STATUS",
+		&"key": status_key,
+		&"params": {
+			&"val": formula.calculate(src, tar),
+			&"turns": turns,
+			&"hits": hits,
+			&"hit-based": hit_based,
+			&"permanent": permanent,
+			&"removable": removable,
+			&"trigger_on": trigger,
+			&"id": id,
+			&"is_buff": is_buff,
+			&"behavior": behavior,
+			&"caster": src,
+			&"unique": unique
 		}
 	}

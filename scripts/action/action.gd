@@ -6,7 +6,7 @@ enum TargetGroup {SELF, ALLY_ONLY, PARTY, ENEMY}
 enum TargetMode {SINGLE, MULTIPLE, AOE, RANDOM }
 enum TargetState {ALIVE, DEAD, ANY}
 
-@export var action_name : String
+@export var action_name : StringName
 @export var action_icon : Texture
 
 @export var action_description : String = ""
@@ -39,12 +39,12 @@ enum TargetState {ALIVE, DEAD, ANY}
 @export var effect_groups : Array[EffectGroup]
 
 func _validate_property(property: Dictionary) -> void:
-	if property.name in ["target_mode", "target_count", "target_state"]:
+	if property.name in [&"target_mode", &"target_count", &"target_state"]:
 		var hide := false
 		match property.name:
-			"target_mode", "target_state":
+			&"target_mode", &"target_state":
 				hide = target_group == TargetGroup.SELF
-			"target_count":
+			&"target_count":
 				hide = (target_mode == TargetMode.AOE or
 					target_mode == TargetMode.SINGLE or 
 					target_group == TargetGroup.SELF)
@@ -75,14 +75,14 @@ func summarize_effects() -> String:
 			values.append(val)
 	return action_description.format(values)
 
-func val_string(value: ValueFormula) -> String:
+func val_string(value: ValueFormula) -> StringName:
 	match value:
 		var s when s is ValueScaling:
 			return "{val}% {desc}{stat}".format({
-				"val": ((s as ValueScaling).multiplier + 
+				&"val": ((s as ValueScaling).multiplier + 
 						((s as ValueScaling).mult_per_level * level)) * 100,
-				"desc": "" if (s as ValueScaling).from_target else "of own ",
-				"stat": (s as ValueScaling).stat_key,
+				&"desc": "" if (s as ValueScaling).from_target else "of own ",
+				&"stat": (s as ValueScaling).stat_key,
 			})
 		
 		var f when f is ValueFlat:

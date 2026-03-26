@@ -44,8 +44,8 @@ func get_next_action() -> Dictionary:
 			targets = pots.slice(0, min(pots.size(), chosen_action.target_count))
 	
 	return {
-		"action": chosen_action,
-		"targets": targets
+		&"action": chosen_action,
+		&"targets": targets
 	}
 
 func clear_queue() -> void:

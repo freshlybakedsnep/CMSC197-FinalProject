@@ -12,8 +12,8 @@ func get_next_action() -> Dictionary:
 	if queued_action == null:
 		return {}
 	return {
-		"action": queued_action,
-		"targets": queued_targets
+		&"action": queued_action,
+		&"targets": queued_targets
 	}
 
 func select_action(slot: ActionComponent.Slot) -> bool:

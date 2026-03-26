@@ -61,24 +61,24 @@ static func _apply_effect(src: EntityData, tar: EntityData, fx: Effect, level: i
 	var eff = fx.get_effect_data(src, tar, level)
 	var stats : StatsComponent = tar.get_comp(EntityComponent.Type.STATS)
 	var t
-	match eff.get("type"):
-		"HEALTH":
+	match eff.get(&"type"):
+		&"HEALTH":
 			var result = CombatResolver.resolve_health_adjust(src, tar, eff)
-			stats.modify_stat("CURR_HP", -result["final"])
+			stats.modify_stat(&"CURR_HP", -result[&"final"])
 			
 			t = damage_text.instantiate() as DamageText
-			t.modify(result, eff.get("is_damaging"))
+			t.modify(result, eff.get(&"is_damaging"))
 			
-			if stats.get_stat("CURR_HP") <= 0:
+			if stats.get_stat(&"CURR_HP") <= 0:
 				tar.host.entity_eliminated.emit()
 		
-		"STATUS":
-			if tar.state != EntityData.State.DEAD and stats.get_stat("CURR_HP") > 0:
+		&"STATUS":
+			if tar.state != EntityData.State.DEAD and stats.get_stat(&"CURR_HP") > 0:
 				var status = tar.get_comp(EntityComponent.Type.STATUS)
 				if status:
-					status.add_modifier(eff["key"], eff["params"])
+					status.add_modifier(eff[&"key"], eff[&"params"])
 				t = effect_text.instantiate() as EffectText
-				t.effect(eff["key"], Color.WHITE, eff["params"].get("is_buff", true))
+				t.effect(eff[&"key"], Color.WHITE, eff[&"params"].get(&"is_buff", true))
 	tar.host.add_child(t)
 	await t.finished
 
@@ -91,8 +91,8 @@ static func get_prediction(src: EntityData, tar: EntityData, action: Action) -> 
 	for fx: Effect in group.effects:
 		var eff_data = fx.get_effect_data(src, tar, action.level)
 		
-		if eff_data.get("type") == "HEALTH":
+		if eff_data.get(&"type") == &"HEALTH":
 			var res = CombatResolver.resolve_health_adjust(src, tar, eff_data)
 			results.append(res)
 		
-	return {"results": results}
+	return {&"results": results}

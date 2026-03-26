@@ -7,7 +7,7 @@ func _init() -> void:
 
 signal resource_changed(current: int, max_val: int)
 
-@export var res_name : String
+@export var res_name : StringName
 @export var max_amount : int = 5
 @export var start_amount : int = 0
 @export var turn_regen : int = 1

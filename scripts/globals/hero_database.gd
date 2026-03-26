@@ -16,9 +16,9 @@ func load_all() -> void:
 	dir.list_dir_begin()
 	var file_name = dir.get_next()
 	
-	while file_name != "":
-		if file_name.ends_with(".tres") or file_name.ends_with(".res") or file_name.ends_with(".remap"): 
-			var clean_path = DATA_PATH + file_name.replace(".remap", "")
+	while file_name != &"":
+		if file_name.ends_with(&".tres") or file_name.ends_with(&".res") or file_name.ends_with(".remap"): 
+			var clean_path = DATA_PATH + file_name.replace(&".remap", &"")
 			var res = ResourceLoader.load(clean_path)
 			
 			if res is HeroData:
@@ -33,7 +33,7 @@ func get_hero(hero_name: String) -> HeroData:
 		
 		# initialize each component
 		for comp in hero.components.values():
-			if comp.has_method("initialize"):
+			if comp.has_method(&"initialize"):
 				comp.initialize()
 		return hero
 	return null

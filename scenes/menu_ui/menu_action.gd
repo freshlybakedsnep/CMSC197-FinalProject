@@ -30,7 +30,6 @@ func load_menu(hero : Entity) -> void:
 	var status : StatusComponent = selected_hero.data.get_comp(EntityComponent.Type.STATUS)
 	var res : ResourceComponent = selected_hero.data.get_comp(EntityComponent.Type.RESOURCE)
 	if !act_sys: return
-	var silenced = status.has_flag("SILENCE")
 	for slot in binds:
 		var action : Action = act_sys.get_action(slot)
 		var button := binds[slot]
@@ -46,7 +45,7 @@ func load_menu(hero : Entity) -> void:
 		if act_sys.basic_pool.has(action):
 			continue
 		
-		if silenced:
+		if status.has_flag(&"SILENCE"):
 			button.disable_button(true, "X")
 			continue
 		if act_sys.is_on_cooldown(action):

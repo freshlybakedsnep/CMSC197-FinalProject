@@ -5,7 +5,7 @@ class_name ValueScaling
 @export var mult_per_level := 0.05
 @export var from_target := false
 
-@export var stat_key : String = "ATK"
+@export var stat_key : StringName = &"ATK"
 
 func calculate(src : EntityData, tar : EntityData) -> float:
 	var unit := tar if from_target else src
