@@ -7,8 +7,9 @@
 
 [resource]
 script = ExtResource("4_utb26")
-action_name = "ST Damage"
+action_name = "Single Attack"
 action_icon = ExtResource("1_lptkk")
+action_description = "Deal {0} damage to a single enemy."
 level = 1
 target_group = 3
 effect_groups = Array[ExtResource("2_852ae")]([ExtResource("3_kx0cg")])

@@ -9,6 +9,7 @@
 script = ExtResource("4_5fufh")
 action_name = "ST silence"
 action_icon = ExtResource("1_upoxh")
+action_description = "Apply {0} to one enemy"
 level = 1
 target_group = 3
 effect_groups = Array[ExtResource("2_v3ak8")]([ExtResource("3_upoxh")])

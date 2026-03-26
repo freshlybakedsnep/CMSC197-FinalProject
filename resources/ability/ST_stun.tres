@@ -9,6 +9,7 @@
 script = ExtResource("4_1qgtn")
 action_name = "ST Stun"
 action_icon = ExtResource("1_4gaoa")
+action_description = "Apply {0} to one enemy"
 level = 1
 target_group = 3
 effect_groups = Array[ExtResource("2_f0yfg")]([ExtResource("3_4gaoa")])

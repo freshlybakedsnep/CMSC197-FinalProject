@@ -14,6 +14,7 @@ metadata/_custom_type_script = "uid://x82xxogtaoe5"
 [sub_resource type="Resource" id="Resource_6wq2l"]
 script = ExtResource("5_sy8ko")
 status_key = &"DEFEND"
+behavior = 3
 formula = SubResource("Resource_laowq")
 metadata/_custom_type_script = "uid://b7wmacmexid3k"
 
@@ -25,8 +26,9 @@ metadata/_custom_type_script = "uid://djkmvtkrgtp6u"
 
 [resource]
 script = ExtResource("2_4cksu")
-action_name = "Guarding"
+action_name = "Guard"
 action_icon = ExtResource("1_ne3h8")
+action_description = "Reduce incoming damage."
 level = 1
 effect_groups = Array[ExtResource("1_ksfhh")]([SubResource("Resource_whrce")])
 metadata/_custom_type_script = "uid://bdmenxynhc50j"

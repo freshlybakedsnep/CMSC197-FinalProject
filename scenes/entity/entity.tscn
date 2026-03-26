@@ -141,7 +141,6 @@ mouse_filter = 1
 script = ExtResource("4_xk0ck")
 
 [node name="Name" type="Label" parent="HPBar" unique_id=963951141]
-visible = false
 z_index = 2
 anchors_preset = 5
 anchor_left = 0.5

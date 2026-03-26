@@ -7,8 +7,9 @@
 
 [resource]
 script = ExtResource("4_el4xy")
-action_name = "SELF heal"
+action_name = "Taunt"
 action_icon = ExtResource("1_v7viy")
+action_description = "Apply {0} to self."
 level = 1
 effect_groups = Array[ExtResource("2_bola3")]([ExtResource("3_v7viy")])
 metadata/_custom_type_script = "uid://bdmenxynhc50j"
