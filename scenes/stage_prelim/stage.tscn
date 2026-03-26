@@ -92,7 +92,7 @@ z_index = -1
 position = Vector2(350, 280)
 
 [node name="Heroes" parent="." unique_id=2033338877 instance=ExtResource("12_cxkqe")]
-position = Vector2(850, 400)
+position = Vector2(850, 440)
 
 [node name="CommandUI" parent="." unique_id=1732962988 instance=ExtResource("14_dkcyh")]
 z_index = 1

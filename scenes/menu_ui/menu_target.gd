@@ -53,8 +53,7 @@ func setup(data: Dictionary) -> void:
 			b.pressed.disconnect(con["callable"])
 		b.pressed.connect(selected_target.bind(unit))
 		
-		b.focus_neighbor_bottom = confirm.get_path()
-		b.focus_neighbor_top = back.get_path()
+		b.focus_neighbor_top = confirm.get_path()
 		
 		if (que.has(unit.data) or
 			action.target_mode >= Action.TargetMode.AOE or
@@ -78,8 +77,7 @@ func setup(data: Dictionary) -> void:
 			fb.set_focus_neighbor(SIDE_LEFT, lb.get_path())
 	
 	if display_targets:
-		back.focus_neighbor_bottom = display_targets.front().target_component.get_path()
-		confirm.focus_neighbor_top = display_targets.front().target_component.get_path()
+		confirm.focus_neighbor_bottom = display_targets.front().target_component.get_path()
 	
 	confirm_button()
 

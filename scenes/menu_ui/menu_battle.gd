@@ -80,8 +80,6 @@ func _open_target_menu(slot : ActionComponent.Slot) -> void:
 	if act_sys:
 		var action = act_sys.get_action(slot)
 		if not action: return
-		target_menu.global_position = enemy_formation if \
-		action.target_group == Action.TargetGroup.ENEMY else hero_formation
 		
 		target_menu.setup(
 			{"selected_hero": selected_hero, 
