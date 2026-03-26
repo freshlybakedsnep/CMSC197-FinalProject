@@ -2,6 +2,7 @@ extends Control
 class_name ActionMenu
 
 signal action_selected
+signal action_tooltip
 
 var back : Button
 var selected_hero : Entity
@@ -37,6 +38,10 @@ func load_menu(hero : Entity) -> void:
 			button.hide()
 			continue
 		
+		for con in button.focus_entered.get_connections():
+			button.focus_entered.disconnect(con["callable"])
+		
+		button.focus_entered.connect(show_action_tooltip.bind(action))
 		button.set_icon(action.action_icon)
 		if act_sys.basic_pool.has(action):
 			continue
@@ -54,6 +59,17 @@ func load_menu(hero : Entity) -> void:
 				continue
 		
 		button.disable_button(false)
+
+func show_action_tooltip(action: Action) -> void:
+	action_tooltip.emit(
+		{
+			"type": action,
+			"name": action.action_name,
+			"level": str(action.level),
+			"cd": str(action.cooldown) if action.cooldown > 0 else "None",
+			"desc": action.summarize_effects()
+		}
+	)
 
 func select_action(slot: ActionComponent.Slot) -> void:
 	if selected_hero:

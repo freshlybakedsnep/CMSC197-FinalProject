@@ -12,3 +12,6 @@ func disable_button(toggle: bool, display: String = "") -> void:
 	disabled = toggle
 	indicator.visible = toggle
 	indicator.text = display
+
+func _on_mouse_entered() -> void:
+	grab_focus()

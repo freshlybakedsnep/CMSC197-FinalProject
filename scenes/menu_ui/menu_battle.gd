@@ -10,7 +10,7 @@ signal plan_done
 @onready var back: Button = $Back
 @onready var start_battle: Button = $MarginContainer/StartBattle
 @onready var cursor: Cursor = $Cursor
-@onready var ability_tooltip: Panel = $AbilityTooltip
+@onready var tooltip: Panel = $Tooltip
 
 var selected_hero : Entity
 var menu_stack : Array
@@ -21,6 +21,7 @@ var hero_formation: Vector2
 func _ready() -> void:
 	party_menu.hero_selected.connect(_open_action_menu)
 	action_menu.action_selected.connect(_open_target_menu)
+	action_menu.action_tooltip.connect(tooltip.update_display)
 	action_menu.add_back(back)
 	action_menu.hide()
 	target_menu.hide()
@@ -51,6 +52,8 @@ func _close_menu() -> void:
 	if not menu_stack.is_empty():
 		var prev = menu_stack.back()
 		prev.enabled(true)
+	if menu_stack.size() == 1:
+		tooltip.hide()
 
 func _close_to_root() -> void:
 	while menu_stack.size() > 1:
@@ -69,6 +72,7 @@ func _open_menu(menu : Control) -> void:
 func _open_action_menu(hero : Entity) -> void:
 	selected_hero = hero
 	action_menu.load_menu(hero)
+	tooltip.show()
 	_open_menu(action_menu)
 
 func _open_target_menu(slot : ActionComponent.Slot) -> void:
