@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://cu3w3gplfr16v"]
+
+[ext_resource type="PackedScene" uid="uid://df1xxwl5jdhpp" path="res://scenes/player_world/warp_gate.tscn" id="1_4rr8x"]
+
+[node name="World" type="Node" unique_id=387434959]
+
+[node name="ToPartySelection" parent="." unique_id=1713874473 instance=ExtResource("1_4rr8x")]
+position = Vector2(600, 343)
+destination_path = "uid://b443gh0tp45xd"
+
+[node name="ToStage" parent="." unique_id=1603651808 instance=ExtResource("1_4rr8x")]
+position = Vector2(935, 162)
+destination_path = "uid://bifyp6opkfsfo"
+
+[node name="Test" parent="." unique_id=154122976 instance=ExtResource("1_4rr8x")]
+position = Vector2(300, 173)
+destination_path = "uid://bwtxguku00kwa"

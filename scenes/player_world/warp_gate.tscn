@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://df1xxwl5jdhpp"]
+
+[ext_resource type="Script" uid="uid://b5e7mptdr6rpy" path="res://scenes/player_world/warp_gate.gd" id="1_2l2d3"]
+[ext_resource type="Texture2D" uid="uid://coix0iaueaui5" path="res://assets/place_holder.png" id="1_l631h"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fbel5"]
+radius = 50.0
+height = 150.0
+
+[node name="WarpGate" type="Area2D" unique_id=1713874473]
+script = ExtResource("1_2l2d3")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2123731363]
+position = Vector2(-1, -20)
+scale = Vector2(3.3125, 3.3125)
+texture = ExtResource("1_l631h")
+
+[node name="Label" type="Label" parent="." unique_id=316542375]
+offset_left = -33.0
+offset_top = 30.0
+offset_right = 36.0
+offset_bottom = 53.0
+text = "go battle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1273862510]
+shape = SubResource("CapsuleShape2D_fbel5")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
