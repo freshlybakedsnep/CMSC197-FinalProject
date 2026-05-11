@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://stg73iippgsu"]
+
+[ext_resource type="Texture2D" uid="uid://c06guetubyynw" path="res://assets/sprites/famido.webp" id="1_1qihj"]
+[ext_resource type="Script" uid="uid://biwbjcrbn8kaq" path="res://scenes/player_world/intro.gd" id="2_ug8sc"]
+
+[node name="Intro" type="TextureRect" unique_id=245348320]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_1qihj")
+script = ExtResource("2_ug8sc")
+
+[node name="Dialogue" type="Label" parent="." unique_id=1784945891]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Next" type="Button" parent="." unique_id=1971055266]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="Skip" type="Button" parent="." unique_id=415789267]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0

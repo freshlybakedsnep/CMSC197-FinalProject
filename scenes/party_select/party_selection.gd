@@ -21,6 +21,8 @@ func _ready():
 	if heroes.size() > MAX_ROSTER:
 		heroes = heroes.slice(0, MAX_ROSTER)
 	for h in heroes:
+		if not PartyManager.is_unlocked(h.entity_name):
+			continue
 		var c = character_slot.instantiate() as CharacterSelectButton
 		(c as Button).toggled.connect(func(is_on): select_hero(is_on, h))
 		character_buttons.add_child(c)
