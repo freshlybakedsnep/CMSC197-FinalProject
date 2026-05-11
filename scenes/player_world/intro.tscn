@@ -1,50 +1,192 @@
-[gd_scene format=3 uid="uid://stg73iippgsu"]
+[gd_scene load_steps=8 format=3 uid="uid://stg73iippgsu"]
 
-[ext_resource type="Script" uid="uid://biwbjcrbn8kaq" path="res://scenes/player_world/intro.gd" id="2_ug8sc"]
-[ext_resource type="FontFile" uid="uid://dmgqmwfwyqfc0" path="res://assets/FOT-Aokane Std.ttf" id="3_2ddfd"]
+[ext_resource type="Script" uid="uid://biwbjcrbn8kaq" path="res://scenes/player_world/intro.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://baque3agyqaqt" path="res://assets/background/bg_11.png" id="2_bg"]
+[ext_resource type="FontFile" uid="uid://dmgqmwfwyqfc0" path="res://assets/FOT-Aokane Std.ttf" id="3_font"]
+[ext_resource type="Texture2D" uid="uid://c51rmprgm5hh4" path="res://assets/sprites/ricano.webp" id="4_portrait"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_vbh3x"]
-font = ExtResource("3_2ddfd")
-font_size = 50
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.0509804, 0.0745098, 0.145098, 0.82)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.521569, 0.780392, 1, 0.5)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+shadow_size = 14
 
-[node name="Intro" type="TextureRect" unique_id=245348320]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button"]
+bg_color = Color(0.0823529, 0.14902, 0.270588, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.435294, 0.686275, 0.980392, 0.85)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_hover"]
+bg_color = Color(0.145098, 0.25098, 0.435294, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.682353, 0.894118, 1, 1)
+corner_radius_top_left = 14
+corner_radius_top_right = 14
+corner_radius_bottom_right = 14
+corner_radius_bottom_left = 14
+
+[sub_resource type="LabelSettings" id="LabelSettings_dialogue"]
+font = ExtResource("3_font")
+font_size = 34
+font_color = Color(0.905882, 0.952941, 1, 1)
+line_spacing = 4.0
+shadow_color = Color(0, 0, 0, 0.7)
+shadow_offset = Vector2(2, 3)
+
+[node name="Intro" type="Control" unique_id=245348320]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -256.0
-offset_top = -567.0
-grow_horizontal = 0
-grow_vertical = 0
-script = ExtResource("2_ug8sc")
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
 
-[node name="Dialogue" type="Label" parent="." unique_id=1784945891]
+[node name="Backdrop" type="Control" parent="." unique_id=168907112]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BG" type="TextureRect" parent="Backdrop" unique_id=202044325]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bg")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Shade" type="ColorRect" parent="Backdrop" unique_id=732227071]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0117647, 0.0235294, 0.0745098, 0.7)
+
+[node name="Glow" type="ColorRect" parent="Backdrop" unique_id=1550249708]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -470.0
+offset_top = -270.0
+offset_right = 470.0
+offset_bottom = 270.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.113725, 0.419608, 0.729412, 0.16)
+
+[node name="HeroPortrait" type="TextureRect" parent="Backdrop" unique_id=1096267884]
+modulate = Color(1, 1, 1, 0.9)
 layout_mode = 0
-offset_left = -991.0
-offset_top = 394.0
-offset_right = -3.0
-offset_bottom = 563.0
-label_settings = SubResource("LabelSettings_vbh3x")
+offset_left = 56.0
+offset_top = 74.0
+offset_right = 438.0
+offset_bottom = 690.0
+texture = ExtResource("4_portrait")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1034581488]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer" unique_id=1651167139]
+layout_mode = 2
+theme_override_constants/margin_left = 600
+theme_override_constants/margin_top = 70
+theme_override_constants/margin_right = 70
+theme_override_constants/margin_bottom = 70
+
+[node name="Panel" type="Panel" parent="CenterContainer/MarginContainer" unique_id=108590922]
+custom_minimum_size = Vector2(540, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="Body" type="VBoxContainer" parent="CenterContainer/MarginContainer/Panel" unique_id=1697824488]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 26.0
+offset_top = 24.0
+offset_right = -26.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 12
+
+[node name="Kicker" type="Label" parent="CenterContainer/MarginContainer/Panel/Body" unique_id=667013399]
+layout_mode = 2
+text = "MISSION BRIEFING"
+modulate = Color(0.65098, 0.831373, 1, 0.9)
+
+[node name="Speaker" type="Label" parent="CenterContainer/MarginContainer/Panel/Body" unique_id=298060983]
+layout_mode = 2
+text = "Ares"
+modulate = Color(0.901961, 0.972549, 1, 1)
+
+[node name="Dialogue" type="Label" parent="CenterContainer/MarginContainer/Panel/Body" unique_id=1784945891]
+custom_minimum_size = Vector2(0, 220)
+layout_mode = 2
+label_settings = SubResource("LabelSettings_dialogue")
 autowrap_mode = 3
 
-[node name="Next" type="Button" parent="." unique_id=1971055266]
-layout_mode = 0
-offset_left = -173.0
-offset_top = 536.0
-offset_right = -128.0
-offset_bottom = 567.0
-text = "Next"
+[node name="Buttons" type="HBoxContainer" parent="CenterContainer/MarginContainer/Panel/Body" unique_id=109421278]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 2
 
-[node name="Skip" type="Button" parent="." unique_id=415789267]
-layout_mode = 0
-offset_left = -84.0
-offset_top = 537.0
-offset_right = -57.0
-offset_bottom = 568.0
-text = ">>"
+[node name="Skip" type="Button" parent="CenterContainer/MarginContainer/Panel/Body/Buttons" unique_id=415789267]
+custom_minimum_size = Vector2(110, 48)
+layout_mode = 2
+text = "Skip"
+theme_override_styles/normal = SubResource("StyleBoxFlat_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_hover")
+
+[node name="Next" type="Button" parent="CenterContainer/MarginContainer/Panel/Body/Buttons" unique_id=1971055266]
+custom_minimum_size = Vector2(170, 48)
+layout_mode = 2
+text = "Next"
+theme_override_styles/normal = SubResource("StyleBoxFlat_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_hover")
 
 [node name="Voice" type="AudioStreamPlayer" parent="." unique_id=575157707]
 
-[connection signal="pressed" from="Next" to="." method="_on_next_pressed"]
-[connection signal="pressed" from="Skip" to="." method="_on_skip_pressed"]
+[connection signal="pressed" from="CenterContainer/MarginContainer/Panel/Body/Buttons/Skip" to="." method="_on_skip_pressed"]
+[connection signal="pressed" from="CenterContainer/MarginContainer/Panel/Body/Buttons/Next" to="." method="_on_next_pressed"]

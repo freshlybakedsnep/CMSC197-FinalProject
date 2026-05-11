@@ -1,10 +1,9 @@
-extends TextureRect
+extends Control
 
 const WORLD_SCENE := "res://scenes/player_world/world.tscn"
 const INTRO_HERO_NAME := "Ares"
 
 var intro_voice_lines: Array[AudioStream] = []
-@onready var voice: AudioStreamPlayer = $Voice
 
 var lines := [
 	"You made it. The rifts opened and everything changed.",
@@ -15,15 +14,20 @@ var lines := [
 ]
 var idx := 0
 
-@onready var dialogue: Label = $Dialogue
+@onready var dialogue: Label = $CenterContainer/MarginContainer/Panel/Body/Dialogue
+@onready var portrait: TextureRect = $Backdrop/HeroPortrait
+@onready var next_btn: Button = $CenterContainer/MarginContainer/Panel/Body/Buttons/Next
+@onready var voice: AudioStreamPlayer = $Voice
 
 func _ready() -> void:
 	var hero := HeroDatabase.get_hero(INTRO_HERO_NAME)
 	if hero:
-		texture = hero.sprite
+		portrait.texture = hero.sprite
 		if hero.intro_line_texts.size() > 0:
 			lines = hero.intro_line_texts
 		intro_voice_lines = hero.intro_voice_lines
+
+	next_btn.grab_focus()
 
 	if PartyManager.intro_seen:
 		_go_to_world()
@@ -31,6 +35,9 @@ func _ready() -> void:
 	_show_line()
 
 func _show_line() -> void:
+	if lines.is_empty():
+		dialogue.text = "..."
+		return
 	dialogue.text = lines[idx]
 	_play_line_voice(idx)
 
