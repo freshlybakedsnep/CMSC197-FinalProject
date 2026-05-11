@@ -1,26 +1,37 @@
 [gd_scene format=3 uid="uid://df1xxwl5jdhpp"]
 
 [ext_resource type="Script" uid="uid://b5e7mptdr6rpy" path="res://scenes/player_world/warp_gate.gd" id="1_2l2d3"]
-[ext_resource type="Texture2D" uid="uid://coix0iaueaui5" path="res://assets/place_holder.png" id="1_l631h"]
+[ext_resource type="Texture2D" path="res://assets/icons/class_vanguard.webp" id="1_l631h"]
+[ext_resource type="FontFile" path="res://assets/FOT-Aokane Std.ttf" id="2_font"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fbel5"]
-radius = 50.0
-height = 150.0
+radius = 44.0
+height = 122.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_gate"]
+font = ExtResource("2_font")
+font_size = 24
+font_color = Color(0.898039, 0.964706, 1, 1)
+shadow_color = Color(0, 0, 0, 0.6)
+shadow_offset = Vector2(2, 2)
 
 [node name="WarpGate" type="Area2D" unique_id=1713874473]
 script = ExtResource("1_2l2d3")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2123731363]
-position = Vector2(-1, -20)
-scale = Vector2(3.3125, 3.3125)
+position = Vector2(-1, -16)
+scale = Vector2(5.2, 5.2)
 texture = ExtResource("1_l631h")
+modulate = Color(0.792157, 0.909804, 1, 0.94)
 
 [node name="Label" type="Label" parent="." unique_id=316542375]
-offset_left = -33.0
-offset_top = 30.0
-offset_right = 36.0
-offset_bottom = 53.0
+offset_left = -110.0
+offset_top = 58.0
+offset_right = 110.0
+offset_bottom = 88.0
+label_settings = SubResource("LabelSettings_gate")
 text = "Location"
+horizontal_alignment = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1273862510]
 shape = SubResource("CapsuleShape2D_fbel5")
