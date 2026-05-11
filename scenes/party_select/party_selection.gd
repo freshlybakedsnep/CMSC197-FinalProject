@@ -21,8 +21,6 @@ func _ready():
 	if heroes.size() > MAX_ROSTER:
 		heroes = heroes.slice(0, MAX_ROSTER)
 	for h in heroes:
-		if not PartyManager.is_unlocked(h.entity_name):
-			continue
 		var c = character_slot.instantiate() as CharacterSelectButton
 		(c as Button).toggled.connect(func(is_on): select_hero(is_on, h))
 		character_buttons.add_child(c)
@@ -43,12 +41,12 @@ func _ready():
 
 func select_hero(recruited : bool, ch : HeroData) -> void:
 	if recruited:
-		var p = TextureRect.new()
-		p.texture = ch.sprite
-		p.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-		p.custom_minimum_size = Vector2(128, 283.5)
-		party_preview.add_child(p)
-		PartyManager.add_member(ch)
+		if PartyManager.add_member(ch):
+			var p = TextureRect.new()
+			p.texture = ch.sprite
+			p.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+			p.custom_minimum_size = Vector2(128, 283.5)
+			party_preview.add_child(p)
 	else:
 		if ch in PartyManager.party:
 			party_preview.get_child(PartyManager.remove_member(ch)).queue_free()
