@@ -45,17 +45,19 @@ func _render_location() -> void:
 		gate.destination_scene = s.target_scene
 		gates.add_child(gate)
 	
-	left_arrow.visible = current_location.left_location != null
-	right_arrow.visible = current_location.right_location != null
+	left_arrow.visible = current_location.get_left_location() != null
+	right_arrow.visible = current_location.get_right_location() != null
 
 func _on_left_arrow_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		if current_location.left_location:
-			current_location = current_location.left_location
+		var next_left := current_location.get_left_location()
+		if next_left:
+			current_location = next_left
 			_render_location()
 
 func _on_right_arrow_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		if current_location.right_location:
-			current_location = current_location.right_location
+		var next_right := current_location.get_right_location()
+		if next_right:
+			current_location = next_right
 			_render_location()

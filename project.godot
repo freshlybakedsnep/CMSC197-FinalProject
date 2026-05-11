@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Unnamed Turn-based Strategy RPG"
-run/main_scene="uid://b443gh0tp45xd"
+run/main_scene="uid://cu3w3gplfr16v"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="LocationData" format=3]
+
+[ext_resource type="Script" path="res://scripts/location_data.gd" id="1_location_script"]
+[ext_resource type="Texture2D" path="res://assets/place_holder.png" id="2_background"]
+[ext_resource type="Resource" path="res://resources/battles/town_battle_lv1.tres" id="4_battle"]
+[ext_resource type="Resource" path="res://resources/services/weapons_shop.tres" id="5_service"]
+[ext_resource type="Script" path="res://scripts/battle_node_data.gd" id="6_battle_script"]
+[ext_resource type="Script" path="res://scripts/service_node_data.gd" id="7_service_script"]
+
+[resource]
+script = ExtResource("1_location_script")
+id = &"town"
+display_name = "Town"
+background = ExtResource("2_background")
+right_location_path = "res://resources/locations/forest.tres"
+battle_nodes = Array[ExtResource("6_battle_script")]([ExtResource("4_battle")])
+service_nodes = Array[ExtResource("7_service_script")]([ExtResource("5_service")])

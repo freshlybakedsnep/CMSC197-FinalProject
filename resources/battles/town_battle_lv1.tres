@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="BattleNodeData" format=3]
+
+[ext_resource type="Script" path="res://scripts/battle_node_data.gd" id="1_battle_script"]
+[ext_resource type="PackedScene" path="res://scenes/stage_prelim/stage.tscn" id="2_battle_scene"]
+
+[resource]
+script = ExtResource("1_battle_script")
+label = "Town Arena"
+battle_scene = ExtResource("2_battle_scene")
+min_level = 1
+reward_gold = 25
+reward_exp = 20
+world_pos = Vector2(470, 250)

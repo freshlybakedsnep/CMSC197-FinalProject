@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BattleNodeData" format=3 uid="uid://clipthvexsvqx"]
+
+[ext_resource type="PackedScene" uid="uid://b443gh0tp45xd" path="res://scenes/party_select/party_selection.tscn" id="1_mrbf6"]
+[ext_resource type="Script" uid="uid://dtkwoa4vtxljs" path="res://scripts/battle_node_data.gd" id="2_udsgo"]
+
+[resource]
+script = ExtResource("2_udsgo")
+label = "rawr"
+battle_scene = ExtResource("1_mrbf6")
+reward_gold = 25
+reward_exp = 25

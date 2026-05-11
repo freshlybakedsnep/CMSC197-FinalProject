@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ServiceNodeData" format=3]
+
+[ext_resource type="Script" path="res://scripts/service_node_data.gd" id="1_service_script"]
+[ext_resource type="PackedScene" path="res://scenes/player_world/weapons.tscn" id="2_service_scene"]
+
+[resource]
+script = ExtResource("1_service_script")
+label = "Weapons Shop"
+target_scene = ExtResource("2_service_scene")
+world_pos = Vector2(980, 280)
