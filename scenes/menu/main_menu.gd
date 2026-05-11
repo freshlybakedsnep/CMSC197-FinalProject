@@ -3,10 +3,37 @@ extends Control
 const INTRO_SCENE := "res://scenes/player_world/intro.tscn"
 const WORLD_SCENE := "res://scenes/player_world/world.tscn"
 
-@onready var continue_btn: Button = $CenterContainer/VBoxContainer/Continue
+@onready var continue_btn: Button = $CenterContainer/MarginContainer/Panel/Body/Buttons/Continue
+@onready var new_btn: Button = $CenterContainer/MarginContainer/Panel/Body/Buttons/NewGame
+@onready var title_label: Label = $CenterContainer/MarginContainer/Panel/Body/Title
+@onready var glow: ColorRect = $Backdrop/Glow
+@onready var hero_portrait: TextureRect = $Backdrop/HeroPortrait
 
 func _ready() -> void:
 	continue_btn.disabled = not PartyManager.has_save()
+	new_btn.grab_focus()
+
+	if continue_btn.disabled:
+		continue_btn.tooltip_text = "No save data found yet."
+
+	_start_menu_motion()
+
+func _start_menu_motion() -> void:
+	# Keep title static in Y so it never overlaps the kicker.
+	var title_tween := create_tween()
+	title_tween.set_loops()
+	title_tween.tween_property(title_label, "modulate:a", 0.88, 2.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	title_tween.tween_property(title_label, "modulate:a", 1.0, 2.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+	var glow_tween := create_tween()
+	glow_tween.set_loops()
+	glow_tween.tween_property(glow, "modulate:a", 0.38, 2.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	glow_tween.tween_property(glow, "modulate:a", 0.18, 2.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+	var portrait_tween := create_tween()
+	portrait_tween.set_loops()
+	portrait_tween.tween_property(hero_portrait, "position:y", 76.0, 3.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	portrait_tween.tween_property(hero_portrait, "position:y", 86.0, 3.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 func _on_new_game_pressed() -> void:
 	PartyManager.reset_progress()

@@ -31,3 +31,6 @@ enum Gender {
 
 @export var lose_voice_lines: Array[AudioStream] = []
 @export var lose_line_texts: PackedStringArray = []
+
+@export var intro_voice_lines: Array[AudioStream] = []
+@export var intro_line_texts: PackedStringArray = []
