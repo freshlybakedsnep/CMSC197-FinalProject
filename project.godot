@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Unnamed Turn-based Strategy RPG"
-run/main_scene="uid://stg73iippgsu"
+run/main_scene="res://scenes/menu/main_menu.tscn"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -65,3 +65,4 @@ screen_dim_amount={
 "type": "float",
 "value": 1.0
 }
+

@@ -2,24 +2,49 @@
 
 [ext_resource type="Texture2D" uid="uid://c06guetubyynw" path="res://assets/sprites/famido.webp" id="1_1qihj"]
 [ext_resource type="Script" uid="uid://biwbjcrbn8kaq" path="res://scenes/player_world/intro.gd" id="2_ug8sc"]
+[ext_resource type="FontFile" uid="uid://dmgqmwfwyqfc0" path="res://assets/FOT-Aokane Std.ttf" id="3_2ddfd"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_vbh3x"]
+font = ExtResource("3_2ddfd")
+font_size = 50
 
 [node name="Intro" type="TextureRect" unique_id=245348320]
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -256.0
+offset_top = -567.0
+grow_horizontal = 0
+grow_vertical = 0
 texture = ExtResource("1_1qihj")
 script = ExtResource("2_ug8sc")
 
 [node name="Dialogue" type="Label" parent="." unique_id=1784945891]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = -991.0
+offset_top = 394.0
+offset_right = -3.0
+offset_bottom = 563.0
+label_settings = SubResource("LabelSettings_vbh3x")
+autowrap_mode = 3
 
 [node name="Next" type="Button" parent="." unique_id=1971055266]
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = -173.0
+offset_top = 536.0
+offset_right = -128.0
+offset_bottom = 567.0
+text = "Next"
 
 [node name="Skip" type="Button" parent="." unique_id=415789267]
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = -84.0
+offset_top = 537.0
+offset_right = -57.0
+offset_bottom = 568.0
+text = ">>"
+
+[connection signal="pressed" from="Next" to="." method="_on_next_pressed"]
+[connection signal="pressed" from="Skip" to="." method="_on_skip_pressed"]
