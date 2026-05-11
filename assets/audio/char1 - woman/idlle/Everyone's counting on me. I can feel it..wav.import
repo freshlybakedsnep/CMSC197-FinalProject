@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://611hg86tvs6t"
+path="res://.godot/imported/Everyone's counting on me. I can feel it..wav-dd9eb561b87cd8c143ab2a8e99b94d68.sample"
+
+[deps]
+
+source_file="res://assets/audio/char1 - woman/idlle/Everyone's counting on me. I can feel it..wav"
+dest_files=["res://.godot/imported/Everyone's counting on me. I can feel it..wav-dd9eb561b87cd8c143ab2a8e99b94d68.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
