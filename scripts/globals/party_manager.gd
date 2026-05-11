@@ -11,6 +11,9 @@ const SAVE_PATH := "user://progress.cfg"
 func _ready() -> void:
 	load_progress()
 
+func is_unlocked(hero_name: String) -> bool:
+	return unlocked_heroes.get(hero_name, false)
+
 func unlock_hero(hero_name: String) -> void:
 	unlocked_heroes[hero_name] = true
 	save_progress()
