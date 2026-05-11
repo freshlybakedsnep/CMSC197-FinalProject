@@ -21,6 +21,7 @@ func _render_location() -> void:
 		
 	if current_location.background:
 		background.texture = current_location.background
+		_fit_background_to_viewport()
 	
 	for c in gates.get_children():
 		c.queue_free()
@@ -61,3 +62,11 @@ func _on_right_arrow_input_event(_viewport: Node, event: InputEvent, _shape_idx:
 		if next_right:
 			current_location = next_right
 			_render_location()
+
+func _fit_background_to_viewport() -> void:
+	if background.texture == null:
+		return
+	var vp := get_viewport_rect().size
+	var ts := background.texture.get_size()
+	background.position = vp * 0.5
+	background.scale = Vector2(vp.x / ts.x, vp.y / ts.y)
