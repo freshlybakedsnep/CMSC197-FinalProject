@@ -12,6 +12,12 @@ enum CharacterClass {
 	VANDAL
 }
 
+@export var gender : Gender = Gender.MALE
+enum Gender {
+	MALE,
+	FEMALE
+}
+
 @export var idle_voice_lines: Array[AudioStream] = []
 @export var idle_line_texts: PackedStringArray = []
 @export var idle_bark_interval := 8.0

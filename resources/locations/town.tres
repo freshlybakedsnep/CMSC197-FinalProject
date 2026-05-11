@@ -1,11 +1,11 @@
-[gd_resource type="Resource" script_class="LocationData" format=3]
+[gd_resource type="Resource" script_class="LocationData" format=3 uid="uid://dvfqnd6jgdhhb"]
 
-[ext_resource type="Script" path="res://scripts/location_data.gd" id="1_location_script"]
-[ext_resource type="Texture2D" path="res://assets/place_holder.png" id="2_background"]
-[ext_resource type="Resource" path="res://resources/battles/town_battle_lv1.tres" id="4_battle"]
+[ext_resource type="Script" uid="uid://ci1o82a0iwfin" path="res://scripts/location_data.gd" id="1_location_script"]
+[ext_resource type="Texture2D" uid="uid://coix0iaueaui5" path="res://assets/place_holder.png" id="2_background"]
+[ext_resource type="Resource" uid="uid://b8sxycd881ilf" path="res://resources/battles/town_battle_lv1.tres" id="4_battle"]
 [ext_resource type="Resource" path="res://resources/services/weapons_shop.tres" id="5_service"]
-[ext_resource type="Script" path="res://scripts/battle_node_data.gd" id="6_battle_script"]
-[ext_resource type="Script" path="res://scripts/service_node_data.gd" id="7_service_script"]
+[ext_resource type="Script" uid="uid://dtkwoa4vtxljs" path="res://scripts/battle_node_data.gd" id="6_battle_script"]
+[ext_resource type="Script" uid="uid://cyk41rb81ktuw" path="res://scripts/service_node_data.gd" id="7_service_script"]
 
 [resource]
 script = ExtResource("1_location_script")

@@ -14,7 +14,7 @@
 [ext_resource type="Script" uid="uid://cm88ovm7gjp44" path="res://scripts/components/status_component.gd" id="7_m1i4o"]
 [ext_resource type="Script" uid="uid://bvxud30fp77h2" path="res://scripts/components/player_controller.gd" id="8_5yh1s"]
 [ext_resource type="Script" uid="uid://nqhxig82acgw" path="res://scenes/entity/ent_hero.gd" id="9_ofre0"]
-[ext_resource type="Texture2D" uid="uid://c51rmprgm5hh4" path="res://assets/sprites/ricano.webp" id="10_7pur0"]
+[ext_resource type="Texture2D" path="res://assets/sprites/famido.webp" id="10_7pur0"]
 
 [sub_resource type="Resource" id="Resource_ig5s4"]
 script = ExtResource("2_eka21")
@@ -48,8 +48,14 @@ metadata/_custom_type_script = "uid://bvxud30fp77h2"
 
 [resource]
 script = ExtResource("9_ofre0")
-character_class = 4
-entity_name = "Ricano"
+character_class = 3
+gender = 1
+entity_name = "Vexa"
 sprite = ExtResource("10_7pur0")
 components = Array[ExtResource("1_842gx")]([SubResource("Resource_ig5s4"), SubResource("Resource_3ngop"), SubResource("Resource_0tcap"), SubResource("Resource_jba1v"), SubResource("Resource_yv4oe")])
 metadata/_custom_type_script = "uid://nqhxig82acgw"
+
+
+
+
+
