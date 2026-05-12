@@ -10,6 +10,7 @@ const WORLD_SCENE := "res://scenes/player_world/world.tscn"
 @onready var hero_portrait: TextureRect = $Backdrop/HeroPortrait
 
 func _ready() -> void:
+	BGM.play_menu()
 	continue_btn.disabled = not PartyManager.has_save()
 	new_btn.grab_focus()
 

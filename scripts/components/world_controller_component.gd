@@ -12,6 +12,7 @@ extends Node2D
 var current_location: LocationData
 
 func _ready() -> void:
+	BGM.play_world()
 	current_location = start_location
 	_render_location()
 

@@ -19,6 +19,7 @@ var acted : Array[Entity]
 var eliminated : Array[Entity]
 
 func _ready() -> void:
+	BGM.play_battle()
 	state_machine.handler = self
 	
 	heroes.setup(eliminated)
