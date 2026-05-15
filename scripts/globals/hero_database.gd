@@ -32,7 +32,7 @@ func get_hero(hero_name: String) -> HeroData:
 		var hero = library[hero_name].duplicate(true) as HeroData
 		
 		# initialize each component
-		for comp in hero.components.values():
+		for comp in hero.components:
 			if comp.has_method(&"initialize"):
 				comp.initialize()
 		return hero

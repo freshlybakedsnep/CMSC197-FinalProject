@@ -15,12 +15,13 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Unnamed Turn-based Strategy RPG"
-run/main_scene="uid://b443gh0tp45xd"
+run/main_scene="res://scenes/menu/main_menu.tscn"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
+BGM="*res://scripts/globals/bgm_manager.gd"
 PartyManager="*res://scripts/globals/party_manager.gd"
 HeroDatabase="*res://scripts/globals/hero_database.gd"
 BattleRegistry="*uid://cukk0c3cvcvfo"
@@ -31,6 +32,10 @@ window/size/viewport_width=1280
 window/size/viewport_height=720
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
+
+[dotnet]
+
+project/assembly_name="Unnamed Turn-based Strategy RPG"
 
 [editor]
 

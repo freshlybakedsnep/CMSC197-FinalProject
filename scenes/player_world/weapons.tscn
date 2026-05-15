@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://crcpho48mciri"]
+
+[ext_resource type="PackedScene" uid="uid://df1xxwl5jdhpp" path="res://scenes/player_world/warp_gate.tscn" id="1_htw7x"]
+
+[node name="World" type="Node" unique_id=387434959]
+
+[node name="WarpGate" parent="." unique_id=1713874473 instance=ExtResource("1_htw7x")]
+position = Vector2(229, 194)
+location_name = "yay weapons"
+
+[node name="WarpGate2" parent="." unique_id=1921908347 instance=ExtResource("1_htw7x")]
+position = Vector2(694, 214)
+location_name = "rawr"
+
+[node name="WarpGate3" parent="." unique_id=1450618009 instance=ExtResource("1_htw7x")]
+position = Vector2(1171, 166)
+location_name = "weapons"

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="LocationData" format=3 uid="uid://71i2agdrb25m"]
+
+[ext_resource type="Script" uid="uid://ci1o82a0iwfin" path="res://scripts/location_data.gd" id="1_0urnx"]
+[ext_resource type="Script" uid="uid://dtkwoa4vtxljs" path="res://scripts/battle_node_data.gd" id="1_3gh30"]
+[ext_resource type="Texture2D" uid="uid://o1p6u5uo0e3f" path="res://assets/background/bg_4.png" id="1_ru2vs"]
+[ext_resource type="Resource" uid="uid://clipthvexsvqx" path="res://resources/battles/test_battle.tres" id="2_5vrpi"]
+[ext_resource type="Script" uid="uid://cyk41rb81ktuw" path="res://scripts/service_node_data.gd" id="3_bap8c"]
+[ext_resource type="Resource" uid="uid://tyivi6kns6fc" path="res://resources/services/test_service.tres" id="5_ru2vs"]
+
+[resource]
+script = ExtResource("1_0urnx")
+background = ExtResource("1_ru2vs")
+battle_nodes = Array[ExtResource("1_3gh30")]([ExtResource("2_5vrpi")])
+service_nodes = Array[ExtResource("3_bap8c")]([ExtResource("5_ru2vs")])

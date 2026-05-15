@@ -21,6 +21,7 @@ var eliminated : Array[Entity]
 var pending_triggers : Array[Dictionary] = []
 
 func _ready() -> void:
+	BGM.play_battle()
 	state_machine.handler = self
 	
 	heroes.setup(eliminated)

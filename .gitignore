@@ -14,3 +14,7 @@ export_credentials.cfg
 .mono/
 data_*/
 mono_crash.*.json
+
+# Local save data
+/user/progress/
+/user/progress/progress.cfg

@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://cu3w3gplfr16v"]
+
+[ext_resource type="PackedScene" uid="uid://df1xxwl5jdhpp" path="res://scenes/player_world/warp_gate.tscn" id="1_4rr8x"]
+[ext_resource type="Script" uid="uid://bdje7mektrm1g" path="res://scripts/components/world_controller_component.gd" id="1_pmff1"]
+[ext_resource type="Texture2D" uid="uid://coix0iaueaui5" path="res://assets/place_holder.png" id="2_kj8f2"]
+[ext_resource type="Resource" uid="uid://dvfqnd6jgdhhb" path="res://resources/locations/town.tres" id="3_5y31n"]
+[ext_resource type="Texture2D" uid="uid://bm28udodvjnls" path="res://assets/icons/class_controller.webp" id="4_nav"]
+[ext_resource type="FontFile" uid="uid://dmgqmwfwyqfc0" path="res://assets/FOT-Aokane Std.ttf" id="5_font"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_nav"]
+font = ExtResource("5_font")
+font_size = 42
+font_color = Color(0.901961, 0.972549, 1, 1)
+shadow_color = Color(0, 0, 0, 0.55)
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_left"]
+size = Vector2(120, 140)
+
+[node name="World" type="Node2D" unique_id=387434959]
+script = ExtResource("1_pmff1")
+start_location = ExtResource("3_5y31n")
+gate_scene = ExtResource("1_4rr8x")
+player_level = 3
+
+[node name="Background" type="Sprite2D" parent="." unique_id=1131205192]
+position = Vector2(640, 360)
+texture = ExtResource("2_kj8f2")
+
+[node name="Gates" type="Node2D" parent="." unique_id=201359220]
+
+[node name="LeftArrow" type="Area2D" parent="." unique_id=269087145]
+position = Vector2(76, 360)
+
+[node name="Sprite2D" type="Sprite2D" parent="LeftArrow" unique_id=1499019605]
+modulate = Color(0.337255, 0.6, 0.882353, 0.78)
+scale = Vector2(2.2, 2.2)
+texture = ExtResource("4_nav")
+
+[node name="Label" type="Label" parent="LeftArrow" unique_id=1864393022]
+offset_left = -23.0
+offset_top = -28.0
+offset_right = 26.0
+offset_bottom = 28.0
+text = "◀"
+label_settings = SubResource("LabelSettings_nav")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftArrow" unique_id=397901047]
+shape = SubResource("RectangleShape2D_left")
+
+[node name="RightArrow" type="Area2D" parent="." unique_id=602585976]
+position = Vector2(1204, 360)
+
+[node name="Sprite2D" type="Sprite2D" parent="RightArrow" unique_id=943772646]
+modulate = Color(0.337255, 0.6, 0.882353, 0.78)
+scale = Vector2(2.2, 2.2)
+texture = ExtResource("4_nav")
+
+[node name="Label" type="Label" parent="RightArrow" unique_id=1882927234]
+offset_left = -23.0
+offset_top = -28.0
+offset_right = 26.0
+offset_bottom = 28.0
+text = "▶"
+label_settings = SubResource("LabelSettings_nav")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightArrow" unique_id=1806371600]
+shape = SubResource("RectangleShape2D_left")
+
+[connection signal="input_event" from="LeftArrow" to="." method="_on_left_arrow_input_event"]
+[connection signal="input_event" from="RightArrow" to="." method="_on_right_arrow_input_event"]
