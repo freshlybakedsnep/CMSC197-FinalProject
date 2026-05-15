@@ -206,7 +206,7 @@ custom_minimum_size = Vector2(300, 20)
 layout_mode = 2
 text = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
 label_settings = SubResource("LabelSettings_ww08t")
-autowrap_mode = 1
+autowrap_mode = 3
 
 [node name="TargetMenu" type="VBoxContainer" parent="." unique_id=243708598]
 layout_mode = 1

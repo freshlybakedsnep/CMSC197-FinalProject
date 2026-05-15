@@ -7,13 +7,12 @@
 
 [resource]
 script = ExtResource("4_3hruj")
-action_name = "AoE Attack"
+action_name = &"AoE Attack"
 action_icon = ExtResource("1_86eh6")
 action_description = "Apply {0} to all enemies"
-level = 1
 target_group = 3
 target_mode = 2
-cooldown = 2
+cooldown = 4
 cost = 5
 effect_groups = Array[ExtResource("2_im6n3")]([ExtResource("3_s63t1")])
 metadata/_custom_type_script = "uid://bdmenxynhc50j"

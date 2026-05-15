@@ -29,17 +29,17 @@ func _ready() -> void:
 	
 	load_next_wave()
 	
-	state_machine.register_state("start", BattleEvents.TurnStart)
-	state_machine.register_state("plan", BattleEvents.PlanState)
-	state_machine.register_state("combat", BattleEvents.CombatState)
-	state_machine.register_state("act", BattleEvents.ActingState)
-	state_machine.register_state("end", BattleEvents.TurnEnd)
+	state_machine.register_state(&"start", BattleEvents.TurnStart)
+	state_machine.register_state(&"plan", BattleEvents.PlanState)
+	state_machine.register_state(&"combat", BattleEvents.CombatState)
+	state_machine.register_state(&"act", BattleEvents.ActingState)
+	state_machine.register_state(&"end", BattleEvents.TurnEnd)
 	state_machine.register_state(&"async", BattleEvents.AsyncEffectState)
 	
-	state_machine.register_state("win", BattleEvents.Win)
-	state_machine.register_state("lose", BattleEvents.GameOver)
+	state_machine.register_state(&"win", BattleEvents.Win)
+	state_machine.register_state(&"lose", BattleEvents.GameOver)
 	
-	state_machine.change("start")
+	state_machine.change(&"start")
 	state_machine._process_pending()
 
 func load_next_wave() -> bool:

@@ -7,13 +7,13 @@
 
 [resource]
 script = ExtResource("4_boymh")
-action_name = "Random Hitter"
+action_name = &"Random Hitter"
 action_icon = ExtResource("1_b6to7")
 action_description = "Deal {0} damage to random enemies."
 level = 3
 target_group = 3
 target_mode = 3
 target_count = 2
-cooldown = 2
+cooldown = 4
 effect_groups = Array[ExtResource("2_ifs31")]([ExtResource("3_onn3l")])
 metadata/_custom_type_script = "uid://bdmenxynhc50j"

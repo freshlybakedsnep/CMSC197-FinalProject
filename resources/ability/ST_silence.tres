@@ -7,10 +7,10 @@
 
 [resource]
 script = ExtResource("4_5fufh")
-action_name = "ST silence"
+action_name = &"Silence"
 action_icon = ExtResource("1_upoxh")
 action_description = "Apply {0} to one enemy"
-level = 1
 target_group = 3
+cooldown = 2
 effect_groups = Array[ExtResource("2_v3ak8")]([ExtResource("3_upoxh")])
 metadata/_custom_type_script = "uid://bdmenxynhc50j"

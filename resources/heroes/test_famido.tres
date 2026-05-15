@@ -36,7 +36,7 @@ binds = Dictionary[int, ExtResource("3_hrxc2")]({
 3: ExtResource("7_ahk1e"),
 4: ExtResource("10_eih61")
 })
-basic_pool = Array[ExtResource("3_hrxc2")]([ExtResource("4_h5r05")])
+basic_pool = Array[ExtResource("3_hrxc2")]([ExtResource("4_h5r05"), ExtResource("5_gyfmr")])
 skill_pool = Array[ExtResource("3_hrxc2")]([ExtResource("8_3d1dq"), ExtResource("10_eih61"), ExtResource("7_ahk1e"), ExtResource("6_r17k7")])
 metadata/_custom_type_script = "uid://dsu1t80330rqd"
 

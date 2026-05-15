@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://bq4jpvro24bfo" path="res://scripts/components/stats_component.gd" id="2_rmjao"]
 [ext_resource type="Script" uid="uid://bdmenxynhc50j" path="res://scripts/action/action.gd" id="3_x18yb"]
 [ext_resource type="Resource" uid="uid://c3q57rkxtt5ah" path="res://resources/ability/ST_dmg.tres" id="4_rmjao"]
-[ext_resource type="Resource" uid="uid://blla1se37bp71" path="res://resources/ability/ST_silence.tres" id="5_q3br0"]
+[ext_resource type="Resource" uid="uid://cq7qno4tcufth" path="res://resources/ability/ST_stun.tres" id="5_pw5yq"]
 [ext_resource type="Script" uid="uid://dsu1t80330rqd" path="res://scripts/components/action_component.gd" id="5_v5i3a"]
 [ext_resource type="Script" uid="uid://c6g2xy001wklx" path="res://scripts/components/element_component.gd" id="6_q3br0"]
 [ext_resource type="Script" uid="uid://cm88ovm7gjp44" path="res://scripts/components/status_component.gd" id="7_mmqww"]
@@ -25,13 +25,13 @@ metadata/_custom_type_script = "uid://bq4jpvro24bfo"
 
 [sub_resource type="Resource" id="Resource_syrdu"]
 script = ExtResource("5_v5i3a")
-basic_pool = Array[ExtResource("3_x18yb")]([ExtResource("4_rmjao"), ExtResource("5_q3br0")])
+basic_pool = Array[ExtResource("3_x18yb")]([ExtResource("4_rmjao"), ExtResource("5_pw5yq")])
 ultimates = Array[ExtResource("3_x18yb")]([ExtResource("7_pw5yq")])
 metadata/_custom_type_script = "uid://dsu1t80330rqd"
 
 [sub_resource type="Resource" id="Resource_s5yfr"]
 script = ExtResource("6_q3br0")
-my_elem = 1
+my_elem = 2
 metadata/_custom_type_script = "uid://c6g2xy001wklx"
 
 [sub_resource type="Resource" id="Resource_p3iaq"]
@@ -44,7 +44,7 @@ metadata/_custom_type_script = "uid://cpffl8bnew7fl"
 
 [sub_resource type="Resource" id="Resource_s2s0s"]
 script = ExtResource("9_sfq5q")
-res_name = "Charge"
+res_name = &"Charge"
 start_amount = -1
 metadata/_custom_type_script = "uid://ug5unx6nj7be"
 

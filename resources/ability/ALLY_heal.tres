@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Action" format=3 uid="uid://dmhnhpgdkcnqm"]
+
+[ext_resource type="Texture2D" uid="uid://c2l0sgxhal5k6" path="res://assets/icon_test.png" id="1_knxng"]
+[ext_resource type="Script" uid="uid://djkmvtkrgtp6u" path="res://scripts/action/effect_group.gd" id="2_mqh8i"]
+[ext_resource type="Resource" uid="uid://dk74nfjn0nts5" path="res://resources/ability/effect_group/inherit_heal60-100%ownATK.tres" id="3_xnc1h"]
+[ext_resource type="Script" uid="uid://bdmenxynhc50j" path="res://scripts/action/action.gd" id="4_7adpv"]
+
+[resource]
+script = ExtResource("4_7adpv")
+action_name = &"Heal"
+action_icon = ExtResource("1_knxng")
+action_description = "Restore health by {0} to an ally."
+target_group = 2
+cooldown = 2
+effect_groups = Array[ExtResource("2_mqh8i")]([ExtResource("3_xnc1h")])
+metadata/_custom_type_script = "uid://bdmenxynhc50j"

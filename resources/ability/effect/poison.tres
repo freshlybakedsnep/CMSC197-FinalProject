@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="StatusEffect" format=3 uid="uid://d14vher7v6klk"]
+
+[ext_resource type="Resource" uid="uid://7vhjtcnrh1e7" path="res://resources/ability/value/6-14flat.tres" id="1_ihd0y"]
+[ext_resource type="Script" uid="uid://b7wmacmexid3k" path="res://scripts/action/effect_status.gd" id="2_vkppc"]
+
+[resource]
+script = ExtResource("2_vkppc")
+status_key = &"POISON"
+is_buff = false
+turns = 3
+trigger = 3
+behavior = 4
+formula = ExtResource("1_ihd0y")
+metadata/_custom_type_script = "uid://b7wmacmexid3k"

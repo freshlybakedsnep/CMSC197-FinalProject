@@ -1,0 +1,64 @@
+[gd_resource type="Resource" script_class="HeroData" format=3 uid="uid://c4jsek652ebdy"]
+
+[ext_resource type="Script" uid="uid://bl2qf613jng43" path="res://scenes/entity/entity_component.gd" id="1_mdvyt"]
+[ext_resource type="Script" uid="uid://bq4jpvro24bfo" path="res://scripts/components/stats_component.gd" id="2_d20np"]
+[ext_resource type="Script" uid="uid://bdmenxynhc50j" path="res://scripts/action/action.gd" id="3_yvmqh"]
+[ext_resource type="Resource" uid="uid://c3q57rkxtt5ah" path="res://resources/ability/ST_dmg.tres" id="4_s50h4"]
+[ext_resource type="Resource" uid="uid://cvn20gih60uto" path="res://resources/ability/Defend.tres" id="5_s54h1"]
+[ext_resource type="Resource" uid="uid://dua2ulvhtgbfv" path="res://resources/ability/ALLY_atkUP.tres" id="6_yvmqh"]
+[ext_resource type="Resource" uid="uid://0uyg5dgut0f4" path="res://resources/ability/SELF_heal.tres" id="7_f3iqc"]
+[ext_resource type="Resource" uid="uid://dmhnhpgdkcnqm" path="res://resources/ability/ALLY_heal.tres" id="7_s50h4"]
+[ext_resource type="Resource" uid="uid://d14n3vqbqsfy7" path="res://resources/ability/RAN_dmg.tres" id="8_grklv"]
+[ext_resource type="Resource" uid="uid://blmlyn3ib41co" path="res://resources/ability/PARTY_heal.tres" id="8_s54h1"]
+[ext_resource type="Script" uid="uid://dsu1t80330rqd" path="res://scripts/components/action_component.gd" id="9_le8ev"]
+[ext_resource type="Resource" uid="uid://bdnkx1a8e24j4" path="res://resources/ability/AOE_dmg.tres" id="10_ohgaa"]
+[ext_resource type="Resource" uid="uid://cq7qno4tcufth" path="res://resources/ability/ST_stun.tres" id="11_f4bub"]
+[ext_resource type="Script" uid="uid://c6g2xy001wklx" path="res://scripts/components/element_component.gd" id="12_xlppj"]
+[ext_resource type="Script" uid="uid://cm88ovm7gjp44" path="res://scripts/components/status_component.gd" id="13_06noe"]
+[ext_resource type="Script" uid="uid://bvxud30fp77h2" path="res://scripts/components/player_controller.gd" id="14_afmgu"]
+[ext_resource type="Texture2D" uid="uid://ckpqbwkytcvof" path="res://assets/sprites/rutenix.webp" id="15_750o4"]
+[ext_resource type="Script" uid="uid://nqhxig82acgw" path="res://scenes/entity/ent_hero.gd" id="15_eu5aj"]
+
+[sub_resource type="Resource" id="Resource_ig5s4"]
+script = ExtResource("2_d20np")
+base_stats = {
+"ATK": 5,
+"DEF": 2,
+"HP": 20,
+"SPD": 4
+}
+metadata/_custom_type_script = "uid://bq4jpvro24bfo"
+
+[sub_resource type="Resource" id="Resource_3ngop"]
+script = ExtResource("9_le8ev")
+binds = Dictionary[int, ExtResource("3_yvmqh")]({
+0: ExtResource("4_s50h4"),
+1: ExtResource("5_s54h1"),
+2: ExtResource("6_yvmqh"),
+3: ExtResource("7_s50h4"),
+4: ExtResource("8_s54h1")
+})
+basic_pool = Array[ExtResource("3_yvmqh")]([ExtResource("4_s50h4"), ExtResource("5_s54h1")])
+skill_pool = Array[ExtResource("3_yvmqh")]([ExtResource("10_ohgaa"), ExtResource("8_grklv"), ExtResource("7_f3iqc"), ExtResource("11_f4bub")])
+metadata/_custom_type_script = "uid://dsu1t80330rqd"
+
+[sub_resource type="Resource" id="Resource_0tcap"]
+script = ExtResource("12_xlppj")
+my_elem = 1
+metadata/_custom_type_script = "uid://c6g2xy001wklx"
+
+[sub_resource type="Resource" id="Resource_jba1v"]
+script = ExtResource("13_06noe")
+metadata/_custom_type_script = "uid://cm88ovm7gjp44"
+
+[sub_resource type="Resource" id="Resource_yv4oe"]
+script = ExtResource("14_afmgu")
+metadata/_custom_type_script = "uid://bvxud30fp77h2"
+
+[resource]
+script = ExtResource("15_eu5aj")
+character_class = 2
+entity_name = "Rutenix"
+sprite = ExtResource("15_750o4")
+components = Array[ExtResource("1_mdvyt")]([SubResource("Resource_ig5s4"), SubResource("Resource_3ngop"), SubResource("Resource_0tcap"), SubResource("Resource_jba1v"), SubResource("Resource_yv4oe")])
+metadata/_custom_type_script = "uid://nqhxig82acgw"

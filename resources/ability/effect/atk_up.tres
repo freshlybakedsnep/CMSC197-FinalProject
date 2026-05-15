@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="StatusEffect" format=3 uid="uid://c785up8wqukko"]
+
+[ext_resource type="Resource" uid="uid://dtbno4ix4li8t" path="res://resources/ability/value/30%targetATK.tres" id="1_sc0iw"]
+[ext_resource type="Script" uid="uid://b7wmacmexid3k" path="res://scripts/action/effect_status.gd" id="2_s1dbr"]
+
+[resource]
+script = ExtResource("2_s1dbr")
+status_key = &"ATK"
+turns = 2
+hit_based = true
+formula = ExtResource("1_sc0iw")
+metadata/_custom_type_script = "uid://b7wmacmexid3k"
