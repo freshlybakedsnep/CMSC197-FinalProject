@@ -20,8 +20,8 @@ config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
-BGM="*res://scripts/globals/bgm_manager.gd"
 
+BGM="*res://scripts/globals/bgm_manager.gd"
 PartyManager="*res://scripts/globals/party_manager.gd"
 HeroDatabase="*res://scripts/globals/hero_database.gd"
 BattleRegistry="*uid://cukk0c3cvcvfo"
@@ -66,5 +66,3 @@ screen_dim_amount={
 "type": "float",
 "value": 1.0
 }
-
-
