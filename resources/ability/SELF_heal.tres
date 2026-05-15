@@ -7,8 +7,9 @@
 
 [resource]
 script = ExtResource("4_ie4al")
-action_name = "Heal"
+action_name = &"Heal"
 action_icon = ExtResource("1_shoej")
 action_description = "Restore health by {0} to self."
+cooldown = 2
 effect_groups = Array[ExtResource("2_2sa37")]([ExtResource("3_shoej")])
 metadata/_custom_type_script = "uid://bdmenxynhc50j"

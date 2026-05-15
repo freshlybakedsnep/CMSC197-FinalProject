@@ -65,6 +65,9 @@ func setup(data: Dictionary) -> void:
 		else:
 			predict_outcome(unit, false)
 		
+		b.set_focus_neighbor(SIDE_RIGHT, NodePath(""))
+		b.set_focus_neighbor(SIDE_LEFT, NodePath(""))
+		
 		if i > 0:
 			var lb = display_targets[i-1].target_component
 			b.set_focus_neighbor(SIDE_LEFT, lb.get_path())

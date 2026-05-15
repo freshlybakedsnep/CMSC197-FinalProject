@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Action" format=3 uid="uid://dua2ulvhtgbfv"]
+
+[ext_resource type="Texture2D" uid="uid://c2l0sgxhal5k6" path="res://assets/icon_test.png" id="1_7xbf5"]
+[ext_resource type="Script" uid="uid://djkmvtkrgtp6u" path="res://scripts/action/effect_group.gd" id="2_u1o0r"]
+[ext_resource type="Resource" uid="uid://b0ovc8wldveak" path="res://resources/ability/effect_group/inherit_atkUP.tres" id="3_7xbf5"]
+[ext_resource type="Script" uid="uid://bdmenxynhc50j" path="res://scripts/action/action.gd" id="4_x7ncp"]
+
+[resource]
+script = ExtResource("4_x7ncp")
+action_name = &"Charisma"
+action_icon = ExtResource("1_7xbf5")
+action_description = "Provides a {0} buff to one ally."
+target_group = 2
+cooldown = 2
+effect_groups = Array[ExtResource("2_u1o0r")]([ExtResource("3_7xbf5")])
+metadata/_custom_type_script = "uid://bdmenxynhc50j"

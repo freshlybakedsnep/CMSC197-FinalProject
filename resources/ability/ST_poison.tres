@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Action" format=3 uid="uid://n2sgmkddiy4a"]
+
+[ext_resource type="Texture2D" uid="uid://c2l0sgxhal5k6" path="res://assets/icon_test.png" id="1_soijl"]
+[ext_resource type="Script" uid="uid://djkmvtkrgtp6u" path="res://scripts/action/effect_group.gd" id="2_pb6k7"]
+[ext_resource type="Resource" uid="uid://d4m51mll11juc" path="res://resources/ability/effect_group/inherit_poison.tres" id="3_soijl"]
+[ext_resource type="Script" uid="uid://bdmenxynhc50j" path="res://scripts/action/action.gd" id="4_n8n26"]
+
+[resource]
+script = ExtResource("4_n8n26")
+action_name = &"ST poison"
+action_icon = ExtResource("1_soijl")
+action_description = "Apply POISON to one enemy, dealing {0} at the start of each turn."
+target_group = 3
+cooldown = 4
+effect_groups = Array[ExtResource("2_pb6k7")]([ExtResource("3_soijl")])
+metadata/_custom_type_script = "uid://bdmenxynhc50j"

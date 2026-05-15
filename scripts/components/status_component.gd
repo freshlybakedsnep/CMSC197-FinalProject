@@ -12,7 +12,7 @@ var _active_status : Dictionary = {}
 # 2nd-level : name of buff
 # 3rd-level : property of buff
 
-enum Trigger { ON_ATTACK, ON_DEFEND }
+enum Trigger { ON_ATTACK, ON_DEFEND, ON_TURN_START, ON_TURN_END, ON_FOLLOW_UP }
 
 func add_modifier(stat_name: StringName, params: Dictionary) -> void:
 	# Hard Block: don't refresh
@@ -94,10 +94,10 @@ func has_taunt() -> bool:
 func tick_turns() -> void:
 	_process_reduction(&"turns")
 
-func tick_hits(trigger_type: Trigger) -> void:
-	_process_reduction("hits", trigger_type)
+func tick_hits(trigger_type: Trigger) -> Dictionary:
+	return _process_reduction(&"hits", trigger_type)
 
-func _process_reduction(key: StringName, trigger_type: Variant = null) -> void:
+func _process_reduction(key: StringName, trigger_type: Variant = null) -> Dictionary:
 	# iterate through all buckets
 	for behavior in _active_status.keys():
 		var b = _active_status[behavior]
@@ -107,6 +107,15 @@ func _process_reduction(key: StringName, trigger_type: Variant = null) -> void:
 			# iterate through each instance
 			for i in range(listing.size()-1, -1, -1):
 				var mod = listing[i]
+				
+				if behavior == StatusEffect.Behavior.EOT and mod[&"trigger_on"] == trigger_type:
+					return {
+						&"type": StatusEffect.Behavior.EOT,
+						&"src": mod[&"caster"],
+						&"tar": host,
+						&"eff": _trigger_dot_effect(mod[&"val"])
+					}
+				
 				match key:
 					&"hits" when mod[&"hits"] > 0 and mod[&"trigger_on"] == trigger_type:
 						mod[&"hits"] -= 1
@@ -121,7 +130,17 @@ func _process_reduction(key: StringName, trigger_type: Variant = null) -> void:
 					# add a signal here for triggers of certain effects upon removal
 					status_removed.emit(stat)
 					listing.remove_at(i)
+			
 			if listing.is_empty():
 				b.erase(stat)
 		if b.is_empty():
 			_active_status.erase(behavior)
+	return {}
+
+func _trigger_dot_effect(amount: float) -> Dictionary:
+	return {
+			&"type": "HEALTH",
+			&"amount": amount,
+			&"is_damaging": true,
+			&"ignore_def": true
+	}

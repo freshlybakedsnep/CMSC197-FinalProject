@@ -9,6 +9,7 @@
 [ext_resource type="Resource" uid="uid://d14n3vqbqsfy7" path="res://resources/ability/RAN_dmg.tres" id="6_go73x"]
 [ext_resource type="Resource" uid="uid://cq7qno4tcufth" path="res://resources/ability/ST_stun.tres" id="6_m1i4o"]
 [ext_resource type="Script" uid="uid://c6g2xy001wklx" path="res://scripts/components/element_component.gd" id="6_pk2qp"]
+[ext_resource type="Resource" uid="uid://n2sgmkddiy4a" path="res://resources/ability/ST_poison.tres" id="7_5yh1s"]
 [ext_resource type="Resource" uid="uid://0uyg5dgut0f4" path="res://resources/ability/SELF_heal.tres" id="7_76hqa"]
 [ext_resource type="Resource" uid="uid://bdnkx1a8e24j4" path="res://resources/ability/AOE_dmg.tres" id="7_go73x"]
 [ext_resource type="Script" uid="uid://cm88ovm7gjp44" path="res://scripts/components/status_component.gd" id="7_m1i4o"]
@@ -26,11 +27,11 @@ binds = Dictionary[int, ExtResource("3_k4hbv")]({
 0: ExtResource("4_go73x"),
 1: ExtResource("5_k4hbv"),
 2: ExtResource("6_m1i4o"),
-3: ExtResource("7_76hqa"),
+3: ExtResource("7_5yh1s"),
 4: ExtResource("7_go73x")
 })
-basic_pool = Array[ExtResource("3_k4hbv")]([ExtResource("4_go73x")])
-skill_pool = Array[ExtResource("3_k4hbv")]([ExtResource("7_go73x"), ExtResource("6_go73x"), ExtResource("7_76hqa"), ExtResource("6_m1i4o")])
+basic_pool = Array[ExtResource("3_k4hbv")]([ExtResource("4_go73x"), ExtResource("5_k4hbv")])
+skill_pool = Array[ExtResource("3_k4hbv")]([ExtResource("7_go73x"), ExtResource("6_go73x"), ExtResource("7_76hqa"), ExtResource("6_m1i4o"), ExtResource("7_5yh1s")])
 metadata/_custom_type_script = "uid://dsu1t80330rqd"
 
 [sub_resource type="Resource" id="Resource_0tcap"]

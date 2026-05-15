@@ -18,7 +18,7 @@ enum Behavior {
 	INCAPACITATE,	# causes entity to skip their turn
 	RESTRICT, 		# limits the entity's choices
 	PROTECT,		# affects damage multiplier and targeting
-	DOT				# off-battle damage application
+	EOT				# takes effect asynchronously
 }
 @export var permanent : bool = false
 @export var removable : bool = true

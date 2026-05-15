@@ -14,17 +14,10 @@ func register_state(_name: String, state_class: GDScript) -> void:
 func change(state_name: String) -> void:
 	pending.append(state_name)
 
-func back() -> void:
-	pending.append("pop")
-
-func clear() -> void:
-	pending.append("clear")
-
-func refresh() -> void:
-	pending.append("refresh")
-
-func current() -> GameState:
-	return stack.back() if stack else null
+func back() -> void: pending.append(&"pop")
+func clear() -> void: pending.append(&"clear")
+func refresh() -> void: pending.append(&"refresh")
+func current() -> GameState: return stack.back() if stack else null
 
 func _process(delta: float) -> void:
 	if stack.is_empty(): return
@@ -35,32 +28,23 @@ func _process(delta: float) -> void:
 	# START
 	if not state.started:
 		state.started = true
-		if state.start() == "repeat":
-			repeat = true
+		repeat = state.start() == &"repeat"
 	
 	# BEGIN
 	if not repeat and not state.processed:
 		state.processed = true
-		if state.begin() == "repeat":
-			repeat = true
+		repeat = state.begin() == &"repeat"
 	
 	# INPUT
 	if not repeat:
 		var event = _get_current_input()
-		if state.take_input(event) == "repeat":
-			repeat = true
+		repeat = state.take_input(event) == &"repeat"
 	
 	# UPDATED
-	if not repeat:
-		var transition = state.update(delta)
-		match transition:
-			"repeat": repeat = true
-			"": pass
-			_: change(transition)
+	if not repeat: repeat = state.update(delta) == &"repeat"
 	
 	# DRAW
-	if not repeat:
-		_draw_stack()
+	if not repeat: _draw_stack()
 	
 	# END
 	if not pending.is_empty() and state.processed:
@@ -76,18 +60,18 @@ func _pop(s: GameState):
 func _process_pending() -> void:
 	for transition: Variant in pending:
 		match transition:
-			"pop":
+			&"pop":
 				if stack.size() > 0:
 					_pop(stack.pop_back())
-			"clear":
+			&"clear":
 				while stack.size() > 0:
 					_pop(stack.pop_back())
-			"refresh":
+			&"refresh":
 				while stack.size() > 1:
 					_pop(stack.pop_front())
 			_:
 				var new_state: GameState = state_registry[transition].new()
-				if "handler" in new_state:
+				if &"handler" in new_state:
 					new_state.handler = self.handler
 				new_state.state_name = transition
 				stack.append(new_state)
@@ -102,5 +86,11 @@ func _draw_stack() -> void:
 	for i: int in range(start_idx, stack.size()):
 		stack[i].draw(get_tree().root)
 
-func _get_current_input() -> String:
-	return ""
+var last_input : InputEvent
+func _input(event: InputEvent) -> void:
+	last_input = event
+
+func _get_current_input() -> InputEvent:
+	var x := last_input
+	last_input = null
+	return x
