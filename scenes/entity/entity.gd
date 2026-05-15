@@ -3,6 +3,7 @@ class_name Entity
 
 signal entity_action_over
 signal entity_eliminated
+signal entity_effect_triggered
 signal dead
 
 var data : EntityData

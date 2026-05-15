@@ -61,6 +61,7 @@ static func _apply_effect(src: EntityData, tar: EntityData, fx: Effect, level: i
 	var eff = fx.get_effect_data(src, tar, level)
 	var stats : StatsComponent = tar.get_comp(EntityComponent.Type.STATS)
 	var t
+	
 	match eff.get(&"type"):
 		&"HEALTH":
 			var result = CombatResolver.resolve_health_adjust(src, tar, eff)
@@ -74,9 +75,10 @@ static func _apply_effect(src: EntityData, tar: EntityData, fx: Effect, level: i
 		
 		&"STATUS":
 			if tar.state != EntityData.State.DEAD and stats.get_stat(&"CURR_HP") > 0:
-				var status = tar.get_comp(EntityComponent.Type.STATUS)
+				var status : StatusComponent = tar.get_comp(EntityComponent.Type.STATUS)
 				if status:
 					status.add_modifier(eff[&"key"], eff[&"params"])
+					#print(status._active_status)
 				t = effect_text.instantiate() as EffectText
 				t.effect(eff[&"key"], Color.WHITE, eff[&"params"].get(&"is_buff", true))
 	tar.host.add_child(t)
@@ -96,3 +98,20 @@ static func get_prediction(src: EntityData, tar: EntityData, action: Action) -> 
 			results.append(res)
 		
 	return {&"results": results}
+
+static func apply_dot_effect(src: EntityData, tar: EntityData, eff: Dictionary) -> void:
+	var stats : StatsComponent = tar.get_comp(EntityComponent.Type.STATS)
+	if not stats or tar.state == EntityData.State.DEAD: return
+	
+	var result = CombatResolver.resolve_health_adjust(src, tar, eff)
+	stats.modify_stat(&"CURR_HP", -result[&"final"])
+	
+	var t : DamageText = damage_text.instantiate()
+	t.modify(result, eff.get(&"is_damaging"))
+	tar.host.add_child(t)
+	
+	if stats.get_stat(&"CURR_HP") <= 0:
+		tar.host.entity_eliminated.emit()
+		
+	await t.finished
+	tar.host.entity_effect_triggered.emit()

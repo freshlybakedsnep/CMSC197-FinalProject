@@ -65,7 +65,7 @@ func show_action_tooltip(action: Action) -> void:
 			"type": action,
 			"name": action.action_name,
 			"level": str(action.level),
-			"cd": str(action.cooldown) if action.cooldown > 0 else "None",
+			"cd": str(action.cooldown - 1) if action.cooldown > 0 else "None",
 			"desc": action.summarize_effects()
 		}
 	)

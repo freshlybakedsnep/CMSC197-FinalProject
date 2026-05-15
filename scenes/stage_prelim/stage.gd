@@ -15,8 +15,10 @@ var current_wave_index := -1
 
 var turn_count := 0
 var turn_queue : Array[Entity]
+
 var acted : Array[Entity]
 var eliminated : Array[Entity]
+var pending_triggers : Array[Dictionary] = []
 
 func _ready() -> void:
 	state_machine.handler = self
@@ -32,6 +34,7 @@ func _ready() -> void:
 	state_machine.register_state("combat", BattleEvents.CombatState)
 	state_machine.register_state("act", BattleEvents.ActingState)
 	state_machine.register_state("end", BattleEvents.TurnEnd)
+	state_machine.register_state(&"async", BattleEvents.AsyncEffectState)
 	
 	state_machine.register_state("win", BattleEvents.Win)
 	state_machine.register_state("lose", BattleEvents.GameOver)
@@ -79,10 +82,33 @@ func start_turn() -> void:
 	enemies.fill_vacancies()
 	$EnemyCount.text = "Enemies Left: " + str(enemies.enemy_pool.size())
 	
-	for e in get_tree().get_nodes_in_group("entities"):
+	for e: Entity in get_tree().get_nodes_in_group("entities"):
 		if e.data.state == EntityData.State.NORMAL:
 			e.reset()
+			trigger_event(e, StatusComponent.Trigger.ON_TURN_START)
 	print("\nTurn %d" % turn_count)
+
+func end_turn() -> void:
+	RenderingServer.global_shader_parameter_set("screen_dim_amount", 1.0)
+	acted.clear()
+	for e: Entity in get_tree().get_nodes_in_group("entities"):
+		if e.data.state == EntityData.State.NORMAL:
+			trigger_event(e, StatusComponent.Trigger.ON_TURN_END)
+
+func trigger_event(ent: Entity, event: StatusComponent.Trigger) -> void:
+	var status : StatusComponent = ent.data.get_comp(EntityComponent.Type.STATUS)
+	if not status: return
+	var e = status.tick_hits(event)
+	if e:
+		match e[&"type"]:
+			StatusEffect.Behavior.EOT:
+				pending_triggers.append(
+					{
+						&"state_name" : "async",
+						&"host": e[&"tar"],
+						&"call": func(): ActionParser.apply_dot_effect(e[&"src"], e[&"tar"], e[&"eff"])
+					}
+				)
 
 func _get_prio(ent: Entity) -> int:
 	var act_sys : ActionComponent = ent.data.get_comp(EntityComponent.Type.ACTION)
@@ -113,3 +139,11 @@ func clear_the_dead() -> void:
 			print(ent.name, " is deleted")
 			ent.queue_free()
 		ent.remove_from_group("entities")
+
+func get_next_state() -> String:
+	if pending_triggers.is_empty(): return ""
+	return pending_triggers.front().get(&"state_name")
+
+func process_pending() -> Dictionary:
+	if pending_triggers.is_empty(): return {}
+	return pending_triggers.pop_front()

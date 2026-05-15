@@ -68,10 +68,13 @@ func summarize_effects() -> String:
 				
 				var stat when stat is StatusEffect:
 					var s = stat as StatusEffect
-					if s.behavior == StatusEffect.Behavior.NONE:
-						val = val_string(stat.formula) + " "
-						
-					val += s.status_key
+					match s.behavior:
+						StatusEffect.Behavior.NONE:
+							val = val_string(stat.formula) + s.status_key
+						StatusEffect.Behavior.EOT:
+							val = val_string(stat.formula)
+						_:
+							val = s.status_key
 			values.append(val)
 	return action_description.format(values)
 
