@@ -108,9 +108,9 @@ func _process_reduction(key: StringName, trigger_type: Variant = null) -> Dictio
 			for i in range(listing.size()-1, -1, -1):
 				var mod = listing[i]
 				
-				if behavior == StatusEffect.Behavior.DOT and mod[&"trigger_on"] == trigger_type:
+				if behavior == StatusEffect.Behavior.EOT and mod[&"trigger_on"] == trigger_type:
 					return {
-						&"type": StatusEffect.Behavior.DOT,
+						&"type": StatusEffect.Behavior.EOT,
 						&"src": mod[&"caster"],
 						&"tar": host,
 						&"eff": _trigger_dot_effect(mod[&"val"])
