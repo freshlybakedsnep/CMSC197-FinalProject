@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://ddsxg1ao3vu1d" path="res://scenes/entity/ent_enemy.gd" id="4_2lgi4"]
 [ext_resource type="Resource" uid="uid://db8wjrcpyke2a" path="res://resources/enemies/test_slime.tres" id="5_ho8nq"]
 [ext_resource type="Script" uid="uid://bl2qf613jng43" path="res://scenes/entity/entity_component.gd" id="6_2xm68"]
+[ext_resource type="SpriteFrames" uid="uid://dba8h5urkin07" path="res://resources/enemies/slime_water.tres" id="6_eoap2"]
 [ext_resource type="Script" uid="uid://bq4jpvro24bfo" path="res://scripts/components/stats_component.gd" id="7_3al4t"]
 [ext_resource type="Script" uid="uid://bdmenxynhc50j" path="res://scripts/action/action.gd" id="8_kebkx"]
 [ext_resource type="Resource" uid="uid://c3q57rkxtt5ah" path="res://resources/ability/ST_dmg.tres" id="9_u3bu7"]
@@ -21,12 +22,14 @@
 [ext_resource type="Script" uid="uid://cpffl8bnew7fl" path="res://scripts/components/ai_controller.gd" id="15_eoap2"]
 [ext_resource type="Script" uid="uid://ug5unx6nj7be" path="res://scripts/components/resource_component.gd" id="16_ejsep"]
 [ext_resource type="Script" uid="uid://djkmvtkrgtp6u" path="res://scripts/action/effect_group.gd" id="17_k3x5l"]
+[ext_resource type="SpriteFrames" uid="uid://3giw5rnt7eew" path="res://resources/enemies/slime_fire.tres" id="18_ejsep"]
 [ext_resource type="Script" uid="uid://df5c28vkm6a78" path="res://scripts/action/effect.gd" id="18_mlihk"]
 [ext_resource type="Script" uid="uid://bmoddb5swqv0y" path="res://scripts/state_machine.gd" id="18_s5gfg"]
 [ext_resource type="Script" uid="uid://dhasq7k64fe7q" path="res://scripts/action/value_scaling.gd" id="19_0vnh0"]
 [ext_resource type="Script" uid="uid://dt538323xnk4w" path="res://scripts/action/effect_health.gd" id="20_eoap2"]
 [ext_resource type="Script" uid="uid://x82xxogtaoe5" path="res://scripts/action/value_flat.gd" id="21_ejsep"]
 [ext_resource type="Script" uid="uid://b7wmacmexid3k" path="res://scripts/action/effect_status.gd" id="22_anduq"]
+[ext_resource type="PackedScene" uid="uid://hortyt3kgxxl" path="res://scenes/menu_ui/lose_screen.tscn" id="27_mlihk"]
 
 [sub_resource type="Resource" id="Resource_jncna"]
 script = ExtResource("7_3al4t")
@@ -66,6 +69,7 @@ metadata/_custom_type_script = "uid://ug5unx6nj7be"
 [sub_resource type="Resource" id="Resource_anduq"]
 script = ExtResource("4_2lgi4")
 entity_name = "Slime"
+battle_sprite = ExtResource("6_eoap2")
 components = Array[ExtResource("6_2xm68")]([SubResource("Resource_jncna"), SubResource("Resource_syrdu"), SubResource("Resource_s5yfr"), SubResource("Resource_p3iaq"), SubResource("Resource_jel85"), SubResource("Resource_s2s0s")])
 metadata/_custom_type_script = "uid://ddsxg1ao3vu1d"
 
@@ -200,6 +204,7 @@ metadata/_custom_type_script = "uid://ug5unx6nj7be"
 [sub_resource type="Resource" id="Resource_uaju1"]
 script = ExtResource("4_2lgi4")
 entity_name = "Slime"
+battle_sprite = ExtResource("18_ejsep")
 components = Array[ExtResource("6_2xm68")]([SubResource("Resource_73dpb"), SubResource("Resource_mpegb"), SubResource("Resource_8li6u"), SubResource("Resource_s4in1"), SubResource("Resource_fvkwm"), SubResource("Resource_pmvbh")])
 metadata/_custom_type_script = "uid://ddsxg1ao3vu1d"
 
@@ -235,7 +240,9 @@ position = Vector2(350, 280)
 position = Vector2(850, 440)
 
 [node name="CommandUI" parent="." unique_id=1732962988 instance=ExtResource("14_dkcyh")]
-z_index = 1
+
+[node name="LoseScreen" parent="." unique_id=1469454908 instance=ExtResource("27_mlihk")]
+visible = false
 
 [node name="Interval" type="Timer" parent="." unique_id=762121790]
 wait_time = 0.5
@@ -266,3 +273,5 @@ text = "Wave: x/x"
 label_settings = SubResource("LabelSettings_ltv8x")
 
 [connection signal="plan_done" from="CommandUI" to="." method="start_fight"]
+
+[editable path="LoseScreen"]

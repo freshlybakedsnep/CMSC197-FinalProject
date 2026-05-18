@@ -24,6 +24,7 @@ gate_scene = ExtResource("1_4rr8x")
 player_level = 3
 
 [node name="Background" type="Sprite2D" parent="." unique_id=1131205192]
+z_index = -2
 position = Vector2(640, 360)
 texture = ExtResource("2_kj8f2")
 

@@ -7,6 +7,7 @@ class_name Stage
 @onready var enemies : EnemyFormation = $Enemies
 @onready var heroes : HeroFormation = $Heroes
 @onready var interval: Timer = $Interval
+@onready var lose_screen: CanvasLayer = $LoseScreen
 
 @export var stage_info : StageInfo
 

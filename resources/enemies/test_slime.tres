@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="EnemyData" format=3 uid="uid://db8wjrcpyke2a"]
 
 [ext_resource type="Script" uid="uid://bl2qf613jng43" path="res://scenes/entity/entity_component.gd" id="1_rwtre"]
+[ext_resource type="SpriteFrames" uid="uid://dv5n1xrxxw0o0" path="res://resources/enemies/slime_wood.tres" id="1_v5i3a"]
 [ext_resource type="Script" uid="uid://ddsxg1ao3vu1d" path="res://scenes/entity/ent_enemy.gd" id="2_ljfmg"]
 [ext_resource type="Script" uid="uid://bq4jpvro24bfo" path="res://scripts/components/stats_component.gd" id="2_rmjao"]
 [ext_resource type="Script" uid="uid://bdmenxynhc50j" path="res://scripts/action/action.gd" id="3_x18yb"]
 [ext_resource type="Resource" uid="uid://c3q57rkxtt5ah" path="res://resources/ability/ST_dmg.tres" id="4_rmjao"]
-[ext_resource type="Resource" uid="uid://cq7qno4tcufth" path="res://resources/ability/ST_stun.tres" id="5_pw5yq"]
 [ext_resource type="Script" uid="uid://dsu1t80330rqd" path="res://scripts/components/action_component.gd" id="5_v5i3a"]
 [ext_resource type="Script" uid="uid://c6g2xy001wklx" path="res://scripts/components/element_component.gd" id="6_q3br0"]
 [ext_resource type="Script" uid="uid://cm88ovm7gjp44" path="res://scripts/components/status_component.gd" id="7_mmqww"]
@@ -25,7 +25,7 @@ metadata/_custom_type_script = "uid://bq4jpvro24bfo"
 
 [sub_resource type="Resource" id="Resource_syrdu"]
 script = ExtResource("5_v5i3a")
-basic_pool = Array[ExtResource("3_x18yb")]([ExtResource("4_rmjao"), ExtResource("5_pw5yq")])
+basic_pool = Array[ExtResource("3_x18yb")]([ExtResource("4_rmjao")])
 ultimates = Array[ExtResource("3_x18yb")]([ExtResource("7_pw5yq")])
 metadata/_custom_type_script = "uid://dsu1t80330rqd"
 
@@ -51,5 +51,6 @@ metadata/_custom_type_script = "uid://ug5unx6nj7be"
 [resource]
 script = ExtResource("2_ljfmg")
 entity_name = "Slime"
+battle_sprite = ExtResource("1_v5i3a")
 components = Array[ExtResource("1_rwtre")]([SubResource("Resource_jncna"), SubResource("Resource_syrdu"), SubResource("Resource_s5yfr"), SubResource("Resource_p3iaq"), SubResource("Resource_jel85"), SubResource("Resource_s2s0s")])
 metadata/_custom_type_script = "uid://ddsxg1ao3vu1d"
