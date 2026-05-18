@@ -63,7 +63,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="Panel" type="Panel" parent="ModalRoot/CenterContainer" unique_id=1481318226]
-custom_minimum_size = Vector2(460, 300)
+custom_minimum_size = Vector2(460, 250)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
