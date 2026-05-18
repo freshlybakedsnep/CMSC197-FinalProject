@@ -38,6 +38,10 @@ static func execute(src: Entity, action: Action, targets: Array[EntityData] = []
 				curr_action.target_count, 
 				curr_action.target_state)
 		
+		if curr_action.target_mode == Action.TargetMode.SINGLE:
+			if BattleRegistry._is_hero(src.data):
+				main_targets = main_targets.slice(0,1)
+		
 		var current_targets = main_targets
 		for group in curr_action.effect_groups:
 			current_targets = TargetingResolver.get_effect_targets(src.data, group, main_targets)
