@@ -1,6 +1,7 @@
 extends Area2D
 
-@export var destination_scene: PackedScene
+signal stage_select
+
 @export var location_name: String = "Location"
 @export var hover_tint: Color = Color(1.2, 1.2, 1.2, 1.0)
 @export var normal_tint: Color = Color(1, 1, 1, 1)
@@ -33,5 +34,4 @@ func _on_mouse_exited() -> void:
 
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		if destination_scene:
-			get_tree().change_scene_to_packed(destination_scene)
+		stage_select.emit()

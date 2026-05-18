@@ -6,7 +6,7 @@
 font = ExtResource("1_yd5bg")
 font_size = 48
 
-[node name="LoseScreen" type="CanvasLayer" unique_id=1469454908]
+[node name="EndScreen" type="CanvasLayer" unique_id=1469454908]
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=528576866]
 anchors_preset = 15
@@ -26,7 +26,7 @@ alignment = 1
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=144622659]
 layout_mode = 2
-text = "The Party has fallen..."
+text = "Battle Finished!"
 label_settings = SubResource("LabelSettings_uohpj")
 
 [node name="Retry" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1983171627]

@@ -1,6 +1,8 @@
 extends Node
 class_name Stage
 
+signal stage_quit
+
 @onready var state_machine: GameStateMachine = $StateMachine
 
 @onready var command_ui: BattleMenu = $CommandUI
@@ -149,3 +151,8 @@ func get_next_state() -> String:
 func process_pending() -> Dictionary:
 	if pending_triggers.is_empty(): return {}
 	return pending_triggers.pop_front()
+
+func exit_stage() -> void:
+	stage_quit.emit()
+	BattleRegistry.clear_battle()
+	queue_free()

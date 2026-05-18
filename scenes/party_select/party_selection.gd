@@ -1,11 +1,12 @@
-extends Control
+extends Node
 class_name PartySelector
+
+signal party_finalized
 
 @onready var party_preview: HBoxContainer = $VBoxContainer/Party
 @onready var character_buttons: GridContainer = $VBoxContainer/CharacterButtons
 
 @export var character_slot : PackedScene
-@export var stage : PackedScene
 
 const MAX_ROSTER := 8
 
@@ -51,11 +52,15 @@ func select_hero(recruited : bool, ch : HeroData) -> void:
 		if ch in PartyManager.party:
 			party_preview.get_child(PartyManager.remove_member(ch)).queue_free()
 	
-	$VBoxContainer/Button.disabled = (PartyManager.party.size() < 1)
+	$VBoxContainer/StartBattle.disabled = (PartyManager.party.size() < 1)
 
-func _on_button_pressed() -> void:
+func start_battle() -> void:
 	PartyManager.finalize_party()
-	get_tree().change_scene_to_packed(stage)
+	party_finalized.emit()
+	queue_free()
+
+func reselect_stage() -> void:
+	queue_free()
 
 func _class_to_text(character_class: HeroData.CharacterClass) -> String:
 	match character_class:
