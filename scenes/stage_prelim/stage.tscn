@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bwtxguku00kwa" path="res://scenes/menu_ui/menu_battle.tscn" id="14_dkcyh"]
 [ext_resource type="Script" uid="uid://bmoddb5swqv0y" path="res://scripts/state_machine.gd" id="18_s5gfg"]
 [ext_resource type="PackedScene" path="res://scenes/stage_prelim/pause_modal.tscn" id="23_pause"]
-[ext_resource type="PackedScene" uid="uid://hortyt3kgxxl" path="res://scenes/menu_ui/lose_screen.tscn" id="27_mlihk"]
+[ext_resource type="PackedScene" uid="uid://hortyt3kgxxl" path="res://scenes/menu_ui/end_screen.tscn" id="27_mlihk"]
 
 [sub_resource type="Resource" id="Resource_sponv"]
 script = ExtResource("3_sc1co")
@@ -54,7 +54,7 @@ grow_vertical = 2
 mouse_filter = 1
 mouse_behavior_recursive = 2
 
-[node name="LoseScreen" parent="." unique_id=1469454908 instance=ExtResource("27_mlihk")]
+[node name="EndScreen" parent="." unique_id=1469454908 instance=ExtResource("27_mlihk")]
 visible = false
 
 [node name="Interval" type="Timer" parent="." unique_id=762121790]
@@ -89,4 +89,4 @@ label_settings = SubResource("LabelSettings_ltv8x")
 
 [connection signal="plan_done" from="CommandUI" to="." method="start_fight"]
 
-[editable path="LoseScreen"]
+[editable path="EndScreen"]

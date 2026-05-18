@@ -32,7 +32,7 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[node name="LoseScreen" type="CanvasLayer" unique_id=1469454908]
+[node name="EndScreen" type="CanvasLayer" unique_id=1469454908]
 layer = 30
 
 [node name="ModalRoot" type="Control" parent="." unique_id=458443276]

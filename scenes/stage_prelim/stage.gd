@@ -3,8 +3,10 @@ class_name Stage
 
 const WORLD_SCENE := "res://scenes/player_world/world.tscn"
 const MAIN_MENU_SCENE := "res://scenes/menu/main_menu.tscn"
-const WIN_SCREEN_SCENE := preload("res://scenes/menu_ui/win_screen.tscn")
+const WIN_TITLE := "Stage Cleared!"
 const WIN_HINT_DEFAULT := "Your party won the battle. Choose what to do next."
+const LOSE_TITLE := "The Party has fallen..."
+const LOSE_HINT_DEFAULT := "Your team was defeated."
 
 @onready var state_machine: GameStateMachine = $StateMachine
 
@@ -13,8 +15,11 @@ const WIN_HINT_DEFAULT := "Your party won the battle. Choose what to do next."
 @onready var heroes : HeroFormation = $Heroes
 @onready var interval: Timer = $Interval
 @onready var pause_modal = $PauseModal
-@onready var lose_screen: CanvasLayer = $LoseScreen
-var win_screen: CanvasLayer
+@onready var end_screen: CanvasLayer = $EndScreen
+@onready var result_title: Label = $EndScreen/ModalRoot/CenterContainer/Panel/VBoxContainer/Label
+@onready var result_hint: Label = $EndScreen/ModalRoot/CenterContainer/Panel/VBoxContainer/Hint
+@onready var result_retry_button: Button = $EndScreen/ModalRoot/CenterContainer/Panel/VBoxContainer/Buttons/Retry
+@onready var result_exit_button: Button = $EndScreen/ModalRoot/CenterContainer/Panel/VBoxContainer/Buttons/Exit
 
 @export var stage_info : StageInfo
 
@@ -34,21 +39,11 @@ func _ready() -> void:
 	pause_modal.resume_requested.connect(_on_pause_resume_requested)
 	pause_modal.exit_battle_requested.connect(_on_pause_exit_battle_requested)
 	pause_modal.exit_game_requested.connect(_on_pause_exit_game_requested)
-
-	if has_node("WinScreen"):
-		win_screen = $WinScreen
-	else:
-		win_screen = WIN_SCREEN_SCENE.instantiate() as CanvasLayer
-		win_screen.name = "WinScreen"
-		win_screen.visible = false
-		add_child(win_screen)
-	
-	var continue_button := win_screen.get_node_or_null("ModalRoot/CenterContainer/Panel/VBoxContainer/Buttons/Continue") as Button
-	var exit_button := win_screen.get_node_or_null("ModalRoot/CenterContainer/Panel/VBoxContainer/Buttons/Exit") as Button
-	if continue_button and not continue_button.pressed.is_connected(_on_win_continue_pressed):
-		continue_button.pressed.connect(_on_win_continue_pressed)
-	if exit_button and not exit_button.pressed.is_connected(_on_win_exit_pressed):
-		exit_button.pressed.connect(_on_win_exit_pressed)
+	if not result_retry_button.pressed.is_connected(_on_result_retry_pressed):
+		result_retry_button.pressed.connect(_on_result_retry_pressed)
+	if not result_exit_button.pressed.is_connected(_on_result_exit_pressed):
+		result_exit_button.pressed.connect(_on_result_exit_pressed)
+	_set_result_modal(LOSE_TITLE, LOSE_HINT_DEFAULT)
 	
 	heroes.setup(eliminated)
 	enemies.setup(eliminated)
@@ -184,23 +179,28 @@ func process_pending() -> Dictionary:
 
 func on_battle_won() -> void:
 	var win_result := PartyManager.apply_active_battle_win_unlocks()
-	_update_win_hint(win_result)
-	win_screen.show()
+	_set_result_modal_for_win(win_result)
+	end_screen.show()
 
-func _update_win_hint(win_result: Dictionary) -> void:
-	var hint := win_screen.get_node_or_null("ModalRoot/CenterContainer/Panel/VBoxContainer/Hint") as Label
-	if hint == null:
-		return
+func on_battle_lost() -> void:
+	_set_result_modal(LOSE_TITLE, LOSE_HINT_DEFAULT)
+	end_screen.show()
+
+func _set_result_modal_for_win(win_result: Dictionary) -> void:
+	var hint_text := WIN_HINT_DEFAULT
 	
 	var newly_unlocked: PackedStringArray = win_result.get("newly_unlocked", PackedStringArray())
 	var is_new_clear := bool(win_result.get("is_new_clear", false))
 	
 	if not newly_unlocked.is_empty():
-		hint.text = "New character unlocked: %s\nChoose what to do next." % ", ".join(newly_unlocked)
+		hint_text = "New character unlocked: %s\nChoose what to do next." % ", ".join(newly_unlocked)
 	elif is_new_clear:
-		hint.text = "Stage cleared.\nChoose what to do next."
-	else:
-		hint.text = WIN_HINT_DEFAULT
+		hint_text = "Stage cleared.\nChoose what to do next."
+	_set_result_modal(WIN_TITLE, hint_text)
+
+func _set_result_modal(title_text: String, hint_text: String) -> void:
+	result_title.text = title_text
+	result_hint.text = hint_text
 
 func _on_pause_resume_requested() -> void:
 	pause_modal.close_menu()
@@ -213,10 +213,10 @@ func _on_pause_exit_game_requested() -> void:
 	get_tree().paused = false
 	get_tree().change_scene_to_file(MAIN_MENU_SCENE)
 
-func _on_win_continue_pressed() -> void:
+func _on_result_retry_pressed() -> void:
 	get_tree().paused = false
-	get_tree().change_scene_to_file(WORLD_SCENE)
+	get_tree().reload_current_scene()
 
-func _on_win_exit_pressed() -> void:
+func _on_result_exit_pressed() -> void:
 	get_tree().paused = false
 	get_tree().change_scene_to_file(MAIN_MENU_SCENE)
