@@ -49,7 +49,8 @@ static func execute(src: Entity, action: Action, targets: Array[EntityData] = []
 			if current_targets.is_empty(): continue
 			
 			for fx in group.effects:
-				# insert animation code here
+				if is_instance_valid(src):
+					await src.play_attack_vfx()
 				
 				for target in current_targets:
 					_apply_effect(src.data, target, fx, action.level)
