@@ -4,6 +4,7 @@ class_name BGMManager
 const MENU_BGM_PATH := "res://assets/audio/bgm/1555699_Internubes-AIM-2026.mp3"
 const WORLD_BGM_PATH := "res://assets/audio/bgm/1555699_Internubes-AIM-2026.mp3"
 const BATTLE_BGM_PATH := "res://assets/audio/bgm/1564182_Tokyo-Map-SMT-Raidou-X-Ove.mp3"
+const PARTY_BGM_PATH := "res://assets/audio/bgm/1564182_Tokyo-Map-SMT-Raidou-X-Ove.mp3"
 
 var _player := AudioStreamPlayer.new()
 var _current_path := ""
@@ -22,6 +23,9 @@ func play_world() -> void:
 
 func play_battle() -> void:
 	_play_path(BATTLE_BGM_PATH)
+
+func play_party() -> void:
+	_play_path(PARTY_BGM_PATH)
 
 func stop_music() -> void:
 	_current_path = ""

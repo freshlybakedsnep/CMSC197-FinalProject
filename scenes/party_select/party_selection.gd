@@ -10,6 +10,7 @@ class_name PartySelector
 const MAX_ROSTER := 8
 
 func _ready():
+	BGM.play_party()
 	PartyManager.party.clear()
 	var heroes: Array[HeroData] = []
 	for key in HeroDatabase.library.keys():

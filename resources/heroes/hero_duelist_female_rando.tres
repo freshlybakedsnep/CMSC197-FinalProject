@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="HeroData" format=3 uid="uid://nxypx45gh65r"]
+[gd_resource type="Resource" script_class="HeroData" format=3 uid="uid://caoq0wf2hthrf"]
 
 [ext_resource type="Script" uid="uid://bl2qf613jng43" path="res://scenes/entity/entity_component.gd" id="1_yae68"]
 [ext_resource type="Script" uid="uid://bq4jpvro24bfo" path="res://scripts/components/stats_component.gd" id="2_mpo8d"]

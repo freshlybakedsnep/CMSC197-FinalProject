@@ -4,7 +4,7 @@ class_name Stage
 const WORLD_SCENE := "res://scenes/player_world/world.tscn"
 const MAIN_MENU_SCENE := "res://scenes/menu/main_menu.tscn"
 const WIN_TITLE := "Stage Cleared!"
-const WIN_HINT_DEFAULT := "Your party won the battle. Choose what to do next."
+const WIN_HINT_DEFAULT := "Your party won the battle."
 const LOSE_TITLE := "The Party has fallen..."
 const LOSE_HINT_DEFAULT := "Your team was defeated."
 
