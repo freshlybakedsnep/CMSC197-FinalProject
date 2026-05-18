@@ -27,8 +27,7 @@ func _ready():
 		character_buttons.add_child(c)
 		var elem_icon = c.get_child(0)
 		var portrait = c.get_child(1)
-		portrait.texture = portrait.texture.duplicate()
-		portrait.texture.atlas = h.sprite
+		portrait.texture = h.sprite
 		var elem_comp: ElementComponent = null
 		for val in h.components:
 			if val is ElementComponent:
@@ -46,7 +45,12 @@ func select_hero(recruited : bool, ch : HeroData) -> void:
 			var p = TextureRect.new()
 			p.texture = ch.sprite
 			p.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-			p.custom_minimum_size = Vector2(128, 283.5)
+			p.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+			p.clip_contents = true
+			var target_height := party_preview.custom_minimum_size.y
+			if target_height <= 0.0:
+				target_height = 283.5
+			p.custom_minimum_size = Vector2(128, target_height)
 			party_preview.add_child(p)
 	else:
 		if ch in PartyManager.party:

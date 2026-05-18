@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://coheo4ni5l64c"
+path="res://.godot/imported/This is the power of everyone who believed in me — FEEL IT!.wav-abec13250bf859b26e76af64032bfa0a.sample"
+
+[deps]
+
+source_file="res://assets/audio/char/ares/ult/This is the power of everyone who believed in me — FEEL IT!.wav"
+dest_files=["res://.godot/imported/This is the power of everyone who believed in me — FEEL IT!.wav-abec13250bf859b26e76af64032bfa0a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

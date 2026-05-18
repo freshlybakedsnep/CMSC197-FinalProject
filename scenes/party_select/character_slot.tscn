@@ -16,6 +16,7 @@ atlas = ExtResource("1_ndgm5")
 region = Rect2(0, 0, 256, 256)
 
 [node name="CharacterIcon" type="Button" unique_id=2095410461]
+clip_contents = true
 custom_minimum_size = Vector2(80, 80)
 offset_right = 80.0
 offset_bottom = 80.0
@@ -51,5 +52,6 @@ size_flags_horizontal = 4
 focus_mode = 2
 texture = SubResource("AtlasTexture_h3508")
 expand_mode = 1
+stretch_mode = 6
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

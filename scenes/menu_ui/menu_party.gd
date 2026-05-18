@@ -13,8 +13,8 @@ func setup(nodes : Array[Entity]) -> void:
 		var hero : Entity = nodes[i]
 		hero_to_hud.set(hero, hud)
 		
-		hud.portrait.texture = hud.portrait.texture.duplicate()
-		hud.portrait.texture.atlas = hero.data.sprite
+		# Use the hero texture directly so HUD portrait scaling matches party select.
+		hud.portrait.texture = hero.data.sprite
 		
 		var stats : StatsComponent = hero.data.get_comp(EntityComponent.Type.STATS)
 		if stats:
