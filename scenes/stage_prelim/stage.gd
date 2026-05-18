@@ -1,12 +1,16 @@
 extends Node
 class_name Stage
 
+const WORLD_SCENE := "res://scenes/player_world/world.tscn"
+const MAIN_MENU_SCENE := "res://scenes/menu/main_menu.tscn"
+
 @onready var state_machine: GameStateMachine = $StateMachine
 
 @onready var command_ui: BattleMenu = $CommandUI
 @onready var enemies : EnemyFormation = $Enemies
 @onready var heroes : HeroFormation = $Heroes
 @onready var interval: Timer = $Interval
+@onready var pause_modal = $PauseModal
 
 @export var stage_info : StageInfo
 
@@ -23,6 +27,9 @@ var pending_triggers : Array[Dictionary] = []
 func _ready() -> void:
 	BGM.play_battle()
 	state_machine.handler = self
+	pause_modal.resume_requested.connect(_on_pause_resume_requested)
+	pause_modal.exit_battle_requested.connect(_on_pause_exit_battle_requested)
+	pause_modal.exit_game_requested.connect(_on_pause_exit_game_requested)
 	
 	heroes.setup(eliminated)
 	enemies.setup(eliminated)
@@ -42,6 +49,13 @@ func _ready() -> void:
 	
 	state_machine.change(&"start")
 	state_machine._process_pending()
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel"):
+		if get_tree().paused:
+			return
+		pause_modal.open_menu()
+		get_viewport().set_input_as_handled()
 
 func load_next_wave() -> bool:
 	current_wave_index += 1
@@ -148,3 +162,14 @@ func get_next_state() -> String:
 func process_pending() -> Dictionary:
 	if pending_triggers.is_empty(): return {}
 	return pending_triggers.pop_front()
+
+func _on_pause_resume_requested() -> void:
+	pause_modal.close_menu()
+
+func _on_pause_exit_battle_requested() -> void:
+	get_tree().paused = false
+	get_tree().change_scene_to_file(WORLD_SCENE)
+
+func _on_pause_exit_game_requested() -> void:
+	get_tree().paused = false
+	get_tree().change_scene_to_file(MAIN_MENU_SCENE)

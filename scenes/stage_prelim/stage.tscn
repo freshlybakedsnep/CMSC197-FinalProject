@@ -27,6 +27,7 @@
 [ext_resource type="Script" uid="uid://dt538323xnk4w" path="res://scripts/action/effect_health.gd" id="20_eoap2"]
 [ext_resource type="Script" uid="uid://x82xxogtaoe5" path="res://scripts/action/value_flat.gd" id="21_ejsep"]
 [ext_resource type="Script" uid="uid://b7wmacmexid3k" path="res://scripts/action/effect_status.gd" id="22_anduq"]
+[ext_resource type="PackedScene" path="res://scenes/stage_prelim/pause_modal.tscn" id="23_pause"]
 
 [sub_resource type="Resource" id="Resource_jncna"]
 script = ExtResource("7_3al4t")
@@ -264,5 +265,7 @@ offset_right = 195.0
 offset_bottom = 161.0
 text = "Wave: x/x"
 label_settings = SubResource("LabelSettings_ltv8x")
+
+[node name="PauseModal" parent="." instance=ExtResource("23_pause")]
 
 [connection signal="plan_done" from="CommandUI" to="." method="start_fight"]

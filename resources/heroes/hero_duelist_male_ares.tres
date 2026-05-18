@@ -14,7 +14,7 @@
 [ext_resource type="Script" uid="uid://cm88ovm7gjp44" path="res://scripts/components/status_component.gd" id="7_m1i4o"]
 [ext_resource type="Script" uid="uid://bvxud30fp77h2" path="res://scripts/components/player_controller.gd" id="8_5yh1s"]
 [ext_resource type="Script" uid="uid://nqhxig82acgw" path="res://scenes/entity/ent_hero.gd" id="9_ofre0"]
-[ext_resource type="Texture2D" uid="uid://834p5paarcud" path="res://assets/sprites/locke.webp" id="10_7pur0"]
+[ext_resource type="Texture2D" path="res://assets/sprites/rawr_ares_01.png" id="10_7pur0"]
 [ext_resource type="AudioStream" uid="uid://drskvkdg64oxu" path="res://assets/audio/male 1/intro/1.wav" id="14_fk314"]
 [ext_resource type="AudioStream" uid="uid://c1nmh0y78e3d4" path="res://assets/audio/male 1/intro/2.wav" id="15_qnjom"]
 [ext_resource type="AudioStream" uid="uid://3hxpb2dejctm" path="res://assets/audio/male 1/intro/3.wav" id="16_lf0vj"]

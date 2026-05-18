@@ -11,7 +11,7 @@ var _current_path := ""
 func _ready() -> void:
 	add_child(_player)
 	_player.name = "BGMPlayer"
-	_player.volume_db = -8.0
+	_player.volume_db = -30.0
 	_player.finished.connect(_on_track_finished)
 
 func play_menu() -> void:

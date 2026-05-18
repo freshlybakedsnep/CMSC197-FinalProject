@@ -1,5 +1,7 @@
 extends Node2D
 
+const MAIN_MENU_SCENE := "res://scenes/menu/main_menu.tscn"
+
 @export var start_location: LocationData
 @export var gate_scene: PackedScene
 @export var player_level: int = 1 # replace later with your real progression source
@@ -8,13 +10,23 @@ extends Node2D
 @onready var gates: Node2D = $Gates
 @onready var left_arrow: Area2D = $LeftArrow
 @onready var right_arrow: Area2D = $RightArrow
+@onready var pause_modal = $MapPauseModal
 
 var current_location: LocationData
 
 func _ready() -> void:
 	BGM.play_world()
+	pause_modal.resume_requested.connect(_on_pause_resume_requested)
+	pause_modal.exit_to_menu_requested.connect(_on_pause_exit_to_menu_requested)
 	current_location = start_location
 	_render_location()
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel"):
+		if get_tree().paused:
+			return
+		pause_modal.open_menu()
+		get_viewport().set_input_as_handled()
 
 func _render_location() -> void:
 	if current_location == null:
@@ -71,3 +83,10 @@ func _fit_background_to_viewport() -> void:
 	var ts := background.texture.get_size()
 	background.position = vp * 0.5
 	background.scale = Vector2(vp.x / ts.x, vp.y / ts.y)
+
+func _on_pause_resume_requested() -> void:
+	pause_modal.close_menu()
+
+func _on_pause_exit_to_menu_requested() -> void:
+	get_tree().paused = false
+	get_tree().change_scene_to_file(MAIN_MENU_SCENE)
