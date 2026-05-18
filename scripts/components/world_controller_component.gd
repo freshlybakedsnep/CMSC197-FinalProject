@@ -47,6 +47,8 @@ func _render_location() -> void:
 		var gate = gate_scene.instantiate()
 		gate.position = b.world_pos
 		gate.location_name = b.label
+		gate.battle_id = String(b.battle_id) if not String(b.battle_id).is_empty() else b.label.to_lower().replace(" ", "_")
+		gate.unlock_heroes_on_win = b.unlock_heroes
 		gate.destination_scene = b.battle_scene
 		gates.add_child(gate)
 	
@@ -56,6 +58,8 @@ func _render_location() -> void:
 		var gate = gate_scene.instantiate()
 		gate.position = s.world_pos
 		gate.location_name = s.label
+		gate.battle_id = ""
+		gate.unlock_heroes_on_win = PackedStringArray()
 		gate.destination_scene = s.target_scene
 		gates.add_child(gate)
 	

@@ -8,7 +8,7 @@ class Win extends GameState:
 	
 	func start() -> String:
 		handler.state_machine.refresh()
-		handler.win_screen.show()
+		handler.on_battle_won()
 		return ""
 
 class GameOver extends GameState:

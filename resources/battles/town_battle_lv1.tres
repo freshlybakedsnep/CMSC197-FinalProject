@@ -6,7 +6,9 @@
 [resource]
 script = ExtResource("1_battle_script")
 label = "Town Arena"
+battle_id = &"town_arena"
 battle_scene = ExtResource("2_battle_scene")
 reward_gold = 25
 reward_exp = 20
+unlock_heroes = PackedStringArray("Mira")
 world_pos = Vector2(470, 250)

@@ -4,6 +4,7 @@ class_name Stage
 const WORLD_SCENE := "res://scenes/player_world/world.tscn"
 const MAIN_MENU_SCENE := "res://scenes/menu/main_menu.tscn"
 const WIN_SCREEN_SCENE := preload("res://scenes/menu_ui/win_screen.tscn")
+const WIN_HINT_DEFAULT := "Your party won the battle. Choose what to do next."
 
 @onready var state_machine: GameStateMachine = $StateMachine
 
@@ -180,6 +181,26 @@ func get_next_state() -> String:
 func process_pending() -> Dictionary:
 	if pending_triggers.is_empty(): return {}
 	return pending_triggers.pop_front()
+
+func on_battle_won() -> void:
+	var win_result := PartyManager.apply_active_battle_win_unlocks()
+	_update_win_hint(win_result)
+	win_screen.show()
+
+func _update_win_hint(win_result: Dictionary) -> void:
+	var hint := win_screen.get_node_or_null("ModalRoot/CenterContainer/Panel/VBoxContainer/Hint") as Label
+	if hint == null:
+		return
+	
+	var newly_unlocked: PackedStringArray = win_result.get("newly_unlocked", PackedStringArray())
+	var is_new_clear := bool(win_result.get("is_new_clear", false))
+	
+	if not newly_unlocked.is_empty():
+		hint.text = "New character unlocked: %s\nChoose what to do next." % ", ".join(newly_unlocked)
+	elif is_new_clear:
+		hint.text = "Stage cleared.\nChoose what to do next."
+	else:
+		hint.text = WIN_HINT_DEFAULT
 
 func _on_pause_resume_requested() -> void:
 	pause_modal.close_menu()
