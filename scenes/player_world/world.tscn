@@ -4,8 +4,10 @@
 [ext_resource type="Script" uid="uid://bdje7mektrm1g" path="res://scripts/components/world_controller_component.gd" id="1_pmff1"]
 [ext_resource type="Texture2D" uid="uid://coix0iaueaui5" path="res://assets/place_holder.png" id="2_kj8f2"]
 [ext_resource type="Resource" uid="uid://dvfqnd6jgdhhb" path="res://resources/locations/town.tres" id="3_5y31n"]
+[ext_resource type="PackedScene" uid="uid://b443gh0tp45xd" path="res://scenes/party_select/party_selection.tscn" id="4_egfxq"]
 [ext_resource type="Texture2D" uid="uid://bm28udodvjnls" path="res://assets/icons/class_controller.webp" id="4_nav"]
 [ext_resource type="FontFile" uid="uid://dmgqmwfwyqfc0" path="res://assets/FOT-Aokane Std.ttf" id="5_font"]
+[ext_resource type="PackedScene" uid="uid://bifyp6opkfsfo" path="res://scenes/stage_prelim/stage.tscn" id="5_vsfwa"]
 [ext_resource type="PackedScene" path="res://scenes/player_world/map_pause_modal.tscn" id="6_pause_modal"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_nav"]
@@ -23,6 +25,8 @@ script = ExtResource("1_pmff1")
 start_location = ExtResource("3_5y31n")
 gate_scene = ExtResource("1_4rr8x")
 player_level = 3
+party_select = ExtResource("4_egfxq")
+stage = ExtResource("5_vsfwa")
 
 [node name="Background" type="Sprite2D" parent="." unique_id=1131205192]
 z_index = -2

@@ -2,21 +2,35 @@
 
 [ext_resource type="Script" uid="uid://dkejoipkaf70w" path="res://scenes/party_select/party_selection.gd" id="1_akf8x"]
 [ext_resource type="PackedScene" uid="uid://jncj3kxol1ne" path="res://scenes/party_select/character_slot.tscn" id="2_c7a27"]
-[ext_resource type="PackedScene" uid="uid://bifyp6opkfsfo" path="res://scenes/stage_prelim/stage.tscn" id="3_c7a27"]
 
-[node name="PartySelection" type="Control" unique_id=497987333]
-layout_mode = 3
+[node name="PartySelection" type="CanvasLayer" unique_id=138198631]
+script = ExtResource("1_akf8x")
+character_slot = ExtResource("2_c7a27")
+
+[node name="Panel" type="Panel" parent="." unique_id=847204766]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_akf8x")
-character_slot = ExtResource("2_c7a27")
-stage = ExtResource("3_c7a27")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1791047033]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+
+[node name="BackButton" type="Button" parent="MarginContainer" unique_id=966566299]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Back"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1589294305]
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -38,7 +52,7 @@ size_flags_vertical = 4
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="Button" type="Button" parent="VBoxContainer" unique_id=677667267]
+[node name="StartBattle" type="Button" parent="VBoxContainer" unique_id=677667267]
 layout_mode = 2
 disabled = true
 text = "Start Battle!"
@@ -49,4 +63,5 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 columns = 4
 
-[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="MarginContainer/BackButton" to="." method="reselect_stage"]
+[connection signal="pressed" from="VBoxContainer/StartBattle" to="." method="start_battle"]

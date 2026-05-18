@@ -1,5 +1,7 @@
 extends Area2D
 
+signal stage_select
+
 @export var destination_scene: PackedScene
 @export var location_name: String = "Location"
 @export var battle_id: String = ""
@@ -41,3 +43,5 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 			else:
 				PartyManager.set_active_battle(battle_id, location_name, unlock_heroes_on_win)
 			get_tree().change_scene_to_packed(destination_scene)
+			return
+		stage_select.emit()

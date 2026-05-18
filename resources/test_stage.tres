@@ -1,0 +1,212 @@
+[gd_resource type="Resource" script_class="StageInfo" format=3 uid="uid://xbpt4bjbrof1"]
+
+[ext_resource type="Script" uid="uid://lhx7sp8rhhjr" path="res://scripts/stage_info.gd" id="1_ioy3i"]
+[ext_resource type="Script" uid="uid://cx656sdytf30u" path="res://scripts/wave.gd" id="2_jlv4s"]
+[ext_resource type="Script" uid="uid://ddsxg1ao3vu1d" path="res://scenes/entity/ent_enemy.gd" id="3_rpd1l"]
+[ext_resource type="Resource" uid="uid://db8wjrcpyke2a" path="res://resources/enemies/test_slime.tres" id="4_8aclv"]
+[ext_resource type="SpriteFrames" uid="uid://dba8h5urkin07" path="res://resources/enemies/slime_water.tres" id="5_s1eh2"]
+[ext_resource type="Script" uid="uid://bl2qf613jng43" path="res://scenes/entity/entity_component.gd" id="6_5nglp"]
+[ext_resource type="Script" uid="uid://bq4jpvro24bfo" path="res://scripts/components/stats_component.gd" id="7_0d8pa"]
+[ext_resource type="Script" uid="uid://bdmenxynhc50j" path="res://scripts/action/action.gd" id="8_cmmr2"]
+[ext_resource type="Resource" uid="uid://c3q57rkxtt5ah" path="res://resources/ability/ST_dmg.tres" id="9_dqkg7"]
+[ext_resource type="Resource" uid="uid://dpidsf1drgduj" path="res://resources/ability/SELF_untargetable.tres" id="10_4qwcq"]
+[ext_resource type="Script" uid="uid://dsu1t80330rqd" path="res://scripts/components/action_component.gd" id="11_v1o6j"]
+[ext_resource type="Resource" uid="uid://bdnkx1a8e24j4" path="res://resources/ability/AOE_dmg.tres" id="12_4n4jb"]
+[ext_resource type="Script" uid="uid://c6g2xy001wklx" path="res://scripts/components/element_component.gd" id="13_kgb5v"]
+[ext_resource type="Script" uid="uid://cm88ovm7gjp44" path="res://scripts/components/status_component.gd" id="14_euygq"]
+[ext_resource type="Script" uid="uid://cpffl8bnew7fl" path="res://scripts/components/ai_controller.gd" id="15_vlmrf"]
+[ext_resource type="Script" uid="uid://ug5unx6nj7be" path="res://scripts/components/resource_component.gd" id="16_oc7hk"]
+[ext_resource type="SpriteFrames" uid="uid://3giw5rnt7eew" path="res://resources/enemies/slime_fire.tres" id="17_vv4by"]
+[ext_resource type="Script" uid="uid://djkmvtkrgtp6u" path="res://scripts/action/effect_group.gd" id="18_vje2w"]
+[ext_resource type="Script" uid="uid://df5c28vkm6a78" path="res://scripts/action/effect.gd" id="19_yww2q"]
+[ext_resource type="Script" uid="uid://dhasq7k64fe7q" path="res://scripts/action/value_scaling.gd" id="20_0rohg"]
+[ext_resource type="Script" uid="uid://dt538323xnk4w" path="res://scripts/action/effect_health.gd" id="21_03kyn"]
+[ext_resource type="Script" uid="uid://x82xxogtaoe5" path="res://scripts/action/value_flat.gd" id="22_w4864"]
+[ext_resource type="Script" uid="uid://b7wmacmexid3k" path="res://scripts/action/effect_status.gd" id="23_50rmr"]
+
+[sub_resource type="Resource" id="Resource_jncna"]
+script = ExtResource("7_0d8pa")
+base_stats = {
+"ATK": 5,
+"DEF": 2,
+"HP": 10,
+"SPD": 5
+}
+metadata/_custom_type_script = "uid://bq4jpvro24bfo"
+
+[sub_resource type="Resource" id="Resource_syrdu"]
+script = ExtResource("11_v1o6j")
+basic_pool = Array[ExtResource("8_cmmr2")]([ExtResource("9_dqkg7"), ExtResource("10_4qwcq")])
+ultimates = Array[ExtResource("8_cmmr2")]([ExtResource("12_4n4jb")])
+metadata/_custom_type_script = "uid://dsu1t80330rqd"
+
+[sub_resource type="Resource" id="Resource_s5yfr"]
+script = ExtResource("13_kgb5v")
+my_elem = 1
+metadata/_custom_type_script = "uid://c6g2xy001wklx"
+
+[sub_resource type="Resource" id="Resource_p3iaq"]
+script = ExtResource("14_euygq")
+metadata/_custom_type_script = "uid://cm88ovm7gjp44"
+
+[sub_resource type="Resource" id="Resource_jel85"]
+script = ExtResource("15_vlmrf")
+metadata/_custom_type_script = "uid://cpffl8bnew7fl"
+
+[sub_resource type="Resource" id="Resource_s2s0s"]
+script = ExtResource("16_oc7hk")
+res_name = &"Charge"
+start_amount = -1
+metadata/_custom_type_script = "uid://ug5unx6nj7be"
+
+[sub_resource type="Resource" id="Resource_anduq"]
+script = ExtResource("3_rpd1l")
+entity_name = "Slime"
+battle_sprite = ExtResource("5_s1eh2")
+components = Array[ExtResource("6_5nglp")]([SubResource("Resource_jncna"), SubResource("Resource_syrdu"), SubResource("Resource_s5yfr"), SubResource("Resource_p3iaq"), SubResource("Resource_jel85"), SubResource("Resource_s2s0s")])
+metadata/_custom_type_script = "uid://ddsxg1ao3vu1d"
+
+[sub_resource type="Resource" id="Resource_73dpb"]
+script = ExtResource("7_0d8pa")
+base_stats = {
+"ATK": 5,
+"DEF": 2,
+"HP": 10,
+"SPD": 5
+}
+metadata/_custom_type_script = "uid://bq4jpvro24bfo"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_6ottr"]
+load_path = "res://.godot/imported/icon_test.png-2f51dd0c8858d0711633a16adc9904d3.ctex"
+
+[sub_resource type="Resource" id="Resource_c0vtb"]
+script = ExtResource("20_0rohg")
+multiplier = 0.6
+mult_per_level = 0.1
+metadata/_custom_type_script = "uid://dhasq7k64fe7q"
+
+[sub_resource type="Resource" id="Resource_mfkvk"]
+script = ExtResource("21_03kyn")
+formula = SubResource("Resource_c0vtb")
+metadata/_custom_type_script = "uid://dt538323xnk4w"
+
+[sub_resource type="Resource" id="Resource_s4n4n"]
+script = ExtResource("18_vje2w")
+inherit_target = true
+effects = Array[ExtResource("19_yww2q")]([SubResource("Resource_mfkvk")])
+metadata/_custom_type_script = "uid://djkmvtkrgtp6u"
+
+[sub_resource type="Resource" id="Resource_tbprq"]
+script = ExtResource("8_cmmr2")
+action_name = &"Single Attack"
+action_icon = SubResource("CompressedTexture2D_6ottr")
+action_description = "Deal {0} damage to a single enemy."
+target_group = 3
+effect_groups = Array[ExtResource("18_vje2w")]([SubResource("Resource_s4n4n")])
+metadata/_custom_type_script = "uid://bdmenxynhc50j"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gqslc"]
+load_path = "res://.godot/imported/icon_test.png-2f51dd0c8858d0711633a16adc9904d3.ctex"
+
+[sub_resource type="Resource" id="Resource_tkxak"]
+script = ExtResource("22_w4864")
+metadata/_custom_type_script = "uid://x82xxogtaoe5"
+
+[sub_resource type="Resource" id="Resource_qjlgi"]
+script = ExtResource("23_50rmr")
+status_key = &"PROVOKE"
+is_buff = false
+turns = 2
+behavior = 2
+formula = SubResource("Resource_tkxak")
+metadata/_custom_type_script = "uid://b7wmacmexid3k"
+
+[sub_resource type="Resource" id="Resource_vko3a"]
+script = ExtResource("18_vje2w")
+inherit_target = true
+effects = Array[ExtResource("19_yww2q")]([SubResource("Resource_qjlgi")])
+metadata/_custom_type_script = "uid://djkmvtkrgtp6u"
+
+[sub_resource type="Resource" id="Resource_w63eh"]
+script = ExtResource("8_cmmr2")
+action_name = &"Provoke"
+action_icon = SubResource("CompressedTexture2D_gqslc")
+action_description = "Apply {0} to one enemy"
+target_group = 3
+cooldown = 2
+effect_groups = Array[ExtResource("18_vje2w")]([SubResource("Resource_vko3a")])
+metadata/_custom_type_script = "uid://bdmenxynhc50j"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ycdwr"]
+load_path = "res://.godot/imported/icon_test.png-2f51dd0c8858d0711633a16adc9904d3.ctex"
+
+[sub_resource type="Resource" id="Resource_tx0uk"]
+script = ExtResource("20_0rohg")
+multiplier = 0.6
+mult_per_level = 0.1
+metadata/_custom_type_script = "uid://dhasq7k64fe7q"
+
+[sub_resource type="Resource" id="Resource_6c0jb"]
+script = ExtResource("21_03kyn")
+formula = SubResource("Resource_tx0uk")
+metadata/_custom_type_script = "uid://dt538323xnk4w"
+
+[sub_resource type="Resource" id="Resource_lfdwh"]
+script = ExtResource("18_vje2w")
+inherit_target = true
+effects = Array[ExtResource("19_yww2q")]([SubResource("Resource_6c0jb")])
+metadata/_custom_type_script = "uid://djkmvtkrgtp6u"
+
+[sub_resource type="Resource" id="Resource_klwgh"]
+script = ExtResource("8_cmmr2")
+action_name = &"AoE Attack"
+action_icon = SubResource("CompressedTexture2D_ycdwr")
+action_description = "Apply {0} to all enemies"
+target_group = 3
+target_mode = 2
+cooldown = 4
+cost = 5
+effect_groups = Array[ExtResource("18_vje2w")]([SubResource("Resource_lfdwh")])
+metadata/_custom_type_script = "uid://bdmenxynhc50j"
+
+[sub_resource type="Resource" id="Resource_mpegb"]
+script = ExtResource("11_v1o6j")
+basic_pool = Array[ExtResource("8_cmmr2")]([SubResource("Resource_tbprq"), SubResource("Resource_w63eh")])
+ultimates = Array[ExtResource("8_cmmr2")]([SubResource("Resource_klwgh")])
+metadata/_custom_type_script = "uid://dsu1t80330rqd"
+
+[sub_resource type="Resource" id="Resource_8li6u"]
+script = ExtResource("13_kgb5v")
+my_elem = 0
+metadata/_custom_type_script = "uid://c6g2xy001wklx"
+
+[sub_resource type="Resource" id="Resource_s4in1"]
+script = ExtResource("14_euygq")
+metadata/_custom_type_script = "uid://cm88ovm7gjp44"
+
+[sub_resource type="Resource" id="Resource_fvkwm"]
+script = ExtResource("15_vlmrf")
+metadata/_custom_type_script = "uid://cpffl8bnew7fl"
+
+[sub_resource type="Resource" id="Resource_pmvbh"]
+script = ExtResource("16_oc7hk")
+res_name = &"Charge"
+start_amount = -1
+metadata/_custom_type_script = "uid://ug5unx6nj7be"
+
+[sub_resource type="Resource" id="Resource_uaju1"]
+script = ExtResource("3_rpd1l")
+entity_name = "Slime"
+battle_sprite = ExtResource("17_vv4by")
+components = Array[ExtResource("6_5nglp")]([SubResource("Resource_73dpb"), SubResource("Resource_mpegb"), SubResource("Resource_8li6u"), SubResource("Resource_s4in1"), SubResource("Resource_fvkwm"), SubResource("Resource_pmvbh")])
+metadata/_custom_type_script = "uid://ddsxg1ao3vu1d"
+
+[sub_resource type="Resource" id="Resource_sponv"]
+script = ExtResource("2_jlv4s")
+enemies = Array[ExtResource("3_rpd1l")]([ExtResource("4_8aclv"), SubResource("Resource_anduq"), SubResource("Resource_uaju1")])
+metadata/_custom_type_script = "uid://cx656sdytf30u"
+
+[resource]
+script = ExtResource("1_ioy3i")
+waves = Array[ExtResource("2_jlv4s")]([SubResource("Resource_sponv")])
+metadata/_custom_type_script = "uid://lhx7sp8rhhjr"

@@ -1,6 +1,8 @@
 extends Node
 class_name Stage
 
+signal stage_quit
+
 const WORLD_SCENE := "res://scenes/player_world/world.tscn"
 const MAIN_MENU_SCENE := "res://scenes/menu/main_menu.tscn"
 const WIN_TITLE := "Stage Cleared!"

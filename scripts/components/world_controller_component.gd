@@ -6,12 +6,16 @@ const MAIN_MENU_SCENE := "res://scenes/menu/main_menu.tscn"
 @export var gate_scene: PackedScene
 @export var player_level: int = 1 # replace later with your real progression source
 
+@export var party_select : PackedScene
+@export var stage : PackedScene
+
 @onready var background: Sprite2D = $Background
 @onready var gates: Node2D = $Gates
 @onready var left_arrow: Area2D = $LeftArrow
 @onready var right_arrow: Area2D = $RightArrow
 @onready var pause_modal = $MapPauseModal
 
+var current_stage : StageInfo
 var current_location: LocationData
 
 func _ready() -> void:
@@ -45,6 +49,8 @@ func _render_location() -> void:
 		if player_level < b.min_level:
 			continue
 		var gate = gate_scene.instantiate()
+		if b.stage_info:
+			gate.stage_select.connect(open_party_select_for_battle.bind(b))
 		gate.position = b.world_pos
 		gate.location_name = b.label
 		gate.battle_id = String(b.battle_id) if not String(b.battle_id).is_empty() else b.label.to_lower().replace(" ", "_")
@@ -62,9 +68,33 @@ func _render_location() -> void:
 		gate.unlock_heroes_on_win = PackedStringArray()
 		gate.destination_scene = s.target_scene
 		gates.add_child(gate)
-	
 	left_arrow.visible = current_location.get_left_location() != null
 	right_arrow.visible = current_location.get_right_location() != null
+
+func open_party_select_for_battle(battle_node: BattleNodeData) -> void:
+	if battle_node == null or battle_node.stage_info == null:
+		return
+	var battle_id := String(battle_node.battle_id).strip_edges()
+	if battle_id.is_empty():
+		battle_id = battle_node.label.to_lower().replace(" ", "_")
+	PartyManager.set_active_battle(battle_id, battle_node.label, battle_node.unlock_heroes)
+	open_party_select(battle_node.stage_info)
+
+func open_party_select(stage_info: StageInfo) -> void:
+	var p = party_select.instantiate() as PartySelector
+	current_stage = stage_info
+	add_child(p)
+	p.party_finalized.connect(start_battle)
+
+func start_battle() -> void:
+	var s = stage.instantiate() as Stage
+	s.stage_info = current_stage
+	add_child(s)
+	s.stage_quit.connect(reload_world)
+	hide()
+
+func reload_world() -> void:
+	show()
 
 func _on_left_arrow_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:

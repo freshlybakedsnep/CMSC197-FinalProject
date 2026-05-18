@@ -8,6 +8,7 @@ class_name LocationData
 @export var right_location: LocationData
 @export_file("*.tres") var left_location_path: String = ""
 @export_file("*.tres") var right_location_path: String = ""
+
 @export var battle_nodes: Array[BattleNodeData] = []
 @export var service_nodes: Array[ServiceNodeData] = []
 

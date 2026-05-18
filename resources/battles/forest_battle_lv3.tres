@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="BattleNodeData" format=3 uid="uid://yxm5npx3d5cq"]
 
 [ext_resource type="Script" uid="uid://dtkwoa4vtxljs" path="res://scripts/battle_node_data.gd" id="1_battle_script"]
-[ext_resource type="PackedScene" uid="uid://b443gh0tp45xd" path="res://scenes/party_select/party_selection.tscn" id="2_battle_scene"]
+[ext_resource type="Resource" uid="uid://xbpt4bjbrof1" path="res://resources/test_stage.tres" id="2_pn8tb"]
 
 [resource]
 script = ExtResource("1_battle_script")
 label = "Forest Raid"
 battle_id = &"forest_raid"
-battle_scene = ExtResource("2_battle_scene")
+stage_info = ExtResource("2_pn8tb")
 min_level = 3
 reward_gold = 60
 reward_exp = 45

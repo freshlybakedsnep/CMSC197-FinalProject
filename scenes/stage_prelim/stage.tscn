@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bwtxguku00kwa" path="res://scenes/menu_ui/menu_battle.tscn" id="14_dkcyh"]
 [ext_resource type="Script" uid="uid://bmoddb5swqv0y" path="res://scripts/state_machine.gd" id="18_s5gfg"]
 [ext_resource type="PackedScene" path="res://scenes/stage_prelim/pause_modal.tscn" id="23_pause"]
-[ext_resource type="PackedScene" uid="uid://bdsf8ag4perto" path="res://scenes/menu_ui/lose_screen.tscn" id="27_mlihk"]
+[ext_resource type="PackedScene" uid="uid://hortyt3kgxxl" path="res://scenes/menu_ui/end_screen.tscn" id="27_mlihk"]
 
 [sub_resource type="Resource" id="Resource_sponv"]
 script = ExtResource("3_sc1co")
@@ -78,7 +78,5 @@ text = "Wave: x/x"
 label_settings = SubResource("LabelSettings_ltv8x")
 
 [node name="PauseModal" parent="." unique_id=723258704 instance=ExtResource("23_pause")]
-
-[connection signal="plan_done" from="CommandUI" to="." method="start_fight"]
 
 [editable path="EndScreen"]
