@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://hortyt3kgxxl"]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="FontFile" uid="uid://dmgqmwfwyqfc0" path="res://assets/FOT-Aokane Std.ttf" id="1_yd5bg"]
 
@@ -14,12 +14,6 @@ corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
-[sub_resource type="LabelSettings" id="LabelSettings_title"]
-font = ExtResource("1_yd5bg")
-font_size = 40
-outline_size = 3
-outline_color = Color(0, 0, 0, 1)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button"]
 bg_color = Color(0.0823529, 0.156863, 0.282353, 0.95)
 border_width_left = 2
@@ -32,18 +26,24 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[node name="LoseScreen" type="CanvasLayer" unique_id=1469454908]
+[sub_resource type="LabelSettings" id="LabelSettings_title"]
+font = ExtResource("1_yd5bg")
+font_size = 48
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
+[node name="WinScreen" type="CanvasLayer"]
 layer = 30
 
-[node name="ModalRoot" type="Control" parent="." unique_id=458443276]
-layout_mode = 3
+[node name="ModalRoot" type="Control" parent="."]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Dimmer" type="ColorRect" parent="ModalRoot" unique_id=558119324]
+[node name="Dimmer" type="ColorRect" parent="ModalRoot"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -53,7 +53,7 @@ grow_vertical = 2
 mouse_filter = 1
 color = Color(0, 0, 0, 0.62)
 
-[node name="CenterContainer" type="CenterContainer" parent="ModalRoot" unique_id=619452481]
+[node name="CenterContainer" type="CenterContainer" parent="ModalRoot"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -62,12 +62,12 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Panel" type="Panel" parent="ModalRoot/CenterContainer" unique_id=1481318226]
+[node name="Panel" type="Panel" parent="ModalRoot/CenterContainer"]
 custom_minimum_size = Vector2(460, 300)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ModalRoot/CenterContainer/Panel" unique_id=2041034625]
+[node name="VBoxContainer" type="VBoxContainer" parent="ModalRoot/CenterContainer/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -80,35 +80,35 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 14
 
-[node name="Label" type="Label" parent="ModalRoot/CenterContainer/Panel/VBoxContainer" unique_id=144622659]
+[node name="Label" type="Label" parent="ModalRoot/CenterContainer/Panel/VBoxContainer"]
 layout_mode = 2
-text = "The Party has fallen..."
+text = "Stage Cleared!"
 label_settings = SubResource("LabelSettings_title")
 horizontal_alignment = 1
 
-[node name="Hint" type="Label" parent="ModalRoot/CenterContainer/Panel/VBoxContainer" unique_id=757289303]
+[node name="Hint" type="Label" parent="ModalRoot/CenterContainer/Panel/VBoxContainer"]
 modulate = Color(0.807843, 0.890196, 0.964706, 0.9)
 layout_mode = 2
-text = "Your team was defeated."
+text = "Your party won the battle. Choose what to do next."
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="Buttons" type="VBoxContainer" parent="ModalRoot/CenterContainer/Panel/VBoxContainer" unique_id=56962927]
+[node name="Buttons" type="VBoxContainer" parent="ModalRoot/CenterContainer/Panel/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Retry" type="Button" parent="ModalRoot/CenterContainer/Panel/VBoxContainer/Buttons" unique_id=1983171627]
+[node name="Continue" type="Button" parent="ModalRoot/CenterContainer/Panel/VBoxContainer/Buttons"]
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_button")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_button")
 theme_override_styles/hover = SubResource("StyleBoxFlat_button")
-text = "Challenge Again"
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button")
+text = "Return to Map"
 
-[node name="Exit" type="Button" parent="ModalRoot/CenterContainer/Panel/VBoxContainer/Buttons" unique_id=543825825]
+[node name="Exit" type="Button" parent="ModalRoot/CenterContainer/Panel/VBoxContainer/Buttons"]
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_button")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_button")
 theme_override_styles/hover = SubResource("StyleBoxFlat_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button")
 text = "Exit to Menu"

@@ -3,6 +3,7 @@ class_name Stage
 
 const WORLD_SCENE := "res://scenes/player_world/world.tscn"
 const MAIN_MENU_SCENE := "res://scenes/menu/main_menu.tscn"
+const WIN_SCREEN_SCENE := preload("res://scenes/menu_ui/win_screen.tscn")
 
 @onready var state_machine: GameStateMachine = $StateMachine
 
@@ -12,6 +13,7 @@ const MAIN_MENU_SCENE := "res://scenes/menu/main_menu.tscn"
 @onready var interval: Timer = $Interval
 @onready var pause_modal = $PauseModal
 @onready var lose_screen: CanvasLayer = $LoseScreen
+var win_screen: CanvasLayer
 
 @export var stage_info : StageInfo
 
@@ -31,6 +33,21 @@ func _ready() -> void:
 	pause_modal.resume_requested.connect(_on_pause_resume_requested)
 	pause_modal.exit_battle_requested.connect(_on_pause_exit_battle_requested)
 	pause_modal.exit_game_requested.connect(_on_pause_exit_game_requested)
+
+	if has_node("WinScreen"):
+		win_screen = $WinScreen
+	else:
+		win_screen = WIN_SCREEN_SCENE.instantiate() as CanvasLayer
+		win_screen.name = "WinScreen"
+		win_screen.visible = false
+		add_child(win_screen)
+	
+	var continue_button := win_screen.get_node_or_null("ModalRoot/CenterContainer/Panel/VBoxContainer/Buttons/Continue") as Button
+	var exit_button := win_screen.get_node_or_null("ModalRoot/CenterContainer/Panel/VBoxContainer/Buttons/Exit") as Button
+	if continue_button and not continue_button.pressed.is_connected(_on_win_continue_pressed):
+		continue_button.pressed.connect(_on_win_continue_pressed)
+	if exit_button and not exit_button.pressed.is_connected(_on_win_exit_pressed):
+		exit_button.pressed.connect(_on_win_exit_pressed)
 	
 	heroes.setup(eliminated)
 	enemies.setup(eliminated)
@@ -172,5 +189,13 @@ func _on_pause_exit_battle_requested() -> void:
 	get_tree().change_scene_to_file(WORLD_SCENE)
 
 func _on_pause_exit_game_requested() -> void:
+	get_tree().paused = false
+	get_tree().change_scene_to_file(MAIN_MENU_SCENE)
+
+func _on_win_continue_pressed() -> void:
+	get_tree().paused = false
+	get_tree().change_scene_to_file(WORLD_SCENE)
+
+func _on_win_exit_pressed() -> void:
 	get_tree().paused = false
 	get_tree().change_scene_to_file(MAIN_MENU_SCENE)
