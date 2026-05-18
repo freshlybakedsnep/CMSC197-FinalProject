@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ciiwy4ojou0tj" path="res://scenes/entity/entity.gd" id="1_0p8rp"]
 [ext_resource type="Shader" uid="uid://byk63wjvv8dun" path="res://entity_outline.gdshader" id="2_u7y06"]
-[ext_resource type="Texture2D" uid="uid://coix0iaueaui5" path="res://assets/place_holder.png" id="3_lk8ta"]
+[ext_resource type="Texture2D" uid="uid://coix0iaueaui5" path="res://assets/place_holder.png" id="3_acqig"]
 [ext_resource type="Script" uid="uid://bbqureqt1r8x1" path="res://scenes/entity/hp_bar.gd" id="4_xk0ck"]
 [ext_resource type="FontFile" uid="uid://dmgqmwfwyqfc0" path="res://assets/FOT-Aokane Std.ttf" id="5_686q4"]
 [ext_resource type="Texture2D" uid="uid://cb5wxytvtgwv" path="res://assets/El4kind5.png" id="6_a0j2l"]
@@ -12,19 +12,27 @@ resource_local_to_scene = true
 shader = ExtResource("2_u7y06")
 shader_parameter/active = false
 shader_parameter/outline_color = Color(1, 1, 1, 1)
-shader_parameter/outline_thickness = 0.5
+shader_parameter/outline_thickness = 2.00000007125
 shader_parameter/alpha_threshold = 0.50000002049012
 shader_parameter/is_bright = false
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_nwmpt"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_8wy7d"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_lk8ta")
+"texture": ExtResource("3_acqig")
 }],
 "loop": true,
-"name": &"default",
-"speed": 5.0
+"name": &"hit",
+"speed": 30.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_acqig")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 30.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_03rkj"]
@@ -122,8 +130,9 @@ script = ExtResource("1_0p8rp")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=229155458]
 material = SubResource("ShaderMaterial_03rkj")
-scale = Vector2(4, 4)
-sprite_frames = SubResource("SpriteFrames_nwmpt")
+sprite_frames = SubResource("SpriteFrames_8wy7d")
+animation = &"hit"
+autoplay = "idle"
 offset = Vector2(0.5, -5)
 
 [node name="Hitbox" type="CollisionShape2D" parent="." unique_id=427758308]

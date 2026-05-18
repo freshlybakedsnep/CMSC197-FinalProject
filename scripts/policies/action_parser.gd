@@ -49,10 +49,6 @@ static func execute(src: Entity, action: Action, targets: Array[EntityData] = []
 				
 				for target in current_targets:
 					_apply_effect(src.data, target, fx, action.level)
-					
-					#var tar_node = BattleRegistry.get_entity(target)
-					#if tar_node:
-						#tar_node.play_hit_vfx()
 				
 				await src.get_tree().create_timer(0.3).timeout
 	src.entity_action_over.emit()
@@ -69,6 +65,9 @@ static func _apply_effect(src: EntityData, tar: EntityData, fx: Effect, level: i
 			
 			t = damage_text.instantiate() as DamageText
 			t.modify(result, eff.get(&"is_damaging"))
+			
+			var tar_node = BattleRegistry.get_entity(tar)
+			if tar_node: tar_node.play_hit_vfx()
 			
 			if stats.get_stat(&"CURR_HP") <= 0:
 				tar.host.entity_eliminated.emit()

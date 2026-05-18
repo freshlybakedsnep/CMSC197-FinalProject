@@ -37,6 +37,10 @@ func _ready() -> void:
 	if data.state == EntityData.State.DEAD:
 		stats.modify_stat("CURR_HP", -1)
 	
+	if data.battle_sprite:
+		sprite.sprite_frames = data.battle_sprite
+		sprite.play("idle")
+	
 	position_health_bar()
 
 func position_health_bar():
@@ -61,6 +65,7 @@ func setup(res: EntityData) -> void:
 	data = res
 	name = res.entity_name
 	data.host = self
+	
 
 func _on_state_changed(new_state: EntityData.State) -> void:
 	match new_state:
@@ -106,3 +111,8 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 				print("%s: %d/%d" % [name, stats.get_stat("CURR_HP"), stats.get_stat("HP")])
 			if target_component.visible:
 				target_component.pressed.emit()
+
+func play_hit_vfx() -> void:
+	sprite.play("hit")
+	await sprite.animation_finished
+	sprite.play("idle")
