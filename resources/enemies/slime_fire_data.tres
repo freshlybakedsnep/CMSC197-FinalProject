@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EntityData" format=3 uid="uid://bhmy2o1o00yp3"]
+
+[ext_resource type="Script" uid="uid://bl2qf613jng43" path="res://scenes/entity/entity_component.gd" id="1_qblt2"]
+[ext_resource type="Script" uid="uid://b1i4t3llcs8b1" path="res://scenes/entity/entity_data.gd" id="2_4p6os"]
+[ext_resource type="SpriteFrames" uid="uid://3giw5rnt7eew" path="res://resources/enemies/slime_fire.tres" id="3_4p6os"]
+
+[resource]
+script = ExtResource("2_4p6os")
+entity_name = "Fire Slime"
+battle_sprite = ExtResource("3_4p6os")
+metadata/_custom_type_script = "uid://b1i4t3llcs8b1"

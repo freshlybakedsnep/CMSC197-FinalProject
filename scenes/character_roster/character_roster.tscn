@@ -1,17 +1,17 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene format=3 uid="uid://dqei5cyi7jofh"]
 
-[ext_resource type="Script" path="res://scenes/character_roster/character_roster.gd" id="1"]
-[ext_resource type="PackedScene" path="res://scenes/stage_prelim/stage.tscn" id="2"]
+[ext_resource type="Script" uid="uid://bpq3gty057q8s" path="res://scenes/character_roster/character_roster.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://bifyp6opkfsfo" path="res://scenes/stage_prelim/stage.tscn" id="2"]
 
-[node name="CharacterRoster" type="Node2D"]
+[node name="CharacterRoster" type="Node2D" unique_id=820551366]
 script = ExtResource("1")
 next_scene = ExtResource("2")
 
-[node name="Characters" type="Node2D" parent="."]
+[node name="Characters" type="Node2D" parent="." unique_id=1674902570]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1047125580]
 
-[node name="UI" type="Control" parent="CanvasLayer"]
+[node name="UI" type="Control" parent="CanvasLayer" unique_id=2015732637]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,7 +19,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Title" type="Label" parent="CanvasLayer/UI"]
+[node name="Title" type="Label" parent="CanvasLayer/UI" unique_id=1028246981]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 18.0
@@ -27,7 +27,7 @@ offset_right = 420.0
 offset_bottom = 44.0
 text = "Character Roster (8 total)"
 
-[node name="Status" type="Label" parent="CanvasLayer/UI"]
+[node name="Status" type="Label" parent="CanvasLayer/UI" unique_id=114503172]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 44.0
@@ -35,7 +35,7 @@ offset_right = 520.0
 offset_bottom = 68.0
 text = "Loading..."
 
-[node name="StartBattle" type="Button" parent="CanvasLayer/UI"]
+[node name="StartBattle" type="Button" parent="CanvasLayer/UI" unique_id=815093250]
 layout_mode = 0
 offset_left = 1060.0
 offset_top = 22.0

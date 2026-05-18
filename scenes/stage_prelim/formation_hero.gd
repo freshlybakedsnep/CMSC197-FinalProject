@@ -16,4 +16,4 @@ func setup(death_row : Array) -> void:
 
 func wiped() -> bool:
 	var active = formation.values().filter(func(h): return h)
-	return not active.filter(func(h): return h.data.state == EntityData.State.DEAD).is_empty()
+	return active.filter(func(h): return h.data.state == EntityData.State.NORMAL).is_empty()

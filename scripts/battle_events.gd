@@ -17,6 +17,7 @@ class GameOver extends GameState:
 	
 	func start() -> String:
 		handler.state_machine.refresh()
+		handler.lose_screen.show()
 		return ""
 
 class TurnEnd extends GameState:
@@ -32,7 +33,6 @@ class TurnEnd extends GameState:
 	func begin() -> String:
 		pending_cleared = false
 		_handle_pending()
-		
 		if pending_cleared:
 			if handler.enemies.is_wave_clear():
 				print("Wave Clear!")
@@ -64,7 +64,6 @@ class TurnStart extends GameState:
 		handler.state_machine.change(&"end")
 		handler.state_machine.change(&"combat")
 		handler.state_machine.change(&"plan")
-		
 
 class PlanState extends GameState:
 	var handler : Stage

@@ -38,6 +38,10 @@ static func execute(src: Entity, action: Action, targets: Array[EntityData] = []
 				curr_action.target_count, 
 				curr_action.target_state)
 		
+		if curr_action.target_mode == Action.TargetMode.SINGLE:
+			if BattleRegistry._is_hero(src.data):
+				main_targets = main_targets.slice(0,1)
+		
 		var current_targets = main_targets
 		for group in curr_action.effect_groups:
 			current_targets = TargetingResolver.get_effect_targets(src.data, group, main_targets)
@@ -49,10 +53,6 @@ static func execute(src: Entity, action: Action, targets: Array[EntityData] = []
 				
 				for target in current_targets:
 					_apply_effect(src.data, target, fx, action.level)
-					
-					#var tar_node = BattleRegistry.get_entity(target)
-					#if tar_node:
-						#tar_node.play_hit_vfx()
 				
 				await src.get_tree().create_timer(0.3).timeout
 	src.entity_action_over.emit()
@@ -69,6 +69,9 @@ static func _apply_effect(src: EntityData, tar: EntityData, fx: Effect, level: i
 			
 			t = damage_text.instantiate() as DamageText
 			t.modify(result, eff.get(&"is_damaging"))
+			
+			var tar_node = BattleRegistry.get_entity(tar)
+			if tar_node: tar_node.play_hit_vfx()
 			
 			if stats.get_stat(&"CURR_HP") <= 0:
 				tar.host.entity_eliminated.emit()

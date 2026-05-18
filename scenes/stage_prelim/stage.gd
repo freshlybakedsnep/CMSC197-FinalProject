@@ -11,6 +11,7 @@ const MAIN_MENU_SCENE := "res://scenes/menu/main_menu.tscn"
 @onready var heroes : HeroFormation = $Heroes
 @onready var interval: Timer = $Interval
 @onready var pause_modal = $PauseModal
+@onready var lose_screen: CanvasLayer = $LoseScreen
 
 @export var stage_info : StageInfo
 

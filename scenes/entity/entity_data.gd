@@ -6,6 +6,7 @@ signal state_changed(new_state: State)
 # Entity Info
 @export var entity_name := "Entity"
 @export var sprite : Texture
+@export var battle_sprite : SpriteFrames
 var host : Entity
 
 # Faction

@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://hortyt3kgxxl"]
+
+[ext_resource type="FontFile" uid="uid://dmgqmwfwyqfc0" path="res://assets/FOT-Aokane Std.ttf" id="1_yd5bg"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_uohpj"]
+font = ExtResource("1_yd5bg")
+font_size = 48
+
+[node name="LoseScreen" type="CanvasLayer" unique_id=1469454908]
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=528576866]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer" unique_id=1489370945]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1589253450]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=144622659]
+layout_mode = 2
+text = "The Party has fallen..."
+label_settings = SubResource("LabelSettings_uohpj")
+
+[node name="Retry" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1983171627]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Challenge Again"
+
+[node name="Exit" type="Button" parent="MarginContainer/VBoxContainer" unique_id=543825825]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Exit to Menu"
