@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="StageInfo" format=3 uid="uid://xbpt4bjbrof1"]
+[gd_resource type="Resource" script_class="StageInfo" format=3 uid="uid://bghvjlxm4c1b1"]
 
 [ext_resource type="Script" uid="uid://lhx7sp8rhhjr" path="res://scripts/stage_info.gd" id="1_ioy3i"]
 [ext_resource type="Script" uid="uid://cx656sdytf30u" path="res://scripts/wave.gd" id="2_jlv4s"]

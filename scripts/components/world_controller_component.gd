@@ -17,6 +17,7 @@ const MAIN_MENU_SCENE := "res://scenes/menu/main_menu.tscn"
 
 var current_stage : StageInfo
 var current_location: LocationData
+var active_party_selector: PartySelector
 
 func _ready() -> void:
 	BGM.play_world()
@@ -26,6 +27,8 @@ func _ready() -> void:
 	_render_location()
 
 func _unhandled_input(event: InputEvent) -> void:
+	if is_instance_valid(active_party_selector):
+		return
 	if event.is_action_pressed("ui_cancel"):
 		if get_tree().paused:
 			return
@@ -81,10 +84,15 @@ func open_party_select_for_battle(battle_node: BattleNodeData) -> void:
 	open_party_select(battle_node.stage_info)
 
 func open_party_select(stage_info: StageInfo) -> void:
+	if is_instance_valid(active_party_selector):
+		return
 	var p = party_select.instantiate() as PartySelector
 	current_stage = stage_info
+	active_party_selector = p
+	_set_world_clickables_enabled(false)
 	add_child(p)
 	p.party_finalized.connect(start_battle)
+	p.tree_exited.connect(_on_party_select_closed)
 
 func start_battle() -> void:
 	var s = stage.instantiate() as Stage
@@ -95,6 +103,18 @@ func start_battle() -> void:
 
 func reload_world() -> void:
 	show()
+
+func _on_party_select_closed() -> void:
+	active_party_selector = null
+	_set_world_clickables_enabled(true)
+
+func _set_world_clickables_enabled(enabled: bool) -> void:
+	left_arrow.input_pickable = enabled
+	right_arrow.input_pickable = enabled
+	for gate in gates.get_children():
+		var clickable_gate := gate as CollisionObject2D
+		if clickable_gate:
+			clickable_gate.input_pickable = enabled
 
 func _on_left_arrow_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:

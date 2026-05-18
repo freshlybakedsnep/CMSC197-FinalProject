@@ -65,6 +65,7 @@ func start_battle() -> void:
 	queue_free()
 
 func reselect_stage() -> void:
+	BGM.play_world()
 	queue_free()
 
 func _class_to_text(character_class: HeroData.CharacterClass) -> String:

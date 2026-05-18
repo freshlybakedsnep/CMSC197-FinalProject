@@ -1,0 +1,114 @@
+[gd_scene format=3 uid="uid://senk5cdut5e8"]
+
+[ext_resource type="FontFile" uid="uid://dmgqmwfwyqfc0" path="res://assets/FOT-Aokane Std.ttf" id="1_yd5bg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.0470588, 0.0784314, 0.145098, 0.94)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.631373, 0.835294, 1, 0.9)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="LabelSettings" id="LabelSettings_title"]
+font = ExtResource("1_yd5bg")
+font_size = 40
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button"]
+bg_color = Color(0.0823529, 0.156863, 0.282353, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.631373, 0.835294, 1, 0.9)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="LoseScreen" type="CanvasLayer" unique_id=1469454908]
+layer = 30
+
+[node name="ModalRoot" type="Control" parent="." unique_id=458443276]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dimmer" type="ColorRect" parent="ModalRoot" unique_id=558119324]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+color = Color(0, 0, 0, 0.62)
+
+[node name="CenterContainer" type="CenterContainer" parent="ModalRoot" unique_id=619452481]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Panel" type="Panel" parent="ModalRoot/CenterContainer" unique_id=1481318226]
+custom_minimum_size = Vector2(460, 250)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ModalRoot/CenterContainer/Panel" unique_id=2041034625]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 14
+
+[node name="Label" type="Label" parent="ModalRoot/CenterContainer/Panel/VBoxContainer" unique_id=144622659]
+layout_mode = 2
+text = "The Party has fallen..."
+label_settings = SubResource("LabelSettings_title")
+horizontal_alignment = 1
+
+[node name="Hint" type="Label" parent="ModalRoot/CenterContainer/Panel/VBoxContainer" unique_id=757289303]
+modulate = Color(0.807843, 0.890196, 0.964706, 0.9)
+layout_mode = 2
+text = "Your team was defeated."
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Buttons" type="VBoxContainer" parent="ModalRoot/CenterContainer/Panel/VBoxContainer" unique_id=56962927]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Retry" type="Button" parent="ModalRoot/CenterContainer/Panel/VBoxContainer/Buttons" unique_id=1983171627]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button")
+text = "Challenge Again"
+
+[node name="Exit" type="Button" parent="ModalRoot/CenterContainer/Panel/VBoxContainer/Buttons" unique_id=543825825]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button")
+text = "Exit to Menu"
