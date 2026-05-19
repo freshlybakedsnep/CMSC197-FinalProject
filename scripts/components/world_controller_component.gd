@@ -17,6 +17,7 @@ const MAIN_MENU_SCENE := "res://scenes/menu/main_menu.tscn"
 @onready var location_banner: Label = $LocationBanner/Label
 
 var current_stage : StageInfo
+var current_battle_node: BattleNodeData
 var current_location: LocationData
 var active_party_selector: PartySelector
 var location_banner_tween: Tween
@@ -60,7 +61,7 @@ func _render_location() -> void:
 		gate.location_name = b.label
 		gate.battle_id = String(b.battle_id) if not String(b.battle_id).is_empty() else b.label.to_lower().replace(" ", "_")
 		gate.unlock_heroes_on_win = b.unlock_heroes
-		gate.destination_scene = b.battle_scene
+		gate.destination_scene = null if b.stage_info else b.battle_scene
 		gates.add_child(gate)
 	
 	for s in current_location.service_nodes:
@@ -84,6 +85,7 @@ func open_party_select_for_battle(battle_node: BattleNodeData) -> void:
 	if battle_id.is_empty():
 		battle_id = battle_node.label.to_lower().replace(" ", "_")
 	PartyManager.set_active_battle(battle_id, battle_node.label, battle_node.unlock_heroes)
+	current_battle_node = battle_node
 	open_party_select(battle_node.stage_info)
 
 func open_party_select(stage_info: StageInfo) -> void:
@@ -100,6 +102,8 @@ func open_party_select(stage_info: StageInfo) -> void:
 func start_battle() -> void:
 	var s = stage.instantiate() as Stage
 	s.stage_info = current_stage
+	if current_battle_node:
+		s.battle_background = current_battle_node.background
 	add_child(s)
 	s.stage_quit.connect(reload_world)
 	hide()
@@ -109,6 +113,7 @@ func reload_world() -> void:
 
 func _on_party_select_closed() -> void:
 	active_party_selector = null
+	current_battle_node = null
 	_set_world_clickables_enabled(true)
 
 func _set_world_clickables_enabled(enabled: bool) -> void:

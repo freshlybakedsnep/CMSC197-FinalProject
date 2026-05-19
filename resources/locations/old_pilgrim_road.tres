@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="LocationData" format=3 uid="uid://bgypd5xmdi0eq"]
+
+[ext_resource type="Texture2D" uid="uid://s1qlt0mbigrg" path="res://assets/background/bg_14.png" id="1_gnf6u"]
+[ext_resource type="Script" uid="uid://dtkwoa4vtxljs" path="res://scripts/battle_node_data.gd" id="2_gnf6u"]
+[ext_resource type="Resource" uid="uid://yxm5npx3d5cq" path="res://resources/battles/forest_battle_lv3.tres" id="3_jurk0"]
+[ext_resource type="Script" uid="uid://ci1o82a0iwfin" path="res://scripts/location_data.gd" id="4_3wi20"]
+[ext_resource type="Resource" uid="uid://clwv14ndk2ihd" path="res://resources/locations/elderwood_path.tres" id="4_jurk0"]
+[ext_resource type="Script" uid="uid://cyk41rb81ktuw" path="res://scripts/service_node_data.gd" id="5_gkqtl"]
+
+[resource]
+script = ExtResource("4_3wi20")
+id = &"old_pilgrim_road"
+display_name = "Old Pilgrim Road"
+background = ExtResource("1_gnf6u")
+left_location = ExtResource("4_jurk0")
+battle_nodes = Array[ExtResource("2_gnf6u")]([ExtResource("3_jurk0")])

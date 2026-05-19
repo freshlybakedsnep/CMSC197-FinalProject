@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://dsu1t80330rqd" path="res://scripts/components/action_component.gd" id="6_gdr7i"]
 [ext_resource type="Resource" uid="uid://dvriirguc0vps" path="res://resources/ability/SELF_taunt.tres" id="7_hm5tj"]
 [ext_resource type="Script" uid="uid://c6g2xy001wklx" path="res://scripts/components/element_component.gd" id="8_3xkss"]
+[ext_resource type="Resource" uid="uid://blla1se37bp71" path="res://resources/ability/ST_silence.tres" id="8_tcypm"]
 [ext_resource type="Script" uid="uid://cm88ovm7gjp44" path="res://scripts/components/status_component.gd" id="9_jeqpw"]
 [ext_resource type="Script" uid="uid://cpffl8bnew7fl" path="res://scripts/components/ai_controller.gd" id="10_ef1ts"]
 [ext_resource type="Script" uid="uid://ug5unx6nj7be" path="res://scripts/components/resource_component.gd" id="11_w8q86"]
@@ -26,7 +27,7 @@ metadata/_custom_type_script = "uid://bq4jpvro24bfo"
 [sub_resource type="Resource" id="Resource_syrdu"]
 script = ExtResource("6_gdr7i")
 basic_pool = Array[ExtResource("4_7rglj")]([ExtResource("5_jwj5c")])
-skill_pool = Array[ExtResource("4_7rglj")]([ExtResource("7_hm5tj")])
+skill_pool = Array[ExtResource("4_7rglj")]([ExtResource("7_hm5tj"), ExtResource("8_tcypm")])
 metadata/_custom_type_script = "uid://dsu1t80330rqd"
 
 [sub_resource type="Resource" id="Resource_s5yfr"]

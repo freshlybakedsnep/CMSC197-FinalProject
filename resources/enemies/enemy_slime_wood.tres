@@ -6,7 +6,8 @@
 [ext_resource type="Script" uid="uid://bdmenxynhc50j" path="res://scripts/action/action.gd" id="4_l1u51"]
 [ext_resource type="Resource" uid="uid://c3q57rkxtt5ah" path="res://resources/ability/ST_dmg.tres" id="5_66s1q"]
 [ext_resource type="Script" uid="uid://dsu1t80330rqd" path="res://scripts/components/action_component.gd" id="6_etn0g"]
-[ext_resource type="Resource" uid="uid://bdnkx1a8e24j4" path="res://resources/ability/AOE_dmg.tres" id="7_b4lir"]
+[ext_resource type="Resource" uid="uid://cq7qno4tcufth" path="res://resources/ability/ST_stun.tres" id="7_tjbt1"]
+[ext_resource type="Resource" uid="uid://blla1se37bp71" path="res://resources/ability/ST_silence.tres" id="8_ssoj4"]
 [ext_resource type="Script" uid="uid://c6g2xy001wklx" path="res://scripts/components/element_component.gd" id="8_w4b8m"]
 [ext_resource type="Script" uid="uid://cm88ovm7gjp44" path="res://scripts/components/status_component.gd" id="9_uh01p"]
 [ext_resource type="Script" uid="uid://cpffl8bnew7fl" path="res://scripts/components/ai_controller.gd" id="10_61njd"]
@@ -26,7 +27,7 @@ metadata/_custom_type_script = "uid://bq4jpvro24bfo"
 [sub_resource type="Resource" id="Resource_syrdu"]
 script = ExtResource("6_etn0g")
 basic_pool = Array[ExtResource("4_l1u51")]([ExtResource("5_66s1q")])
-ultimates = Array[ExtResource("4_l1u51")]([ExtResource("7_b4lir")])
+skill_pool = Array[ExtResource("4_l1u51")]([ExtResource("7_tjbt1"), ExtResource("8_ssoj4")])
 metadata/_custom_type_script = "uid://dsu1t80330rqd"
 
 [sub_resource type="Resource" id="Resource_s5yfr"]

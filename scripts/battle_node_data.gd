@@ -4,6 +4,7 @@ class_name BattleNodeData
 @export var label: String = ""
 @export var battle_id: StringName
 @export var battle_scene: PackedScene
+@export var background: Texture2D
 @export var stage_info : StageInfo
 @export var min_level: int = 1
 @export var reward_gold: int = 0

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="LocationData" format=3 uid="uid://cg1pekm5kgk6a"]
+
+[ext_resource type="Texture2D" uid="uid://o1p6u5uo0e3f" path="res://assets/background/bg_4.png" id="1_jw7yv"]
+[ext_resource type="Script" uid="uid://dtkwoa4vtxljs" path="res://scripts/battle_node_data.gd" id="2_tse13"]
+[ext_resource type="Resource" uid="uid://c1i73g8powdwq" path="res://resources/battles/field_battle_lvl2.tres" id="3_jw7yv"]
+[ext_resource type="Script" uid="uid://ci1o82a0iwfin" path="res://scripts/location_data.gd" id="4_cbmir"]
+[ext_resource type="Script" uid="uid://cyk41rb81ktuw" path="res://scripts/service_node_data.gd" id="5_mywwd"]
+
+[resource]
+script = ExtResource("4_cbmir")
+id = &"seduc_relic_valley"
+display_name = "Seduc Relic Valley"
+background = ExtResource("1_jw7yv")
+left_location_path = "uid://dvfqnd6jgdhhb"
+battle_nodes = Array[ExtResource("2_tse13")]([ExtResource("3_jw7yv")])

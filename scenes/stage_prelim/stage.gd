@@ -22,8 +22,10 @@ const LOSE_HINT_DEFAULT := "Your team was defeated."
 @onready var result_hint: Label = $EndScreen/ModalRoot/CenterContainer/Panel/VBoxContainer/Hint
 @onready var result_retry_button: Button = $EndScreen/ModalRoot/CenterContainer/Panel/VBoxContainer/Buttons/Retry
 @onready var result_exit_button: Button = $EndScreen/ModalRoot/CenterContainer/Panel/VBoxContainer/Buttons/Exit
+@onready var background_sprite: Sprite2D = $Background/Sprite2D
 
 @export var stage_info : StageInfo
+@export var battle_background: Texture2D
 
 var current_wave : Array[EnemyData]
 var current_wave_index := -1
@@ -37,6 +39,7 @@ var pending_triggers : Array[Dictionary] = []
 
 func _ready() -> void:
 	BGM.play_battle()
+	_apply_battle_background()
 	state_machine.handler = self
 	pause_modal.resume_requested.connect(_on_pause_resume_requested)
 	pause_modal.exit_battle_requested.connect(_on_pause_exit_battle_requested)
@@ -203,6 +206,22 @@ func _set_result_modal_for_win(win_result: Dictionary) -> void:
 func _set_result_modal(title_text: String, hint_text: String) -> void:
 	result_title.text = title_text
 	result_hint.text = hint_text
+
+func _apply_battle_background() -> void:
+	if battle_background == null:
+		background_sprite.visible = false
+		return
+	background_sprite.texture = battle_background
+	background_sprite.visible = true
+	_fit_background_to_viewport()
+
+func _fit_background_to_viewport() -> void:
+	if background_sprite.texture == null:
+		return
+	var vp := get_viewport().get_visible_rect().size
+	var ts := background_sprite.texture.get_size()
+	background_sprite.position = vp * 0.5
+	background_sprite.scale = Vector2(vp.x / ts.x, vp.y / ts.y)
 
 func _on_pause_resume_requested() -> void:
 	pause_modal.close_menu()

@@ -38,6 +38,9 @@ script = ExtResource("18_s5gfg")
 [node name="Background" type="Node2D" parent="." unique_id=1792994303]
 z_index = -1
 
+[node name="Sprite2D" type="Sprite2D" parent="Background" unique_id=241052470]
+visible = false
+
 [node name="Enemies" parent="." unique_id=689653097 instance=ExtResource("10_q2835")]
 position = Vector2(350, 280)
 
