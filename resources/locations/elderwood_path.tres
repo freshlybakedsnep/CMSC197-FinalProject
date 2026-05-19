@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="LocationData" format=3 uid="uid://clwv14ndk2ihd"]
+
+[ext_resource type="Texture2D" uid="uid://lq688ymw45gu" path="res://assets/background/bg_12.png" id="1_kk3c1"]
+[ext_resource type="Script" uid="uid://dtkwoa4vtxljs" path="res://scripts/battle_node_data.gd" id="2_y4ryv"]
+[ext_resource type="Resource" uid="uid://c1i73g8powdwq" path="res://resources/battles/field_battle_lvl2.tres" id="3_jdyum"]
+[ext_resource type="Script" uid="uid://ci1o82a0iwfin" path="res://scripts/location_data.gd" id="4_xabhg"]
+[ext_resource type="Script" uid="uid://cyk41rb81ktuw" path="res://scripts/service_node_data.gd" id="5_se7bd"]
+
+[resource]
+script = ExtResource("4_xabhg")
+id = &"elderwood_path"
+display_name = "Elderwood Path"
+background = ExtResource("1_kk3c1")
+left_location_path = "uid://dvfqnd6jgdhhb"
+right_location_path = "uid://bgypd5xmdi0eq"
+battle_nodes = Array[ExtResource("2_y4ryv")]([ExtResource("3_jdyum")])

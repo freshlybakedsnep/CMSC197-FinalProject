@@ -1,0 +1,109 @@
+[gd_resource type="Resource" script_class="HeroData" format=3 uid="uid://dtba17o0e61ju"]
+
+[ext_resource type="Script" uid="uid://bl2qf613jng43" path="res://scenes/entity/entity_component.gd" id="1_842gx"]
+[ext_resource type="Texture2D" uid="uid://c3mgklwuxb34p" path="res://assets/sprites/chars/ares/attack/attack1.png" id="1_b1end"]
+[ext_resource type="Script" uid="uid://bq4jpvro24bfo" path="res://scripts/components/stats_component.gd" id="2_eka21"]
+[ext_resource type="Texture2D" uid="uid://dc7fdlp5cgn8a" path="res://assets/sprites/chars/ares/attack/attack2.png" id="2_u8vkd"]
+[ext_resource type="Script" uid="uid://bdmenxynhc50j" path="res://scripts/action/action.gd" id="3_k4hbv"]
+[ext_resource type="Texture2D" uid="uid://bn8k0q4rugyav" path="res://assets/sprites/chars/ares/attack/attack3.png" id="3_tuqdd"]
+[ext_resource type="Resource" uid="uid://c3q57rkxtt5ah" path="res://resources/ability/ST_dmg.tres" id="4_go73x"]
+[ext_resource type="Texture2D" uid="uid://cshwm7qg4ai88" path="res://assets/sprites/chars/ares/attack/attack4.png" id="4_sxwet"]
+[ext_resource type="Script" uid="uid://dsu1t80330rqd" path="res://scripts/components/action_component.gd" id="5_76hqa"]
+[ext_resource type="Texture2D" uid="uid://5mh60r01cn3j" path="res://assets/sprites/chars/ares/idle/idle1.png" id="5_e8igl"]
+[ext_resource type="Resource" uid="uid://cvn20gih60uto" path="res://resources/ability/Defend.tres" id="5_k4hbv"]
+[ext_resource type="Resource" uid="uid://d14n3vqbqsfy7" path="res://resources/ability/RAN_dmg.tres" id="6_go73x"]
+[ext_resource type="Resource" uid="uid://cq7qno4tcufth" path="res://resources/ability/ST_stun.tres" id="6_m1i4o"]
+[ext_resource type="Script" uid="uid://c6g2xy001wklx" path="res://scripts/components/element_component.gd" id="6_pk2qp"]
+[ext_resource type="Texture2D" uid="uid://20ucxdcki20o" path="res://assets/sprites/chars/ares/idle/idle2.png" id="6_rh0wn"]
+[ext_resource type="Resource" uid="uid://0uyg5dgut0f4" path="res://resources/ability/SELF_heal.tres" id="7_76hqa"]
+[ext_resource type="Texture2D" uid="uid://bdbc32pmtmibc" path="res://assets/sprites/chars/ares/idle/idle3.png" id="7_c2ux2"]
+[ext_resource type="Resource" uid="uid://bdnkx1a8e24j4" path="res://resources/ability/AOE_dmg.tres" id="7_go73x"]
+[ext_resource type="Script" uid="uid://cm88ovm7gjp44" path="res://scripts/components/status_component.gd" id="7_m1i4o"]
+[ext_resource type="Script" uid="uid://bvxud30fp77h2" path="res://scripts/components/player_controller.gd" id="8_5yh1s"]
+[ext_resource type="Texture2D" uid="uid://bjammfe65ovhx" path="res://assets/sprites/chars/ares/idle/idle4.png" id="8_ipc6d"]
+[ext_resource type="Script" uid="uid://nqhxig82acgw" path="res://scenes/entity/ent_hero.gd" id="9_ofre0"]
+[ext_resource type="AudioStream" uid="uid://chi3l3ngbnwv7" path="res://assets/audio/char/ares/intro/1.wav" id="22_u8vkd"]
+[ext_resource type="AudioStream" uid="uid://c8dnpcsin1un0" path="res://assets/audio/char/ares/intro/2.wav" id="23_tuqdd"]
+[ext_resource type="AudioStream" uid="uid://c4hddd0jrqpdq" path="res://assets/audio/char/ares/intro/3.wav" id="24_sxwet"]
+[ext_resource type="AudioStream" uid="uid://bvgnqd7h42i0k" path="res://assets/audio/char/ares/intro/4.wav" id="25_e8igl"]
+[ext_resource type="AudioStream" uid="uid://dpscx2awpmo7w" path="res://assets/audio/char/ares/intro/5.wav" id="26_rh0wn"]
+[ext_resource type="Texture2D" uid="uid://cgnklb6swibbb" path="res://assets/sprites/chars/ares/25.png" id="28_u8vkd"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fk314"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_b1end")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_u8vkd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_tuqdd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_sxwet")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_e8igl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_rh0wn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_c2ux2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ipc6d")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="Resource" id="Resource_ig5s4"]
+script = ExtResource("2_eka21")
+metadata/_custom_type_script = "uid://bq4jpvro24bfo"
+
+[sub_resource type="Resource" id="Resource_3ngop"]
+script = ExtResource("5_76hqa")
+binds = Dictionary[int, ExtResource("3_k4hbv")]({
+0: ExtResource("4_go73x"),
+1: ExtResource("5_k4hbv"),
+2: ExtResource("6_m1i4o"),
+3: ExtResource("7_76hqa"),
+4: ExtResource("7_go73x")
+})
+basic_pool = Array[ExtResource("3_k4hbv")]([ExtResource("4_go73x")])
+skill_pool = Array[ExtResource("3_k4hbv")]([ExtResource("7_go73x"), ExtResource("6_go73x"), ExtResource("7_76hqa"), ExtResource("6_m1i4o")])
+metadata/_custom_type_script = "uid://dsu1t80330rqd"
+
+[sub_resource type="Resource" id="Resource_0tcap"]
+script = ExtResource("6_pk2qp")
+my_elem = 0
+metadata/_custom_type_script = "uid://c6g2xy001wklx"
+
+[sub_resource type="Resource" id="Resource_jba1v"]
+script = ExtResource("7_m1i4o")
+metadata/_custom_type_script = "uid://cm88ovm7gjp44"
+
+[sub_resource type="Resource" id="Resource_yv4oe"]
+script = ExtResource("8_5yh1s")
+metadata/_custom_type_script = "uid://bvxud30fp77h2"
+
+[resource]
+script = ExtResource("9_ofre0")
+gender = 1
+win_voice_lines = Array[AudioStream]([null])
+lose_voice_lines = Array[AudioStream]([null])
+intro_voice_lines = Array[AudioStream]([ExtResource("22_u8vkd"), ExtResource("23_tuqdd"), ExtResource("24_sxwet"), ExtResource("25_e8igl"), ExtResource("26_rh0wn")])
+entity_name = "Ares"
+sprite = ExtResource("28_u8vkd")
+battle_sprite = SubResource("SpriteFrames_fk314")
+components = Array[ExtResource("1_842gx")]([SubResource("Resource_ig5s4"), SubResource("Resource_3ngop"), SubResource("Resource_0tcap"), SubResource("Resource_jba1v"), SubResource("Resource_yv4oe")])
+metadata/_custom_type_script = "uid://nqhxig82acgw"

@@ -31,6 +31,13 @@ func fill_vacancies() -> void:
 func is_wave_clear() -> bool:
 	return _vacancies == 5 and enemy_pool.is_empty()
 
+func enemies_left() -> int:
+	var active_count := 0
+	for enemy in formation.values():
+		if enemy != null and is_instance_valid(enemy):
+			active_count += 1
+	return active_count + enemy_pool.size()
+
 func add_to_formation(enemy : Entity, index : int, pos : Marker2D) -> void:
 	formation[index] = enemy
 	pos.add_child(enemy)

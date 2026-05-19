@@ -25,6 +25,7 @@ BGM="*res://scripts/globals/bgm_manager.gd"
 PartyManager="*res://scripts/globals/party_manager.gd"
 HeroDatabase="*res://scripts/globals/hero_database.gd"
 BattleRegistry="*uid://cukk0c3cvcvfo"
+SFX="*res://scripts/globals/sfx_manager.gd"
 
 [display]
 

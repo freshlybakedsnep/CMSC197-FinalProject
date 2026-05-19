@@ -6,15 +6,20 @@ signal party_ready
 
 var hero_to_hud : Dictionary[Entity, HeroHUD] = {}
 var selected_hero : Entity
+var health_changed_connections: Array[Dictionary] = []
 
 func setup(nodes : Array[Entity]) -> void:
+	_clear_health_connections()
+	hero_to_hud.clear()
+	selected_hero = null
+	
 	for i in range(nodes.size()):
 		var hud = get_child(i) as HeroHUD
 		var hero : Entity = nodes[i]
 		hero_to_hud.set(hero, hud)
 		
-		hud.portrait.texture = hud.portrait.texture.duplicate()
-		hud.portrait.texture.atlas = hero.data.sprite
+		# Use the hero texture directly so HUD portrait scaling matches party select.
+		hud.portrait.texture = hero.data.sprite
 		
 		var stats : StatsComponent = hero.data.get_comp(EntityComponent.Type.STATS)
 		if stats:
@@ -22,11 +27,17 @@ func setup(nodes : Array[Entity]) -> void:
 			hud.health.value = stats.get_stat("CURR_HP")
 			hud.health.max_value = stats.get_stat("HP")
 		
-			stats.health_changed.connect(
-				func(h, m): 
-					hud.health.value = h
-					hud.health.max_value = m
-					hud.value.text = str(h))
+			var health_changed := func(h: int, m: int) -> void:
+				if not is_instance_valid(hud):
+					return
+				hud.health.value = h
+				hud.health.max_value = m
+				hud.value.text = str(h)
+			stats.health_changed.connect(health_changed)
+			health_changed_connections.append({
+				&"stats": stats,
+				&"callable": health_changed
+			})
 		
 		var elem : ElementComponent = hero.data.get_comp(EntityComponent.Type.ELEMENT)
 		
@@ -37,6 +48,17 @@ func setup(nodes : Array[Entity]) -> void:
 			hud.pressed.connect(func(): select_hero(hero))
 			hero.entity_eliminated.connect(func(): hud.enabled(false))
 		hud.show()
+
+func _exit_tree() -> void:
+	_clear_health_connections()
+
+func _clear_health_connections() -> void:
+	for connection in health_changed_connections:
+		var stats := connection.get(&"stats") as StatsComponent
+		var callable := connection.get(&"callable") as Callable
+		if stats and stats.health_changed.is_connected(callable):
+			stats.health_changed.disconnect(callable)
+	health_changed_connections.clear()
 
 func select_hero(hero : Entity) -> void:
 	if hero:

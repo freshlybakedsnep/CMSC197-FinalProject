@@ -8,6 +8,7 @@ class Win extends GameState:
 	
 	func start() -> String:
 		handler.state_machine.refresh()
+		handler.on_battle_won()
 		return ""
 
 class GameOver extends GameState:
@@ -17,7 +18,7 @@ class GameOver extends GameState:
 	
 	func start() -> String:
 		handler.state_machine.refresh()
-		handler.lose_screen.show()
+		handler.on_battle_lost()
 		return ""
 
 class TurnEnd extends GameState:

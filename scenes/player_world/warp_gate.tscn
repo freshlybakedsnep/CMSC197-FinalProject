@@ -6,10 +6,21 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_gate"]
 font = ExtResource("2_font")
-font_size = 24
-font_color = Color(0.898039, 0.964706, 1, 1)
-shadow_color = Color(0, 0, 0, 0.6)
-shadow_offset = Vector2(2, 2)
+font_size = 30
+font_color = Color(1, 0.956863, 0.721569, 1)
+outline_size = 5
+outline_color = Color(0.027451, 0.0627451, 0.101961, 0.95)
+shadow_color = Color(0, 0, 0, 0.7)
+shadow_offset = Vector2(3, 3)
+
+[sub_resource type="LabelSettings" id="LabelSettings_notice"]
+font = ExtResource("2_font")
+font_size = 36
+font_color = Color(1, 0.886275, 0.321569, 1)
+outline_size = 6
+outline_color = Color(0.027451, 0.0627451, 0.101961, 0.95)
+shadow_color = Color(0, 0, 0, 0.65)
+shadow_offset = Vector2(3, 4)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fbel5"]
 radius = 44.0
@@ -18,17 +29,41 @@ height = 122.0
 [node name="WarpGate" type="Area2D" unique_id=1713874473]
 script = ExtResource("1_2l2d3")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2123731363]
-modulate = Color(0.792157, 0.909804, 1, 0.94)
+[node name="GlowAura" type="Sprite2D" parent="."]
+z_index = -2
+modulate = Color(1, 0.670588, 0.184314, 0.38)
 position = Vector2(-1, -16)
-scale = Vector2(5.2, 5.2)
+scale = Vector2(7.4, 7.4)
 texture = ExtResource("1_l631h")
 
+[node name="BackPlate" type="Sprite2D" parent="."]
+z_index = -1
+modulate = Color(0.027451, 0.0862745, 0.12549, 0.78)
+position = Vector2(-1, -16)
+scale = Vector2(6.35, 6.35)
+texture = ExtResource("1_l631h")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2123731363]
+modulate = Color(1, 0.980392, 0.815686, 1)
+position = Vector2(-1, -16)
+scale = Vector2(5.8, 5.8)
+texture = ExtResource("1_l631h")
+
+[node name="Notice" type="Label" parent="."]
+offset_left = -24.0
+offset_top = -122.0
+offset_right = 24.0
+offset_bottom = -74.0
+text = "!"
+label_settings = SubResource("LabelSettings_notice")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Label" type="Label" parent="." unique_id=316542375]
-offset_left = -110.0
-offset_top = 58.0
-offset_right = 110.0
-offset_bottom = 88.0
+offset_left = -130.0
+offset_top = 62.0
+offset_right = 130.0
+offset_bottom = 102.0
 text = "Location"
 label_settings = SubResource("LabelSettings_gate")
 horizontal_alignment = 1

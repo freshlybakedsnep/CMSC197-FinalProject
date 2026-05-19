@@ -5,21 +5,22 @@
 [node name="pos1" type="Marker2D" parent="." unique_id=507830191]
 z_index = 1
 y_sort_enabled = true
-position = Vector2(-160, 10)
+position = Vector2(-230, 35)
 
 [node name="pos2" type="Marker2D" parent="." unique_id=313020340]
 y_sort_enabled = true
-position = Vector2(-85, -10)
+position = Vector2(-115, -25)
 
 [node name="pos3" type="Marker2D" parent="." unique_id=1971730018]
 z_index = 1
 y_sort_enabled = true
+position = Vector2(0, 10)
 
 [node name="pos4" type="Marker2D" parent="." unique_id=264810793]
 y_sort_enabled = true
-position = Vector2(70, -20)
+position = Vector2(115, -25)
 
 [node name="pos5" type="Marker2D" parent="." unique_id=1400350062]
 z_index = 1
 y_sort_enabled = true
-position = Vector2(155, -10)
+position = Vector2(230, 35)

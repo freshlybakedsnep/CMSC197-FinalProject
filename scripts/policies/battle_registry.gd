@@ -14,12 +14,18 @@ func unregister_entity(data: EntityData) -> void:
 	enemies.erase(data)
 	_data_node.erase(data)
 
+func _prune_invalid_entities() -> void:
+	for data in _data_node.keys():
+		if not is_instance_valid(_data_node[data]):
+			unregister_entity(data)
+
 func clear_battle() -> void:
 	heroes.clear()
 	enemies.clear()
 	_data_node.clear()
 
 func get_potential_targets(src: EntityData, group_type: Action.TargetGroup) -> Array[EntityData]:
+	_prune_invalid_entities()
 	match group_type:
 		Action.TargetGroup.SELF:
 			return [src]
@@ -34,9 +40,13 @@ func get_potential_targets(src: EntityData, group_type: Action.TargetGroup) -> A
 	return []
 
 func _is_hero(data: EntityData) -> bool:
+	_prune_invalid_entities()
 	return heroes.has(data)
 
 func get_entity(data: EntityData) -> Entity:
 	if _data_node.has(data):
-		return _data_node[data]
+		var node = _data_node[data]
+		if is_instance_valid(node):
+			return node
+		unregister_entity(data)
 	return null

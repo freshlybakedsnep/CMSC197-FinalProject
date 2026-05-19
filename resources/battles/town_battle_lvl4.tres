@@ -1,0 +1,46 @@
+[gd_resource type="Resource" script_class="BattleNodeData" format=3 uid="uid://cnog6k8iqc6ya"]
+
+[ext_resource type="Script" uid="uid://dtkwoa4vtxljs" path="res://scripts/battle_node_data.gd" id="1_8h2fq"]
+[ext_resource type="Texture2D" uid="uid://1igmd7khiy2r" path="res://assets/background/bg_10.png" id="1_lyqgc"]
+[ext_resource type="Script" uid="uid://lhx7sp8rhhjr" path="res://scripts/stage_info.gd" id="2_bkj5u"]
+[ext_resource type="Script" uid="uid://cx656sdytf30u" path="res://scripts/wave.gd" id="3_p8nf7"]
+[ext_resource type="Script" uid="uid://ddsxg1ao3vu1d" path="res://scenes/entity/ent_enemy.gd" id="4_cc2qr"]
+[ext_resource type="Resource" uid="uid://db8wjrcpyke2a" path="res://resources/enemies/enemy_slime_fire.tres" id="5_emy8b"]
+[ext_resource type="Resource" uid="uid://nnqev8hbnndb" path="res://resources/enemies/enemy_slime_water.tres" id="6_lyqgc"]
+[ext_resource type="Resource" uid="uid://cmqx7xlx81qck" path="res://resources/enemies/enemy_slime_wood.tres" id="7_smpie"]
+[ext_resource type="Resource" uid="uid://wk7uklmcqjit" path="res://resources/enemies/enemy_slime_light.tres" id="8_c027w"]
+[ext_resource type="Resource" uid="uid://bm4vpdr10dk6u" path="res://resources/enemies/enemy_slime_dark.tres" id="9_1cjsp"]
+
+[sub_resource type="Resource" id="Resource_8s53e"]
+script = ExtResource("3_p8nf7")
+enemies = Array[ExtResource("4_cc2qr")]([ExtResource("5_emy8b"), ExtResource("6_lyqgc"), ExtResource("7_smpie")])
+metadata/_custom_type_script = "uid://cx656sdytf30u"
+
+[sub_resource type="Resource" id="Resource_v2c7x"]
+script = ExtResource("3_p8nf7")
+enemies = Array[ExtResource("4_cc2qr")]([ExtResource("7_smpie"), ExtResource("8_c027w"), ExtResource("9_1cjsp")])
+metadata/_custom_type_script = "uid://cx656sdytf30u"
+
+[sub_resource type="Resource" id="Resource_dpix3"]
+script = ExtResource("3_p8nf7")
+enemies = Array[ExtResource("4_cc2qr")]([ExtResource("9_1cjsp"), ExtResource("8_c027w"), ExtResource("7_smpie"), ExtResource("6_lyqgc"), ExtResource("5_emy8b"), ExtResource("9_1cjsp")])
+metadata/_custom_type_script = "uid://cx656sdytf30u"
+
+[sub_resource type="Resource" id="Resource_86uow"]
+script = ExtResource("2_bkj5u")
+waves = Array[ExtResource("3_p8nf7")]([SubResource("Resource_8s53e"), SubResource("Resource_v2c7x"), SubResource("Resource_dpix3")])
+metadata/_custom_type_script = "uid://lhx7sp8rhhjr"
+
+[resource]
+script = ExtResource("1_8h2fq")
+label = "Skyfall Dryads"
+battle_id = &"skyfall_dryads"
+background = ExtResource("1_lyqgc")
+stage_info = SubResource("Resource_86uow")
+min_level = 4
+reward_gold = 60
+reward_exp = 45
+unlock_heroes = ["Selene"]
+world_pos = Vector2(1000, 450)
+enemy_formation_position = Vector2(420, 550)
+hero_formation_position = Vector2(1000, 550)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://stg73iippgsu"]
+[gd_scene format=3 uid="uid://stg73iippgsu"]
 
 [ext_resource type="Script" uid="uid://biwbjcrbn8kaq" path="res://scenes/player_world/intro.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://baque3agyqaqt" path="res://assets/background/bg_11.png" id="2_bg"]
@@ -17,6 +17,14 @@ corner_radius_top_right = 24
 corner_radius_bottom_right = 24
 corner_radius_bottom_left = 24
 shadow_size = 14
+
+[sub_resource type="LabelSettings" id="LabelSettings_dialogue"]
+line_spacing = 4.0
+font = ExtResource("3_font")
+font_size = 34
+font_color = Color(0.905882, 0.952941, 1, 1)
+shadow_color = Color(0, 0, 0, 0.7)
+shadow_offset = Vector2(2, 3)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button"]
 bg_color = Color(0.0823529, 0.14902, 0.270588, 0.95)
@@ -41,14 +49,6 @@ corner_radius_top_left = 14
 corner_radius_top_right = 14
 corner_radius_bottom_right = 14
 corner_radius_bottom_left = 14
-
-[sub_resource type="LabelSettings" id="LabelSettings_dialogue"]
-font = ExtResource("3_font")
-font_size = 34
-font_color = Color(0.905882, 0.952941, 1, 1)
-line_spacing = 4.0
-shadow_color = Color(0, 0, 0, 0.7)
-shadow_offset = Vector2(2, 3)
 
 [node name="Intro" type="Control" unique_id=245348320]
 layout_mode = 3
@@ -106,10 +106,10 @@ color = Color(0.113725, 0.419608, 0.729412, 0.16)
 [node name="HeroPortrait" type="TextureRect" parent="Backdrop" unique_id=1096267884]
 modulate = Color(1, 1, 1, 0.9)
 layout_mode = 0
-offset_left = 56.0
-offset_top = 74.0
-offset_right = 438.0
-offset_bottom = 690.0
+offset_left = 172.0
+offset_top = 86.0
+offset_right = 492.0
+offset_bottom = 668.0
 texture = ExtResource("4_portrait")
 expand_mode = 1
 stretch_mode = 5
@@ -139,23 +139,23 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 26.0
-offset_top = 24.0
-offset_right = -26.0
-offset_bottom = -24.0
+offset_left = -21.0
+offset_top = -190.0
+offset_right = -73.0
+offset_bottom = 160.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 12
 
 [node name="Kicker" type="Label" parent="CenterContainer/MarginContainer/Panel/Body" unique_id=667013399]
+modulate = Color(0.65098, 0.831373, 1, 0.9)
 layout_mode = 2
 text = "MISSION BRIEFING"
-modulate = Color(0.65098, 0.831373, 1, 0.9)
 
 [node name="Speaker" type="Label" parent="CenterContainer/MarginContainer/Panel/Body" unique_id=298060983]
+modulate = Color(0.901961, 0.972549, 1, 1)
 layout_mode = 2
 text = "Ares"
-modulate = Color(0.901961, 0.972549, 1, 1)
 
 [node name="Dialogue" type="Label" parent="CenterContainer/MarginContainer/Panel/Body" unique_id=1784945891]
 custom_minimum_size = Vector2(0, 220)
@@ -171,20 +171,20 @@ alignment = 2
 [node name="Skip" type="Button" parent="CenterContainer/MarginContainer/Panel/Body/Buttons" unique_id=415789267]
 custom_minimum_size = Vector2(110, 48)
 layout_mode = 2
-text = "Skip"
 theme_override_styles/normal = SubResource("StyleBoxFlat_button")
-theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
 theme_override_styles/focus = SubResource("StyleBoxFlat_button_hover")
+text = "Skip"
 
 [node name="Next" type="Button" parent="CenterContainer/MarginContainer/Panel/Body/Buttons" unique_id=1971055266]
 custom_minimum_size = Vector2(170, 48)
 layout_mode = 2
-text = "Next"
 theme_override_styles/normal = SubResource("StyleBoxFlat_button")
-theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
 theme_override_styles/focus = SubResource("StyleBoxFlat_button_hover")
+text = "Next"
 
 [node name="Voice" type="AudioStreamPlayer" parent="." unique_id=575157707]
 

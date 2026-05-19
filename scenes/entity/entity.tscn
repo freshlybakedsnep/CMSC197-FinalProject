@@ -130,6 +130,7 @@ script = ExtResource("1_0p8rp")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=229155458]
 material = SubResource("ShaderMaterial_03rkj")
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_8wy7d")
 animation = &"hit"
 autoplay = "idle"

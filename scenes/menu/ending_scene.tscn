@@ -1,0 +1,262 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://scenes/menu/ending_scene.gd" id="1_ending"]
+[ext_resource type="Texture2D" uid="uid://baque3agyqaqt" path="res://assets/background/bg_11.png" id="2_bg"]
+[ext_resource type="FontFile" uid="uid://dmgqmwfwyqfc0" path="res://assets/FOT-Aokane Std.ttf" id="3_font"]
+[ext_resource type="Texture2D" path="res://assets/sprites/chars/ares/25.png" id="4_ares"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_title"]
+font = ExtResource("3_font")
+font_size = 44
+font_color = Color(0.92549, 0.964706, 1, 1)
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+shadow_color = Color(0, 0, 0, 0.72)
+shadow_offset = Vector2(2, 4)
+
+[sub_resource type="LabelSettings" id="LabelSettings_heading"]
+font = ExtResource("3_font")
+font_size = 28
+font_color = Color(0.815686, 0.909804, 1, 1)
+outline_size = 3
+outline_color = Color(0, 0, 0, 0.85)
+
+[sub_resource type="LabelSettings" id="LabelSettings_credit"]
+font = ExtResource("3_font")
+font_size = 22
+font_color = Color(0.886275, 0.937255, 1, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 0.8)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.0470588, 0.0784314, 0.145098, 0.82)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.631373, 0.835294, 1, 0.78)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button"]
+bg_color = Color(0.0823529, 0.14902, 0.270588, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.435294, 0.686275, 0.980392, 0.85)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_hover"]
+bg_color = Color(0.145098, 0.25098, 0.435294, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.682353, 0.894118, 1, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[node name="EndingScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ending")
+
+[node name="Backdrop" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BG" type="TextureRect" parent="Backdrop"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bg")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Shade" type="ColorRect" parent="Backdrop"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.00784314, 0.0156863, 0.0470588, 0.72)
+
+[node name="HeroPortrait" type="TextureRect" parent="Backdrop"]
+modulate = Color(1, 1, 1, 0.72)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 42.0
+offset_top = -216.0
+offset_right = 362.0
+offset_bottom = 216.0
+grow_vertical = 2
+texture = ExtResource("4_ares")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RootMargin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 420
+theme_override_constants/margin_top = 56
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 44
+
+[node name="Body" type="VBoxContainer" parent="RootMargin"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Kicker" type="Label" parent="RootMargin/Body"]
+modulate = Color(0.65098, 0.831373, 1, 0.88)
+layout_mode = 2
+text = "FINAL BATTLE CLEARED"
+
+[node name="Title" type="Label" parent="RootMargin/Body"]
+layout_mode = 2
+text = "Sed Is Free"
+label_settings = SubResource("LabelSettings_title")
+
+[node name="Story" type="Label" parent="RootMargin/Body"]
+modulate = Color(0.831373, 0.905882, 0.984314, 0.95)
+layout_mode = 2
+text = "The Withered Seducs fall silent. The gates dim, the rifts loosen their grip, and the party returns carrying the first quiet dawn Sed has seen in years."
+autowrap_mode = 3
+
+[node name="CreditsPanel" type="Panel" parent="RootMargin/Body"]
+custom_minimum_size = Vector2(0, 350)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="CreditsTitle" type="Label" parent="RootMargin/Body/CreditsPanel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 20.0
+offset_top = 18.0
+offset_right = -20.0
+offset_bottom = 54.0
+grow_horizontal = 2
+text = "Ending Credits"
+label_settings = SubResource("LabelSettings_heading")
+horizontal_alignment = 1
+
+[node name="CreditsWindow" type="Control" parent="RootMargin/Body/CreditsPanel"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 68.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CreditsContent" type="VBoxContainer" parent="RootMargin/Body/CreditsPanel/CreditsWindow"]
+layout_mode = 0
+offset_right = 740.0
+offset_bottom = 480.0
+theme_override_constants/separation = 14
+
+[node name="Credit1" type="Label" parent="RootMargin/Body/CreditsPanel/CreditsWindow/CreditsContent"]
+layout_mode = 2
+text = "Created for CMSC 197 - Game Design and Development"
+label_settings = SubResource("LabelSettings_credit")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Credit2" type="Label" parent="RootMargin/Body/CreditsPanel/CreditsWindow/CreditsContent"]
+layout_mode = 2
+text = "Game Design, Programming, Combat Flow"
+label_settings = SubResource("LabelSettings_credit")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Credit3" type="Label" parent="RootMargin/Body/CreditsPanel/CreditsWindow/CreditsContent"]
+layout_mode = 2
+text = "Sed Actions! Development Team"
+label_settings = SubResource("LabelSettings_credit")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Credit4" type="Label" parent="RootMargin/Body/CreditsPanel/CreditsWindow/CreditsContent"]
+layout_mode = 2
+text = "Character Data, Battle Resources, World Map"
+label_settings = SubResource("LabelSettings_credit")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Credit5" type="Label" parent="RootMargin/Body/CreditsPanel/CreditsWindow/CreditsContent"]
+layout_mode = 2
+text = "Ares, Mira, Rando, Cael, Bronn, and the defenders of Sed"
+label_settings = SubResource("LabelSettings_credit")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Credit6" type="Label" parent="RootMargin/Body/CreditsPanel/CreditsWindow/CreditsContent"]
+layout_mode = 2
+text = "Music, SFX, UI, and Art Assets"
+label_settings = SubResource("LabelSettings_credit")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Credit7" type="Label" parent="RootMargin/Body/CreditsPanel/CreditsWindow/CreditsContent"]
+layout_mode = 2
+text = "Thanks for playing."
+label_settings = SubResource("LabelSettings_heading")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Buttons" type="HBoxContainer" parent="RootMargin/Body"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 2
+
+[node name="World" type="Button" parent="RootMargin/Body/Buttons"]
+custom_minimum_size = Vector2(180, 48)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_hover")
+text = "Return to World"
+
+[node name="MainMenu" type="Button" parent="RootMargin/Body/Buttons"]
+custom_minimum_size = Vector2(180, 48)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_hover")
+text = "Main Menu"
+
+[connection signal="pressed" from="RootMargin/Body/Buttons/World" to="." method="_on_world_pressed"]
+[connection signal="pressed" from="RootMargin/Body/Buttons/MainMenu" to="." method="_on_main_menu_pressed"]

@@ -1,0 +1,56 @@
+[gd_resource type="Resource" script_class="EnemyData" format=3 uid="uid://wk7uklmcqjit"]
+
+[ext_resource type="SpriteFrames" uid="uid://bpim70e5jxeir" path="res://resources/enemies/slime_light.tres" id="1_77jai"]
+[ext_resource type="Script" uid="uid://bl2qf613jng43" path="res://scenes/entity/entity_component.gd" id="2_llbw4"]
+[ext_resource type="Script" uid="uid://bq4jpvro24bfo" path="res://scripts/components/stats_component.gd" id="3_k5wjh"]
+[ext_resource type="Script" uid="uid://bdmenxynhc50j" path="res://scripts/action/action.gd" id="4_hrtny"]
+[ext_resource type="Resource" uid="uid://c3q57rkxtt5ah" path="res://resources/ability/ST_dmg.tres" id="5_2pmgg"]
+[ext_resource type="Script" uid="uid://dsu1t80330rqd" path="res://scripts/components/action_component.gd" id="6_ged6n"]
+[ext_resource type="Resource" uid="uid://bdnkx1a8e24j4" path="res://resources/ability/AOE_dmg.tres" id="7_xlexo"]
+[ext_resource type="Script" uid="uid://c6g2xy001wklx" path="res://scripts/components/element_component.gd" id="8_it8ts"]
+[ext_resource type="Script" uid="uid://cm88ovm7gjp44" path="res://scripts/components/status_component.gd" id="9_tkqx2"]
+[ext_resource type="Script" uid="uid://cpffl8bnew7fl" path="res://scripts/components/ai_controller.gd" id="10_0js7v"]
+[ext_resource type="Script" uid="uid://ug5unx6nj7be" path="res://scripts/components/resource_component.gd" id="11_5g31h"]
+[ext_resource type="Script" uid="uid://ddsxg1ao3vu1d" path="res://scenes/entity/ent_enemy.gd" id="12_kxoop"]
+
+[sub_resource type="Resource" id="Resource_jncna"]
+script = ExtResource("3_k5wjh")
+base_stats = {
+"ATK": 5,
+"DEF": 2,
+"HP": 10,
+"SPD": 5
+}
+metadata/_custom_type_script = "uid://bq4jpvro24bfo"
+
+[sub_resource type="Resource" id="Resource_syrdu"]
+script = ExtResource("6_ged6n")
+basic_pool = Array[ExtResource("4_hrtny")]([ExtResource("5_2pmgg")])
+ultimates = Array[ExtResource("4_hrtny")]([ExtResource("7_xlexo")])
+metadata/_custom_type_script = "uid://dsu1t80330rqd"
+
+[sub_resource type="Resource" id="Resource_s5yfr"]
+script = ExtResource("8_it8ts")
+my_elem = 3
+metadata/_custom_type_script = "uid://c6g2xy001wklx"
+
+[sub_resource type="Resource" id="Resource_p3iaq"]
+script = ExtResource("9_tkqx2")
+metadata/_custom_type_script = "uid://cm88ovm7gjp44"
+
+[sub_resource type="Resource" id="Resource_jel85"]
+script = ExtResource("10_0js7v")
+metadata/_custom_type_script = "uid://cpffl8bnew7fl"
+
+[sub_resource type="Resource" id="Resource_s2s0s"]
+script = ExtResource("11_5g31h")
+res_name = &"Charge"
+start_amount = -1
+metadata/_custom_type_script = "uid://ug5unx6nj7be"
+
+[resource]
+script = ExtResource("12_kxoop")
+entity_name = "Light Slime"
+battle_sprite = ExtResource("1_77jai")
+components = Array[ExtResource("2_llbw4")]([SubResource("Resource_jncna"), SubResource("Resource_syrdu"), SubResource("Resource_s5yfr"), SubResource("Resource_p3iaq"), SubResource("Resource_jel85"), SubResource("Resource_s2s0s")])
+metadata/_custom_type_script = "uid://ddsxg1ao3vu1d"

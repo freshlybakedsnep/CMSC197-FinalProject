@@ -1,0 +1,101 @@
+[gd_resource type="Resource" script_class="HeroData" format=3 uid="uid://caoq0wf2hthrf"]
+
+[ext_resource type="Script" uid="uid://bl2qf613jng43" path="res://scenes/entity/entity_component.gd" id="1_yae68"]
+[ext_resource type="Script" uid="uid://bq4jpvro24bfo" path="res://scripts/components/stats_component.gd" id="2_mpo8d"]
+[ext_resource type="Script" uid="uid://bdmenxynhc50j" path="res://scripts/action/action.gd" id="3_7o5uo"]
+[ext_resource type="Resource" uid="uid://c3q57rkxtt5ah" path="res://resources/ability/ST_dmg.tres" id="4_8x1pv"]
+[ext_resource type="Resource" uid="uid://cvn20gih60uto" path="res://resources/ability/Defend.tres" id="5_brx8t"]
+[ext_resource type="Resource" uid="uid://cq7qno4tcufth" path="res://resources/ability/ST_stun.tres" id="6_rd6pt"]
+[ext_resource type="Resource" uid="uid://0uyg5dgut0f4" path="res://resources/ability/SELF_heal.tres" id="7_0vts0"]
+[ext_resource type="Resource" uid="uid://bdnkx1a8e24j4" path="res://resources/ability/AOE_dmg.tres" id="8_tkevo"]
+[ext_resource type="Script" uid="uid://dsu1t80330rqd" path="res://scripts/components/action_component.gd" id="9_ht808"]
+[ext_resource type="Resource" uid="uid://d14n3vqbqsfy7" path="res://resources/ability/RAN_dmg.tres" id="10_bg58l"]
+[ext_resource type="Script" uid="uid://c6g2xy001wklx" path="res://scripts/components/element_component.gd" id="11_cy1t6"]
+[ext_resource type="Script" uid="uid://cm88ovm7gjp44" path="res://scripts/components/status_component.gd" id="12_jotkt"]
+[ext_resource type="Script" uid="uid://bvxud30fp77h2" path="res://scripts/components/player_controller.gd" id="13_frx7p"]
+[ext_resource type="Script" uid="uid://nqhxig82acgw" path="res://scenes/entity/ent_hero.gd" id="14_53sq7"]
+[ext_resource type="Texture2D" path="res://assets/sprites/chars/rando/54.png" id="15_dw8ae"]
+[ext_resource type="Texture2D" path="res://assets/sprites/chars/rando/attack/attack1.png" id="16_a1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/chars/rando/attack/attack2.png" id="17_a2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/chars/rando/attack/attack3.png" id="18_a3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/chars/rando/attack/attack4.png" id="19_a4"]
+[ext_resource type="Texture2D" path="res://assets/sprites/chars/rando/idle/idle1.png" id="20_i1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/chars/rando/idle/idle2.png" id="21_i2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/chars/rando/idle/idle3.png" id="22_i3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/chars/rando/idle/idle4.png" id="23_i4"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rando"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_a1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_a2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_a3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_a4")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_i1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_i2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_i3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_i4")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="Resource" id="Resource_ig5s4"]
+script = ExtResource("2_mpo8d")
+metadata/_custom_type_script = "uid://bq4jpvro24bfo"
+
+[sub_resource type="Resource" id="Resource_3ngop"]
+script = ExtResource("9_ht808")
+binds = Dictionary[int, ExtResource("3_7o5uo")]({
+0: ExtResource("4_8x1pv"),
+1: ExtResource("5_brx8t"),
+2: ExtResource("6_rd6pt"),
+3: ExtResource("7_0vts0"),
+4: ExtResource("8_tkevo")
+})
+basic_pool = Array[ExtResource("3_7o5uo")]([ExtResource("4_8x1pv")])
+skill_pool = Array[ExtResource("3_7o5uo")]([ExtResource("8_tkevo"), ExtResource("10_bg58l"), ExtResource("7_0vts0"), ExtResource("6_rd6pt")])
+metadata/_custom_type_script = "uid://dsu1t80330rqd"
+
+[sub_resource type="Resource" id="Resource_0tcap"]
+script = ExtResource("11_cy1t6")
+my_elem = 0
+metadata/_custom_type_script = "uid://c6g2xy001wklx"
+
+[sub_resource type="Resource" id="Resource_jba1v"]
+script = ExtResource("12_jotkt")
+metadata/_custom_type_script = "uid://cm88ovm7gjp44"
+
+[sub_resource type="Resource" id="Resource_yv4oe"]
+script = ExtResource("13_frx7p")
+metadata/_custom_type_script = "uid://bvxud30fp77h2"
+
+[resource]
+script = ExtResource("14_53sq7")
+gender = 1
+entity_name = "Rando"
+sprite = ExtResource("15_dw8ae")
+battle_sprite = SubResource("SpriteFrames_rando")
+components = Array[ExtResource("1_yae68")]([SubResource("Resource_ig5s4"), SubResource("Resource_3ngop"), SubResource("Resource_0tcap"), SubResource("Resource_jba1v"), SubResource("Resource_yv4oe")])
+metadata/_custom_type_script = "uid://nqhxig82acgw"

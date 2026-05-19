@@ -6,11 +6,11 @@ const INTRO_HERO_NAME := "Ares"
 var intro_voice_lines: Array[AudioStream] = []
 
 var lines := [
-	"You made it. The rifts opened and everything changed.",
-	"I'm Ares, a Duelist. I'll guide your first mission.",
-	"Pick a gate, choose your party, then fight by turn order.",
-	"Win battles to earn rewards and unlock stronger paths.",
-	"I'll join your team now."
+	"Welcome to Sed, a fractured land where the rifts never stay quiet.",
+	"I'm Ares, a Duelist sworn to keep Sed standing.",
+	"Each gate in Sed leads to a different front, so choose your party well.",
+	"Win by turn order, hold the line, and reclaim Sed one battle at a time.",
+	"I'll join your team now. Let's take Sed back."
 ]
 var idx := 0
 

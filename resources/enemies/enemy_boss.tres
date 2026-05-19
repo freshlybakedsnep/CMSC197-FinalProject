@@ -1,0 +1,99 @@
+[gd_resource type="Resource" script_class="EnemyData" format=3 uid="uid://c0ta1c6wuhkaj"]
+
+[ext_resource type="Texture2D" uid="uid://buapkdcv46me4" path="res://assets/sprites/boosss/hurt/player-hurt-1.png" id="1_g1vt2"]
+[ext_resource type="Script" uid="uid://bl2qf613jng43" path="res://scenes/entity/entity_component.gd" id="2_0qhip"]
+[ext_resource type="Texture2D" uid="uid://cp882niu0bfpp" path="res://assets/sprites/boosss/hurt/player-hurt-2.png" id="2_8ghdg"]
+[ext_resource type="Script" uid="uid://bq4jpvro24bfo" path="res://scripts/components/stats_component.gd" id="3_38a3b"]
+[ext_resource type="Texture2D" uid="uid://dtm4sg664qtmp" path="res://assets/sprites/boosss/idle/player-idle-1.png" id="3_jnodc"]
+[ext_resource type="Script" uid="uid://bdmenxynhc50j" path="res://scripts/action/action.gd" id="4_6yer0"]
+[ext_resource type="Texture2D" uid="uid://bexdwvshpubms" path="res://assets/sprites/boosss/idle/player-idle-2.png" id="4_ka0w5"]
+[ext_resource type="Texture2D" uid="uid://t5ghyo2r7drt" path="res://assets/sprites/boosss/idle/player-idle-3.png" id="5_7dif3"]
+[ext_resource type="Resource" uid="uid://c3q57rkxtt5ah" path="res://resources/ability/ST_dmg.tres" id="5_eexsi"]
+[ext_resource type="Resource" uid="uid://blla1se37bp71" path="res://resources/ability/ST_silence.tres" id="6_2m42a"]
+[ext_resource type="Texture2D" uid="uid://d2kkpa1sg4r48" path="res://assets/sprites/boosss/idle/player-idle-4.png" id="6_df77e"]
+[ext_resource type="Script" uid="uid://dsu1t80330rqd" path="res://scripts/components/action_component.gd" id="6_twmdt"]
+[ext_resource type="Resource" uid="uid://bdnkx1a8e24j4" path="res://resources/ability/AOE_dmg.tres" id="7_2m42a"]
+[ext_resource type="Resource" uid="uid://dftwr2rk6ha3y" path="res://resources/ability/ST_provoke.tres" id="7_c40kw"]
+[ext_resource type="Script" uid="uid://c6g2xy001wklx" path="res://scripts/components/element_component.gd" id="8_c40kw"]
+[ext_resource type="Resource" uid="uid://cq7qno4tcufth" path="res://resources/ability/ST_stun.tres" id="8_nu0bk"]
+[ext_resource type="Resource" uid="uid://dvriirguc0vps" path="res://resources/ability/SELF_taunt.tres" id="9_76ysc"]
+[ext_resource type="Script" uid="uid://cm88ovm7gjp44" path="res://scripts/components/status_component.gd" id="9_nu0bk"]
+[ext_resource type="Script" uid="uid://cpffl8bnew7fl" path="res://scripts/components/ai_controller.gd" id="10_76ysc"]
+[ext_resource type="Resource" uid="uid://dpidsf1drgduj" path="res://resources/ability/SELF_untargetable.tres" id="10_axhix"]
+[ext_resource type="Script" uid="uid://ug5unx6nj7be" path="res://scripts/components/resource_component.gd" id="11_axhix"]
+[ext_resource type="Resource" path="res://resources/ability/ST_poison.tres" id="12_8ghdg"]
+[ext_resource type="Script" uid="uid://ddsxg1ao3vu1d" path="res://scenes/entity/ent_enemy.gd" id="12_g1vt2"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_smyy0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_g1vt2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_8ghdg")
+}],
+"loop": true,
+"name": &"hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_jnodc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ka0w5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_7dif3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_df77e")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="Resource" id="Resource_jncna"]
+script = ExtResource("3_38a3b")
+base_stats = {
+"ATK": 50,
+"DEF": 20,
+"HP": 100,
+"SPD": 5
+}
+metadata/_custom_type_script = "uid://bq4jpvro24bfo"
+
+[sub_resource type="Resource" id="Resource_syrdu"]
+script = ExtResource("6_twmdt")
+basic_pool = Array[ExtResource("4_6yer0")]([ExtResource("5_eexsi")])
+skill_pool = Array[ExtResource("4_6yer0")]([ExtResource("6_2m42a"), ExtResource("7_c40kw"), ExtResource("8_nu0bk"), ExtResource("9_76ysc"), ExtResource("10_axhix")])
+ultimates = Array[ExtResource("4_6yer0")]([ExtResource("7_2m42a"), ExtResource("12_8ghdg")])
+metadata/_custom_type_script = "uid://dsu1t80330rqd"
+
+[sub_resource type="Resource" id="Resource_s5yfr"]
+script = ExtResource("8_c40kw")
+my_elem = 4
+metadata/_custom_type_script = "uid://c6g2xy001wklx"
+
+[sub_resource type="Resource" id="Resource_p3iaq"]
+script = ExtResource("9_nu0bk")
+metadata/_custom_type_script = "uid://cm88ovm7gjp44"
+
+[sub_resource type="Resource" id="Resource_jel85"]
+script = ExtResource("10_76ysc")
+metadata/_custom_type_script = "uid://cpffl8bnew7fl"
+
+[sub_resource type="Resource" id="Resource_s2s0s"]
+script = ExtResource("11_axhix")
+res_name = &"Charge"
+start_amount = -1
+metadata/_custom_type_script = "uid://ug5unx6nj7be"
+
+[resource]
+script = ExtResource("12_g1vt2")
+entity_name = "Boosss"
+battle_sprite = SubResource("SpriteFrames_smyy0")
+components = Array[ExtResource("2_0qhip")]([SubResource("Resource_jncna"), SubResource("Resource_syrdu"), SubResource("Resource_s5yfr"), SubResource("Resource_p3iaq"), SubResource("Resource_jel85"), SubResource("Resource_s2s0s")])
+metadata/_custom_type_script = "uid://ddsxg1ao3vu1d"

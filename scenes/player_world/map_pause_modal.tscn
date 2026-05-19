@@ -1,0 +1,194 @@
+[gd_scene format=3 uid="uid://vruixxvxuypi"]
+
+[ext_resource type="Script" uid="uid://b30bk85r6abmh" path="res://scenes/player_world/map_pause_modal.gd" id="1_pause_script"]
+[ext_resource type="FontFile" uid="uid://dmgqmwfwyqfc0" path="res://assets/FOT-Aokane Std.ttf" id="2_font"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.0470588, 0.0784314, 0.145098, 0.94)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.631373, 0.835294, 1, 0.9)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="LabelSettings" id="LabelSettings_title"]
+font = ExtResource("2_font")
+font_size = 36
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button"]
+bg_color = Color(0.0823529, 0.156863, 0.282353, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.631373, 0.835294, 1, 0.9)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="MapPauseModal" type="CanvasLayer" unique_id=1362752707]
+layer = 30
+script = ExtResource("1_pause_script")
+
+[node name="ModalRoot" type="Control" parent="." unique_id=2107368906]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dimmer" type="ColorRect" parent="ModalRoot" unique_id=886704116]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+color = Color(0, 0, 0, 0.58)
+
+[node name="CenterContainer" type="CenterContainer" parent="ModalRoot" unique_id=1067167257]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Panel" type="Panel" parent="ModalRoot/CenterContainer" unique_id=1210220685]
+custom_minimum_size = Vector2(430, 250)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ModalRoot/CenterContainer/Panel" unique_id=1284841290]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 14
+
+[node name="Title" type="Label" parent="ModalRoot/CenterContainer/Panel/VBoxContainer" unique_id=979497734]
+layout_mode = 2
+text = "Paused"
+label_settings = SubResource("LabelSettings_title")
+horizontal_alignment = 1
+
+[node name="Hint" type="Label" parent="ModalRoot/CenterContainer/Panel/VBoxContainer" unique_id=53020067]
+modulate = Color(0.807843, 0.890196, 0.964706, 0.9)
+layout_mode = 2
+text = "Press Esc to resume."
+horizontal_alignment = 1
+
+[node name="Buttons" type="VBoxContainer" parent="ModalRoot/CenterContainer/Panel/VBoxContainer" unique_id=78944059]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Resume" type="Button" parent="ModalRoot/CenterContainer/Panel/VBoxContainer/Buttons" unique_id=866877571]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button")
+text = "Resume"
+
+[node name="ExitToMenu" type="Button" parent="ModalRoot/CenterContainer/Panel/VBoxContainer/Buttons" unique_id=296660679]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button")
+text = "Exit to Main Menu"
+
+[node name="ConfirmOverlay" type="Control" parent="ModalRoot" unique_id=1922412429]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Shade" type="ColorRect" parent="ModalRoot/ConfirmOverlay" unique_id=1779833892]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+color = Color(0, 0, 0, 0.36)
+
+[node name="CenterContainer" type="CenterContainer" parent="ModalRoot/ConfirmOverlay" unique_id=472750915]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ConfirmPanel" type="Panel" parent="ModalRoot/ConfirmOverlay/CenterContainer" unique_id=715243663]
+custom_minimum_size = Vector2(360, 120)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ModalRoot/ConfirmOverlay/CenterContainer/ConfirmPanel" unique_id=1468621769]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="ConfirmText" type="Label" parent="ModalRoot/ConfirmOverlay/CenterContainer/ConfirmPanel/VBoxContainer" unique_id=1507649744]
+layout_mode = 2
+text = "Return to main menu?"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="ConfirmButtons" type="HBoxContainer" parent="ModalRoot/ConfirmOverlay/CenterContainer/ConfirmPanel/VBoxContainer" unique_id=1321755139]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Yes" type="Button" parent="ModalRoot/ConfirmOverlay/CenterContainer/ConfirmPanel/VBoxContainer/ConfirmButtons" unique_id=1624313076]
+custom_minimum_size = Vector2(100, 42)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button")
+text = "Yes"
+
+[node name="No" type="Button" parent="ModalRoot/ConfirmOverlay/CenterContainer/ConfirmPanel/VBoxContainer/ConfirmButtons" unique_id=647625993]
+custom_minimum_size = Vector2(100, 42)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button")
+text = "No"
+
+[connection signal="pressed" from="ModalRoot/CenterContainer/Panel/VBoxContainer/Buttons/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="ModalRoot/CenterContainer/Panel/VBoxContainer/Buttons/ExitToMenu" to="." method="_on_exit_to_menu_pressed"]
+[connection signal="pressed" from="ModalRoot/ConfirmOverlay/CenterContainer/ConfirmPanel/VBoxContainer/ConfirmButtons/Yes" to="." method="_on_yes_pressed"]
+[connection signal="pressed" from="ModalRoot/ConfirmOverlay/CenterContainer/ConfirmPanel/VBoxContainer/ConfirmButtons/No" to="." method="_on_no_pressed"]

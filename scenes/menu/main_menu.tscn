@@ -3,7 +3,9 @@
 [ext_resource type="Script" uid="uid://bobgexqqp7mqj" path="res://scenes/menu/main_menu.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://baque3agyqaqt" path="res://assets/background/bg_11.png" id="2"]
 [ext_resource type="FontFile" uid="uid://dmgqmwfwyqfc0" path="res://assets/FOT-Aokane Std.ttf" id="3"]
-[ext_resource type="Texture2D" uid="uid://c51rmprgm5hh4" path="res://assets/sprites/ricano.webp" id="4"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_247la"]
+load_path = "res://.godot/imported/25.png-4454c7f21b699efbcedb9a0a4d6969e6.ctex"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
 bg_color = Color(0.0509804, 0.0745098, 0.145098, 0.78)
@@ -20,7 +22,7 @@ shadow_size = 14
 
 [sub_resource type="LabelSettings" id="LabelSettings_title"]
 font = ExtResource("3")
-font_size = 58
+font_size = 40
 font_color = Color(0.905882, 0.952941, 1, 1)
 shadow_color = Color(0, 0, 0, 0.7)
 shadow_offset = Vector2(2, 4)
@@ -105,11 +107,11 @@ color = Color(0.113725, 0.419608, 0.729412, 0.18)
 [node name="HeroPortrait" type="TextureRect" parent="Backdrop" unique_id=1340672005]
 modulate = Color(1, 1, 1, 0.9)
 layout_mode = 0
-offset_left = 78.0
+offset_left = 172.0
 offset_top = 86.0
-offset_right = 398.0
+offset_right = 492.0
 offset_bottom = 618.0
-texture = ExtResource("4")
+texture = SubResource("CompressedTexture2D_247la")
 expand_mode = 1
 stretch_mode = 5
 
@@ -138,10 +140,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 26.0
-offset_top = 24.0
-offset_right = -26.0
-offset_bottom = -24.0
+offset_left = -21.0
+offset_top = -190.0
+offset_right = -73.0
+offset_bottom = 190.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 12
@@ -153,7 +155,7 @@ text = "A TURN-BASED CHRONICLE"
 
 [node name="Title" type="Label" parent="CenterContainer/MarginContainer/Panel/Body" unique_id=1124744365]
 layout_mode = 2
-text = "Furry Actions!"
+text = "Seed Actions!"
 label_settings = SubResource("LabelSettings_title")
 autowrap_mode = 3
 
@@ -203,6 +205,90 @@ layout_mode = 2
 text = "Tip: Continue is enabled when a local progress file exists."
 autowrap_mode = 3
 
+[node name="ConfirmOverlay" type="Control" parent="." unique_id=313871257]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Shade" type="ColorRect" parent="ConfirmOverlay" unique_id=318605462]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+color = Color(0, 0, 0, 0.62)
+
+[node name="CenterContainer" type="CenterContainer" parent="ConfirmOverlay" unique_id=1591276322]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Panel" type="Panel" parent="ConfirmOverlay/CenterContainer" unique_id=113252600]
+custom_minimum_size = Vector2(450, 200)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ConfirmOverlay/CenterContainer/Panel" unique_id=1123204962]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 22.0
+offset_top = 20.0
+offset_right = -22.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 14
+
+[node name="Title" type="Label" parent="ConfirmOverlay/CenterContainer/Panel/VBoxContainer" unique_id=1574239120]
+layout_mode = 2
+text = "Start a New Game?"
+label_settings = SubResource("LabelSettings_title")
+horizontal_alignment = 1
+
+[node name="Text" type="Label" parent="ConfirmOverlay/CenterContainer/Panel/VBoxContainer" unique_id=122879648]
+modulate = Color(0.807843, 0.890196, 0.964706, 0.95)
+layout_mode = 2
+text = "This will reset your current progress."
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Buttons" type="HBoxContainer" parent="ConfirmOverlay/CenterContainer/Panel/VBoxContainer" unique_id=61222930]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Yes" type="Button" parent="ConfirmOverlay/CenterContainer/Panel/VBoxContainer/Buttons" unique_id=1929462574]
+custom_minimum_size = Vector2(140, 46)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_hover")
+text = "Yes"
+
+[node name="No" type="Button" parent="ConfirmOverlay/CenterContainer/Panel/VBoxContainer/Buttons" unique_id=1342659362]
+custom_minimum_size = Vector2(140, 46)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_hover")
+text = "Cancel"
+
 [connection signal="pressed" from="CenterContainer/MarginContainer/Panel/Body/Buttons/NewGame" to="." method="_on_new_game_pressed"]
 [connection signal="pressed" from="CenterContainer/MarginContainer/Panel/Body/Buttons/Continue" to="." method="_on_continue_pressed"]
 [connection signal="pressed" from="CenterContainer/MarginContainer/Panel/Body/Buttons/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="ConfirmOverlay/CenterContainer/Panel/VBoxContainer/Buttons/Yes" to="." method="_on_confirm_new_game_pressed"]
+[connection signal="pressed" from="ConfirmOverlay/CenterContainer/Panel/VBoxContainer/Buttons/No" to="." method="_on_cancel_new_game_pressed"]

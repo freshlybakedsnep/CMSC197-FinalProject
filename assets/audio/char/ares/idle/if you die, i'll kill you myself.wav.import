@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://lyhoppvgtsiu"
+path="res://.godot/imported/if you die, i'll kill you myself.wav-77a7bbb17750fa06e552a5709feabeaa.sample"
+
+[deps]
+
+source_file="res://assets/audio/char/ares/idle/if you die, i'll kill you myself.wav"
+dest_files=["res://.godot/imported/if you die, i'll kill you myself.wav-77a7bbb17750fa06e552a5709feabeaa.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

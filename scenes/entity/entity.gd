@@ -92,6 +92,7 @@ func reset() -> void:
 func die() -> void:
 	# place death animation here
 	# temporary
+	SFX.play_death()
 	var t : Tween = create_tween()
 	t.tween_property(sprite, "self_modulate:a", 0.0, 0.6)
 	await t.finished
@@ -113,6 +114,24 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 				target_component.pressed.emit()
 
 func play_hit_vfx() -> void:
-	sprite.play("hit")
+	await _play_temp_animation("hit")
+
+func play_attack_vfx() -> void:
+	await _play_temp_animation("attack")
+
+func _play_temp_animation(anim_name: StringName) -> void:
+	if not sprite.sprite_frames:
+		return
+	if not sprite.sprite_frames.has_animation(anim_name):
+		if sprite.sprite_frames.has_animation(&"idle"):
+			sprite.play(&"idle")
+		return
+	
+	var prev_loop := sprite.sprite_frames.get_animation_loop(anim_name)
+	sprite.sprite_frames.set_animation_loop(anim_name, false)
+	sprite.play(anim_name)
 	await sprite.animation_finished
-	sprite.play("idle")
+	sprite.sprite_frames.set_animation_loop(anim_name, prev_loop)
+	
+	if sprite.sprite_frames.has_animation(&"idle"):
+		sprite.play(&"idle")

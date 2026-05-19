@@ -14,7 +14,52 @@
 [ext_resource type="Script" uid="uid://cm88ovm7gjp44" path="res://scripts/components/status_component.gd" id="7_m1i4o"]
 [ext_resource type="Script" uid="uid://bvxud30fp77h2" path="res://scripts/components/player_controller.gd" id="8_5yh1s"]
 [ext_resource type="Script" uid="uid://nqhxig82acgw" path="res://scenes/entity/ent_hero.gd" id="9_ofre0"]
-[ext_resource type="Texture2D" uid="uid://ckpqbwkytcvof" path="res://assets/sprites/rutenix.webp" id="10_7pur0"]
+[ext_resource type="Texture2D" path="res://assets/sprites/chars/selene/64.png" id="10_7pur0"]
+[ext_resource type="Texture2D" path="res://assets/sprites/chars/selene/attack/attack1.png" id="11_a1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/chars/selene/attack/attack2.png" id="12_a2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/chars/selene/attack/attack3.png" id="13_a3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/chars/selene/attack/attack4.png" id="14_a4"]
+[ext_resource type="Texture2D" path="res://assets/sprites/chars/selene/idle/idle1.png" id="15_i1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/chars/selene/idle/idle2.png" id="16_i2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/chars/selene/idle/idle3.png" id="17_i3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/chars/selene/idle/idle4.png" id="18_i4"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_selene"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_a1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_a2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_a3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_a4")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_i1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_i2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_i3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_i4")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
 
 [sub_resource type="Resource" id="Resource_ig5s4"]
 script = ExtResource("2_eka21")
@@ -52,5 +97,6 @@ character_class = 1
 gender = 1
 entity_name = "Selene"
 sprite = ExtResource("10_7pur0")
+battle_sprite = SubResource("SpriteFrames_selene")
 components = Array[ExtResource("1_842gx")]([SubResource("Resource_ig5s4"), SubResource("Resource_3ngop"), SubResource("Resource_0tcap"), SubResource("Resource_jba1v"), SubResource("Resource_yv4oe")])
 metadata/_custom_type_script = "uid://nqhxig82acgw"

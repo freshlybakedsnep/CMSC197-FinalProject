@@ -19,6 +19,7 @@ var enemy_formation: Vector2
 var hero_formation: Vector2
 
 func _ready() -> void:
+	SFX.bind_button_sounds(self)
 	party_menu.hero_selected.connect(_open_action_menu)
 	action_menu.action_selected.connect(_open_target_menu)
 	action_menu.action_tooltip.connect(tooltip.update_display)
