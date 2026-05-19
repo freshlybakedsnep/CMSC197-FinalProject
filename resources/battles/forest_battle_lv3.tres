@@ -1,17 +1,19 @@
 [gd_resource type="Resource" script_class="BattleNodeData" format=3 uid="uid://yxm5npx3d5cq"]
 
 [ext_resource type="Script" uid="uid://dtkwoa4vtxljs" path="res://scripts/battle_node_data.gd" id="1_battle_script"]
-[ext_resource type="Texture2D" uid="uid://1igmd7khiy2r" path="res://assets/background/bg_10.png" id="1_qmyjt"]
+[ext_resource type="Texture2D" uid="uid://s1qlt0mbigrg" path="res://assets/background/bg_14.png" id="1_qmyjt"]
 [ext_resource type="Resource" uid="uid://bghvjlxm4c1b1" path="res://resources/test_stage.tres" id="2_pn8tb"]
 
 [resource]
 script = ExtResource("1_battle_script")
-label = "Forest Raid"
-battle_id = &"forest_raid"
+label = "Pilgrim Road Raid"
+battle_id = &"pilgrim_road_raid"
 background = ExtResource("1_qmyjt")
 stage_info = ExtResource("2_pn8tb")
 min_level = 3
 reward_gold = 60
 reward_exp = 45
 unlock_heroes = ["Vexa"]
-world_pos = Vector2(760, 260)
+world_pos = Vector2(760, 330)
+enemy_formation_position = Vector2(430, 395)
+hero_formation_position = Vector2(850, 495)

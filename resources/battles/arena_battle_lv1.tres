@@ -470,3 +470,5 @@ reward_gold = 25
 reward_exp = 20
 unlock_heroes = ["Mira"]
 world_pos = Vector2(640, 560)
+enemy_formation_position = Vector2(420, 350)
+hero_formation_position = Vector2(830, 445)

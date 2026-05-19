@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="BattleNodeData" format=3 uid="uid://c1i73g8powdwq"]
 
 [ext_resource type="Script" uid="uid://dtkwoa4vtxljs" path="res://scripts/battle_node_data.gd" id="1_op0jc"]
-[ext_resource type="Texture2D" uid="uid://c2vvva4xvc8db" path="res://assets/background/bg_2_0000_Full_Image.png" id="1_sswcu"]
+[ext_resource type="Texture2D" uid="uid://df3k1xkw6abuy" path="res://assets/background/bg_8.png" id="1_sswcu"]
 [ext_resource type="Script" uid="uid://lhx7sp8rhhjr" path="res://scripts/stage_info.gd" id="2_tdvkx"]
 [ext_resource type="Script" uid="uid://cx656sdytf30u" path="res://scripts/wave.gd" id="3_kf4l0"]
 [ext_resource type="Script" uid="uid://ddsxg1ao3vu1d" path="res://scenes/entity/ent_enemy.gd" id="4_sswcu"]
@@ -464,11 +464,13 @@ metadata/_custom_type_script = "uid://lhx7sp8rhhjr"
 
 [resource]
 script = ExtResource("1_op0jc")
-label = "Field Hunt"
-battle_id = &"field_hunt"
+label = "Elderwood Hunt"
+battle_id = &"elderwood_hunt"
 background = ExtResource("1_sswcu")
 stage_info = SubResource("Resource_86uow")
 reward_gold = 25
 reward_exp = 20
 unlock_heroes = ["Orin"]
-world_pos = Vector2(500, 500)
+world_pos = Vector2(640, 500)
+enemy_formation_position = Vector2(420, 550)
+hero_formation_position = Vector2(1000, 505)

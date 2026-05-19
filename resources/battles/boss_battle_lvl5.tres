@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="BattleNodeData" format=3 uid="uid://cb3umttr6ybyt"]
 
 [ext_resource type="Script" uid="uid://dtkwoa4vtxljs" path="res://scripts/battle_node_data.gd" id="1_0boi5"]
-[ext_resource type="Texture2D" uid="uid://c30fs6okpkhck" path="res://assets/background/1.png" id="1_ea40y"]
+[ext_resource type="Texture2D" uid="uid://o1p6u5uo0e3f" path="res://assets/background/bg_4.png" id="1_ea40y"]
 [ext_resource type="Script" uid="uid://lhx7sp8rhhjr" path="res://scripts/stage_info.gd" id="2_ea40y"]
 [ext_resource type="Script" uid="uid://cx656sdytf30u" path="res://scripts/wave.gd" id="3_oh3lr"]
 [ext_resource type="Script" uid="uid://ddsxg1ao3vu1d" path="res://scenes/entity/ent_enemy.gd" id="4_s7uan"]
@@ -479,4 +479,6 @@ min_level = 5
 reward_gold = 25
 reward_exp = 20
 unlock_heroes = ["Rando", "Cael", "Bronn"]
-world_pos = Vector2(470, 250)
+world_pos = Vector2(540, 250)
+enemy_formation_position = Vector2(430, 410)
+hero_formation_position = Vector2(860, 505)

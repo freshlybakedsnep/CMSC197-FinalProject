@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://lq688ymw45gu" path="res://assets/background/bg_12.png" id="1_kk3c1"]
 [ext_resource type="Script" uid="uid://dtkwoa4vtxljs" path="res://scripts/battle_node_data.gd" id="2_y4ryv"]
-[ext_resource type="Resource" uid="uid://yxm5npx3d5cq" path="res://resources/battles/forest_battle_lv3.tres" id="3_jdyum"]
+[ext_resource type="Resource" uid="uid://c1i73g8powdwq" path="res://resources/battles/field_battle_lvl2.tres" id="3_jdyum"]
 [ext_resource type="Script" uid="uid://ci1o82a0iwfin" path="res://scripts/location_data.gd" id="4_xabhg"]
 [ext_resource type="Script" uid="uid://cyk41rb81ktuw" path="res://scripts/service_node_data.gd" id="5_se7bd"]
 

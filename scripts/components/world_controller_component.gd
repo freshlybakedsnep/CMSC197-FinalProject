@@ -104,6 +104,8 @@ func start_battle() -> void:
 	s.stage_info = current_stage
 	if current_battle_node:
 		s.battle_background = current_battle_node.background
+		s.enemy_formation_position = current_battle_node.enemy_formation_position
+		s.hero_formation_position = current_battle_node.hero_formation_position
 	add_child(s)
 	s.stage_quit.connect(reload_world)
 	hide()

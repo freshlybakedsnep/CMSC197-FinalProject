@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="BattleNodeData" format=3 uid="uid://cnog6k8iqc6ya"]
 
 [ext_resource type="Script" uid="uid://dtkwoa4vtxljs" path="res://scripts/battle_node_data.gd" id="1_8h2fq"]
+[ext_resource type="Texture2D" uid="uid://cfjqvhfhy07k3" path="res://assets/background/bg_7.png" id="1_bg"]
 [ext_resource type="Script" uid="uid://lhx7sp8rhhjr" path="res://scripts/stage_info.gd" id="2_bkj5u"]
 [ext_resource type="Script" uid="uid://cx656sdytf30u" path="res://scripts/wave.gd" id="3_p8nf7"]
 [ext_resource type="Script" uid="uid://ddsxg1ao3vu1d" path="res://scenes/entity/ent_enemy.gd" id="4_cc2qr"]
@@ -32,11 +33,14 @@ metadata/_custom_type_script = "uid://lhx7sp8rhhjr"
 
 [resource]
 script = ExtResource("1_8h2fq")
-label = "Town Arena"
-battle_id = &"town_arena"
+label = "Skyfall Arena"
+battle_id = &"skyfall_arena"
+background = ExtResource("1_bg")
 stage_info = SubResource("Resource_86uow")
 min_level = 4
-reward_gold = 25
-reward_exp = 100
+reward_gold = 60
+reward_exp = 45
 unlock_heroes = ["Selene"]
-world_pos = Vector2(470, 250)
+world_pos = Vector2(720, 300)
+enemy_formation_position = Vector2(420, 385)
+hero_formation_position = Vector2(850, 490)

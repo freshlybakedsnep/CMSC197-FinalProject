@@ -26,6 +26,8 @@ const LOSE_HINT_DEFAULT := "Your team was defeated."
 
 @export var stage_info : StageInfo
 @export var battle_background: Texture2D
+@export var enemy_formation_position: Vector2 = Vector2(350, 280)
+@export var hero_formation_position: Vector2 = Vector2(850, 440)
 
 var current_wave : Array[EnemyData]
 var current_wave_index := -1
@@ -40,6 +42,7 @@ var pending_triggers : Array[Dictionary] = []
 func _ready() -> void:
 	BGM.play_battle()
 	_apply_battle_background()
+	_apply_formation_positions()
 	state_machine.handler = self
 	pause_modal.resume_requested.connect(_on_pause_resume_requested)
 	pause_modal.exit_battle_requested.connect(_on_pause_exit_battle_requested)
@@ -222,6 +225,10 @@ func _fit_background_to_viewport() -> void:
 	var ts := background_sprite.texture.get_size()
 	background_sprite.position = vp * 0.5
 	background_sprite.scale = Vector2(vp.x / ts.x, vp.y / ts.y)
+
+func _apply_formation_positions() -> void:
+	enemies.position = enemy_formation_position
+	heroes.position = hero_formation_position
 
 func _on_pause_resume_requested() -> void:
 	pause_modal.close_menu()
