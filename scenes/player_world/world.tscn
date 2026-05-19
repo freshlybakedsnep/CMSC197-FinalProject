@@ -33,7 +33,7 @@ shadow_offset = Vector2(3, 4)
 script = ExtResource("1_pmff1")
 start_location = ExtResource("3_5y31n")
 gate_scene = ExtResource("1_4rr8x")
-player_level = 3
+player_level = 5
 party_select = ExtResource("4_egfxq")
 stage = ExtResource("5_vsfwa")
 

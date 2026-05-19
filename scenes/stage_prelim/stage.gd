@@ -5,6 +5,8 @@ signal stage_quit
 
 const WORLD_SCENE := "res://scenes/player_world/world.tscn"
 const MAIN_MENU_SCENE := "res://scenes/menu/main_menu.tscn"
+const ENDING_SCENE := "res://scenes/menu/ending_scene.tscn"
+const FINAL_BOSS_BATTLE_ID := "boss_battle"
 const WIN_TITLE := "Stage Cleared!"
 const WIN_HINT_DEFAULT := "Your party won the battle."
 const LOSE_TITLE := "The Party has fallen..."
@@ -89,6 +91,7 @@ func load_next_wave() -> bool:
 	print(current_wave_index + 1, "/", stage_info.waves.size())
 	var curr_wave = stage_info.load_wave(current_wave_index)
 	enemies.load_wave(curr_wave)
+	_update_enemy_count()
 	return true
 
 func update_turn_order() -> void:
@@ -118,7 +121,7 @@ func start_turn() -> void:
 	$TurnCount.text = "Turn: " + str(turn_count)
 	
 	enemies.fill_vacancies()
-	$EnemyCount.text = "Enemies Left: " + str(enemies.enemy_pool.size())
+	_update_enemy_count()
 	
 	for e: Entity in get_tree().get_nodes_in_group("entities"):
 		if e.data.state == EntityData.State.NORMAL:
@@ -176,6 +179,7 @@ func clear_the_dead() -> void:
 			enemies.remove_from_formation(ent)
 			print(ent.name, " is deleted")
 			ent.queue_free()
+			_update_enemy_count()
 		ent.remove_from_group("entities")
 
 func get_next_state() -> String:
@@ -188,6 +192,9 @@ func process_pending() -> Dictionary:
 
 func on_battle_won() -> void:
 	var win_result := PartyManager.apply_active_battle_win_unlocks()
+	if String(win_result.get("battle_id", "")) == FINAL_BOSS_BATTLE_ID:
+		get_tree().call_deferred("change_scene_to_file", ENDING_SCENE)
+		return
 	_set_result_modal_for_win(win_result)
 	end_screen.show()
 
@@ -210,6 +217,9 @@ func _set_result_modal_for_win(win_result: Dictionary) -> void:
 func _set_result_modal(title_text: String, hint_text: String) -> void:
 	result_title.text = title_text
 	result_hint.text = hint_text
+
+func _update_enemy_count() -> void:
+	$EnemyCount.text = "Enemies Left: " + str(enemies.enemies_left())
 
 func _apply_battle_background() -> void:
 	if battle_background == null:

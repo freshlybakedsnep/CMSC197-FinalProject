@@ -51,7 +51,7 @@ metadata/_custom_type_script = "uid://ug5unx6nj7be"
 
 [resource]
 script = ExtResource("12_y68jp")
-entity_name = "Slime"
+entity_name = "Wood Slime"
 battle_sprite = ExtResource("1_vvic3")
 components = Array[ExtResource("2_tjbt1")]([SubResource("Resource_jncna"), SubResource("Resource_syrdu"), SubResource("Resource_s5yfr"), SubResource("Resource_p3iaq"), SubResource("Resource_jel85"), SubResource("Resource_s2s0s")])
 metadata/_custom_type_script = "uid://ddsxg1ao3vu1d"

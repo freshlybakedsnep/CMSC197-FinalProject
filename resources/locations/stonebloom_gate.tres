@@ -11,6 +11,5 @@ script = ExtResource("4_7m7s8")
 id = &"stonebloom_gate"
 display_name = "Stonebloom Gate"
 background = ExtResource("1_r5iyk")
-left_location_path = "uid://cg1pekm5kgk6a"
 right_location_path = "uid://clwv14ndk2ihd"
 battle_nodes = Array[ExtResource("2_mv32g")]([ExtResource("3_bl5f6")])

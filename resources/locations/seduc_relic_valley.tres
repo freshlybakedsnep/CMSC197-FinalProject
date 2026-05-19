@@ -11,5 +11,5 @@ script = ExtResource("4_cbmir")
 id = &"seduc_relic_valley"
 display_name = "Seduc Relic Valley"
 background = ExtResource("1_jw7yv")
-left_location_path = "uid://dvfqnd6jgdhhb"
+left_location_path = "uid://comcl356wu5nx"
 battle_nodes = Array[ExtResource("2_tse13")]([ExtResource("3_jw7yv")])

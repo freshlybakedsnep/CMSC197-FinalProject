@@ -12,4 +12,5 @@ id = &"skyfall_ruins"
 display_name = "Skyfall Ruins"
 background = ExtResource("1_h114h")
 left_location_path = "uid://bgypd5xmdi0eq"
+right_location_path = "uid://cg1pekm5kgk6a"
 battle_nodes = Array[ExtResource("2_mwc5a")]([ExtResource("3_pim5c")])
