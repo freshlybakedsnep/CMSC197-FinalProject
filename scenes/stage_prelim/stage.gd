@@ -42,6 +42,7 @@ var eliminated : Array[Entity]
 var pending_triggers : Array[Dictionary] = []
 
 func _ready() -> void:
+	BattleRegistry.clear_battle()
 	BGM.play_battle()
 	SFX.play_battle_start()
 	_apply_battle_background()
@@ -177,10 +178,14 @@ func clear_the_dead() -> void:
 		ent.data.state = EntityData.State.DEAD
 		if ent.data.faction == EntityData.Faction.ENEMY:
 			enemies.remove_from_formation(ent)
+			BattleRegistry.unregister_entity(ent.data)
 			print(ent.name, " is deleted")
 			ent.queue_free()
 			_update_enemy_count()
 		ent.remove_from_group("entities")
+
+func _exit_tree() -> void:
+	BattleRegistry.clear_battle()
 
 func get_next_state() -> String:
 	if pending_triggers.is_empty(): return ""
