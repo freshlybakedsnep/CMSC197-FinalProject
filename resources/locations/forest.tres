@@ -11,5 +11,5 @@ script = ExtResource("1_location_script")
 id = &"forest"
 display_name = "Forest"
 background = ExtResource("1_7q3hv")
-left_location_path = "res://resources/locations/town.tres"
+left_location_path = "res://resources/locations/forest_entrance.tres"
 battle_nodes = Array[ExtResource("5_battle_script")]([ExtResource("4_battle")])

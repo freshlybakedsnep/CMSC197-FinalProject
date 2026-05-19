@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://df1xxwl5jdhpp" path="res://scenes/player_world/warp_gate.tscn" id="1_4rr8x"]
 [ext_resource type="Script" uid="uid://bdje7mektrm1g" path="res://scripts/components/world_controller_component.gd" id="1_pmff1"]
 [ext_resource type="Texture2D" uid="uid://coix0iaueaui5" path="res://assets/place_holder.png" id="2_kj8f2"]
-[ext_resource type="Resource" uid="uid://dvfqnd6jgdhhb" path="res://resources/locations/town.tres" id="3_5y31n"]
+[ext_resource type="Resource" uid="uid://dvfqnd6jgdhhb" path="res://resources/locations/forest_entrance.tres" id="3_5y31n"]
 [ext_resource type="PackedScene" uid="uid://b443gh0tp45xd" path="res://scenes/party_select/party_selection.tscn" id="4_egfxq"]
 [ext_resource type="Texture2D" uid="uid://bm28udodvjnls" path="res://assets/icons/class_controller.webp" id="4_nav"]
 [ext_resource type="FontFile" uid="uid://dmgqmwfwyqfc0" path="res://assets/FOT-Aokane Std.ttf" id="5_font"]
@@ -16,6 +16,15 @@ font_size = 42
 font_color = Color(0.901961, 0.972549, 1, 1)
 shadow_color = Color(0, 0, 0, 0.55)
 shadow_offset = Vector2(2, 2)
+
+[sub_resource type="LabelSettings" id="LabelSettings_location_banner"]
+font = ExtResource("5_font")
+font_size = 54
+font_color = Color(0.901961, 0.972549, 1, 1)
+outline_size = 8
+outline_color = Color(0.027451, 0.0627451, 0.101961, 0.85)
+shadow_color = Color(0, 0, 0, 0.45)
+shadow_offset = Vector2(3, 4)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_left"]
 size = Vector2(120, 140)
@@ -77,7 +86,23 @@ vertical_alignment = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightArrow" unique_id=1806371600]
 shape = SubResource("RectangleShape2D_left")
 
-[node name="MapPauseModal" parent="." instance=ExtResource("6_pause_modal")]
+[node name="LocationBanner" type="CanvasLayer" parent="." unique_id=1548438455]
+layer = 8
+
+[node name="Label" type="Label" parent="LocationBanner" unique_id=228431652]
+visible = false
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 82.0
+offset_bottom = 156.0
+grow_horizontal = 2
+text = "Location"
+label_settings = SubResource("LabelSettings_location_banner")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MapPauseModal" parent="." unique_id=1974986272 instance=ExtResource("6_pause_modal")]
 
 [connection signal="input_event" from="LeftArrow" to="." method="_on_left_arrow_input_event"]
 [connection signal="input_event" from="RightArrow" to="." method="_on_right_arrow_input_event"]

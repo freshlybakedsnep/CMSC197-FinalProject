@@ -1,201 +1,201 @@
-[gd_resource type="Resource" script_class="BattleNodeData" format=3 uid="uid://b8sxycd881ilf"]
+[gd_resource type="Resource" script_class="BattleNodeData" format=3 uid="uid://cnog6k8iqc6ya"]
 
-[ext_resource type="Script" uid="uid://dtkwoa4vtxljs" path="res://scripts/battle_node_data.gd" id="1_battle_script"]
-[ext_resource type="Script" uid="uid://lhx7sp8rhhjr" path="res://scripts/stage_info.gd" id="2_ul0dw"]
-[ext_resource type="Script" uid="uid://cx656sdytf30u" path="res://scripts/wave.gd" id="3_8a2fp"]
-[ext_resource type="Script" uid="uid://ddsxg1ao3vu1d" path="res://scenes/entity/ent_enemy.gd" id="4_ed5xi"]
-[ext_resource type="Texture2D" uid="uid://c1xr2wso1iv8o" path="res://assets/sprites/enemies/slime.png" id="5_yilhr"]
-[ext_resource type="Script" uid="uid://bl2qf613jng43" path="res://scenes/entity/entity_component.gd" id="6_1mivk"]
-[ext_resource type="Script" uid="uid://bq4jpvro24bfo" path="res://scripts/components/stats_component.gd" id="7_u8gel"]
-[ext_resource type="Script" uid="uid://bdmenxynhc50j" path="res://scripts/action/action.gd" id="8_w4fdj"]
-[ext_resource type="Script" uid="uid://djkmvtkrgtp6u" path="res://scripts/action/effect_group.gd" id="9_qs6b3"]
-[ext_resource type="Script" uid="uid://df5c28vkm6a78" path="res://scripts/action/effect.gd" id="10_tjan0"]
-[ext_resource type="Script" uid="uid://dhasq7k64fe7q" path="res://scripts/action/value_scaling.gd" id="11_k00pn"]
-[ext_resource type="Script" uid="uid://dt538323xnk4w" path="res://scripts/action/effect_health.gd" id="12_uo6wo"]
-[ext_resource type="Script" uid="uid://dsu1t80330rqd" path="res://scripts/components/action_component.gd" id="13_g5g6o"]
-[ext_resource type="Script" uid="uid://c6g2xy001wklx" path="res://scripts/components/element_component.gd" id="14_2kwjd"]
-[ext_resource type="Script" uid="uid://cm88ovm7gjp44" path="res://scripts/components/status_component.gd" id="15_hdwpt"]
-[ext_resource type="Script" uid="uid://cpffl8bnew7fl" path="res://scripts/components/ai_controller.gd" id="16_0gdrn"]
-[ext_resource type="Script" uid="uid://ug5unx6nj7be" path="res://scripts/components/resource_component.gd" id="17_1qk3b"]
+[ext_resource type="Script" uid="uid://dtkwoa4vtxljs" path="res://scripts/battle_node_data.gd" id="1_dtb3i"]
+[ext_resource type="Script" uid="uid://lhx7sp8rhhjr" path="res://scripts/stage_info.gd" id="2_gdq7a"]
+[ext_resource type="Script" uid="uid://cx656sdytf30u" path="res://scripts/wave.gd" id="3_whvvf"]
+[ext_resource type="Script" uid="uid://ddsxg1ao3vu1d" path="res://scenes/entity/ent_enemy.gd" id="4_xh17m"]
+[ext_resource type="Texture2D" uid="uid://c1xr2wso1iv8o" path="res://assets/sprites/enemies/slime.png" id="5_u7d3u"]
+[ext_resource type="Script" uid="uid://bl2qf613jng43" path="res://scenes/entity/entity_component.gd" id="6_1gyue"]
+[ext_resource type="Script" uid="uid://bq4jpvro24bfo" path="res://scripts/components/stats_component.gd" id="7_m2hmv"]
+[ext_resource type="Script" uid="uid://bdmenxynhc50j" path="res://scripts/action/action.gd" id="8_isj5q"]
+[ext_resource type="Script" uid="uid://djkmvtkrgtp6u" path="res://scripts/action/effect_group.gd" id="9_4ki2k"]
+[ext_resource type="Script" uid="uid://df5c28vkm6a78" path="res://scripts/action/effect.gd" id="10_lo30r"]
+[ext_resource type="Script" uid="uid://dhasq7k64fe7q" path="res://scripts/action/value_scaling.gd" id="11_ouv3e"]
+[ext_resource type="Script" uid="uid://dt538323xnk4w" path="res://scripts/action/effect_health.gd" id="12_fg01w"]
+[ext_resource type="Script" uid="uid://dsu1t80330rqd" path="res://scripts/components/action_component.gd" id="13_r5akg"]
+[ext_resource type="Script" uid="uid://c6g2xy001wklx" path="res://scripts/components/element_component.gd" id="14_5g2ib"]
+[ext_resource type="Script" uid="uid://cm88ovm7gjp44" path="res://scripts/components/status_component.gd" id="15_62qli"]
+[ext_resource type="Script" uid="uid://cpffl8bnew7fl" path="res://scripts/components/ai_controller.gd" id="16_t7514"]
+[ext_resource type="Script" uid="uid://ug5unx6nj7be" path="res://scripts/components/resource_component.gd" id="17_2o77m"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4u06o"]
-atlas = ExtResource("5_yilhr")
+atlas = ExtResource("5_u7d3u")
 region = Rect2(0, 1728, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qn86a"]
-atlas = ExtResource("5_yilhr")
+atlas = ExtResource("5_u7d3u")
 region = Rect2(192, 1728, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gopjk"]
-atlas = ExtResource("5_yilhr")
+atlas = ExtResource("5_u7d3u")
 region = Rect2(384, 1728, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v5p8q"]
-atlas = ExtResource("5_yilhr")
+atlas = ExtResource("5_u7d3u")
 region = Rect2(576, 1728, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vgnm1"]
-atlas = ExtResource("5_yilhr")
+atlas = ExtResource("5_u7d3u")
 region = Rect2(768, 1728, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5sqph"]
-atlas = ExtResource("5_yilhr")
+atlas = ExtResource("5_u7d3u")
 region = Rect2(960, 1728, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_25stt"]
-atlas = ExtResource("5_yilhr")
+atlas = ExtResource("5_u7d3u")
 region = Rect2(1152, 1728, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_44sox"]
-atlas = ExtResource("5_yilhr")
+atlas = ExtResource("5_u7d3u")
 region = Rect2(1344, 1728, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_50q86"]
-atlas = ExtResource("5_yilhr")
+atlas = ExtResource("5_u7d3u")
 region = Rect2(1536, 1728, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u3qoi"]
-atlas = ExtResource("5_yilhr")
+atlas = ExtResource("5_u7d3u")
 region = Rect2(1728, 1728, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sna3p"]
-atlas = ExtResource("5_yilhr")
+atlas = ExtResource("5_u7d3u")
 region = Rect2(1920, 1728, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bbb0i"]
-atlas = ExtResource("5_yilhr")
+atlas = ExtResource("5_u7d3u")
 region = Rect2(2112, 1728, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4pwwt"]
-atlas = ExtResource("5_yilhr")
+atlas = ExtResource("5_u7d3u")
 region = Rect2(2304, 1728, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bxu0c"]
-atlas = ExtResource("5_yilhr")
+atlas = ExtResource("5_u7d3u")
 region = Rect2(2496, 1728, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4wrv8"]
-atlas = ExtResource("5_yilhr")
+atlas = ExtResource("5_u7d3u")
 region = Rect2(0, 768, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3p7tr"]
-atlas = ExtResource("5_yilhr")
+atlas = ExtResource("5_u7d3u")
 region = Rect2(192, 768, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gkkah"]
-atlas = ExtResource("5_yilhr")
+atlas = ExtResource("5_u7d3u")
 region = Rect2(384, 768, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_aegpq"]
-atlas = ExtResource("5_yilhr")
+atlas = ExtResource("5_u7d3u")
 region = Rect2(576, 768, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h1j8u"]
-atlas = ExtResource("5_yilhr")
+atlas = ExtResource("5_u7d3u")
 region = Rect2(768, 768, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ocmi5"]
-atlas = ExtResource("5_yilhr")
+atlas = ExtResource("5_u7d3u")
 region = Rect2(960, 768, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nisuq"]
-atlas = ExtResource("5_yilhr")
+atlas = ExtResource("5_u7d3u")
 region = Rect2(1152, 768, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vcfd3"]
-atlas = ExtResource("5_yilhr")
+atlas = ExtResource("5_u7d3u")
 region = Rect2(1344, 768, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yfxqa"]
-atlas = ExtResource("5_yilhr")
+atlas = ExtResource("5_u7d3u")
 region = Rect2(1536, 768, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gqobv"]
-atlas = ExtResource("5_yilhr")
+atlas = ExtResource("5_u7d3u")
 region = Rect2(1728, 768, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t4syr"]
-atlas = ExtResource("5_yilhr")
+atlas = ExtResource("5_u7d3u")
 region = Rect2(1920, 768, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u0m37"]
-atlas = ExtResource("5_yilhr")
+atlas = ExtResource("5_u7d3u")
 region = Rect2(2112, 768, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q0qro"]
-atlas = ExtResource("5_yilhr")
+atlas = ExtResource("5_u7d3u")
 region = Rect2(2304, 768, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wtdr3"]
-atlas = ExtResource("5_yilhr")
+atlas = ExtResource("5_u7d3u")
 region = Rect2(2496, 768, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p5rja"]
-atlas = ExtResource("5_yilhr")
+atlas = ExtResource("5_u7d3u")
 region = Rect2(2688, 768, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ja4c0"]
-atlas = ExtResource("5_yilhr")
+atlas = ExtResource("5_u7d3u")
 region = Rect2(2880, 768, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fqbj8"]
-atlas = ExtResource("5_yilhr")
+atlas = ExtResource("5_u7d3u")
 region = Rect2(3072, 768, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4mw77"]
-atlas = ExtResource("5_yilhr")
+atlas = ExtResource("5_u7d3u")
 region = Rect2(3264, 768, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7l1q8"]
-atlas = ExtResource("5_yilhr")
+atlas = ExtResource("5_u7d3u")
 region = Rect2(3456, 768, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i6tn2"]
-atlas = ExtResource("5_yilhr")
+atlas = ExtResource("5_u7d3u")
 region = Rect2(3648, 768, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cmpnx"]
-atlas = ExtResource("5_yilhr")
+atlas = ExtResource("5_u7d3u")
 region = Rect2(3840, 768, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g73f5"]
-atlas = ExtResource("5_yilhr")
+atlas = ExtResource("5_u7d3u")
 region = Rect2(4032, 768, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wc8cu"]
-atlas = ExtResource("5_yilhr")
+atlas = ExtResource("5_u7d3u")
 region = Rect2(4224, 768, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ty38j"]
-atlas = ExtResource("5_yilhr")
+atlas = ExtResource("5_u7d3u")
 region = Rect2(4416, 768, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f2jkv"]
-atlas = ExtResource("5_yilhr")
+atlas = ExtResource("5_u7d3u")
 region = Rect2(4608, 768, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_esmh0"]
-atlas = ExtResource("5_yilhr")
+atlas = ExtResource("5_u7d3u")
 region = Rect2(4800, 768, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oresl"]
-atlas = ExtResource("5_yilhr")
+atlas = ExtResource("5_u7d3u")
 region = Rect2(4992, 768, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7260w"]
-atlas = ExtResource("5_yilhr")
+atlas = ExtResource("5_u7d3u")
 region = Rect2(5184, 768, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yj14u"]
-atlas = ExtResource("5_yilhr")
+atlas = ExtResource("5_u7d3u")
 region = Rect2(5376, 768, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8uphi"]
-atlas = ExtResource("5_yilhr")
+atlas = ExtResource("5_u7d3u")
 region = Rect2(5568, 768, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_i6b57"]
-atlas = ExtResource("5_yilhr")
+atlas = ExtResource("5_u7d3u")
 region = Rect2(5760, 768, 192, 192)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ppwql"]
@@ -347,7 +347,7 @@ animations = [{
 }]
 
 [sub_resource type="Resource" id="Resource_fajyp"]
-script = ExtResource("7_u8gel")
+script = ExtResource("7_m2hmv")
 base_stats = {
 "ATK": 5,
 "DEF": 2,
@@ -360,53 +360,53 @@ metadata/_custom_type_script = "uid://bq4jpvro24bfo"
 load_path = "res://.godot/imported/icon_test.png-2f51dd0c8858d0711633a16adc9904d3.ctex"
 
 [sub_resource type="Resource" id="Resource_1ttfj"]
-script = ExtResource("11_k00pn")
+script = ExtResource("11_ouv3e")
 multiplier = 0.6
 mult_per_level = 0.1
 metadata/_custom_type_script = "uid://dhasq7k64fe7q"
 
 [sub_resource type="Resource" id="Resource_nqip7"]
-script = ExtResource("12_uo6wo")
+script = ExtResource("12_fg01w")
 formula = SubResource("Resource_1ttfj")
 metadata/_custom_type_script = "uid://dt538323xnk4w"
 
 [sub_resource type="Resource" id="Resource_4evno"]
-script = ExtResource("9_qs6b3")
+script = ExtResource("9_4ki2k")
 inherit_target = true
-effects = Array[ExtResource("10_tjan0")]([SubResource("Resource_nqip7")])
+effects = Array[ExtResource("10_lo30r")]([SubResource("Resource_nqip7")])
 metadata/_custom_type_script = "uid://djkmvtkrgtp6u"
 
 [sub_resource type="Resource" id="Resource_b47tr"]
-script = ExtResource("8_w4fdj")
+script = ExtResource("8_isj5q")
 action_name = &"Single Attack"
 action_icon = SubResource("CompressedTexture2D_wjrxo")
 action_description = "Deal {0} damage to a single enemy."
 target_group = 3
-effect_groups = Array[ExtResource("9_qs6b3")]([SubResource("Resource_4evno")])
+effect_groups = Array[ExtResource("9_4ki2k")]([SubResource("Resource_4evno")])
 metadata/_custom_type_script = "uid://bdmenxynhc50j"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_07bwq"]
 load_path = "res://.godot/imported/icon_test.png-2f51dd0c8858d0711633a16adc9904d3.ctex"
 
 [sub_resource type="Resource" id="Resource_3yvfn"]
-script = ExtResource("11_k00pn")
+script = ExtResource("11_ouv3e")
 multiplier = 0.6
 mult_per_level = 0.1
 metadata/_custom_type_script = "uid://dhasq7k64fe7q"
 
 [sub_resource type="Resource" id="Resource_6b35l"]
-script = ExtResource("12_uo6wo")
+script = ExtResource("12_fg01w")
 formula = SubResource("Resource_3yvfn")
 metadata/_custom_type_script = "uid://dt538323xnk4w"
 
 [sub_resource type="Resource" id="Resource_utwjy"]
-script = ExtResource("9_qs6b3")
+script = ExtResource("9_4ki2k")
 inherit_target = true
-effects = Array[ExtResource("10_tjan0")]([SubResource("Resource_6b35l")])
+effects = Array[ExtResource("10_lo30r")]([SubResource("Resource_6b35l")])
 metadata/_custom_type_script = "uid://djkmvtkrgtp6u"
 
 [sub_resource type="Resource" id="Resource_a0tes"]
-script = ExtResource("8_w4fdj")
+script = ExtResource("8_isj5q")
 action_name = &"AoE Attack"
 action_icon = SubResource("CompressedTexture2D_07bwq")
 action_description = "Apply {0} to all enemies"
@@ -414,57 +414,58 @@ target_group = 3
 target_mode = 2
 cooldown = 4
 cost = 5
-effect_groups = Array[ExtResource("9_qs6b3")]([SubResource("Resource_utwjy")])
+effect_groups = Array[ExtResource("9_4ki2k")]([SubResource("Resource_utwjy")])
 metadata/_custom_type_script = "uid://bdmenxynhc50j"
 
 [sub_resource type="Resource" id="Resource_ypa4k"]
-script = ExtResource("13_g5g6o")
-basic_pool = Array[ExtResource("8_w4fdj")]([SubResource("Resource_b47tr")])
-ultimates = Array[ExtResource("8_w4fdj")]([SubResource("Resource_a0tes")])
+script = ExtResource("13_r5akg")
+basic_pool = Array[ExtResource("8_isj5q")]([SubResource("Resource_b47tr")])
+ultimates = Array[ExtResource("8_isj5q")]([SubResource("Resource_a0tes")])
 metadata/_custom_type_script = "uid://dsu1t80330rqd"
 
 [sub_resource type="Resource" id="Resource_qxyjw"]
-script = ExtResource("14_2kwjd")
+script = ExtResource("14_5g2ib")
 my_elem = 2
 metadata/_custom_type_script = "uid://c6g2xy001wklx"
 
 [sub_resource type="Resource" id="Resource_0h23u"]
-script = ExtResource("15_hdwpt")
+script = ExtResource("15_62qli")
 metadata/_custom_type_script = "uid://cm88ovm7gjp44"
 
 [sub_resource type="Resource" id="Resource_nb57i"]
-script = ExtResource("16_0gdrn")
+script = ExtResource("16_t7514")
 metadata/_custom_type_script = "uid://cpffl8bnew7fl"
 
 [sub_resource type="Resource" id="Resource_expet"]
-script = ExtResource("17_1qk3b")
+script = ExtResource("17_2o77m")
 res_name = &"Charge"
 start_amount = -1
 metadata/_custom_type_script = "uid://ug5unx6nj7be"
 
 [sub_resource type="Resource" id="Resource_yfwkg"]
-script = ExtResource("4_ed5xi")
+script = ExtResource("4_xh17m")
 entity_name = "Slime"
 battle_sprite = SubResource("SpriteFrames_ppwql")
-components = Array[ExtResource("6_1mivk")]([SubResource("Resource_fajyp"), SubResource("Resource_ypa4k"), SubResource("Resource_qxyjw"), SubResource("Resource_0h23u"), SubResource("Resource_nb57i"), SubResource("Resource_expet")])
+components = Array[ExtResource("6_1gyue")]([SubResource("Resource_fajyp"), SubResource("Resource_ypa4k"), SubResource("Resource_qxyjw"), SubResource("Resource_0h23u"), SubResource("Resource_nb57i"), SubResource("Resource_expet")])
 metadata/_custom_type_script = "uid://ddsxg1ao3vu1d"
 
 [sub_resource type="Resource" id="Resource_8s53e"]
-script = ExtResource("3_8a2fp")
-enemies = Array[ExtResource("4_ed5xi")]([SubResource("Resource_yfwkg")])
+script = ExtResource("3_whvvf")
+enemies = Array[ExtResource("4_xh17m")]([SubResource("Resource_yfwkg")])
 metadata/_custom_type_script = "uid://cx656sdytf30u"
 
 [sub_resource type="Resource" id="Resource_86uow"]
-script = ExtResource("2_ul0dw")
-waves = Array[ExtResource("3_8a2fp")]([SubResource("Resource_8s53e")])
+script = ExtResource("2_gdq7a")
+waves = Array[ExtResource("3_whvvf")]([SubResource("Resource_8s53e")])
 metadata/_custom_type_script = "uid://lhx7sp8rhhjr"
 
 [resource]
-script = ExtResource("1_battle_script")
-label = "Town Arena"
-battle_id = &"town_arena"
+script = ExtResource("1_dtb3i")
+label = "Arena"
+battle_id = &"arena"
 stage_info = SubResource("Resource_86uow")
+min_level = 4
 reward_gold = 25
 reward_exp = 20
-unlock_heroes = ["Mira"]
-world_pos = Vector2(640, 560)
+unlock_heroes = ["Vexa"]
+world_pos = Vector2(470, 250)

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://lhx7sp8rhhjr" path="res://scripts/stage_info.gd" id="1_ioy3i"]
 [ext_resource type="Script" uid="uid://cx656sdytf30u" path="res://scripts/wave.gd" id="2_jlv4s"]
 [ext_resource type="Script" uid="uid://ddsxg1ao3vu1d" path="res://scenes/entity/ent_enemy.gd" id="3_rpd1l"]
-[ext_resource type="Resource" uid="uid://db8wjrcpyke2a" path="res://resources/enemies/test_slime.tres" id="4_8aclv"]
+[ext_resource type="Resource" uid="uid://db8wjrcpyke2a" path="res://resources/enemies/enemy_slime_fire.tres" id="4_8aclv"]
 [ext_resource type="SpriteFrames" uid="uid://dba8h5urkin07" path="res://resources/enemies/slime_water.tres" id="5_s1eh2"]
 [ext_resource type="Script" uid="uid://bl2qf613jng43" path="res://scenes/entity/entity_component.gd" id="6_5nglp"]
 [ext_resource type="Script" uid="uid://bq4jpvro24bfo" path="res://scripts/components/stats_component.gd" id="7_0d8pa"]

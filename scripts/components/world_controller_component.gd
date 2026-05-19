@@ -14,10 +14,12 @@ const MAIN_MENU_SCENE := "res://scenes/menu/main_menu.tscn"
 @onready var left_arrow: Area2D = $LeftArrow
 @onready var right_arrow: Area2D = $RightArrow
 @onready var pause_modal = $MapPauseModal
+@onready var location_banner: Label = $LocationBanner/Label
 
 var current_stage : StageInfo
 var current_location: LocationData
 var active_party_selector: PartySelector
+var location_banner_tween: Tween
 
 func _ready() -> void:
 	BGM.play_world()
@@ -73,6 +75,7 @@ func _render_location() -> void:
 		gates.add_child(gate)
 	left_arrow.visible = current_location.get_left_location() != null
 	right_arrow.visible = current_location.get_right_location() != null
+	_show_location_banner()
 
 func open_party_select_for_battle(battle_node: BattleNodeData) -> void:
 	if battle_node == null or battle_node.stage_info == null:
@@ -137,6 +140,29 @@ func _fit_background_to_viewport() -> void:
 	var ts := background.texture.get_size()
 	background.position = vp * 0.5
 	background.scale = Vector2(vp.x / ts.x, vp.y / ts.y)
+
+func _show_location_banner() -> void:
+	if current_location == null:
+		return
+	if is_instance_valid(location_banner_tween):
+		location_banner_tween.kill()
+	location_banner.text = _get_location_display_name()
+	location_banner.visible = true
+	location_banner.modulate.a = 0.0
+	location_banner_tween = create_tween()
+	location_banner_tween.tween_property(location_banner, "modulate:a", 1.0, 0.25)
+	location_banner_tween.tween_interval(1.0)
+	location_banner_tween.tween_property(location_banner, "modulate:a", 0.0, 0.75)
+	location_banner_tween.tween_callback(location_banner.hide)
+
+func _get_location_display_name() -> String:
+	var location_name := current_location.display_name.strip_edges()
+	if not location_name.is_empty():
+		return location_name
+	location_name = String(current_location.id).strip_edges()
+	if not location_name.is_empty():
+		return location_name.capitalize()
+	return "Unknown Location"
 
 func _on_pause_resume_requested() -> void:
 	pause_modal.close_menu()

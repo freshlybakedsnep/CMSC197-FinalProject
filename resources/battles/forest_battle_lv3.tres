@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="BattleNodeData" format=3 uid="uid://yxm5npx3d5cq"]
 
 [ext_resource type="Script" uid="uid://dtkwoa4vtxljs" path="res://scripts/battle_node_data.gd" id="1_battle_script"]
-[ext_resource type="Resource" path="res://resources/test_stage.tres" id="2_pn8tb"]
+[ext_resource type="Resource" uid="uid://bghvjlxm4c1b1" path="res://resources/test_stage.tres" id="2_pn8tb"]
 
 [resource]
 script = ExtResource("1_battle_script")
@@ -11,4 +11,5 @@ stage_info = ExtResource("2_pn8tb")
 min_level = 3
 reward_gold = 60
 reward_exp = 45
+unlock_heroes = ["Selene"]
 world_pos = Vector2(760, 260)
