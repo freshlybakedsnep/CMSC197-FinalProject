@@ -14,7 +14,52 @@
 [ext_resource type="Script" uid="uid://cm88ovm7gjp44" path="res://scripts/components/status_component.gd" id="12_jotkt"]
 [ext_resource type="Script" uid="uid://bvxud30fp77h2" path="res://scripts/components/player_controller.gd" id="13_frx7p"]
 [ext_resource type="Script" uid="uid://nqhxig82acgw" path="res://scenes/entity/ent_hero.gd" id="14_53sq7"]
-[ext_resource type="Texture2D" uid="uid://c06guetubyynw" path="res://assets/sprites/famido.webp" id="15_dw8ae"]
+[ext_resource type="Texture2D" path="res://assets/sprites/chars/rando/54.png" id="15_dw8ae"]
+[ext_resource type="Texture2D" path="res://assets/sprites/chars/rando/attack/attack1.png" id="16_a1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/chars/rando/attack/attack2.png" id="17_a2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/chars/rando/attack/attack3.png" id="18_a3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/chars/rando/attack/attack4.png" id="19_a4"]
+[ext_resource type="Texture2D" path="res://assets/sprites/chars/rando/idle/idle1.png" id="20_i1"]
+[ext_resource type="Texture2D" path="res://assets/sprites/chars/rando/idle/idle2.png" id="21_i2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/chars/rando/idle/idle3.png" id="22_i3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/chars/rando/idle/idle4.png" id="23_i4"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rando"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_a1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_a2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_a3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_a4")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_i1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_i2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_i3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_i4")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
 
 [sub_resource type="Resource" id="Resource_ig5s4"]
 script = ExtResource("2_mpo8d")
@@ -51,5 +96,6 @@ script = ExtResource("14_53sq7")
 gender = 1
 entity_name = "Rando"
 sprite = ExtResource("15_dw8ae")
+battle_sprite = SubResource("SpriteFrames_rando")
 components = Array[ExtResource("1_yae68")]([SubResource("Resource_ig5s4"), SubResource("Resource_3ngop"), SubResource("Resource_0tcap"), SubResource("Resource_jba1v"), SubResource("Resource_yv4oe")])
 metadata/_custom_type_script = "uid://nqhxig82acgw"

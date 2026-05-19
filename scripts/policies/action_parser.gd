@@ -2,6 +2,12 @@ class_name ActionParser
 static var damage_text : PackedScene = preload("res://scenes/stage_prelim/ui/damage_text.tscn")
 static var effect_text : PackedScene = preload("res://scenes/stage_prelim/ui/effect_text.tscn")
 
+static func _sfx() -> Node:
+	var tree := Engine.get_main_loop() as SceneTree
+	if tree == null:
+		return null
+	return tree.root.get_node_or_null("SFX")
+
 static func _is_alive(ent: EntityData) -> bool:
 	return is_instance_valid(ent.host) and ent.state != EntityData.State.DEAD
 
@@ -67,6 +73,9 @@ static func _apply_effect(src: EntityData, tar: EntityData, fx: Effect, level: i
 		&"HEALTH":
 			var result = CombatResolver.resolve_health_adjust(src, tar, eff)
 			stats.modify_stat(&"CURR_HP", -result[&"final"])
+			var sfx := _sfx()
+			if sfx:
+				sfx.play_health_result(eff.get(&"is_damaging"), result.get(&"blocked", false))
 			
 			t = damage_text.instantiate() as DamageText
 			t.modify(result, eff.get(&"is_damaging"))
@@ -83,6 +92,9 @@ static func _apply_effect(src: EntityData, tar: EntityData, fx: Effect, level: i
 				if status:
 					status.add_modifier(eff[&"key"], eff[&"params"])
 					#print(status._active_status)
+				var sfx := _sfx()
+				if sfx:
+					sfx.play_status_result(eff[&"params"].get(&"is_buff", true))
 				t = effect_text.instantiate() as EffectText
 				t.effect(eff[&"key"], Color.WHITE, eff[&"params"].get(&"is_buff", true))
 	tar.host.add_child(t)
@@ -109,6 +121,9 @@ static func apply_dot_effect(src: EntityData, tar: EntityData, eff: Dictionary) 
 	
 	var result = CombatResolver.resolve_health_adjust(src, tar, eff)
 	stats.modify_stat(&"CURR_HP", -result[&"final"])
+	var sfx := _sfx()
+	if sfx:
+		sfx.play_dot()
 	
 	var t : DamageText = damage_text.instantiate()
 	t.modify(result, eff.get(&"is_damaging"))

@@ -13,11 +13,14 @@ signal exit_to_menu_requested
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_WHEN_PAUSED
+	SFX.bind_button_sounds(self)
+	SFX.use_decline_sound(confirm_no_button)
 	modal_root.hide()
 	_set_confirm_visible(false)
 
 func open_menu() -> void:
 	get_tree().paused = true
+	SFX.play_pause()
 	modal_root.show()
 	_set_confirm_visible(false)
 	resume_button.grab_focus()
@@ -25,6 +28,7 @@ func open_menu() -> void:
 func close_menu() -> void:
 	modal_root.hide()
 	_set_confirm_visible(false)
+	SFX.play_unpause()
 	get_tree().paused = false
 
 func _unhandled_input(event: InputEvent) -> void:

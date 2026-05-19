@@ -92,6 +92,7 @@ func reset() -> void:
 func die() -> void:
 	# place death animation here
 	# temporary
+	SFX.play_death()
 	var t : Tween = create_tween()
 	t.tween_property(sprite, "self_modulate:a", 0.0, 0.6)
 	await t.finished

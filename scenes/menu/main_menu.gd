@@ -14,6 +14,8 @@ const WORLD_SCENE := "res://scenes/player_world/world.tscn"
 
 func _ready() -> void:
 	BGM.play_menu()
+	SFX.bind_button_sounds(self)
+	SFX.use_decline_sound(confirm_no_btn)
 	continue_btn.disabled = not PartyManager.has_save()
 	new_btn.grab_focus()
 	confirm_overlay.visible = false

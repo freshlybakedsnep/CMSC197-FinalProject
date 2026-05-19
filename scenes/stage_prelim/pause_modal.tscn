@@ -1,6 +1,6 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene format=3 uid="uid://c030wk4yi2s4x"]
 
-[ext_resource type="Script" path="res://scenes/stage_prelim/pause_modal.gd" id="1_pause_script"]
+[ext_resource type="Script" uid="uid://84kbhfqmx64h" path="res://scenes/stage_prelim/pause_modal.gd" id="1_pause_script"]
 [ext_resource type="FontFile" uid="uid://dmgqmwfwyqfc0" path="res://assets/FOT-Aokane Std.ttf" id="2_font"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
@@ -15,6 +15,12 @@ corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
+[sub_resource type="LabelSettings" id="LabelSettings_title"]
+font = ExtResource("2_font")
+font_size = 36
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button"]
 bg_color = Color(0.0823529, 0.156863, 0.282353, 0.95)
 border_width_left = 2
@@ -27,26 +33,20 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="LabelSettings" id="LabelSettings_title"]
-font = ExtResource("2_font")
-font_size = 36
-outline_size = 3
-outline_color = Color(0, 0, 0, 1)
-
-[node name="PauseModal" type="CanvasLayer"]
+[node name="PauseModal" type="CanvasLayer" unique_id=1554100698]
 layer = 30
 script = ExtResource("1_pause_script")
 
-[node name="ModalRoot" type="Control" parent="."]
+[node name="ModalRoot" type="Control" parent="." unique_id=1618174048]
 visible = false
-layout_mode = 1
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Dimmer" type="ColorRect" parent="ModalRoot"]
+[node name="Dimmer" type="ColorRect" parent="ModalRoot" unique_id=1591024207]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -56,7 +56,7 @@ grow_vertical = 2
 mouse_filter = 1
 color = Color(0, 0, 0, 0.58)
 
-[node name="CenterContainer" type="CenterContainer" parent="ModalRoot"]
+[node name="CenterContainer" type="CenterContainer" parent="ModalRoot" unique_id=1593068317]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -65,12 +65,12 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Panel" type="Panel" parent="ModalRoot/CenterContainer"]
+[node name="Panel" type="Panel" parent="ModalRoot/CenterContainer" unique_id=900276575]
 custom_minimum_size = Vector2(430, 320)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ModalRoot/CenterContainer/Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ModalRoot/CenterContainer/Panel" unique_id=946695378]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -83,47 +83,47 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 14
 
-[node name="Title" type="Label" parent="ModalRoot/CenterContainer/Panel/VBoxContainer"]
+[node name="Title" type="Label" parent="ModalRoot/CenterContainer/Panel/VBoxContainer" unique_id=1372088389]
 layout_mode = 2
 text = "Paused"
 label_settings = SubResource("LabelSettings_title")
 horizontal_alignment = 1
 
-[node name="Hint" type="Label" parent="ModalRoot/CenterContainer/Panel/VBoxContainer"]
+[node name="Hint" type="Label" parent="ModalRoot/CenterContainer/Panel/VBoxContainer" unique_id=892025458]
 modulate = Color(0.807843, 0.890196, 0.964706, 0.9)
 layout_mode = 2
 text = "Press Esc to resume."
 horizontal_alignment = 1
 
-[node name="Buttons" type="VBoxContainer" parent="ModalRoot/CenterContainer/Panel/VBoxContainer"]
+[node name="Buttons" type="VBoxContainer" parent="ModalRoot/CenterContainer/Panel/VBoxContainer" unique_id=1296474962]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Resume" type="Button" parent="ModalRoot/CenterContainer/Panel/VBoxContainer/Buttons"]
+[node name="Resume" type="Button" parent="ModalRoot/CenterContainer/Panel/VBoxContainer/Buttons" unique_id=1021636511]
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_button")
-theme_override_styles/hover = SubResource("StyleBoxFlat_button")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button")
 text = "Resume"
 
-[node name="ExitBattle" type="Button" parent="ModalRoot/CenterContainer/Panel/VBoxContainer/Buttons"]
+[node name="ExitBattle" type="Button" parent="ModalRoot/CenterContainer/Panel/VBoxContainer/Buttons" unique_id=404131178]
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_button")
-theme_override_styles/hover = SubResource("StyleBoxFlat_button")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button")
 text = "Exit Battle"
 
-[node name="ExitGame" type="Button" parent="ModalRoot/CenterContainer/Panel/VBoxContainer/Buttons"]
+[node name="ExitGame" type="Button" parent="ModalRoot/CenterContainer/Panel/VBoxContainer/Buttons" unique_id=399539026]
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_button")
-theme_override_styles/hover = SubResource("StyleBoxFlat_button")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button")
 text = "Exit Game"
 
-[node name="ConfirmOverlay" type="Control" parent="ModalRoot"]
+[node name="ConfirmOverlay" type="Control" parent="ModalRoot" unique_id=78246371]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -131,9 +131,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 0
 
-[node name="Shade" type="ColorRect" parent="ModalRoot/ConfirmOverlay"]
+[node name="Shade" type="ColorRect" parent="ModalRoot/ConfirmOverlay" unique_id=1775737443]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -143,7 +142,7 @@ grow_vertical = 2
 mouse_filter = 1
 color = Color(0, 0, 0, 0.36)
 
-[node name="CenterContainer" type="CenterContainer" parent="ModalRoot/ConfirmOverlay"]
+[node name="CenterContainer" type="CenterContainer" parent="ModalRoot/ConfirmOverlay" unique_id=2137254767]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -152,12 +151,12 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="ConfirmPanel" type="Panel" parent="ModalRoot/ConfirmOverlay/CenterContainer"]
-custom_minimum_size = Vector2(360, 170)
+[node name="ConfirmPanel" type="Panel" parent="ModalRoot/ConfirmOverlay/CenterContainer" unique_id=1497911833]
+custom_minimum_size = Vector2(360, 120)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ModalRoot/ConfirmOverlay/CenterContainer/ConfirmPanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ModalRoot/ConfirmOverlay/CenterContainer/ConfirmPanel" unique_id=1877164577]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -170,31 +169,31 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 10
 
-[node name="ConfirmText" type="Label" parent="ModalRoot/ConfirmOverlay/CenterContainer/ConfirmPanel/VBoxContainer"]
+[node name="ConfirmText" type="Label" parent="ModalRoot/ConfirmOverlay/CenterContainer/ConfirmPanel/VBoxContainer" unique_id=389327483]
 layout_mode = 2
 text = "Are you sure you want to exit?"
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="ConfirmButtons" type="HBoxContainer" parent="ModalRoot/ConfirmOverlay/CenterContainer/ConfirmPanel/VBoxContainer"]
+[node name="ConfirmButtons" type="HBoxContainer" parent="ModalRoot/ConfirmOverlay/CenterContainer/ConfirmPanel/VBoxContainer" unique_id=888230476]
 layout_mode = 2
 theme_override_constants/separation = 8
 alignment = 1
 
-[node name="Yes" type="Button" parent="ModalRoot/ConfirmOverlay/CenterContainer/ConfirmPanel/VBoxContainer/ConfirmButtons"]
+[node name="Yes" type="Button" parent="ModalRoot/ConfirmOverlay/CenterContainer/ConfirmPanel/VBoxContainer/ConfirmButtons" unique_id=963960134]
 custom_minimum_size = Vector2(100, 42)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_button")
-theme_override_styles/hover = SubResource("StyleBoxFlat_button")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button")
 text = "Yes"
 
-[node name="No" type="Button" parent="ModalRoot/ConfirmOverlay/CenterContainer/ConfirmPanel/VBoxContainer/ConfirmButtons"]
+[node name="No" type="Button" parent="ModalRoot/ConfirmOverlay/CenterContainer/ConfirmPanel/VBoxContainer/ConfirmButtons" unique_id=77354131]
 custom_minimum_size = Vector2(100, 42)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_button")
-theme_override_styles/hover = SubResource("StyleBoxFlat_button")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button")
 text = "No"
 
 [connection signal="pressed" from="ModalRoot/CenterContainer/Panel/VBoxContainer/Buttons/Resume" to="." method="_on_resume_pressed"]

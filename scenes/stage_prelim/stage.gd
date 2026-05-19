@@ -41,6 +41,7 @@ var pending_triggers : Array[Dictionary] = []
 
 func _ready() -> void:
 	BGM.play_battle()
+	SFX.play_battle_start()
 	_apply_battle_background()
 	_apply_formation_positions()
 	state_machine.handler = self

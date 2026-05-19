@@ -3,7 +3,7 @@ class_name BGMManager
 
 const MENU_BGM_PATH := "res://assets/audio/bgm/1555699_Internubes-AIM-2026.mp3"
 const WORLD_BGM_PATH := "res://assets/audio/bgm/1555699_Internubes-AIM-2026.mp3"
-const BATTLE_BGM_PATH := "res://assets/audio/bgm/1564182_Tokyo-Map-SMT-Raidou-X-Ove.mp3"
+const BATTLE_BGM_PATH := "res://assets/audio/bgm/Grizzly Dwarf Battle LOOP.wav"
 const PARTY_BGM_PATH := "res://assets/audio/bgm/1564182_Tokyo-Map-SMT-Raidou-X-Ove.mp3"
 
 var _player := AudioStreamPlayer.new()

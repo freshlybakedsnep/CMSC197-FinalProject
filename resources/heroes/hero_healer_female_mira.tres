@@ -14,7 +14,52 @@
 [ext_resource type="Script" uid="uid://cm88ovm7gjp44" path="res://scripts/components/status_component.gd" id="7_m1i4o"]
 [ext_resource type="Script" uid="uid://bvxud30fp77h2" path="res://scripts/components/player_controller.gd" id="8_5yh1s"]
 [ext_resource type="Script" uid="uid://nqhxig82acgw" path="res://scenes/entity/ent_hero.gd" id="9_ofre0"]
-[ext_resource type="Texture2D" uid="uid://ckvv4ch5rnnh1" path="res://assets/sprites/shin.webp" id="10_7pur0"]
+[ext_resource type="Texture2D" uid="uid://2ccih4u4y0jt" path="res://assets/sprites/chars/mira/59.png" id="10_7pur0"]
+[ext_resource type="Texture2D" uid="uid://b7dp87hj5fb8q" path="res://assets/sprites/chars/mira/attack/attack1.png" id="11_a1"]
+[ext_resource type="Texture2D" uid="uid://bsis78l18c6rl" path="res://assets/sprites/chars/mira/attack/attack2.png" id="12_a2"]
+[ext_resource type="Texture2D" uid="uid://dfu2nbrggbfu6" path="res://assets/sprites/chars/mira/attack/attack3.png" id="13_a3"]
+[ext_resource type="Texture2D" uid="uid://c2awo2jypjg1g" path="res://assets/sprites/chars/mira/attack/attack4.png" id="14_a4"]
+[ext_resource type="Texture2D" uid="uid://bdg640ub6dk8k" path="res://assets/sprites/chars/mira/idle/idle1.png" id="15_i1"]
+[ext_resource type="Texture2D" uid="uid://fesn21adojdr" path="res://assets/sprites/chars/mira/idle/idle2.png" id="16_i2"]
+[ext_resource type="Texture2D" uid="uid://d20v2vrf82bre" path="res://assets/sprites/chars/mira/idle/idle3.png" id="17_i3"]
+[ext_resource type="Texture2D" uid="uid://dea38g7f5tugf" path="res://assets/sprites/chars/mira/idle/idle4.png" id="18_i4"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mira"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_a1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_a2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_a3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_a4")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_i1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_i2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_i3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_i4")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
 
 [sub_resource type="Resource" id="Resource_ig5s4"]
 script = ExtResource("2_eka21")
@@ -52,5 +97,6 @@ character_class = 2
 gender = 1
 entity_name = "Mira"
 sprite = ExtResource("10_7pur0")
+battle_sprite = SubResource("SpriteFrames_mira")
 components = Array[ExtResource("1_842gx")]([SubResource("Resource_ig5s4"), SubResource("Resource_3ngop"), SubResource("Resource_0tcap"), SubResource("Resource_jba1v"), SubResource("Resource_yv4oe")])
 metadata/_custom_type_script = "uid://nqhxig82acgw"

@@ -3,7 +3,9 @@
 [ext_resource type="Script" uid="uid://bobgexqqp7mqj" path="res://scenes/menu/main_menu.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://baque3agyqaqt" path="res://assets/background/bg_11.png" id="2"]
 [ext_resource type="FontFile" uid="uid://dmgqmwfwyqfc0" path="res://assets/FOT-Aokane Std.ttf" id="3"]
-[ext_resource type="Texture2D" uid="uid://cgnklb6swibbb" path="res://assets/sprites/chars/ares/25.png" id="3_kiqgm"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_247la"]
+load_path = "res://.godot/imported/25.png-4454c7f21b699efbcedb9a0a4d6969e6.ctex"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
 bg_color = Color(0.0509804, 0.0745098, 0.145098, 0.78)
@@ -109,7 +111,7 @@ offset_left = 172.0
 offset_top = 86.0
 offset_right = 492.0
 offset_bottom = 618.0
-texture = ExtResource("3_kiqgm")
+texture = SubResource("CompressedTexture2D_247la")
 expand_mode = 1
 stretch_mode = 5
 
