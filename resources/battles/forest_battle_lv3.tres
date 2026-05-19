@@ -14,6 +14,6 @@ min_level = 3
 reward_gold = 60
 reward_exp = 45
 unlock_heroes = ["Vexa"]
-world_pos = Vector2(760, 330)
+world_pos = Vector2(850, 550)
 enemy_formation_position = Vector2(430, 550)
 hero_formation_position = Vector2(1000, 495)

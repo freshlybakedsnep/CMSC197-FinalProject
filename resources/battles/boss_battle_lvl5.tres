@@ -42,6 +42,6 @@ min_level = 5
 reward_gold = 25
 reward_exp = 20
 unlock_heroes = ["Rando", "Cael", "Bronn"]
-world_pos = Vector2(540, 250)
+world_pos = Vector2(850, 300)
 enemy_formation_position = Vector2(430, 410)
 hero_formation_position = Vector2(1000, 450)
